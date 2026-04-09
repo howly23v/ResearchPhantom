@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#d92323">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ResearchTerminal">
+<link rel="manifest" href="manifest.json">
 <title>GLOBAL RESEARCH TERMINAL // 世界最新研究ニュース</title>
 <style>
 /* ============================================================
@@ -12,6 +17,28 @@
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;600;700&family=Bebas+Neue&display=swap');
+
+/* Offline-safe font stacks (no CDN dependency) */
+@font-face {
+  font-family: 'LocalOswald';
+  src: local('Oswald'), local('Arial Black'), local('Impact');
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LocalBebas';
+  src: local('Bebas Neue'), local('Bebas'), local('Impact'), local('Arial Black');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LocalNotoJP';
+  src: local('Noto Sans JP'), local('Noto Sans CJK JP'), local('Hiragino Sans'),
+       local('Hiragino Kaku Gothic ProN'), local('Yu Gothic'), local('Meiryo'),
+       local('MS Gothic'), local('Apple SD Gothic Neo'), local('Malgun Gothic');
+  font-weight: 400 900;
+  font-display: swap;
+}
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -32,7 +59,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Noto Sans JP', 'Oswald', sans-serif;
+  font-family: 'Noto Sans JP', 'LocalNotoJP', 'Oswald', 'LocalOswald', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
   background: var(--p5-black);
   color: var(--p5-white);
   overflow-x: hidden;
@@ -73,7 +100,7 @@ body::before {
   visibility: hidden;
 }
 .loading-text {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 4rem;
   color: var(--p5-red);
   letter-spacing: 0.3em;
@@ -154,7 +181,7 @@ header {
 }
 
 .logo-text h1 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 2rem;
   letter-spacing: 0.15em;
   color: var(--p5-white);
@@ -173,7 +200,7 @@ header {
   color: var(--p5-white);
 }
 .header-info .date {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 1.3rem;
   letter-spacing: 0.1em;
 }
@@ -209,7 +236,7 @@ header {
 
 .nav-tab {
   padding: 12px 25px;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -255,7 +282,7 @@ header {
   font-size: 0.8rem;
 }
 .stat-number {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 1.5rem;
   color: var(--p5-red);
 }
@@ -280,7 +307,7 @@ header {
   margin-bottom: 40px;
 }
 .section-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 1.8rem;
   letter-spacing: 0.2em;
   color: var(--p5-red);
@@ -327,7 +354,7 @@ header {
   background: var(--p5-red);
   color: var(--p5-white);
   padding: 4px 40px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   transform: rotate(45deg);
@@ -353,7 +380,7 @@ header {
 }
 
 .featured-card .paper-title {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
   line-height: 1.4;
@@ -470,7 +497,7 @@ header {
 }
 
 .paper-card .paper-title {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
@@ -559,7 +586,7 @@ header {
 
 .country-flag-large { font-size: 2.5rem; }
 .country-name {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 2rem;
   letter-spacing: 0.15em;
 }
@@ -570,7 +597,7 @@ header {
   text-transform: uppercase;
 }
 .country-paper-count {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 2.5rem;
   color: var(--p5-red);
   margin-left: auto;
@@ -623,7 +650,7 @@ header {
   transform: translateX(5px);
 }
 .trend-rank {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 2rem;
   color: var(--p5-red);
   min-width: 40px;
@@ -662,7 +689,7 @@ footer::before {
   letter-spacing: 0.1em;
 }
 .footer-brand {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 1.5rem;
   color: var(--p5-red);
   letter-spacing: 0.3em;
@@ -747,7 +774,7 @@ footer::before {
 }
 .no-data .icon { font-size: 3rem; margin-bottom: 15px; }
 .no-data .message {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
   font-size: 1.2rem;
   margin-bottom: 10px;
 }
@@ -813,7 +840,7 @@ footer::before {
 .ticker-content {
   display: inline-block;
   animation: ticker 60s linear infinite;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   color: var(--p5-white);
@@ -1041,7 +1068,7 @@ footer::before {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  font-family: 'Bebas Neue', monospace;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', monospace;
   font-size: 0.7rem;
   color: rgba(0, 255, 136, 0.5);
   letter-spacing: 0.15em;
@@ -1276,7 +1303,7 @@ header::after {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 2rem;
   color: #00c8ff;
   text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
@@ -1333,7 +1360,7 @@ header::after {
   font-weight: 700;
 }
 .jarvis-paper-title {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.4;
@@ -1482,7 +1509,7 @@ header::after {
 .jarvis-bar-fill.novelty { background: linear-gradient(90deg, #00c8ff, #00ff88); }
 .jarvis-bar-fill.applicability { background: linear-gradient(90deg, #ffdd00, #ff8800); }
 .jarvis-bar-value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.7);
   margin-top: 4px;
@@ -1508,7 +1535,7 @@ header::after {
   background: linear-gradient(135deg, rgba(0, 200, 255, 0.15), rgba(0, 200, 255, 0.08));
   border: 1px solid rgba(0, 200, 255, 0.4);
   color: #00c8ff;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -1556,7 +1583,7 @@ header::after {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
   font-size: 0.75rem;
   color: #00c8ff;
 }
@@ -2778,14 +2805,26 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('current-date').textContent = now.toLocaleDateString('ja-JP', options);
   document.getElementById('last-update').textContent = `最終更新: ${now.toLocaleTimeString('ja-JP')}`;
 
-  // Try to load saved data
-  try {
-    const saved = null; // No localStorage in this env
-    if (saved) currentData = JSON.parse(saved);
-  } catch(e) {}
-
-  // Render
+  // Render (cache restoration happens separately via restoreCache())
   renderAll();
+
+  // Register Service Worker for offline PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      console.log('SW registered:', reg.scope);
+    }).catch(err => {
+      console.log('SW registration failed:', err);
+    });
+  }
+
+  // Online/Offline event handlers
+  window.addEventListener('online', () => {
+    showToast('🌐 オンラインに復帰しました。データを更新中...');
+    fetchLivePapers();
+  });
+  window.addEventListener('offline', () => {
+    showToast('📴 オフラインモードに切り替わりました');
+  });
 
   // Hide loading screen
   setTimeout(() => {
@@ -3126,10 +3165,70 @@ function openPaper(encodedUrl) {
 }
 
 // ============ LIVE FETCH (runs in user's browser) ============
+// ============ LOCAL STORAGE CACHE SYSTEM ============
+const CACHE_KEY = 'grterm_paper_cache';
+const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+
+function saveToCache(papers) {
+  try {
+    const cacheData = {
+      timestamp: Date.now(),
+      data: JSON.parse(JSON.stringify(currentData))
+    };
+    localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+  } catch (e) {
+    console.log('Cache save failed (storage full?):', e);
+  }
+}
+
+function loadFromCache() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const cache = JSON.parse(raw);
+    return cache;
+  } catch (e) {
+    return null;
+  }
+}
+
+function isCacheFresh(cache) {
+  if (!cache || !cache.timestamp) return false;
+  return (Date.now() - cache.timestamp) < CACHE_TTL;
+}
+
+// Restore cached data on load (offline support)
+(function restoreCache() {
+  const cache = loadFromCache();
+  if (cache && cache.data) {
+    currentData = cache.data;
+    renderAll();
+    const age = Math.round((Date.now() - cache.timestamp) / 60000);
+    document.getElementById('last-update').textContent = `最終更新: ${age}分前 (キャッシュ)`;
+    if (!isCacheFresh(cache)) {
+      showToast('📦 キャッシュデータを表示中（バックグラウンドで更新します）');
+    }
+  }
+})();
+
 async function fetchLivePapers() {
   showToast('📡 最新論文を取得中...');
   const btn = document.querySelector('.refresh-btn');
   btn.classList.add('spinning');
+
+  // Check if we're offline
+  if (!navigator.onLine) {
+    btn.classList.remove('spinning');
+    const cache = loadFromCache();
+    if (cache && cache.data) {
+      currentData = cache.data;
+      renderAll();
+      showToast('📴 オフラインモード：キャッシュデータを表示中');
+    } else {
+      showToast('📴 オフライン：データがありません。ネットワーク接続後に再試行してください');
+    }
+    return;
+  }
 
   try {
     // Fetch from arXiv RSS (client-side)
@@ -3181,6 +3280,9 @@ async function fetchLivePapers() {
     btn.classList.remove('spinning');
     document.getElementById('last-update').textContent = `最終更新: ${new Date().toLocaleTimeString('ja-JP')}`;
 
+    // Save to localStorage cache
+    saveToCache();
+
     if (newPapers > 0) {
       showToast(`✅ ${newPapers}件の新しい論文を取得しました`);
       renderAll();
@@ -3189,7 +3291,16 @@ async function fetchLivePapers() {
     }
   } catch(e) {
     btn.classList.remove('spinning');
-    showToast('⚠️ 取得に失敗しました。後で再試行します。');
+
+    // Fallback to cache on network error
+    const cache = loadFromCache();
+    if (cache && cache.data) {
+      currentData = cache.data;
+      renderAll();
+      showToast('⚠️ ネットワークエラー：キャッシュデータを使用中');
+    } else {
+      showToast('⚠️ 取得に失敗しました。後で再試行します。');
+    }
     console.error(e);
   }
 }
