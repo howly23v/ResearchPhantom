@@ -8,6 +8,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ResearchTerminal">
 <link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;600;700&family=Bebas+Neue&display=swap" media="print" onload="this.media='all'">
 <title>GLOBAL RESEARCH TERMINAL // 世界最新研究ニュース</title>
 <style>
 /* ============================================================
@@ -16,7 +19,7 @@
                   #ffdd00 (Yellow Accent), #1a1a2e (Dark Blue-Black)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;600;700&family=Bebas+Neue&display=swap');
+/* Google Fonts loaded via non-blocking <link> in <head> */
 
 /* Offline-safe font stacks (no CDN dependency) */
 @font-face {
@@ -94,10 +97,16 @@ body::before {
   justify-content: center;
   z-index: 10000;
   transition: opacity 0.8s ease, visibility 0.8s ease;
+  /* CSS-only safety: auto-dismiss after 4s even if JS fails */
+  animation: forceHideLoading 0.8s ease 4s forwards;
 }
 #loading-screen.hidden {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
+}
+@keyframes forceHideLoading {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
 }
 .loading-text {
   font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
@@ -1661,6 +1670,8 @@ header::after {
   <div class="loading-text">LOADING</div>
   <div class="loading-bar"></div>
 </div>
+<!-- Failsafe: dismiss loading screen even if main JS crashes -->
+<script>setTimeout(function(){var l=document.getElementById('loading-screen');if(l)l.classList.add('hidden')},4000)</script>
 
 <!-- TICKER BAR -->
 <div class="ticker-bar">
@@ -2805,17 +2816,21 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('current-date').textContent = now.toLocaleDateString('ja-JP', options);
   document.getElementById('last-update').textContent = `最終更新: ${now.toLocaleTimeString('ja-JP')}`;
 
-  // Render (cache restoration happens separately via restoreCache())
-  renderAll();
-
-  // Register Service Worker for offline PWA
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').then(reg => {
-      console.log('SW registered:', reg.scope);
-    }).catch(err => {
-      console.log('SW registration failed:', err);
-    });
+  // Render - wrapped in try-catch to never block loading screen
+  try {
+    renderAll();
+  } catch(e) {
+    console.error('Render error:', e);
   }
+
+  // Register Service Worker for offline PWA (fail silently)
+  try {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(reg => {
+        console.log('SW registered:', reg.scope);
+      }).catch(() => {});
+    }
+  } catch(e) {}
 
   // Online/Offline event handlers
   window.addEventListener('online', () => {
@@ -2826,10 +2841,14 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('📴 オフラインモードに切り替わりました');
   });
 
-  // Hide loading screen
-  setTimeout(() => {
-    document.getElementById('loading-screen').classList.add('hidden');
-  }, 1500);
+  // Hide loading screen - ALWAYS runs
+  function hideLoading() {
+    var ls = document.getElementById('loading-screen');
+    if (ls) ls.classList.add('hidden');
+  }
+  setTimeout(hideLoading, 1500);
+  // Extra safety: hide again at 3s in case first attempt failed
+  setTimeout(hideLoading, 3000);
 
   // Intersection observer for animations
   const observer = new IntersectionObserver((entries) => {
@@ -3198,17 +3217,36 @@ function isCacheFresh(cache) {
 }
 
 // Restore cached data on load (offline support)
+// Restore cache - deferred until DOMContentLoaded to avoid race conditions
 (function restoreCache() {
-  const cache = loadFromCache();
-  if (cache && cache.data) {
-    currentData = cache.data;
-    renderAll();
-    const age = Math.round((Date.now() - cache.timestamp) / 60000);
-    document.getElementById('last-update').textContent = `最終更新: ${age}分前 (キャッシュ)`;
-    if (!isCacheFresh(cache)) {
-      showToast('📦 キャッシュデータを表示中（バックグラウンドで更新します）');
+  try {
+    const cache = loadFromCache();
+    if (cache && cache.data) {
+      currentData = cache.data;
+      // Defer DOM operations until ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          try {
+            renderAll();
+            var lu = document.getElementById('last-update');
+            if (lu) {
+              var age = Math.round((Date.now() - cache.timestamp) / 60000);
+              lu.textContent = '\u6700\u7d42\u66f4\u65b0: ' + age + '\u5206\u524d (\u30ad\u30e3\u30c3\u30b7\u30e5)';
+            }
+          } catch(e) { console.error('Cache restore render error:', e); }
+        });
+      } else {
+        try {
+          renderAll();
+          var lu = document.getElementById('last-update');
+          if (lu) {
+            var age = Math.round((Date.now() - cache.timestamp) / 60000);
+            lu.textContent = '\u6700\u7d42\u66f4\u65b0: ' + age + '\u5206\u524d (\u30ad\u30e3\u30c3\u30b7\u30e5)';
+          }
+        } catch(e) { console.error('Cache restore render error:', e); }
+      }
     }
-  }
+  } catch(e) { console.error('Cache restore error:', e); }
 })();
 
 async function fetchLivePapers() {
