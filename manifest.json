@@ -1,0 +1,21 @@
+{
+  "name": "GLOBAL RESEARCH TERMINAL",
+  "short_name": "ResearchTerminal",
+  "description": "世界最新研究ニュースをホログラフィックUIで表示する論文検索ターミナル",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d0d0d",
+  "theme_color": "#d92323",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='80' fill='%230d0d0d'/><rect x='40' y='40' width='432' height='432' rx='60' fill='none' stroke='%23d92323' stroke-width='16'/><text x='256' y='300' text-anchor='middle' font-family='Impact,sans-serif' font-size='200' font-weight='900' fill='%23d92323'>GR</text><text x='256' y='400' text-anchor='middle' font-family='sans-serif' font-size='60' fill='%23ffdd00'>TERMINAL</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "news", "productivity"],
+  "lang": "ja",
+  "dir": "ltr"
+}
