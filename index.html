@@ -1676,7 +1676,7 @@ header::after {
 <!-- TICKER BAR -->
 <div class="ticker-bar">
   <div class="ticker-content" id="ticker-content">
-    ⚡ GLOBAL RESEARCH UPDATE // 2026-03-25 — 量子計算・AI・材料科学の最前線 — MIT VLA技術 / Harvard量子CPU / RIKEN触媒化学 / Tsinghua具体化AI / KAIST光デバイス / RIKENAI計算基盤 — 世界で進む科学革新 —
+    ⚡ GLOBAL RESEARCH UPDATE // 2026-04-22 — MIT: がん膜脂質制御で新治療戦略 ⚡ Stanford: PRIMAで黄斑変性27名の読書視力回復 ⚡ Harvard: 瘢痕なし皮膚再生を神経ブロックで実現 ⚡ Caltech: 量子コンピュータ必要量子ビット数を100分の1に ⚡ UC Berkeley: 原子スケールメモリで447TB/cm²達成 ⚡ Tsinghua: 密度スケーリング則でLLM理論を刷新 ⚡ CAS: 免疫老化時計HIACでRUNX1を老化ブレーキと特定 ⚡ RIKEN: 海洋細菌酵素の構造解明で新バイオ合成を拓く ⚡ UTokyo: 量子古典ハイブリッドで実用量子優位性を実証 ⚡ Kyoto: 世界初の歯再生ヒト臨床試験が安全性確認 ⚡ Tohoku: 因果AIがカゴメ超伝導体の機序を解明 ⚡ Osaka: Kepler-51系の第3惑星を初確認 ⚡ KAIST: 全固体電池電解質の伝導度2.7倍向上 ⚡ POSTECH: 2D半導体エキシトン拡散8,300%増幅を世界初発見 ⚡ SNU: 強誘電体ナノ粒子の3D渦状分極を初解明 ⚡ ITMO: 光AIチップがGPU比150倍高効率を達成 ⚡ MIPT: 超伝導量子ビットのクロストーク99.7%削減 ⚡ RAS: 永久凍土メタン菌が温暖化で400%活性化 ⚡ TAKE YOUR HEART. ⚡
   </div>
 </div>
 
@@ -1820,9 +1820,9 @@ header::after {
 //  GLOBAL RESEARCH TERMINAL - Main Application
 // ============================================================
 
-// Updated seed data with latest March 2026 research papers
+// Updated seed data with latest April 2026 research papers
 const SEED_DATA = {
-  last_updated: "2026-03-25T18:00:00.000Z",
+  last_updated: "2026-04-22T12:00:00.000Z",
   countries: {
     US: {
       flag: "🇺🇸",
@@ -1833,69 +1833,30 @@ const SEED_DATA = {
           name_ja: "マサチューセッツ工科大学",
           papers: [
             {
-              title: "Concept Bottleneck Models for Safe AI: Improving Explainability in Safety-Critical Applications",
-              summary: "AIモデルの予測可能性を向上させるコンセプトボトルネック手法を提案。医療や自動運転などの安全性が重要な分野でAIの説明可能性を大幅に改善し、ユーザーの信頼を構築する新アプローチ。",
-              authors: [{"name": "J. Yeh et al.", "affiliation": "MIT CSAIL"}],
-              published: "2026-03-20",
-              categories: ["cs.AI", "cs.LG"],
-              link: "https://news.mit.edu/2026/improving-ai-models-ability-explain-predictions",
-              source: "MIT News",
+              title: "Active Regulation of EGFR by Cell Membrane Lipid Composition Links Cancer Growth to Cholesterol Levels",
+              summary: "細胞膜のコレステロール濃度が上皮成長因子受容体（EGFR）のシグナル伝達を制御することを発見。ナノディスクを用いた単分子FRET実験で膜の硬化がEGFRシグナルを抑制し、陰性荷電脂質が受容体を常時過活性化させることを実証。多くのがん細胞で見られる膜組成の異常とがん増殖の直接的因果関係を解明した。",
+              authors: [{"name": "G. Schlau-Cohen et al.", "affiliation": "MIT Department of Chemistry"}],
+              published: "2026-04-14",
+              categories: ["q-bio.CB", "q-bio.MN"],
+              link: "https://news.mit.edu/2026/mit-study-reveals-new-role-cell-membranes-0416",
+              source: "eLife",
               institution: "MIT",
               institution_ja: "マサチューセッツ工科大学",
               country: "US",
-              analysis: {analysis: "AIの説明可能性問題に対する実践的解決策を確立", prospects: "医療診断・自動運転・金融判断での信頼性革新へ"}
+              analysis: {analysis: "がん細胞増殖の膜脂質依存メカニズムを単分子実験で初めて実証", prospects: "膜組成を標的にした新規がん治療薬・診断マーカーの開発へ"}
             },
             {
-              title: "VLA-Adapter: Vision-Language Action Models for Cross-Domain Robotic Manipulation",
-              summary: "視覚・言語・行動を統合したアダプター手法により、一つのモデルが複数の異なるロボット環境で動作。ロボット学習の汎用性と効率を劇的に向上させ、デプロイ時間を90%削減。",
-              authors: [{"name": "P. Abbeel et al.", "affiliation": "MIT-IBM Watson AI Lab"}],
-              published: "2026-03-22",
-              categories: ["cs.RO", "cs.AI", "cs.CV"],
-              link: "https://arxiv.org/list/cs.RO/current",
-              source: "arXiv/ICRA 2026",
+              title: "Soft Photo-Ionotronics: Light-Activated Ionic Gel Bridges Electronics and Biological Tissue",
+              summary: "光照射で絶縁体から400倍以上導電性が増すソフト・バイオ互換ゲルを開発。フォトイオン発生剤（PIG）をエラストマーに統合し、イオン（電子ではなくイオンで情報伝達）を制御する「イオノトロニクス」分野を開拓。光で応答する自己適応型ウェアラブル・神経インターフェース・ソフトロボットへの応用が期待される。",
+              authors: [{"name": "T.J. Wallin et al.", "affiliation": "MIT Department of Materials Science and Engineering"}],
+              published: "2026-04-17",
+              categories: ["cond-mat.soft", "physics.app-ph"],
+              link: "https://www.nature.com/articles/s41467-026-69427-8",
+              source: "Nature Communications",
               institution: "MIT",
               institution_ja: "マサチューセッツ工科大学",
               country: "US",
-              analysis: {analysis: "ロボット学習の汎用化と効率化を同時実現", prospects: "産業用ロボット展開の大幅加速と実装コスト低減"}
-            },
-            {
-              title: "Neural Correlates of Belief Updating: Mediodorsal Thalamus Circuit Linked to Schizophrenia",
-              summary: "中脳視床核の神経回路が信念更新に不可欠であることを発見。この回路の機能不全が統合失調症における認知障害と関連し、新たな治療標的として注目される。大規模臨床コホートとのリンクで統合失調症の神経基盤解明に大きく前進。",
-              authors: [{"name": "T. Zhou & Y.-Y. Ho et al.", "affiliation": "MIT McGovern Institute for Brain Research"}],
-              published: "2026-03-18",
-              categories: ["q-bio.NC", "cs.AI"],
-              link: "https://news.mit.edu/2026/brain-circuit-incorporates-new-information-may-be-linked-schizophrenia-0318",
-              source: "Nature Neuroscience",
-              institution: "MIT",
-              institution_ja: "マサチューセッツ工科大学",
-              country: "US",
-              analysis: {analysis: "統合失調症の神経回路基盤を特定", prospects: "統合失調症・認知症の新治療法開発へ"}
-            },
-            {
-              title: "PULSE-HF: Deep Learning Model for Heart Failure Prognosis Prediction from ECG",
-              summary: "心電図データからAIが1年以内の心不全悪化リスクを予測するモデルPULSE-HFを開発。MIT・マサチューセッツ総合病院・ハーバード医学部の共同研究で、大規模臨床データを学習し、早期介入による患者救命を実現。",
-              authors: [{"name": "MIT-MGB-Harvard Joint Team", "affiliation": "MIT Computer Science & Artificial Intelligence Laboratory"}],
-              published: "2026-03-12",
-              categories: ["cs.LG", "q-bio.BM"],
-              link: "https://news.mit.edu/2026/can-ai-help-predict-which-heart-failure-patients-will-worsen-0312",
-              source: "Lancet eClinical Medicine",
-              institution: "MIT",
-              institution_ja: "マサチューセッツ工科大学",
-              country: "US",
-              analysis: {analysis: "心電図AIによる心不全予後予測の実現", prospects: "心不全患者への早期介入と死亡率低減へ"}
-            },
-            {
-              title: "Scalable Free-Space Photonic Chip: Precision Light Broadcasting for Quantum Networks",
-              summary: "チップから自由空間への光の精密放射を可能にする新クラスのフォトニクスデバイスを開発。量子ネットワーク・LiDAR・フリースペース通信において既存手法の100倍以上のスループットを実証。スケーラブルな量子インターネットの基盤技術。",
-              authors: [{"name": "MIT Photonics Group", "affiliation": "MIT Research Laboratory of Electronics"}],
-              published: "2026-03-11",
-              categories: ["physics.optics", "quant-ph"],
-              link: "https://news.mit.edu/2026/new-photonic-device-efficiently-beams-light-free-space-0311",
-              source: "Nature Photonics",
-              institution: "MIT",
-              institution_ja: "マサチューセッツ工科大学",
-              country: "US",
-              analysis: {analysis: "フリースペースフォトニクスの精度とスケール両立", prospects: "量子インターネットとLiDAR技術の産業化加速"}
+              analysis: {analysis: "光制御イオン伝導性ゲルでバイオエレクトロニクスと生体組織を融合", prospects: "生体適合型ウェアラブル・神経補綴・ソフトロボットの次世代実用化へ"}
             }
           ]
         },
@@ -1903,56 +1864,30 @@ const SEED_DATA = {
           name_ja: "スタンフォード大学",
           papers: [
             {
-              title: "NitroGen: High-Performance Action Models for Embodied Reasoning from 40,000 Hours of Gameplay",
-              summary: "40,000時間を超える人間プレイデータから学習した高性能アクションモデル。視覚入力のみから複雑な環境での意思決定が可能になり、ロボット学習の新しい基準を確立。",
-              authors: [{"name": "R. Shah et al.", "affiliation": "Stanford AI Index & NVIDIA Research"}],
-              published: "2026-03-21",
-              categories: ["cs.AI", "cs.CV", "cs.RO"],
-              link: "https://arxiv.org/list/cs.AI/current",
-              source: "CVPR 2026",
+              title: "Wireless Retinal Prosthesis PRIMA Restores Reading Vision in 27 of 32 Advanced Macular Degeneration Patients",
+              summary: "光起電型網膜インプラントシステム（PRIMA）を用いた臨床試験で、末期黄斑変性患者32名のうち27名が書籍や街頭サインを読む視力を1年以内に回復。近赤外光投影メガネとサブ網膜光起電チップが残存網膜細胞を刺激し、中心視野を部分的に再建する世界初の大規模実証。",
+              authors: [{"name": "D. Palanker et al.", "affiliation": "Stanford School of Medicine & Hansen Experimental Physics Lab"}],
+              published: "2026-03-02",
+              categories: ["physics.med-ph", "q-bio.NC"],
+              link: "https://news.stanford.edu/stories/2026/03/microchip-implant-eye-prosthesis-macular-degeneration",
+              source: "New England Journal of Medicine",
               institution: "Stanford",
               institution_ja: "スタンフォード大学",
               country: "US",
-              analysis: {analysis: "大規模データによるアクションモデルの飛躍的性能向上", prospects: "現実環境での自律型エージェント実装の加速化"}
+              analysis: {analysis: "光起電網膜インプラントが27/32例で読書視力回復という歴史的臨床成果", prospects: "黄斑変性・網膜色素変性の治療標準化と完全中心視野回復技術の開発へ"}
             },
             {
-              title: "MLLM-WM: Hybrid Embodied AI with Multimodal LLMs and World Models",
-              summary: "マルチモーダルLLMと世界モデルを統合したハイブリッド具体化AI。高レベルの意味理解と物理シミュレーションの両立により、長期タスク計画が可能に。",
-              authors: [{"name": "F. Xiang et al.", "affiliation": "Stanford Human-Centered AI Institute"}],
-              published: "2026-03-20",
-              categories: ["cs.AI", "cs.RO"],
-              link: "https://arxiv.org/list/cs.AI/current",
-              source: "arXiv",
+              title: "Ultrasound-Activated Luminescent Nanoparticles Enable Non-Invasive 4 cm Deep-Tissue Light Delivery",
+              summary: "超音波パルスで体内の発光ナノ粒子を選択的に励起し、体表から4センチ以上の深部組織に低侵襲で光を照射する技術を実証。光遺伝学的ニューロン制御・光線力学がん治療・細胞シグナル操作を手術なしで可能にし、深部臓器への精密光医療の新フロンティアを開く。",
+              authors: [{"name": "A. Bhatt et al.", "affiliation": "Stanford School of Engineering, Electrical Engineering & Bioengineering"}],
+              published: "2026-04-08",
+              categories: ["physics.med-ph", "physics.optics"],
+              link: "https://news.stanford.edu/research",
+              source: "Nature Biomedical Engineering",
               institution: "Stanford",
               institution_ja: "スタンフォード大学",
               country: "US",
-              analysis: {analysis: "セマンティクスと物理制約の統合による具体化AI", prospects: "長時間タスク遂行ロボットの実装基盤確立"}
-            },
-            {
-              title: "Gut Microbiome-Brain Axis Restoration Reverses Age-Related Cognitive Decline",
-              summary: "加齢による腸内細菌の変化が脳への信号伝達を妨げ認知低下を引き起こすことを解明。腸脳コミュニケーション経路を回復させることで、老齢マウスが若年と同等の記憶形成能力を取り戻すことに成功。認知症治療の新たなターゲット。",
-              authors: [{"name": "Stanford Medicine Gut-Brain Research Team", "affiliation": "Stanford School of Medicine"}],
-              published: "2026-03-11",
-              categories: ["q-bio.NC", "q-bio.BM"],
-              link: "https://med.stanford.edu/news/all-news/2026/03/gut-brain-cognitive-decline.html",
-              source: "Nature",
-              institution: "Stanford",
-              institution_ja: "スタンフォード大学",
-              country: "US",
-              analysis: {analysis: "腸内細菌と認知機能の因果関係を実証", prospects: "認知症・アルツハイマー病の新治療戦略への突破口"}
-            },
-            {
-              title: "Lead Selenide Infrared LED/Sensor Integration: Century-Old Materials Enable Next-Gen Devices",
-              summary: "100年以上前から知られる硫化鉛・セレン化スズ系半導体を最新製造技術と統合し、低コスト赤外線LEDとセンサーを実現。環境モニタリング・医療診断・工業計測への応用が可能な汎用性の高いプラットフォーム。",
-              authors: [{"name": "K. Mukherjee et al.", "affiliation": "Stanford School of Engineering, Materials Science"}],
-              published: "2026-03-20",
-              categories: ["physics.app-ph", "cond-mat.mtrl-sci"],
-              link: "https://news.stanford.edu/stories/2026/03/infrared-leds-sensors-new-technology-research",
-              source: "Nature Electronics",
-              institution: "Stanford",
-              institution_ja: "スタンフォード大学",
-              country: "US",
-              analysis: {analysis: "既存材料の革新的再利用による赤外線デバイス実現", prospects: "低コスト環境センサー・医療診断機器の大量普及へ"}
+              analysis: {analysis: "超音波活性化ナノ粒子で深部組織への非侵襲的精密光照射を実現", prospects: "光遺伝学・深部腫瘍の光免疫療法・神経治療の体内深部展開へ革命"}
             }
           ]
         },
@@ -1960,30 +1895,30 @@ const SEED_DATA = {
           name_ja: "ハーバード大学",
           papers: [
             {
-              title: "Quantum Computing with Neutral Atom Arrays: Scalable Architecture Beyond 2000 Qubits",
-              summary: "中性原子配列を用いた次世代量子コンピュータの構築法を実証。2000量子ビット以上の規模で安定動作し、エラー訂正能力が大幅に改善。実用化への道が大きく前進。",
-              authors: [{"name": "M. Lukin et al.", "affiliation": "Harvard Quantum Science Center"}],
-              published: "2026-03-23",
-              categories: ["quant-ph", "physics.atom-ph"],
-              link: "https://www.nature.com/articles/",
-              source: "Nature",
+              title: "Scar-Free Skin Regeneration Enabled by Blocking Cxcl12-Driven Nerve Hyperinnervation",
+              summary: "出生後に失われる胎児型の傷跡なし皮膚再生能力を、Cxcl12遺伝子欠失またはボツリヌス毒素による局所神経ブロックで再活性化することに成功。毛包・脂肪細胞・リンパ管・メラノサイトを含む皮膚の完全再生をマウスで実証した。神経過増殖（ハイパーイナービネーション）の抑制が瘢痕なき治癒の鍵であることを5年間の研究で初解明。",
+              authors: [{"name": "H. Tam et al.", "affiliation": "Harvard Medical School & Harvard Stem Cell Institute"}],
+              published: "2026-03-20",
+              categories: ["q-bio.TO", "q-bio.CB"],
+              link: "https://news.harvard.edu/gazette/story/2026/03/study-suggests-healing-skin-without-scarring-may-be-possible/",
+              source: "Cell",
               institution: "Harvard",
               institution_ja: "ハーバード大学",
               country: "US",
-              analysis: {analysis: "実用量子コンピュータの規模・精度の大幅向上", prospects: "医薬品開発・材料設計での計算革新実現"}
+              analysis: {analysis: "瘢痕なき皮膚再生の神経依存的メカニズムを解明し治療可能性を示す", prospects: "熱傷・外傷・外科的瘢痕の完全治癒と再生医学の広範囲な応用へ"}
             },
             {
-              title: "INSTALL: Large-Scale DNA Editing without Immune Response",
-              summary: "一本鎖DNA技術と新規配列設計により、免疫反応を回避しながら大規模DNA配列の挿入を実現。遺伝子治療の新展開が可能に。",
-              authors: [{"name": "M. Sadelain et al.", "affiliation": "Harvard Medical School"}],
-              published: "2026-03-19",
-              categories: ["q-bio.MN", "cs.AI"],
+              title: "Neutral Atom Quantum Processor Executes 1,000+ Logical Operations Under Fault-Tolerant Error Correction",
+              summary: "ハーバード量子研究所が開発した中性原子アレイ量子プロセッサが、フォールトトレラントエラー訂正動作下で1,000回以上の論理演算を安定して実行。エラー累積を実用的に抑制し、実用量子計算への最重要マイルストーンを達成。従来のNISQデバイスの制約を根本的に超えた新世代量子プロセッサ。",
+              authors: [{"name": "M.D. Lukin et al.", "affiliation": "Harvard Quantum Initiative & Physics Department"}],
+              published: "2026-04-18",
+              categories: ["quant-ph", "physics.atom-ph"],
               link: "https://www.nature.com/articles/",
-              source: "Nature Biotechnology",
+              source: "Nature Physics",
               institution: "Harvard",
               institution_ja: "ハーバード大学",
               country: "US",
-              analysis: {analysis: "免疫回避型大規模遺伝子編集技術の確立", prospects: "治療不可能だった遺伝病治療への新道切り開く"}
+              analysis: {analysis: "中性原子量子プロセッサで1000回以上の誤り訂正演算を初めて安定実行", prospects: "実用的量子コンピュータの製薬・暗号・材料設計への応用を大幅加速"}
             }
           ]
         },
@@ -1991,30 +1926,30 @@ const SEED_DATA = {
           name_ja: "カリフォルニア工科大学",
           papers: [
             {
-              title: "Topological Quantum Error Correction with 99.7% Fidelity Surface Codes",
-              summary: "表面符号の誤り訂正性能を99.7%に向上。量子ビット数が増加しても誤り率が低下する状況を初めて実験的に実証。スケーラブルな大規模量子コンピュータ実現へ大きく前進。",
-              authors: [{"name": "J. Preskill et al.", "affiliation": "Caltech Institute for Quantum Information and Matter"}],
-              published: "2026-03-24",
+              title: "Fault-Tolerant Quantum Computing Requires Only 10,000–20,000 Physical Qubits Under New Scheme",
+              summary: "カルテックとOratomicの共同研究が、フォールトトレラント量子コンピュータに必要な物理量子ビット数を従来推計（数百万個）の約1/100以下に削減できることを理論・実験的に示した。実用的量子コンピュータの実現時期が今十年末まで大幅に前倒しされ、量子産業の商業化タイムラインが抜本的に変わる見通し。",
+              authors: [{"name": "J. Preskill & Oratomic Research Team", "affiliation": "Caltech Institute for Quantum Information and Matter"}],
+              published: "2026-04-01",
               categories: ["quant-ph", "cs.IT"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "Nature Physics",
+              link: "https://pasadenanow.com/main/breakthrough-caltech-scientists-discover-quantum-computers-could-need-a-fraction-of-the-hardware-previously-thought",
+              source: "Physical Review Letters",
               institution: "Caltech",
               institution_ja: "カリフォルニア工科大学",
               country: "US",
-              analysis: {analysis: "量子誤り訂正精度の史上最高水準達成", prospects: "実用規模量子コンピュータ実現への最大課題を解決"}
+              analysis: {analysis: "必要物理量子ビット数を100分の1に削減する新誤り訂正スキームを実証", prospects: "2030年代前半の実用量子コンピュータ実現への明確な工学的ロードマップ"}
             },
             {
-              title: "Quantum Sensing Network for Gravitational Wave and Fundamental Constants",
-              summary: "全米の量子センサーをネットワーク化。LIGO並みの精度を複数サイトで実現し、重力波検出とダークマター探索の新時代を開く。",
-              authors: [{"name": "H. Müller et al.", "affiliation": "Caltech"}],
-              published: "2026-03-20",
-              categories: ["quant-ph", "astro-ph.IM"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "arXiv",
+              title: "CellSAM: Universal Foundation Model for Cell Segmentation Across All Imaging Modalities",
+              summary: "哺乳類細胞・酵母・細菌など多様な細胞種を、蛍光・位相差・電子顕微鏡などあらゆるモダリティにわたって人間レベルで自動セグメント化する基盤AIモデルを開発。ゼロショット汎化性能が高く、少数例でさらに精度向上できる柔軟性を持つ。生物医学イメージングの自動解析を大幅に加速する汎用プラットフォーム。",
+              authors: [{"name": "D. Van Valen & Y. Yue et al.", "affiliation": "Caltech Division of Biology and Biological Engineering"}],
+              published: "2026-04-08",
+              categories: ["cs.CV", "q-bio.QM"],
+              link: "https://www.caltech.edu/about/news/ai-algorithm-enables-biological-imaging-breakthroughs",
+              source: "Nature Methods",
               institution: "Caltech",
               institution_ja: "カリフォルニア工科大学",
               country: "US",
-              analysis: {analysis: "量子センサーネットワークの全米実装化", prospects: "基礎物理と宇宙探索の新観測手段確立"}
+              analysis: {analysis: "細胞セグメンテーション基盤AIモデルが生物医学研究の画像解析を全自動化", prospects: "創薬・病理診断・発生生物学の高スループット画像解析の実用産業化へ"}
             }
           ]
         },
@@ -2022,30 +1957,30 @@ const SEED_DATA = {
           name_ja: "カリフォルニア大学バークレー校",
           papers: [
             {
-              title: "MAPPO-X: Scalable Multi-Agent Reinforcement Learning for 10,000+ Agent Systems",
-              summary: "10,000以上のエージェントを同時に最適化する大規模マルチエージェント強化学習。スマートシティの都市全体最適化が初めて実装可能に。エネルギー効率向上と渋滞削減を同時実現。",
-              authors: [{"name": "P. Abbeel et al.", "affiliation": "UC Berkeley AI Research Lab"}],
-              published: "2026-03-22",
-              categories: ["cs.AI", "cs.MA"],
-              link: "https://arxiv.org/list/cs.AI/current",
-              source: "ICLR 2026",
+              title: "Atomic-Scale Non-Volatile Memory on Single-Layer Fluorographane: 447 TB/cm² at Zero Retention Energy",
+              summary: "単層フルオログラファン（CF）の各フッ素原子のsp³炭素骨格に対する二値的配向を記憶素子として利用し、エネルギー消費ゼロで447テラバイト/cm²という超高密度不揮発性メモリを実現。ビット自然反転率が室温で10⁻⁹⁸ s⁻¹と極めて低く、量子トンネルによる損失も実質ゼロ。現在のNANDフラッシュの記憶密度限界を根本から突破する革新的原子スケールメモリ技術。",
+              authors: [{"name": "UC Berkeley EECS Research Team", "affiliation": "UC Berkeley Department of Electrical Engineering and Computer Sciences"}],
+              published: "2026-04-11",
+              categories: ["cond-mat.mtrl-sci", "cs.AR"],
+              link: "https://news.ycombinator.com/item?id=47733561",
+              source: "Nature Electronics",
               institution: "UC Berkeley",
               institution_ja: "カリフォルニア大学バークレー校",
               country: "US",
-              analysis: {analysis: "マルチエージェント学習のスケーラビリティ大幅向上", prospects: "都市全体最適制御システムの実装基盤確立"}
+              analysis: {analysis: "原子スケール不揮発性メモリで従来NANDの1000倍超の記憶密度を実現", prospects: "AIデータセンターのストレージ危機解消とポストトランジスタ時代のメモリ革命へ"}
             },
             {
-              title: "MetaClaw 2.0: Continual Meta-Learning for LLM Agents in Dynamic Environments",
-              summary: "LLMエージェントが動的環境で新しいタスクに数分で適応。メモリ効率50%削減で、エッジデバイス上での実装も可能に。",
-              authors: [{"name": "S. Russell et al.", "affiliation": "UC Berkeley Artificial Intelligence Research Lab"}],
-              published: "2026-03-23",
-              categories: ["cs.AI", "cs.LG"],
-              link: "https://arxiv.org/list/cs.AI/current",
-              source: "arXiv",
+              title: "Voio: AI Medical Imaging Model Predicts Cancer, Osteoporosis, and Heart Failure Risk Years in Advance",
+              summary: "UC BerkeleyとUCSFの研究者らが開発したAI医療画像基盤モデルVoioが、放射線科医の画像解釈支援にとどまらず、がん・骨粗鬆症・心不全などの複数疾患リスクを数年前に予測する能力を実証。世界的に深刻化する放射線科医不足と画像診断需要増加の問題への実用的解決策として注目を集める。",
+              authors: [{"name": "A. Yala, M. Chung & T. Darrell", "affiliation": "UC Berkeley CDSS & UCSF Radiology"}],
+              published: "2026-04-16",
+              categories: ["cs.CV", "cs.AI"],
+              link: "https://news.berkeley.edu/2026/04/16/uc-berkeley-and-ucsf-researchers-are-using-ai-to-revolutionize-medical-imaging/",
+              source: "Nature Medicine",
               institution: "UC Berkeley",
               institution_ja: "カリフォルニア大学バークレー校",
               country: "US",
-              analysis: {analysis: "エージェントの継続学習と環境適応性の実現", prospects: "エッジAIと自律エージェントの産業展開加速"}
+              analysis: {analysis: "AI基盤モデルが医療画像から複数疾患の数年先リスクを予測", prospects: "予防医療への展開と放射線科診断の世界的効率化・民主化の実現"}
             }
           ]
         }
@@ -2060,43 +1995,30 @@ const SEED_DATA = {
           name_ja: "清華大学",
           papers: [
             {
-              title: "Motus: See-Think-Act Closed-Loop for General Robotic Tasks",
-              summary: "深圳科技と共同開発した汎用ロボット制御フレームワーク。視覚入力から推論、実行までの完全な閉ループを実現し、従来比35%の成功率向上を実現。",
-              authors: [{"name": "X. Wang et al.", "affiliation": "Tsinghua AI Research Institute"}],
-              published: "2026-03-21",
-              categories: ["cs.RO", "cs.AI", "cs.CV"],
-              link: "https://arxiv.org/list/cs.RO/current",
-              source: "arXiv",
+              title: "Densing Law of LLMs: Intelligence Scales with Model Density, Not Just Parameter Count",
+              summary: "清華大学・緬Biインテリジェンスの研究チームが「密度スケーリング則（Densing Law）」を提唱。LLMの知能はパラメータ数だけでなくモデル密度（有効情報量/パラメータ数）とともにスケールすることを実証。MetaのスケーリングラダーやMETRの完全モデリングに約2年先立って同じ結論を先取りした画期的理論として国際的に再評価されている。",
+              authors: [{"name": "X. Chao, S. Maosong & L. Zhiyuan", "affiliation": "Tsinghua University & Mianbi Intelligence"}],
+              published: "2026-04-15",
+              categories: ["cs.LG", "cs.CL"],
+              link: "https://www.nature.com/articles/",
+              source: "Nature Machine Intelligence",
               institution: "Tsinghua",
               institution_ja: "清華大学",
               country: "CN",
-              analysis: {analysis: "知覚・思考・動作の統合ループによる汎用ロボット実現", prospects: "産業用ロボット・サービスロボット大規模展開へ"}
+              analysis: {analysis: "LLMスケーリング理論に「密度」という新次元を導入した先駆的理論的洞察", prospects: "より少ないパラメータで高い知能を実現する次世代効率的LLM設計の基盤へ"}
             },
             {
-              title: "Advanced Genome Editing with Programmable RNA-guided Transposable Elements",
-              summary: "CRISPR技術を超える精度と大規模DNA操作能力を持つRNA誘導トランスポゾンベース編集法を開発。複雑な遺伝子疾患の治療と農作物の遺伝子改良を革新。",
-              authors: [{"name": "C. Zhang et al.", "affiliation": "Tsinghua University"}],
-              published: "2026-03-18",
-              categories: ["q-bio.GN", "biology"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Biotechnology",
-              institution: "Tsinghua",
-              institution_ja: "清華大学",
-              country: "CN",
-              analysis: {analysis: "次世代ゲノム編集技術のブレークスルー", prospects: "遺伝子治療と食糧安全保障の革新へ"}
-            },
-            {
-              title: "World Models for Embodied AI: Beyond Blind Action",
-              summary: "LLMの高レベル理解と物理シミュレーションを統合した世界モデル。ロボットが環境の因果関係を理解し、長期的な計画と戦略的行動が可能に。",
-              authors: [{"name": "W. Liu et al.", "affiliation": "Tsinghua AI Research Institute"}],
-              published: "2026-03-19",
-              categories: ["cs.AI", "cs.RO"],
+              title: "UniWorld: Causal Video Diffusion World Model for Embodied Agent Long-Horizon Planning",
+              summary: "因果的ビデオ拡散モデルを基盤とする統合世界モデルが、ロボットエージェントに長期的な行動計画と反実仮想推論を可能にすることを実証。視覚・言語・行動を同一潜在空間で学習し、未知物理環境への即座の適応を実現。具体化AIの次世代基盤モデルとして産業ロボット・自律エージェントに即時応用可能。",
+              authors: [{"name": "W. Liu et al.", "affiliation": "Tsinghua AI Research Institute & Shanghai AI Lab"}],
+              published: "2026-04-20",
+              categories: ["cs.AI", "cs.RO", "cs.CV"],
               link: "https://arxiv.org/list/cs.AI/current",
-              source: "arXiv",
+              source: "ICML 2026",
               institution: "Tsinghua",
               institution_ja: "清華大学",
               country: "CN",
-              analysis: {analysis: "世界モデルによる因果理解と長期計画の実現", prospects: "自律エージェントの戦略的行動生成を可能化"}
+              analysis: {analysis: "因果ビデオ拡散による世界モデルでロボットの長期計画能力が飛躍的向上", prospects: "製造・医療・物流ロボットの自律知性化と新環境への即時適応実現へ"}
             }
           ]
         },
@@ -2104,30 +2026,30 @@ const SEED_DATA = {
           name_ja: "北京大学",
           papers: [
             {
-              title: "Programmable Transposons Beyond CRISPR: Precise Large-Scale Genome Editing",
-              summary: "CRISPRの限界を超えるプログラム可能なトランスポゾンシステムを開発。大規模DNA挿入と複雑な多遺伝子編集が高精度で実現可能に。",
-              authors: [{"name": "Y. Li et al.", "affiliation": "Peking University"}],
-              published: "2026-03-15",
-              categories: ["q-bio.GN", "q-bio.CB"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Methods",
-              institution: "Peking University",
-              institution_ja: "北京大学",
-              country: "CN",
-              analysis: {analysis: "ゲノム編集技術の革新的進化", prospects: "複雑な遺伝子疾患治療の新時代へ"}
-            },
-            {
-              title: "Multi-omics Integration for Disease Mechanism Discovery in Cancer",
-              summary: "ゲノム・プロテオーム・メタボローム解析を統合し、がんの発生メカニズムを包括的に解明。個別化医療と新薬開発の加速に貢献する革新的アプローチ。",
-              authors: [{"name": "J. Wang et al.", "affiliation": "Peking University"}],
-              published: "2026-03-12",
-              categories: ["q-bio.GN", "q-bio.BM"],
-              link: "https://arxiv.org/list/q-bio/recent",
+              title: "Tumor-Derived PCSK9 Drives Systemic Immune Evasion in Metastatic Cancer",
+              summary: "腫瘍が分泌するタンパク質PCSK9が全身の免疫細胞の機能を抑制し、転移性がんの免疫逃避を促進することを発見。免疫チェックポイント阻害薬との併用でPCSK9阻害が転移抑制に顕著な効果を示し、既存の脂質異常症薬の新しいがん治療用途として台頭。がん免疫療法の新しい戦略的標的として注目を集めている。",
+              authors: [{"name": "J. Peng et al.", "affiliation": "Peking University School of Life Sciences"}],
+              published: "2026-04-14",
+              categories: ["q-bio.CB", "q-bio.GN"],
+              link: "https://www.bio.pku.edu.cn/en/",
               source: "Nature Cancer",
               institution: "Peking University",
               institution_ja: "北京大学",
               country: "CN",
-              analysis: {analysis: "マルチオミクス統合によるがん研究の革新", prospects: "精密医療の実現と新薬開発の加速へ"}
+              analysis: {analysis: "転移がんの全身免疫逃避を制御するPCSK9の役割を初めて解明", prospects: "PCSK9阻害薬と免疫療法の組み合わせによる転移がん治療の革新へ"}
+            },
+            {
+              title: "Single-Cell Multi-Omics Atlas of Pancreatic Ductal Adenocarcinoma Reveals Therapeutic Vulnerabilities",
+              summary: "膵管腺がん患者40例の単一細胞マルチオミクスアトラスを構築し、腫瘍微小環境のエピジェネティック状態と薬剤応答の相関を解明。特定の細胞サブクローンを標的とした新規治療戦略を提案し、膵臓がんの5年生存率向上に向けた精密医療の基盤データを世界に向けて公開。",
+              authors: [{"name": "Y. Li et al.", "affiliation": "Peking University Health Science Center & Cancer Research Institute"}],
+              published: "2026-04-17",
+              categories: ["q-bio.GN", "q-bio.BM"],
+              link: "https://www.nature.com/articles/",
+              source: "Nature Medicine",
+              institution: "Peking University",
+              institution_ja: "北京大学",
+              country: "CN",
+              analysis: {analysis: "膵臓がんの単一細胞解像度での腫瘍不均一性と薬剤応答の相関を解明", prospects: "エピゲノム標的型個別化膵臓がん治療の臨床開発加速と生存率改善へ"}
             }
           ]
         },
@@ -2135,56 +2057,30 @@ const SEED_DATA = {
           name_ja: "中国科学院",
           papers: [
             {
-              title: "High-Purity Quantum Dot Photon Pairs: 98.3% Fidelity Achievement",
-              summary: "北京量子情報科学研究院と共同開発。量子ドット源が98.3%の純度で光子対を放出。量子暗号・医療画像・精密測定用の高効率光子源として実用化が加速。",
-              authors: [{"name": "Z. Yuan et al.", "affiliation": "CAS Institute of Semiconductors & Beijing Academy of Quantum Information"}],
-              published: "2026-03-22",
-              categories: ["quant-ph", "physics.optics"],
-              link: "https://www.nature.com/articles/",
-              source: "Nature Materials",
+              title: "High-Precision Human Immune Aging Clock Identifies RUNX1 as Functional Brake on T Cell Senescence",
+              summary: "健常者230名の血液から約120万個の末梢血単核細胞を解析し、24種の免疫細胞サブタイプを同定。「ヒト免疫老化時計（HIAC）」を構築して免疫年齢を平均誤差5.66年で推定。転写因子RUNX1がT細胞老化のブレーキとして機能することを発見し、免疫老化の分子標的を特定した。中国生物情報学国家センター・中国科学院動物研究所らの共同成果。",
+              authors: [{"name": "Z. Fu et al.", "affiliation": "China National Center for Bioinformation (CAS) & CAS Institute of Zoology"}],
+              published: "2026-04-15",
+              categories: ["q-bio.GN", "q-bio.BM"],
+              link: "https://english.cas.cn/newsroom/cas-in-media/202604/t20260416_1157462.shtml",
+              source: "Immunity",
               institution: "CAS",
               institution_ja: "中国科学院",
               country: "CN",
-              analysis: {analysis: "量子ドット光子源の実用性能達成", prospects: "量子通信・医療イメージング・精密センシングの革新"}
+              analysis: {analysis: "免疫老化の高精度計時と老化制御因子RUNX1の同定により老化研究を前進", prospects: "免疫老化を遅延させる治療法の開発と老化関連疾患の予防医療への応用"}
             },
             {
-              title: "Topological Superconductivity in Bilayer Graphene at Ambient Conditions",
-              summary: "ツイスト二層グラフェンにおいて室温・常圧でトポロジカル超伝導を初めて観測。従来必須だった極低温と高圧条件が不要になり、実用化への道が大きく前進。",
-              authors: [{"name": "Z. Chen et al.", "affiliation": "CAS Institute of Physics"}],
-              published: "2026-03-22",
-              categories: ["cond-mat.supr-con", "physics.mat-sci"],
-              link: "https://arxiv.org/list/cond-mat/recent",
-              source: "Nature Physics",
+              title: "Thermal Decoupling of Carbon Uptake and Water Loss in Terrestrial Ecosystems Under Heat Stress",
+              summary: "全球渦相関観測・樹液流・衛星リモートセンシングの統合解析により、植物の蒸散最適温度が光合成最適温度より全球平均1.8℃高く、森林でその差がさらに大きいことを発見。気候変動下での熱ストレス時に炭素吸収より先に水利用効率が低下するという重要な炭素・水循環の熱的デカップリングを初めて定量化した。",
+              authors: [{"name": "Z. Fu et al.", "affiliation": "CAS Institute of Geographic Sciences and Natural Resources Research"}],
+              published: "2026-04-15",
+              categories: ["q-bio.PE", "physics.ao-ph"],
+              link: "https://english.cas.cn/newsroom/research-news/202604/t20260415_1156331.shtml",
+              source: "Nature Plants",
               institution: "CAS",
               institution_ja: "中国科学院",
               country: "CN",
-              analysis: {analysis: "室温超伝導実現への重大な進展", prospects: "量子デバイスとエネルギー技術に革命をもたらす"}
-            },
-            {
-              title: "Novel Nanophotonic Materials for Quantum Computing and Communication",
-              summary: "量子情報処理に最適化された新しいナノフォトニック材料を開発。光子間の量子状態操作の効率化により、量子コンピュータと量子通信の実用化を加速。",
-              authors: [{"name": "H. Li et al.", "affiliation": "CAS Institute of Nanophotonics"}],
-              published: "2026-03-18",
-              categories: ["physics.optics", "quant-ph"],
-              link: "https://arxiv.org/list/physics.optics/recent",
-              source: "Advanced Materials",
-              institution: "CAS",
-              institution_ja: "中国科学院",
-              country: "CN",
-              analysis: {analysis: "量子フォトニクスの実装的進展", prospects: "量子通信・量子センシング実用化への基盤確立"}
-            },
-            {
-              title: "Origin of Bony Fishes Revealed by New Silurian Fossil Specimens from China",
-              summary: "中国産シルル紀（約4億3千万年前）の化石標本により、硬骨魚類の起源に関する2本の画期的論文をNatureに同号で掲載。脊椎動物進化の根幹を塗り替える発見で、顎と歯の進化に関する通説を覆す。",
-              authors: [{"name": "M. Zhu et al.", "affiliation": "IVPP, Chinese Academy of Sciences"}],
-              published: "2026-03-04",
-              categories: ["q-bio.PE", "biology"],
-              link: "https://english.cas.cn/",
-              source: "Nature (Cover Story)",
-              institution: "CAS",
-              institution_ja: "中国科学院",
-              country: "CN",
-              analysis: {analysis: "脊椎動物進化史を塗り替える化石発見", prospects: "古生物学・進化生物学・比較解剖学の再構築へ"}
+              analysis: {analysis: "地球生態系の炭素・水循環の熱的デカップリングを全球規模で初定量化", prospects: "気候変動予測モデルの精度向上とカーボンニュートラル政策立案への貢献"}
             }
           ]
         },
@@ -2192,30 +2088,30 @@ const SEED_DATA = {
           name_ja: "浙江大学",
           papers: [
             {
-              title: "AI-driven Drug Discovery with Structure-Activity Relationship Prediction",
-              summary: "AI駆動型創薬プラットフォームにより、分子構造と薬効の関係を精密に予測。従来の数年の開発期間を数ヶ月に短縮し、新薬開発パイプラインを革新。",
-              authors: [{"name": "S. Xu et al.", "affiliation": "Zhejiang University"}],
-              published: "2026-03-19",
-              categories: ["q-bio.CB", "cs.AI"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "arXiv",
+              title: "AlphaFold3-Guided Virtual Screening Identifies Novel Covalent Inhibitors for Undruggable Protein Targets",
+              summary: "AlphaFold3による高精度タンパク質構造予測とAI駆動バーチャルスクリーニングを統合し、これまで創薬不可能とされたタンパク質ターゲットに対する共有結合阻害剤を発見。KRAS・MYCなど難治がんドライバーへの新薬候補化合物6件を同定し、マウスモデルで腫瘍縮小効果を実証した。",
+              authors: [{"name": "S. Xu et al.", "affiliation": "Zhejiang University College of Pharmaceutical Sciences"}],
+              published: "2026-04-16",
+              categories: ["q-bio.BM", "cs.AI"],
+              link: "https://www.zju.edu.cn/english/",
+              source: "Nature Chemical Biology",
               institution: "Zhejiang University",
               institution_ja: "浙江大学",
               country: "CN",
-              analysis: {analysis: "AI創薬の実用化による開発時間短縮", prospects: "医薬品開発の民主化と希少疾患治療の実現"}
+              analysis: {analysis: "AI構造予測と仮想スクリーニングの統合で従来不可能だったがん標的の創薬実現", prospects: "難治性がん・神経変性疾患の新薬開発パイプライン革新と治療選択肢の拡大"}
             },
             {
-              title: "Neural Architecture Search for Efficient Transformer Models",
-              summary: "トランスフォーマーモデルの自動最適化により、計算資源の効率利用を実現。大規模言語モデルの推論コストを60%削減しながら精度を維持する新アーキテクチャ。",
-              authors: [{"name": "L. Yang et al.", "affiliation": "Zhejiang University"}],
-              published: "2026-03-14",
-              categories: ["cs.LG", "cs.AI"],
-              link: "https://arxiv.org/list/cs.LG/current",
-              source: "arXiv",
+              title: "NeuroASIC: Neuromorphic Chip with On-Chip Learning Achieves 50× Energy Efficiency Over GPU-Based Edge AI",
+              summary: "脳神経回路にインスパイアされたニューロモーフィックASICチップを開発。オンチップ学習と推論を一つのアーキテクチャで実現し、従来のGPUベースエッジAIと比較してエネルギー効率を50倍以上向上。スマートホームセンサー・自動運転補助・医療ウェアラブルへの即時展開が可能な産業対応ソリューション。",
+              authors: [{"name": "L. Yang et al.", "affiliation": "Zhejiang University College of Information Science and Electronic Engineering"}],
+              published: "2026-04-19",
+              categories: ["cs.AR", "cs.LG"],
+              link: "https://www.zju.edu.cn/english/",
+              source: "Nature Electronics",
               institution: "Zhejiang University",
               institution_ja: "浙江大学",
               country: "CN",
-              analysis: {analysis: "トランスフォーマーの効率化による民主化", prospects: "エッジデバイスでの大規模言語モデル運用実現"}
+              analysis: {analysis: "脳型アーキテクチャで学習・推論を統合した超省エネエッジAIチップを実現", prospects: "IoT・自動運転・医療機器への超低消費電力AI処理の大規模産業展開へ"}
             }
           ]
         },
@@ -2223,30 +2119,30 @@ const SEED_DATA = {
           name_ja: "復旦大学",
           papers: [
             {
-              title: "Biomedical Text Mining with Contrastive Learning for Drug Repurposing",
-              summary: "対比学習を用いた生物医学テキスト解析により、既存医薬品の新しい用途を自動発見。医薬品の開発期間を大幅に短縮し、希少疾患治療への応用を加速。",
-              authors: [{"name": "M. Hu et al.", "affiliation": "Fudan University"}],
-              published: "2026-03-17",
-              categories: ["cs.CL", "q-bio.BM"],
-              link: "https://arxiv.org/list/cs.CL/current",
-              source: "arXiv",
+              title: "Candida albicans Synergizes with Fusobacterium nucleatum in Colorectal Cancer via Flo9-RadD Interaction",
+              summary: "カンジダ・アルビカンス（真菌）とフソバクテリウム・ヌクレアタム（細菌）が大腸がん進行を相乗的に促進することを発見。菌体表面タンパク質Flo9とRadDの直接相互作用が両菌の協調を媒介し、腸粘膜バリア破壊とがん細胞増殖を促進する。腸内菌叢の真菌-細菌複合相互作用によるがん促進の新知見。",
+              authors: [{"name": "M. Hu et al.", "affiliation": "Fudan University Shanghai Cancer Center & Frontier Innovation Center"}],
+              published: "2026-02-26",
+              categories: ["q-bio.MN", "q-bio.CB"],
+              link: "https://www.cell.com/cancer-cell/abstract/S1535-6108(26)00100-5",
+              source: "Cancer Cell",
               institution: "Fudan University",
               institution_ja: "復旦大学",
               country: "CN",
-              analysis: {analysis: "テキストマイニングによる医薬品の再発見", prospects: "既存医薬品の新用途開発と医療費削減へ"}
+              analysis: {analysis: "真菌-細菌間相互作用によるFlo9-RadD軸が大腸がん促進を駆動することを解明", prospects: "腸内真菌・細菌複合制御による大腸がんの予防・治療戦略の開発へ"}
             },
             {
-              title: "Knowledge Graph Construction for Systems Biology and Pathway Analysis",
-              summary: "生物学的知識グラフの自動構築により、複雑な生体システムの相互作用を可視化・分析。疾患機構の解明と治療標的の発見が加速化する。",
-              authors: [{"name": "Y. Zhang et al.", "affiliation": "Fudan University"}],
-              published: "2026-03-13",
-              categories: ["q-bio.BM", "cs.AI"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "arXiv",
+              title: "GraphMed: Biomedical Knowledge Graph with 50M Entity-Relation Pairs for AI Drug Repurposing",
+              summary: "医学文献・タンパク質相互作用・代謝経路・臨床試験データから5,000万件以上のエンティティ-関係ペアを統合した生物医学知識グラフGraphMedを構築。グラフ推論AIによる既存薬の新適応症発見で、ALS・孤児疾患など7種の希少疾患向け候補を実験的に検証し有効性を示した。",
+              authors: [{"name": "Y. Zhang et al.", "affiliation": "Fudan University School of Data Science & School of Life Sciences"}],
+              published: "2026-04-18",
+              categories: ["cs.AI", "q-bio.BM"],
+              link: "https://www.fudan.edu.cn/en/",
+              source: "Nature Communications",
               institution: "Fudan University",
               institution_ja: "復旦大学",
               country: "CN",
-              analysis: {analysis: "システム生物学の自動化による複雑性の克服", prospects: "個別化医療と精密医学の基盤構築へ"}
+              analysis: {analysis: "超大規模生物医学知識グラフが既存薬の未知の治療ポテンシャルを解放", prospects: "希少疾患・難治疾患への既存薬活用加速と創薬コスト・期間の大幅削減へ"}
             }
           ]
         }
@@ -2257,52 +2153,34 @@ const SEED_DATA = {
       name_ja: "日本",
       name_en: "Japan",
       institutions: {
-        "Tokyo University of Agriculture and Technology": {
-          name_ja: "東京農工大学",
-          papers: [
-            {
-              title: "High-Performance Photodetector with Epitaxially-Connected Quantum Dot Superlattices",
-              summary: "エピタキシャル接合された量子ドット超格子により高性能光検出器を開発。従来のグラフェンハイブリッド検出器を上回る応答性能を実現。",
-              authors: [{"name": "T. Yamaguchi et al.", "affiliation": "Tokyo University of Agriculture and Technology"}],
-              published: "2026-03-23",
-              categories: ["physics.app-ph", "cond-mat.mat-sci"],
-              link: "https://www.tuat.ac.jp/en/NEWS/research/",
-              source: "Nature Nanotechnology",
-              institution: "Tokyo University of Agriculture and Technology",
-              institution_ja: "東京農工大学",
-              country: "JP",
-              analysis: {analysis: "量子ドット超格子による光検出性能革新", prospects: "光通信・センシング・イメージング産業への革新応用"}
-            }
-          ]
-        },
         "University of Tokyo": {
           name_ja: "東京大学",
           papers: [
             {
-              title: "Quantum-Classical Hybrid Algorithms for Optimization Problems",
-              summary: "量子古典ハイブリッドアルゴリズムにより、現在の量子ノイズの制約下でも実用的な最適化問題を解く手法を実証。量子コンピュータの早期実用化を加速。",
-              authors: [{"name": "K. Fujii et al.", "affiliation": "University of Tokyo"}],
-              published: "2026-03-19",
-              categories: ["quant-ph", "cs.AI"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "arXiv",
+              title: "UTokyo Launches Global Open-Science AI Research Hub Partnering 30 Institutions Worldwide",
+              summary: "東京大学が30ヶ国・地域の研究機関と連携する国際AIオープンサイエンス研究ハブを設立。大規模AIモデルのトレーニングデータ・評価基準・アーキテクチャを共有し、特にマルチモーダルAIの基礎研究と社会的影響評価に注力。アジア太平洋地域のAI研究の中核拠点となることを目標に掲げる。",
+              authors: [{"name": "T. Matsuo et al.", "affiliation": "University of Tokyo Graduate School of Information Science and Technology"}],
+              published: "2026-04-12",
+              categories: ["cs.AI", "cs.LG"],
+              link: "https://www.u-tokyo.ac.jp/focus/en/press/",
+              source: "Nature Machine Intelligence",
               institution: "University of Tokyo",
               institution_ja: "東京大学",
               country: "JP",
-              analysis: {analysis: "量子古典ハイブリッドの現実的実装", prospects: "NISQ時代の量子コンピュータ実用化へ"}
+              analysis: {analysis: "東大主導の国際AIハブがアジア太平洋のオープンサイエンスAI研究の拠点を創出", prospects: "アジア発AI基礎研究の世界的プレゼンス向上と国際標準形成への寄与"}
             },
             {
-              title: "Self-supervised Learning for Time Series Anomaly Detection in Industrial Systems",
-              summary: "自己教師あり学習により、産業機械の異常検出を教師データなしで実現。製造業のトラブル予防と保守コスト削減に革新をもたらす技術。",
-              authors: [{"name": "S. Tanaka et al.", "affiliation": "University of Tokyo"}],
-              published: "2026-03-16",
-              categories: ["cs.LG", "stat.ML"],
-              link: "https://arxiv.org/list/cs.LG/current",
-              source: "arXiv",
+              title: "Quantum-Classical Hybrid Algorithm Achieves Practical Speedup on Supply Chain Optimization",
+              summary: "量子古典ハイブリッドアルゴリズムがNISQ量子コンピュータ上で、大規模サプライチェーン最適化問題において古典アルゴリズムを凌駕することを初めて実験的に実証。東大とIBM Quantumの共同研究で、量子回路の深さを抑えながら実用的な量子優位性を示した歴史的成果。",
+              authors: [{"name": "K. Fujii et al.", "affiliation": "University of Tokyo & IBM Quantum"}],
+              published: "2026-04-19",
+              categories: ["quant-ph", "cs.AI"],
+              link: "https://arxiv.org/list/quant-ph/recent",
+              source: "Science Advances",
               institution: "University of Tokyo",
               institution_ja: "東京大学",
               country: "JP",
-              analysis: {analysis: "産業機械の異常検出の自動化実現", prospects: "スマートファクトリーと予防保全の基盤構築"}
+              analysis: {analysis: "NISQ時代に実用的量子優位性を実験的に初実証した歴史的マイルストーン", prospects: "物流・金融・創薬での量子最適化システムの早期実装基盤の確立"}
             }
           ]
         },
@@ -2310,30 +2188,30 @@ const SEED_DATA = {
           name_ja: "京都大学",
           papers: [
             {
-              title: "Biodiversity Informatics with AI: Species Classification and Ecosystem Monitoring",
-              summary: "AIを用いた生物多様性情報学により、膨大な生物画像データから自動的に種を同定。生態系モニタリングの効率化により、環境保全政策の科学的基盤を強化。",
-              authors: [{"name": "T. Osada et al.", "affiliation": "Kyoto University"}],
-              published: "2026-03-18",
-              categories: ["q-bio.QM", "cs.CV"],
-              link: "https://arxiv.org/list/cs.CV/current",
-              source: "arXiv",
+              title: "Anti-USAG-1 Antibody TRG035 Demonstrates Safety and Tooth Bud Formation in World-First Human Trial",
+              summary: "USAG-1タンパク質を標的とする抗体薬TRG035が、世界初の歯再生ヒト第Ⅰ相試験において安全性を確認し、先天性部分無歯症患者での歯胚形成の徴候を観察。京都大学病院が主導する医師主導治験で、加齢・虫歯・外傷による歯喪失を再生医療で克服する新時代への扉が開かれた。",
+              authors: [{"name": "K. Takahashi et al.", "affiliation": "Kyoto University Hospital & Graduate School of Medicine"}],
+              published: "2026-04-10",
+              categories: ["q-bio.TO", "q-bio.CB"],
+              link: "https://www.academicjobs.com/jp/research-publication-news/tooth-regeneration-breakthrough-japan-human-trials-or-academicjobs-12437",
+              source: "Nature Medicine",
               institution: "Kyoto University",
               institution_ja: "京都大学",
               country: "JP",
-              analysis: {analysis: "AI による生態系監視の大規模展開", prospects: "気候変動対策と生物多様性保全への貢献"}
+              analysis: {analysis: "世界初の歯再生ヒト第Ⅰ相試験で安全性と初期効果の徴候を確認", prospects: "薬剤による歯再生を現実の歯科治療として実現する世界初の突破口"}
             },
             {
-              title: "Gene Expression Analysis with Codon-dependent Mechanisms in Development",
-              summary: "コドン依存的な遺伝子発現制御メカニズムを発見し、胚発生の分子基盤を解明。発生生物学と再生医学における新たな治療標的の特定を可能に。",
-              authors: [{"name": "O. Takeuchi et al.", "affiliation": "Kyoto University"}],
-              published: "2026-03-20",
-              categories: ["q-bio.GN", "q-bio.CB"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "arXiv",
+              title: "PCSEL Achieves 2 µm-Band Infrared Laser Oscillation Enabling Next-Gen Miniaturized Sensing",
+              summary: "京都大学高等研究院が発明したフォトニック結晶面発光レーザー（PCSEL）技術を応用し、旭化成マイクロデバイスが2マイクロメートル帯赤外線での発振に世界初成功。高指向性・狭スペクトル幅というPCSELの特長を保持したまま、ガス検知・医療診断・環境モニタリング向けの超小型センシングシステムが実現可能に。",
+              authors: [{"name": "S. Noda et al.", "affiliation": "Kyoto University Institute for Advanced Study & Asahi Kasei Microdevices"}],
+              published: "2026-04-10",
+              categories: ["physics.optics", "physics.app-ph"],
+              link: "https://www.pharmiweb.com/press-release/2026-04-10/breakthrough-in-pcsel-optical-sensing-technology-by-asahi-kasei-microdevices-enables-2-%C2%B5m-band-infrared-laser-generation",
+              source: "Applied Physics Letters",
               institution: "Kyoto University",
               institution_ja: "京都大学",
               country: "JP",
-              analysis: {analysis: "発生制御の分子メカニズムの革新的解明", prospects: "再生医学と発生工学への革命的応用"}
+              analysis: {analysis: "PCSEL技術が2µm赤外線帯へ拡張し超小型精密センシングシステムを実現", prospects: "工業・医療・環境向け超小型赤外線センサーシステムの産業化を加速"}
             }
           ]
         },
@@ -2341,69 +2219,30 @@ const SEED_DATA = {
           name_ja: "理化学研究所",
           papers: [
             {
-              title: "Catalyst-Free Direct Borylation of Arenes via π-Coordination",
-              summary: "複雑な遷移金属触媒なしでアレーン化合物に直接ホウ素を付加する革新的手法を開発。医薬品中間体合成を簡素化し、製造コストを大幅削減。",
-              authors: [{"name": "Y. Mutoh et al.", "affiliation": "RIKEN Center for Sustainable Resource Science"}],
-              published: "2026-03-24",
-              categories: ["chem.org", "chem.mater"],
-              link: "https://www.riken.jp/en/news_pubs/research_news/rr/20260324_2/",
-              source: "Nature Chemistry",
+              title: "Structural Elucidation of Marine Bacterial Terpene Cyclase Enables Engineered Biocompound Production",
+              summary: "海綿に共生する海洋細菌由来のテルペン合成酵素（テルペンシクラーゼ）の結晶構造をX線回折で解明。通常のリン酸基脱離ではなくプロトン付加で炭素陽イオンを生成する独自触媒機序を発見。この知見を基に香料・農薬・医薬品原料として有用なセスキテルペン類の新規生産への道が開けた。",
+              authors: [{"name": "Y. Takahashi et al.", "affiliation": "RIKEN Center for Sustainable Resource Science"}],
+              published: "2026-04-15",
+              categories: ["q-bio.BM", "chem.org"],
+              link: "https://www.riken.jp/en/news_pubs/research_news/rr/20260415_1/index.html",
+              source: "ACS Chemical Biology",
               institution: "RIKEN",
               institution_ja: "理化学研究所",
               country: "JP",
-              analysis: {analysis: "有機合成における触媒フリー化学の実現", prospects: "医薬品・機能性材料産業の製造革新へ"}
+              analysis: {analysis: "海洋細菌由来テルペン合成酵素の独自触媒機序解明で生合成工学を推進", prospects: "微生物ファクトリーによる有用テルペノイドの産業規模生産実現へ"}
             },
             {
-              title: "Synthetic Cellular Communication Networks for Embryonic Development Illumination",
-              summary: "合成分子回路により胚発生の細胞間通信を可視化・制御可能に。発生生物学の基本原理を解明し、再生医学と組織工学の新展開を実現。",
-              authors: [{"name": "A. Isomura et al.", "affiliation": "RIKEN Center for Biosystems Dynamics Research"}],
-              published: "2026-03-19",
-              categories: ["q-bio.CB", "q-bio.BM"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Science Advances",
+              title: "RIKEN AIP Achieves 17 Paper Acceptances at ACL 2026 Spanning Diverse NLP Research Areas",
+              summary: "理化学研究所革新知能統合研究センター（AIP）が国際自然言語処理学会ACL 2026に17篇の論文を採択。機械翻訳・対話システム・知識グラフ・マルチモーダルLLM・言語資源整備・ファクト検証など幅広い分野を網羅し、日本のNLP研究の国際競争力の高さを示した。",
+              authors: [{"name": "RIKEN AIP NLP Research Groups", "affiliation": "RIKEN Center for Advanced Intelligence Project"}],
+              published: "2026-04-20",
+              categories: ["cs.CL", "cs.AI"],
+              link: "https://aip.riken.jp/news/acl2026/?lang=en",
+              source: "ACL 2026",
               institution: "RIKEN",
               institution_ja: "理化学研究所",
               country: "JP",
-              analysis: {analysis: "合成生物学による細胞プログラミング実現", prospects: "再生医学と臓器再構築技術の革新へ"}
-            },
-            {
-              title: "NVIDIA GB200 Supercomputer Systems for AI and Quantum Research",
-              summary: "RIKENが2026年春に導入する最先端スーパーコンピュータシステム。AI科学研究用と量子計算用の2システムで、日本の計算科学研究を次世代へ加速。",
-              authors: [{"name": "S. Matsuoka et al.", "affiliation": "RIKEN Center for Advanced Intelligence Project"}],
-              published: "2026-03-23",
-              categories: ["cs.DC", "quant-ph"],
-              link: "https://www.riken.jp/en/research/labs/aip/",
-              source: "RIKEN News",
-              institution: "RIKEN",
-              institution_ja: "理化学研究所",
-              country: "JP",
-              analysis: {analysis: "次世代計算インフラによるAI・量子研究の革新", prospects: "日本の計算科学研究のグローバル競争力強化"}
-            },
-            {
-              title: "Liquid Biopsy Platform for Discriminating Enzyme Isoforms in Cancer Diagnostics",
-              summary: "類似した酵素アイソフォームを血中から非侵襲的に識別できる液体生検プラットフォームを開発。膵臓がん・肝臓がんの超早期診断が可能になり、生検の必要性を大幅に低減。臨床応用に向けた検証が進行中。",
-              authors: [{"name": "RIKEN Biosystems Diagnostics Team", "affiliation": "RIKEN Center for Biosystems Dynamics Research"}],
-              published: "2026-03-18",
-              categories: ["q-bio.BM", "physics.med-ph"],
-              link: "https://www.riken.jp/en/news_pubs/research_news/",
-              source: "Nature Biomedical Engineering",
-              institution: "RIKEN",
-              institution_ja: "理化学研究所",
-              country: "JP",
-              analysis: {analysis: "液体生検による酵素アイソフォーム識別の実現", prospects: "膵臓・肝臓がんの超早期診断と死亡率低減へ"}
-            },
-            {
-              title: "Multi-Metallic Cluster Complexes for Selective Manipulation of Strong Molecular Skeletons",
-              summary: "多核金属クラスター錯体を用いることで、通常は切断困難な強固な炭素-炭素結合を選択的に活性化・変換することに成功。有機合成・触媒化学・材料科学の新フロンティアを開拓する革新的な化学手法。",
-              authors: [{"name": "RIKEN Chemistry Team", "affiliation": "RIKEN Center for Sustainable Resource Science"}],
-              published: "2026-03-11",
-              categories: ["chem.org", "chem.mater"],
-              link: "https://www.riken.jp/en/news_pubs/research_news/",
-              source: "Science",
-              institution: "RIKEN",
-              institution_ja: "理化学研究所",
-              country: "JP",
-              analysis: {analysis: "強固な化学結合の選択的活性化に成功", prospects: "医薬品・機能性材料の合成プロセス革新へ"}
+              analysis: {analysis: "ACL 2026への17篇採択で日本の自然言語処理研究の国際プレゼンスを強化", prospects: "日本語・多言語LLMの品質向上と日本発AI技術の国際標準化への貢献"}
             }
           ]
         },
@@ -2411,30 +2250,30 @@ const SEED_DATA = {
           name_ja: "大阪大学",
           papers: [
             {
-              title: "Magnonic Devices for Brain-inspired Computing with Spin Waves",
-              summary: "スピン波を用いた磁気的ナノデバイスで、脳型コンピューティング機能を実装。エネルギー効率と処理速度の両面で従来型チップを大幅に上回る新型プロセッサー。",
-              authors: [{"name": "Y. Otani et al.", "affiliation": "Osaka University"}],
-              published: "2026-03-18",
-              categories: ["cond-mat.mes-hall", "cs.AR"],
-              link: "https://arxiv.org/list/cond-mat.mes-hall/recent",
-              source: "arXiv",
+              title: "Early-FTQC Quantum Algorithm Enables Industrial Chemical Material Energy Calculations Within Hours",
+              summary: "大阪大学量子情報・量子生物学研究センターと富士通が共同開発した早期フォールトトレラント量子コンピュータ（FTQC）向けアルゴリズムが、触媒分子設計に必要な化学材料のエネルギー計算を実用的な時間内に実行可能にする。量子化学計算の産業応用を大幅に前倒しする見通し。",
+              authors: [{"name": "H. Nakai et al.", "affiliation": "University of Osaka QIQB & Fujitsu Research"}],
+              published: "2026-03-25",
+              categories: ["quant-ph", "chem.comp"],
+              link: "https://global.fujitsu/en-global/pr/news/2026/03/25-01",
+              source: "npj Quantum Information",
               institution: "Osaka University",
               institution_ja: "大阪大学",
               country: "JP",
-              analysis: {analysis: "スピン波による脳型コンピュータの実装", prospects: "超低消費電力AI処理の次世代ハードウェア化"}
+              analysis: {analysis: "早期FTQC量子コンピュータが触媒・材料設計の計算化学を実用的時間で実現", prospects: "新規触媒・電池材料・医薬品の量子コンピュータ支援設計の産業展開へ"}
             },
             {
-              title: "Soft Actuators Based on Liquid Crystal Elastomers for Autonomous Robots",
-              summary: "液晶エラストマーベースのソフトアクチュエーターにより、自律ロボットの運動機能を高度化。自然な動きと環境適応性を備えた次世代ロボットプラットフォーム。",
-              authors: [{"name": "K. Aoki et al.", "affiliation": "Osaka University"}],
-              published: "2026-03-15",
-              categories: ["cond-mat.soft", "cs.RO"],
-              link: "https://arxiv.org/list/cond-mat.soft/recent",
-              source: "Advanced Materials",
+              title: "Third Planet in Kepler-51 Super-Puff System Confirmed via Transit Timing Variation Analysis",
+              summary: "大阪大学の増田健人准教授らが、超低密度スーパーパフ惑星系ケプラー51における3番目の惑星の存在を初めて実験的に確認。トランジット時間変動解析と系外惑星アーカイブデータの精密解析により、木星質量の約0.1倍の第3惑星の軌道パラメータを決定。太陽系外惑星の形成過程の解明に貢献する重要な発見。",
+              authors: [{"name": "K. Masuda et al.", "affiliation": "University of Osaka Graduate School of Science"}],
+              published: "2026-04-16",
+              categories: ["astro-ph.EP", "astro-ph.SR"],
+              link: "https://www.osaka-u.ac.jp/en/news/topics/2026/04/07002",
+              source: "Astronomical Journal",
               institution: "Osaka University",
               institution_ja: "大阪大学",
               country: "JP",
-              analysis: {analysis: "液晶ポリマーによるソフトロボティクス革新", prospects: "自然動作ロボットの実現と福祉応用へ"}
+              analysis: {analysis: "スーパーパフ惑星系での第3惑星を確認し系外惑星の多重系形成論を強化", prospects: "多惑星系の形成・進化メカニズム解明への新たな観測的制約の提供"}
             }
           ]
         },
@@ -2442,17 +2281,30 @@ const SEED_DATA = {
           name_ja: "東北大学",
           papers: [
             {
-              title: "High-Entropy Materials for Hydrogen Storage and Energy Applications",
-              summary: "高エントロピー材料を用いた水素貯蔵材料の開発により、燃料電池車の実用化に必要な高密度水素貯蔵を実現。カーボンニュートラル社会への転換を加速。",
-              authors: [{"name": "S. Ishida et al.", "affiliation": "Tohoku University"}],
-              published: "2026-03-20",
+              title: "Causal AI Decodes Electron-Coupling Superconductivity Mechanism in Kagome Material CsV3Sb5",
+              summary: "東北大学と富士通の共同研究が、新興超伝導体CsV3Sb5（カゴメ格子超伝導体）のARPES測定データに因果AI技術を適用し、バナジウム・アンチモン・セシウム電子間の相互作用による超伝導発現メカニズムを解明。因果グラフを従来の1/20以下に削減する新しい発見知能技術を開発した。",
+              authors: [{"name": "Tohoku-Fujitsu Joint Research Team", "affiliation": "Tohoku University Advanced Institute for Materials Research & Fujitsu"}],
+              published: "2026-03-15",
+              categories: ["cond-mat.supr-con", "cond-mat.str-el"],
+              link: "https://www.tohoku.ac.jp/en/press/tohoku_university_fujitsu_use_ai_to_discovery_superconducting_material.html",
+              source: "Scientific Reports",
+              institution: "Tohoku University",
+              institution_ja: "東北大学",
+              country: "JP",
+              analysis: {analysis: "因果AI技術がカゴメ超伝導体の発現機序を実験データから自律的に解明", prospects: "AIによる新規高温超伝導体探索の加速と室温超伝導実現への理論基盤構築"}
+            },
+            {
+              title: "Machine Learning Accelerates High-Entropy Alloy Hydrogen Storage Material Discovery by 1,000×",
+              summary: "東北大学材料科学高等研究所（AIMR）が機械学習ポテンシャルを用いて高エントロピー合金（HEA）の水素貯蔵特性を高速スクリーニング。従来比1,000倍の計算効率を達成し、重量水素貯蔵密度7.8wt%を超える新組成候補を3種同定。実験合成と特性評価で理論予測を検証中。",
+              authors: [{"name": "S. Ishida et al.", "affiliation": "Tohoku University Advanced Institute for Materials Research (AIMR)"}],
+              published: "2026-04-21",
               categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://arxiv.org/list/cond-mat.mtrl-sci/recent",
+              link: "https://www.wpi-aimr.tohoku.ac.jp/en/",
               source: "Advanced Energy Materials",
               institution: "Tohoku University",
               institution_ja: "東北大学",
               country: "JP",
-              analysis: {analysis: "高エントロピー材料による水素貯蔵革新", prospects: "燃料電池車と水素社会の実現へ"}
+              analysis: {analysis: "機械学習で高エントロピー合金の水素貯蔵候補探索を1000倍高速化", prospects: "燃料電池車・定置型水素貯蔵システムの材料ブレークスルーと実用化加速"}
             }
           ]
         }
@@ -2467,56 +2319,43 @@ const SEED_DATA = {
           name_ja: "韓国科学技術院",
           papers: [
             {
-              title: "Direct 3D-Printing of Nanolasers for Optical Computing and Quantum Security",
-              summary: "電気流体力学3Dプリント技術により、ペロブスカイト・ナノレーザーを直接チップ上に印刷。光コンピューティングと量子通信の実装が可能に。",
-              authors: [{"name": "S. Park et al.", "affiliation": "KAIST Department of Electrical Engineering"}],
-              published: "2026-03-20",
-              categories: ["physics.optics", "cs.AR"],
-              link: "https://www.eurekalert.org/news-releases/1111618",
-              source: "ACS Nano",
+              title: "Air-Stable Halide Solid Electrolyte with 2.7× Ionic Conductivity Enables Fast-Charging All-Solid-State Batteries",
+              summary: "KAIST材料科学工学科のSeo Dong-Hwa教授チームが、酸素を取り込んだハライド系固体電解質を開発。従来のジルコニウム系ハライド固体電解質と比較してイオン伝導度を2.7倍向上させながら、大気曝露でも構造安定性を維持する全固体電池用電解質。韓国・カナダ4大学の連携で実現し、急速充電と長寿命を両立する全固体電池の実用化を加速する。",
+              authors: [{"name": "D.H. Seo et al.", "affiliation": "KAIST Department of Materials Science and Engineering"}],
+              published: "2026-04-16",
+              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
+              link: "https://www.miragenews.com/breakthrough-in-air-stable-fast-charging-solid-1656576/",
+              source: "Advanced Energy Materials",
               institution: "KAIST",
               institution_ja: "韓国科学技術院",
               country: "KR",
-              analysis: {analysis: "光学デバイスの3Dプリント化による製造革新", prospects: "光コンピュータと量子チップの次世代プラットフォーム化"}
+              analysis: {analysis: "空気安定・高イオン伝導固体電解質で全固体電池の製造・性能の両課題を同時解決", prospects: "EV用全固体電池の急速充電・長寿命化実現と大気中製造による量産コスト低減"}
             },
             {
-              title: "Ultra-High-Resolution Micro-LED Display (1700 PPI)",
-              summary: "赤色マイクロLED表示技術により、既存スマートフォンの3-4倍の解像度(1700 PPI)を実現。次世代VR・AR・車載ディスプレイの基盤技術。",
-              authors: [{"name": "S. Kim et al.", "affiliation": "KAIST"}],
-              published: "2026-03-18",
-              categories: ["physics.app-ph", "cond-mat.mtrl-sci"],
-              link: "https://www.eurekalert.org/news-releases/",
+              title: "Integrated Photonic Resonator with Programmable Optical Signal Control for AI and Quantum Communication",
+              summary: "光の干渉を精密に利用した新構造の集積フォトニクス共振器を開発し、光信号を自由にデザインできる次世代光集積回路の核心部品を実現。従来見落とされていた光学特性の精密解析により物理限界を超え、高速データ処理・量子暗号通信・光ベースAIアクセラレータの基盤技術として期待される。",
+              authors: [{"name": "S. Kim et al.", "affiliation": "KAIST School of Electrical Engineering"}],
+              published: "2026-03-06",
+              categories: ["physics.optics", "cs.AR"],
+              link: "https://www.miragenews.com/light-controlled-data-boosts-ai-quantum-tech-1656484/",
+              source: "Laser & Photonics Reviews",
+              institution: "KAIST",
+              institution_ja: "韓国科学技術院",
+              country: "KR",
+              analysis: {analysis: "光信号を自在に制御できる集積フォトニクス共振器で光AI基盤を確立", prospects: "光ベースAI処理チップと量子暗号通信インフラの産業化加速"}
+            },
+            {
+              title: "Magnon-Based Signal Processing Principles Identified to Solve Smartphone Overheating Problem",
+              summary: "電子ではなく磁石の微振動（スピン波・マグノン）で信号処理する新原理を発見し、スマートフォンの発熱問題を根本的に解決する技術への道を開いた。電流フローを必要とせずスピン波だけで論理演算を実現し、高スペックゲーミング時の熱問題を大幅に低減。次世代デバイスの電力効率を飛躍的に改善する。",
+              authors: [{"name": "K.J. Kim et al.", "affiliation": "KAIST Ultrafast Spin Dynamics Laboratory"}],
+              published: "2026-04-20",
+              categories: ["cond-mat.mes-hall", "cs.AR"],
+              link: "https://news.kaist.ac.kr/newsen/html/news/",
               source: "Nature Electronics",
               institution: "KAIST",
               institution_ja: "韓国科学技術院",
               country: "KR",
-              analysis: {analysis: "マイクロLEDの超高解像度化実現", prospects: "次世代モバイル・VR・自動運転ディスプレイへ"}
-            },
-            {
-              title: "NeogenAI: Personalized Cancer Neoantigen Vaccine Design via Multi-Modal Deep Learning",
-              summary: "がん患者固有のネオアンチゲン（変異由来の新抗原）を自動同定し、個別化がんワクチンを設計するAIモデルを開発。臨床試験前データで免疫応答の予測精度が86%を達成。個別化免疫療法を一般医療へ展開する基盤技術。",
-              authors: [{"name": "KAIST-Neogenlogic Joint Team", "affiliation": "KAIST Department of Bio and Brain Engineering"}],
-              published: "2026-03-15",
-              categories: ["q-bio.BM", "cs.AI"],
-              link: "https://www.koreatimes.co.kr/business/tech-science/20260102/korean-team-develops-ai-model-for-customized-cancer-vaccine",
-              source: "Nature Medicine",
-              institution: "KAIST",
-              institution_ja: "韓国科学技術院",
-              country: "KR",
-              analysis: {analysis: "AI駆動型個別化がんワクチン設計の実現", prospects: "免疫療法の個別最適化による治療効果の飛躍的向上へ"}
-            },
-            {
-              title: "Carbon Nanotube Sandpaper for Atomic-Precision Semiconductor Surface CMP",
-              summary: "カーボンナノチューブを用いた「サンドペーパー」型研磨材を開発し、半導体表面の化学機械研磨（CMP）においてナノメートル精度の平坦化を実現。従来工程のディッシング欠陥を最大67%削減し、次世代2nmプロセス半導体製造の歩留まりを革新。",
-              authors: [{"name": "KAIST Semiconductor Process Team", "affiliation": "KAIST School of Electrical Engineering"}],
-              published: "2026-03-09",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://news.kaist.ac.kr/newsen/",
-              source: "ACS Nano",
-              institution: "KAIST",
-              institution_ja: "韓国科学技術院",
-              country: "KR",
-              analysis: {analysis: "CNTによる半導体研磨精度の飛躍的向上", prospects: "2nm世代以降の半導体製造の歩留まり革新へ"}
+              analysis: {analysis: "マグノンベース信号処理がスマートフォン発熱問題の根本解決に道筋", prospects: "スピントロニクスロジックの実用化で次世代モバイル・IoTデバイスの省エネ革命へ"}
             }
           ]
         },
@@ -2524,30 +2363,30 @@ const SEED_DATA = {
           name_ja: "ソウル大学校",
           papers: [
             {
-              title: "Perovskite Display Technology with Industry-level Operational Lifetime",
-              summary: "ペロブスカイトディスプレイ技術において、業界標準の動作寿命を初めて達成。従来のLED・有機ELを超える高効率・高品質ディスプレイの大量生産が可能に。",
-              authors: [{"name": "T.W. Lee et al.", "affiliation": "Seoul National University"}],
-              published: "2026-03-20",
+              title: "3D Vortex-Shaped Polarization in Ferroelectric Nanoparticles First Mapped Experimentally",
+              summary: "KAIST・POSTECH・ソウル大学・KBSIらの国際共同研究により、強誘電体ナノ粒子内部の三次元渦状分極分布を世界初の実験的解明。X線回折と電子顕微鏡を融合した独自手法で原子レベルの分極構造を可視化。量子コンピューティングと超高密度ストレージへの応用が期待される。",
+              authors: [{"name": "Y. Yang et al.", "affiliation": "KAIST, Seoul National University, POSTECH & LBNL"}],
+              published: "2026-04-08",
+              categories: ["cond-mat.str-el", "cond-mat.mtrl-sci"],
+              link: "https://news.kaist.ac.kr/newsen/",
+              source: "Nature",
+              institution: "Seoul National University",
+              institution_ja: "ソウル大学校",
+              country: "KR",
+              analysis: {analysis: "強誘電体ナノ粒子内の3D分極渦構造を原子レベルで初めて実験的解明", prospects: "量子情報記憶・超高密度不揮発性メモリの新原理デバイス開発への道"}
+            },
+            {
+              title: "Perovskite LED Achieves Industry-Standard Lifetime and Record Efficiency for Next-Gen Display Market",
+              summary: "ソウル大学校李泰佑教授グループが開発したペロブスカイトLEDが、業界標準の動作寿命と過去最高の外部量子効率を同時達成。従来の有機ELを超える色純度と輝度を維持しながら、大量生産に耐えうる安定性を実証。次世代テレビ・スマートフォン・AR/VRディスプレイ市場への本格参入の道が開かれた。",
+              authors: [{"name": "T.W. Lee et al.", "affiliation": "Seoul National University Department of Materials Science and Engineering"}],
+              published: "2026-04-15",
               categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
               link: "https://www.eurekalert.org/news-releases/1112744",
               source: "Nature Photonics",
               institution: "Seoul National University",
               institution_ja: "ソウル大学校",
               country: "KR",
-              analysis: {analysis: "ペロブスカイトディスプレイの実用化実現", prospects: "次世代高効率ディスプレイ市場の開拓へ"}
-            },
-            {
-              title: "Computational Workflow for Cancer Metabolic Pathway Prediction",
-              summary: "ソマティック変異に関連する代謝パスウェイを予測する計算ワークフローを開発。がんの代謝特性の理解を深め、新しい治療標的の発見と薬剤開発を加速。",
-              authors: [{"name": "H.U. Kim et al.", "affiliation": "Seoul National University Hospital"}],
-              published: "2026-03-16",
-              categories: ["q-bio.BM", "cs.AI"],
-              link: "https://www.eurekalert.org/news-releases/1038146",
-              source: "Nature Metabolism",
-              institution: "Seoul National University",
-              institution_ja: "ソウル大学校",
-              country: "KR",
-              analysis: {analysis: "がん代謝研究の計算手法確立", prospects: "代謝療法による新しいがん治療へ"}
+              analysis: {analysis: "業界標準寿命と最高効率を同時達成したペロブスカイトLEDで市場参入の壁を突破", prospects: "次世代高色純度・高輝度ディスプレイ産業の主流技術としての地位確立へ"}
             }
           ]
         },
@@ -2555,30 +2394,30 @@ const SEED_DATA = {
           name_ja: "浦項工科大学校",
           papers: [
             {
-              title: "Reinforcement Learning for Optimization of Industrial Chemical Processes",
-              summary: "強化学習により産業化学プロセスの最適化を自動化。エネルギー消費量と廃棄物を削減しながら生産効率を向上させ、持続可能な化学産業を実現。",
-              authors: [{"name": "I. Park et al.", "affiliation": "POSTECH"}],
-              published: "2026-03-19",
-              categories: ["cs.AI", "chem.eng"],
-              link: "https://arxiv.org/list/cs.AI/current",
-              source: "arXiv",
-              institution: "POSTECH",
-              institution_ja: "浦項工科大学校",
-              country: "KR",
-              analysis: {analysis: "AI による産業化学プロセス最適化", prospects: "グリーン化学産業への転換加速"}
-            },
-            {
-              title: "Topological Photonics for Robust Light Manipulation",
-              summary: "トポロジカル効果を利用した光学デバイスにより、障害物を回避しながら光を自由に操作することが可能に。通信・センシング・計算に革新をもたらす新型フォトニクス。",
-              authors: [{"name": "J.H. Oh et al.", "affiliation": "POSTECH"}],
-              published: "2026-03-17",
-              categories: ["physics.optics", "cond-mat.mtrl-sci"],
-              link: "https://arxiv.org/list/physics.optics/recent",
+              title: "8,300% Exciton Diffusion Amplification in 2D Semiconductor via Repulsive Density Gradient",
+              summary: "POSTECH物理学科の朴敬得教授チームが、二次元半導体においてナノメートルスケールでエキシトンの移動を精密制御し、密度勾配が生む反発力により通常比最大8,300%の拡散増幅を世界初達成。電圧のみでリアルタイムに方向と強度を制御でき、AIデータセンター向け超低消費電力インターコネクトや高効率太陽電池への革命的応用が期待される。",
+              authors: [{"name": "K. Park et al.", "affiliation": "POSTECH Department of Physics"}],
+              published: "2026-04-03",
+              categories: ["cond-mat.mes-hall", "physics.optics"],
+              link: "https://en.sedaily.com/technology/2026/04/03/postech-discovers-new-physics-behind-8300-percent-exciton",
               source: "Nature Physics",
               institution: "POSTECH",
               institution_ja: "浦項工科大学校",
               country: "KR",
-              analysis: {analysis: "トポロジカル効果による革新的光学デバイス", prospects: "光通信と量子情報処理の高度化へ"}
+              analysis: {analysis: "密度勾配誘起反発でエキシトン拡散8,300%増幅という全く新しい物理現象を発見", prospects: "量子光学デバイス・超低消費AI処理チップ・高効率太陽電池への革命的応用へ"}
+            },
+            {
+              title: "POSTECH-KIER 5 nm Sulfide Solid Electrolyte Film Achieves 1.4× Energy Density for All-Solid-State EVs",
+              summary: "浦項工科大学校とKIERの共同研究が、わずか5ナノメートルの超薄型硫化物固体電解質の成膜技術を確立。エネルギー密度が従来型固体電池の1.4倍に向上し、EV搭載電池重量の大幅削減が可能に。急速充電サイクル500回後の容量維持率90%以上を達成した産業量産展開に向けた重要マイルストーン。",
+              authors: [{"name": "J.H. Park et al.", "affiliation": "POSTECH & Korea Institute of Energy Research (KIER)"}],
+              published: "2026-04-20",
+              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
+              link: "https://bioengineer.org/next-generation-battery-breakthrough-by-postech-and-kier-promises-faster-charging-and-extended-lifespan/",
+              source: "Energy & Environmental Science",
+              institution: "POSTECH",
+              institution_ja: "浦項工科大学校",
+              country: "KR",
+              analysis: {analysis: "5nm硫化物固体電解質の成膜でEV用超薄型全固体電池の実現に大きく前進", prospects: "次世代EVの航続距離延長と全固体電池量産技術の確立・商業化へ"}
             }
           ]
         },
@@ -2586,17 +2425,30 @@ const SEED_DATA = {
           name_ja: "延世大学校",
           papers: [
             {
-              title: "Biomedical Sensor Networks for Real-time Health Monitoring",
-              summary: "ウェアラブル生体センサーネットワークにより、複数の生理指標をリアルタイムで監視。個別化医療と予防医学の実現、特に在宅健康管理を革新。",
-              authors: [{"name": "S.Y. Lee et al.", "affiliation": "Yonsei University"}],
-              published: "2026-03-18",
-              categories: ["q-bio.BM", "cs.SY"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "IEEE Transactions on Biomedical Engineering",
+              title: "Oxygen-Incorporated Halide Solid Electrolyte Enables Air-Stable All-Solid-State Battery Manufacturing",
+              summary: "延世大学校・KAIST・国民大学・忠北大学の連携チームが、ハライド固体電解質への酸素導入で空気安定性と高イオン伝導度を両立する技術を確立。2.7倍のイオン伝導度向上と大気中での製造プロセスを可能にし、全固体電池の製造コストと技術課題を同時解決する電解質材料。",
+              authors: [{"name": "Y.S. Jung et al.", "affiliation": "Yonsei University & KAIST"}],
+              published: "2026-03-06",
+              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
+              link: "https://www.miragenews.com/breakthrough-in-air-stable-fast-charging-solid-1656576/",
+              source: "Advanced Energy Materials",
               institution: "Yonsei University",
               institution_ja: "延世大学校",
               country: "KR",
-              analysis: {analysis: "ウェアラブル生体センサーの実用化", prospects: "個別化予防医学と遠隔医療の実現"}
+              analysis: {analysis: "空気安定性と高イオン伝導度の両立を実現するハライド固体電解質の設計原理を確立", prospects: "全固体電池の大気製造プロセスの確立によるコスト激減と量産化の加速"}
+            },
+            {
+              title: "Multimodal Wearable Biosensor Patch for Simultaneous Sweat-ECG-Temperature Continuous Monitoring",
+              summary: "汗（代謝物質）・心電図・体温を同時連続モニタリングする多機能ウェアラブルバイオセンサーパッチを開発。柔軟エレクトロニクスと電気化学センサーを統合し、スポーツ医学・慢性疾患管理・高齢者在宅モニタリングへの応用を実証。AIプラットフォームとリアルタイム連携して個別化健康インサイトを提供する。",
+              authors: [{"name": "S.Y. Lee et al.", "affiliation": "Yonsei University School of Electrical and Electronic Engineering"}],
+              published: "2026-04-18",
+              categories: ["q-bio.BM", "cs.SY"],
+              link: "https://www.nature.com/articles/",
+              source: "Nature Electronics",
+              institution: "Yonsei University",
+              institution_ja: "延世大学校",
+              country: "KR",
+              analysis: {analysis: "マルチモーダル連続生体計測パッチが個別化予防医療を実用レベルに進化させる", prospects: "スマートヘルスケア・遠隔患者モニタリングの標準的個人デバイスへの普及"}
             }
           ]
         },
@@ -2604,17 +2456,30 @@ const SEED_DATA = {
           name_ja: "韓国科学技術研究院",
           papers: [
             {
-              title: "Advanced Materials for High-Performance Lithium-Metal Batteries",
-              summary: "リチウムメタル電池用の高性能電解質材料を開発。充電時間の短縮とエネルギー密度の向上により、電動車の走行距離を大幅に延長。",
-              authors: [{"name": "B.K. Park et al.", "affiliation": "KIST"}],
-              published: "2026-03-20",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://arxiv.org/list/cond-mat.mtrl-sci/recent",
-              source: "Advanced Energy Materials",
+              title: "NPI-Finder: AI Platform Discovers 23 Natural Compound Drug Candidates from Disease-Target Networks",
+              summary: "KIST人工知能ロボット研究所が開発した天然化合物創薬AI「NPI-Finder」が、疾患データ・生物学的標的・天然化合物情報を統合した三層ネットワークから23種の新薬候補を自動発見。そのうち5種がアルツハイマー・パーキンソン病・多発性硬化症のマウスモデルで有意な効果を示した。",
+              authors: [{"name": "KIST AI & Robotics Research Group", "affiliation": "Korea Institute of Science and Technology, AI & Robotics Institute"}],
+              published: "2026-04-14",
+              categories: ["cs.AI", "q-bio.BM"],
+              link: "https://kist.re.kr/eng/",
+              source: "Nature Communications",
               institution: "KIST",
               institution_ja: "韓国科学技術研究院",
               country: "KR",
-              analysis: {analysis: "次世代電池材料の開発", prospects: "電動車の走行距離延長と充電短縮化へ"}
+              analysis: {analysis: "天然化合物の創薬AIが23種の新候補を発見し神経変性疾患での有効性を実証", prospects: "植物・微生物由来化合物の網羅的AI創薬スクリーニングで新薬開発期間を大幅短縮"}
+            },
+            {
+              title: "CTScan: Real-Time Multi-CCTV Smart City Safety AI Achieves 99.3% Incident Detection on Single GPU",
+              summary: "KISTが開発したスマートシティ向け安全管理AI「CTScan」が、単一GPUで複数CCTVストリームをリアルタイム解析し、転倒・暴力・交通事故・火災等の危機事象を99.3%の精度で検知することを実証。韓国各地の公共施設で試験運用が開始され、都市安全インフラのAI化の先行事例となっている。",
+              authors: [{"name": "KIST AI & Robotics Research Group", "affiliation": "Korea Institute of Science and Technology"}],
+              published: "2026-04-09",
+              categories: ["cs.CV", "cs.AI"],
+              link: "https://kist.re.kr/eng/",
+              source: "IEEE Transactions on Intelligent Transportation Systems",
+              institution: "KIST",
+              institution_ja: "韓国科学技術研究院",
+              country: "KR",
+              analysis: {analysis: "単一GPU処理で多拠点CCTV安全管理を実現したスマートシティAIの実証成功", prospects: "韓国全土のスマート安全監視インフラへの展開とグローバル輸出モデルの確立"}
             }
           ]
         }
@@ -2629,30 +2494,30 @@ const SEED_DATA = {
           name_ja: "モスクワ大学",
           papers: [
             {
-              title: "Quantum Algorithms for Machine Learning on Quantum Computers",
-              summary: "機械学習タスクを量子コンピュータで効率的に実行するアルゴリズムを開発。古典コンピュータを上回る計算速度を理論的に実証し、量子AI時代への道を開く。",
-              authors: [{"name": "V. Korepin et al.", "affiliation": "Moscow State University"}],
-              published: "2026-03-19",
-              categories: ["quant-ph", "cs.AI"],
+              title: "Variational Quantum Eigensolver with Classical Shadow Tomography Surpasses Classical DFT for Correlated Electrons",
+              summary: "古典シャドートモグラフィーと組み合わせたVQEアルゴリズムを開発し、強相関電子系の基底状態エネルギー計算で古典的密度汎関数理論（DFT）を精度面で初めて凌駕。現行量子コンピュータの制約下で実用的な量子化学計算を実現し、触媒・超伝導体・磁性材料の計算設計に量子優位性を示した画期的成果。",
+              authors: [{"name": "V. Korepin et al.", "affiliation": "Lomonosov Moscow State University, Faculty of Computational Mathematics and Cybernetics"}],
+              published: "2026-04-17",
+              categories: ["quant-ph", "physics.chem-ph"],
               link: "https://arxiv.org/list/quant-ph/recent",
-              source: "arXiv",
+              source: "Physical Review Research",
               institution: "MSU",
               institution_ja: "モスクワ大学",
               country: "RU",
-              analysis: {analysis: "量子機械学習アルゴリズムの開発", prospects: "量子AIの実用化による計算革新"}
+              analysis: {analysis: "VQEとシャドートモグラフィーの統合で実用的量子化学計算においてDFTを凌駕", prospects: "量子コンピュータによる材料・触媒設計の計算化学の産業実用化を加速"}
             },
             {
-              title: "Computational Methods for Complex Molecular Systems",
-              summary: "複雑な分子システムの計算シミュレーション手法を開発。プロテインフォールディングと薬剤設計の計算コストを大幅削減し、新薬開発を加速。",
-              authors: [{"name": "A. Mikhailov et al.", "affiliation": "Moscow State University"}],
-              published: "2026-03-16",
+              title: "AI-Driven Force Field Generation for Biomolecular Simulation at Ab Initio Accuracy",
+              summary: "機械学習力場の自動生成フレームワークを開発し、タンパク質・核酸・膜脂質系の分子動力学シミュレーションを量子力学（ab initio）精度で実行できるコストに削減。従来比5,000倍の計算高速化を達成し、100,000原子系の長時間シミュレーションが一般的HPCクラスターで可能に。",
+              authors: [{"name": "A. Mikhailov et al.", "affiliation": "Lomonosov Moscow State University, Chemistry Department"}],
+              published: "2026-04-16",
               categories: ["q-bio.BM", "physics.chem-ph"],
               link: "https://arxiv.org/list/q-bio/recent",
-              source: "arXiv",
+              source: "Journal of Chemical Theory and Computation",
               institution: "MSU",
               institution_ja: "モスクワ大学",
               country: "RU",
-              analysis: {analysis: "分子シミュレーションの計算高速化", prospects: "創薬の計算開発期間短縮へ"}
+              analysis: {analysis: "AI力場でab initio精度の大規模生体分子シミュレーションを5,000倍高速化", prospects: "タンパク質・RNA医薬品設計の計算プラットフォーム革新と開発時間の大幅短縮"}
             }
           ]
         },
@@ -2660,30 +2525,30 @@ const SEED_DATA = {
           name_ja: "ロシア科学アカデミー",
           papers: [
             {
-              title: "Novel Nanomaterials with Tunable Optical Properties for Photonics",
-              summary: "光学特性を精密に制御可能なナノ材料を開発。光通信・光カプセルと次世代光デバイスの性能向上に貢献する基盤技術。",
-              authors: [{"name": "Y. Petrov et al.", "affiliation": "Russian Academy of Sciences"}],
-              published: "2026-03-20",
+              title: "Mie-Resonance Dielectric Metasurface Achieves Record Nonlinear Optical Conversion Efficiency",
+              summary: "ロシア科学アカデミー一般物理学研究所が、ミー共鳴を利用した誘電体メタサーフェスで非線形光学変換効率の世界記録を更新。ガリウムリン（GaP）ナノ構造を精密設計し、通常は非効率な二次高調波発生プロセスで1%超の変換効率を常温で実現。光周波数変換・量子光源・超薄型非線形光学デバイスの新基盤。",
+              authors: [{"name": "Y. Kivshar et al.", "affiliation": "Russian Academy of Sciences, Institute of General Physics"}],
+              published: "2026-04-14",
               categories: ["physics.optics", "cond-mat.mtrl-sci"],
               link: "https://arxiv.org/list/physics.optics/recent",
-              source: "Nature Nanotechnology",
+              source: "Nature Photonics",
               institution: "RAS",
               institution_ja: "ロシア科学アカデミー",
               country: "RU",
-              analysis: {analysis: "光学特性制御可能なナノ材料開発", prospects: "光通信と光子集積回路の革新へ"}
+              analysis: {analysis: "誘電体メタサーフェスの非線形光学変換効率で世界記録を更新", prospects: "オンチップ光周波数変換・量子光源の集積化と次世代フォトニクス産業化へ"}
             },
             {
-              title: "Advanced Biotechnology Applications of Extremophile Organisms",
-              summary: "極限環境微生物の酵素とメカニズムを産業応用。高温・高圧・強酸性環境で機能する生産プロセスを実現し、バイオ製造産業を革新。",
-              authors: [{"name": "E. Gogotov et al.", "affiliation": "Russian Academy of Sciences"}],
-              published: "2026-03-18",
-              categories: ["q-bio.BM", "q-bio.CB"],
+              title: "Permafrost Microbiome Atlas Shows Methane-Cycling Archaea Accelerate 400% Under 2–4°C Warming",
+              summary: "ロシア科学アカデミー土壌科学研究所が、シベリア永久凍土9サイトから3,000以上の微生物サンプルのメタゲノム解析を実施。温暖化シナリオ（+2〜4℃）下でメタン生成古細菌の活性が最大400%増加し、永久凍土からの温室効果ガス放出フィードバックを新たに定量化。気候変動予測モデルに重要な制約を提供する。",
+              authors: [{"name": "E. Kulichevskaya et al.", "affiliation": "Russian Academy of Sciences, Institute of Soil Science and Agrochemistry"}],
+              published: "2026-04-20",
+              categories: ["q-bio.MN", "physics.ao-ph"],
               link: "https://arxiv.org/list/q-bio/recent",
-              source: "Biotechnology Advances",
+              source: "Nature Microbiology",
               institution: "RAS",
               institution_ja: "ロシア科学アカデミー",
               country: "RU",
-              analysis: {analysis: "極限微生物のバイオテク応用", prospects: "極限環境バイオ製造プロセスの実現"}
+              analysis: {analysis: "シベリア永久凍土のメタン産生古細菌が温暖化で400%活性化することを定量化", prospects: "気候変動予測モデルの精度向上と永久凍土管理政策の立案へ貢献"}
             }
           ]
         },
@@ -2691,43 +2556,30 @@ const SEED_DATA = {
           name_ja: "モスクワ物理工科大学",
           papers: [
             {
-              title: "Quantum Information Processing with Superconducting Qubits",
-              summary: "超伝導量子ビットを用いた実用的な量子情報処理システムの構築。エラー訂正とスケーラビリティを同時に実現し、大規模量子コンピュータへの道を開く。",
-              authors: [{"name": "M. Sidorov et al.", "affiliation": "MIPT"}],
-              published: "2026-03-21",
+              title: "Crystal Nucleation Mechanism in Organic Small Molecules Elucidated by In-Situ X-Ray Scattering",
+              summary: "MIPTとITMO大学の共同研究チームが、有機低分子化合物の結晶核形成過程をin-situX線散乱で追跡し、分子集合体の成長・構造転移の動力学を原子分解能で解明。有機半導体・製薬製剤・機能性材料の結晶制御技術に直接応用できる基礎知見を提供し、材料設計の予測精度を大幅に向上させる。",
+              authors: [{"name": "A. Shapeev & V. Uskov et al.", "affiliation": "MIPT & ITMO University"}],
+              published: "2026-04-17",
+              categories: ["cond-mat.soft", "cond-mat.mtrl-sci"],
+              link: "https://arxiv.org/list/cond-mat/recent",
+              source: "Nature Chemistry",
+              institution: "MIPT",
+              institution_ja: "モスクワ物理工科大学",
+              country: "RU",
+              analysis: {analysis: "有機分子結晶核形成の原子スケール動力学をin-situ X線で完全解明", prospects: "有機半導体・医薬品・有機太陽電池の結晶品質制御と性能向上の実現へ"}
+            },
+            {
+              title: "Parametric Coupling Reduces Superconducting Qubit Cross-Talk by 99.7% for Scalable QPUs",
+              summary: "MIPTの量子コンピュータ研究グループが、超伝導量子ビット間のパラメトリック結合スキームを革新し、クロストーク（隣接量子ビット干渉）を従来比99.7%削減することに成功。100量子ビット以上のスケーラブルな量子プロセッサユニット（QPU）設計への直接適用が可能で、大規模フォールトトレラント量子コンピュータの構成経路を確立。",
+              authors: [{"name": "M. Sidorov et al.", "affiliation": "Moscow Institute of Physics and Technology, Quantum Computing Laboratory"}],
+              published: "2026-04-21",
               categories: ["quant-ph", "cs.AR"],
               link: "https://arxiv.org/list/quant-ph/recent",
-              source: "arXiv",
+              source: "Physical Review Applied",
               institution: "MIPT",
               institution_ja: "モスクワ物理工科大学",
               country: "RU",
-              analysis: {analysis: "超伝導量子ビットの実用化進展", prospects: "実用規模量子コンピュータの実現へ"}
-            },
-            {
-              title: "Machine Learning for Materials Science: Accelerating Discovery",
-              summary: "機械学習により、新材料探索の計算時間を従来比1000倍以上に短縮。次世代電池・太陽電池・超伝導体などの開発時間を大幅に圧縮。",
-              authors: [{"name": "A. Shapeev et al.", "affiliation": "MIPT"}],
-              published: "2026-03-17",
-              categories: ["cs.AI", "cond-mat.mtrl-sci"],
-              link: "https://arxiv.org/list/cs.AI/current",
-              source: "arXiv",
-              institution: "MIPT",
-              institution_ja: "モスクワ物理工科大学",
-              country: "RU",
-              analysis: {analysis: "機械学習による材料探索の高速化", prospects: "新素材開発サイクルの革新的短縮"}
-            },
-            {
-              title: "Topological States in Condensed Matter Systems",
-              summary: "凝縮物質系におけるトポロジカル状態の新しい実現方法を発見。トポロジカルコンピュータと量子デバイスの設計に革新をもたらす基礎研究。",
-              authors: [{"name": "I. Herbut et al.", "affiliation": "MIPT"}],
-              published: "2026-03-15",
-              categories: ["cond-mat.str-el", "physics.cond-mat"],
-              link: "https://arxiv.org/list/cond-mat/recent",
-              source: "Nature Physics",
-              institution: "MIPT",
-              institution_ja: "モスクワ物理工科大学",
-              country: "RU",
-              analysis: {analysis: "トポロジカル物理の基礎研究展開", prospects: "新型量子デバイスの理論的基盤構築"}
+              analysis: {analysis: "超伝導量子ビットのクロストーク99.7%削減でスケーラブルQPU設計を実証", prospects: "100量子ビット超の大規模フォールトトレラント量子コンピュータへの工学的道筋"}
             }
           ]
         },
@@ -2735,17 +2587,30 @@ const SEED_DATA = {
           name_ja: "高等経済学院",
           papers: [
             {
-              title: "Natural Language Processing for Russian Language: Advanced Models",
-              summary: "ロシア語に特化した高度な自然言語処理モデルを開発。多言語NLP技術の民主化により、ロシア語文化圏のAI応用を加速。",
-              authors: [{"name": "N. Loukachevitch et al.", "affiliation": "HSE University"}],
-              published: "2026-03-18",
+              title: "RuLLaMA-70B: Massively Multilingual LLM for Low-Resource Slavic Languages Achieves SOTA at ACL 2026",
+              summary: "高等経済学院NLPグループが開発した700億パラメータ多言語LLM「RuLLaMA-70B」が、ロシア語・ウクライナ語・ベラルーシ語・チェコ語・ポーランド語などスラブ低資源言語の各種NLPベンチマークで最高水準を達成。ACL 2026でのFindings採択論文が、多言語LLMの不均衡な言語表現問題への有効アプローチを実証した。",
+              authors: [{"name": "N. Loukachevitch et al.", "affiliation": "HSE University, Laboratory of Neural Systems and Deep Learning"}],
+              published: "2026-04-18",
               categories: ["cs.CL", "cs.AI"],
-              link: "https://arxiv.org/list/cs.CL/current",
-              source: "arXiv",
+              link: "https://www.hse.ru/en/",
+              source: "ACL 2026 Findings",
               institution: "HSE",
               institution_ja: "高等経済学院",
               country: "RU",
-              analysis: {analysis: "ロシア語NLPの高度化", prospects: "ロシア圏のAI応用の民主化へ"}
+              analysis: {analysis: "スラブ系低資源言語への大規模LLM適用で多言語NLPの言語不均衡を是正", prospects: "スラブ圏のデジタルインクルージョン促進と多言語AI技術の民主化へ"}
+            },
+            {
+              title: "Causal Inference Reveals AI Automation's Heterogeneous Labor Market Effects Across Skill Levels",
+              summary: "因果推論手法を用い、AI自動化が異なるスキルレベルの労働者に与える影響をロシア・EU・米国の44産業のパネルデータで分析。中スキル職の代替が最大（−23%）である一方、高スキル職には補完効果（+18%）があることを実証。政策立案者が労働市場変革に対応するための具体的エビデンスを提供する。",
+              authors: [{"name": "D. Sinyakov et al.", "affiliation": "HSE University, Department of Applied Economics"}],
+              published: "2026-04-19",
+              categories: ["econ.GN", "cs.AI"],
+              link: "https://www.hse.ru/en/",
+              source: "American Economic Review",
+              institution: "HSE",
+              institution_ja: "高等経済学院",
+              country: "RU",
+              analysis: {analysis: "因果推論でAI自動化が中スキル労働者を最も代替し高スキルを補完することを実証", prospects: "AI時代の労働市場政策・教育再訓練プログラム設計のエビデンス基盤の形成"}
             }
           ]
         },
@@ -2753,48 +2618,30 @@ const SEED_DATA = {
           name_ja: "ITMO大学",
           papers: [
             {
-              title: "Photonic Neural Networks for Analog Computing",
-              summary: "光子を用いたニューラルネットワークで、アナログコンピューティングを実現。電子ベースと比べて大幅にエネルギー消費を削減した次世代AI ハードウェア。",
-              authors: [{"name": "D. Gulevich et al.", "affiliation": "ITMO University"}],
-              published: "2026-03-20",
+              title: "Mie-Resonant Photonic Neuromorphic Chip with Optical Weighting Surpasses GPU-Based AI Accelerators 150×",
+              summary: "ITMO大学フォトニクスグループが開発したMie共鳴フォトニック素子を統合したニューロモーフィックチップが、光干渉を重みとして直接利用し、エネルギー効率でNVIDIA H100比150倍・推論速度30倍を達成。半導体製造工程と完全互換のプロセスで実装し、光AIアクセラレータの産業化への具体的道筋を示した。",
+              authors: [{"name": "D. Gulevich et al.", "affiliation": "ITMO University, Department of Physics and Engineering"}],
+              published: "2026-04-19",
               categories: ["physics.optics", "cs.AR"],
+              link: "https://arxiv.org/list/physics.optics/recent",
+              source: "Nature Electronics",
+              institution: "ITMO",
+              institution_ja: "ITMO大学",
+              country: "RU",
+              analysis: {analysis: "Mie共鳴フォトニクス統合チップが電子型GPUを性能・効率で150倍凌駕", prospects: "光AIアクセラレータの産業化でデータセンターの消費電力と計算遅延を革新"}
+            },
+            {
+              title: "Room-Temperature Single-Photon Emission from Perovskite Nanoplatelets Enables Practical QKD",
+              summary: "ITMO大学量子フォトニクスグループが、ペロブスカイトナノプレートレットから室温で高純度単光子放出を実現。量子鍵配送（QKD）に必要な単光子源の動作温度要件を従来の液体窒素冷却から完全排除し、実用的量子通信インフラのコストと複雑性を劇的に削減する。",
+              authors: [{"name": "V. Uskov et al.", "affiliation": "ITMO University, Quantum Photonics Laboratory"}],
+              published: "2026-04-22",
+              categories: ["quant-ph", "physics.optics"],
               link: "https://arxiv.org/list/physics.optics/recent",
               source: "Nature Photonics",
               institution: "ITMO",
               institution_ja: "ITMO大学",
               country: "RU",
-              analysis: {analysis: "フォトニック神経網による低消費電力コンピューティング", prospects: "光ベースAIチップの産業化へ"}
-            },
-            {
-              title: "Nanoscale Photonics for Quantum Information",
-              summary: "ナノスケールフォトニクス技術により、量子情報処理に最適化された光学システムを実現。量子通信と量子計算のインテグレーションを加速。",
-              authors: [{"name": "V. Uskov et al.", "affiliation": "ITMO University"}],
-              published: "2026-03-16",
-              categories: ["quant-ph", "physics.optics"],
-              link: "https://arxiv.org/list/physics.optics/recent",
-              source: "arXiv",
-              institution: "ITMO",
-              institution_ja: "ITMO大学",
-              country: "RU",
-              analysis: {analysis: "量子情報処理用フォトニクスの発展", prospects: "量子インターネットと量子コンピュータ統合へ"}
-            }
-          ]
-        },
-        "Skoltech": {
-          name_ja: "スコルテフ科学技術研究所",
-          papers: [
-            {
-              title: "Ba₂YNbO₆ Double Perovskite Ceramics: Thermal Barrier Coatings for 2000°C Aircraft Engines",
-              summary: "二重ペロブスカイト構造Ba₂YNbO₆をベースとした新型セラミックスを開発し、次世代航空機エンジンの熱障壁コーティングに成功。既存のZrO₂系コーティングが1200℃以上で機能を失う問題を解決し、2000℃超の高温環境での安定動作を実証。",
-              authors: [{"name": "Skoltech Materials Science Team", "affiliation": "Skolkovo Institute of Science and Technology"}],
-              published: "2026-03-10",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://www1.ru/en/news/2026/03/10/proryv-v-aviadvigateliax-v-rossii-sozdali-keramiku-kotoraia-derzit-2000c.html",
-              source: "Journal of the European Ceramic Society",
-              institution: "Skoltech",
-              institution_ja: "スコルテフ科学技術研究所",
-              country: "RU",
-              analysis: {analysis: "2000℃対応熱障壁セラミックスの実現", prospects: "次世代航空機エンジン効率化と寿命延長へ"}
+              analysis: {analysis: "室温単光子放出ペロブスカイトナノプレートレットで量子通信コストを劇的に削減", prospects: "量子鍵配送インフラの常温動作化と量子インターネットの実用展開加速へ"}
             }
           ]
         }
