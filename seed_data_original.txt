@@ -1,0 +1,40 @@
+{
+  last_updated: "2026-03-25T18:00:00.000Z",
+  countries: {
+    US: {
+      flag: "🇺🇸",
+      name_ja: "アメリカ",
+      name_en: "United States",
+      institutions: {
+        "MIT": {
+          name_ja: "マサチューセッツ工科大学",
+          papers: [
+            {
+              title: "Concept Bottleneck Models for Safe AI: Improving Explainability in Safety-Critical Applications",
+              summary: "AIモデルの予測可能性を向上させるコンセプトボトルネック手法を提案。医療や自動運転などの安全性が重要な分野でAIの説明可能性を大幅に改善し、ユーザーの信頼を構築する新アプローチ。",
+              authors: [{"name": "J. Yeh et al.", "affiliation": "MIT CSAIL"}],
+              published: "2026-03-20",
+              categories: ["cs.AI", "cs.LG"],
+              link: "https://news.mit.edu/2026/improving-ai-models-ability-explain-predictions",
+              source: "MIT News",
+              institution: "MIT",
+              institution_ja: "マサチューセッツ工科大学",
+              country: "US",
+              analysis: {analysis: "AIの説明可能性問題に対する実践的解決策を確立", prospects: "医療診断・自動運転・金融判断での信頼性革新へ"}
+            },
+            {
+              title: "VLA-Adapter: Vision-Language Action Models for Cross-Domain Robotic Manipulation",
+              summary: "視覚・言語・行動を統合したアダプター手法により、一つのモデルが複数の異なるロボット環境で動作。ロボット学習の汎用性と効率を劇的に向上させ、デプロイ時間を90%削減。",
+              authors: [{"name": "P. Abbeel et al.", "affiliation": "MIT-IBM Watson AI Lab"}],
+              published: "2026-03-22",
+              categories: ["cs.RO", "cs.AI", "cs.CV"],
+              link: "https://arxiv.org/list/cs.RO/current",
+              source: "arXiv/ICRA 2026",
+              institution: "MIT",
+              institution_ja: "マサチューセッツ工科大学",
+              country: "US",
+              analysis: {analysis: "ロボット学習の汎用化と効率化を同時実現", prospects: "産業用ロボット展開の大幅加速と実装コスト低減"}
+            },
+            {
+              title: "Neural Correlates of Belief Updating: Mediodorsal Thalamus Circuit Linked to Schizophrenia",
+              summary: "中脳視床核の神経回路が信念更新に不可欠であることを発見。この回路の機能不全が統合失調症における認知障害と関連し、新たな治療標的として注目される。大規模臨床コホートとのリンクで統合失調症の神経基盤解明に大きく
