@@ -1820,9 +1820,9 @@ header::after {
 //  GLOBAL RESEARCH TERMINAL - Main Application
 // ============================================================
 
-// Updated seed data with latest March 2026 research papers
+// Updated seed data with latest April 2026 research papers
 const SEED_DATA = {
-  last_updated: "2026-03-25T18:00:00.000Z",
+  last_updated: "2026-04-23T18:00:00.000Z",
   countries: {
     US: {
       flag: "🇺🇸",
@@ -1896,6 +1896,32 @@ const SEED_DATA = {
               institution_ja: "マサチューセッツ工科大学",
               country: "US",
               analysis: {analysis: "フリースペースフォトニクスの精度とスケール両立", prospects: "量子インターネットとLiDAR技術の産業化加速"}
+            },
+            {
+              title: "AI-Driven Discovery of Atomic Defects: Materials Science Revolution",
+              summary: "AIモデルを用いて材料内の原子欠陥を自動検出し特性化。熱伝導・エネルギー変換効率を大幅改善する新型半導体・再生可能エネルギーデバイスの設計が可能に。",
+              authors: [{"name": "MIT Materials Science Team", "affiliation": "MIT Department of Materials Science and Engineering"}],
+              published: "2026-04-15",
+              categories: ["cond-mat.mtrl-sci", "cs.AI"],
+              link: "https://news.mit.edu/2026/ai-defects-materials",
+              source: "Nature Materials",
+              institution: "MIT",
+              institution_ja: "マサチューセッツ工科大学",
+              country: "US",
+              analysis: {analysis: "AI活用による材料欠陥の自動検出と最適化", prospects: "半導体・再生可能エネルギー技術の革新へ"}
+            },
+            {
+              title: "Protein Design from Motion: Dynamic Biomaterials",
+              summary: "従来の立体構造ではなく、タンパク質の動きに基づいて設計する新手法を開発。動的バイオマテリアルと適応的治療薬の開発が加速し、医療応用に革新をもたらす。",
+              authors: [{"name": "MIT Bio-Engineering Team", "affiliation": "MIT Department of Biology"}],
+              published: "2026-04-12",
+              categories: ["q-bio.BM", "cs.AI"],
+              link: "https://news.mit.edu/2026/protein-motion-design",
+              source: "Nature Biotechnology",
+              institution: "MIT",
+              institution_ja: "マサチューセッツ工科大学",
+              country: "US",
+              analysis: {analysis: "プロテイン動力学に基づく設計手法の確立", prospects: "動的バイオマテリアルと次世代医薬開発へ"}
             }
           ]
         },
@@ -2015,6 +2041,19 @@ const SEED_DATA = {
               institution_ja: "カリフォルニア工科大学",
               country: "US",
               analysis: {analysis: "量子センサーネットワークの全米実装化", prospects: "基礎物理と宇宙探索の新観測手段確立"}
+            },
+            {
+              title: "Practical Quantum Computers with Just 10,000 Qubits: Breakthrough in Error Correction",
+              summary: "実用的な量子コンピュータの実装に必要な量子ビット数を従来予想の100倍削減。Caltechと提携企業Oratomicが中性原子量子計算で誤り訂正アーキテクチャ革命を実現。今十年代後半の実用化が現実に。",
+              authors: [{"name": "J. Preskill et al., Oratomic Team", "affiliation": "Caltech Institute for Quantum Information and Matter"}],
+              published: "2026-04-14",
+              categories: ["quant-ph", "cs.AR"],
+              link: "https://arxiv.org/list/quant-ph/recent",
+              source: "Nature",
+              institution: "Caltech",
+              institution_ja: "カリフォルニア工科大学",
+              country: "US",
+              analysis: {analysis: "誤り訂正量子コンピュータの必要量子ビット数を100倍削減", prospects: "実用規模量子コンピュータの今十年代実現へ"}
             }
           ]
         },
@@ -2097,6 +2136,32 @@ const SEED_DATA = {
               institution_ja: "清華大学",
               country: "CN",
               analysis: {analysis: "世界モデルによる因果理解と長期計画の実現", prospects: "自律エージェントの戦略的行動生成を可能化"}
+            },
+            {
+              title: "AI Scientist v2: Workshop-Level Autonomous Scientific Discovery via Agentic Tree Search",
+              summary: "AIが仮説提案・実験実施・データ分析・論文執筆を自律的に実行。初の完全自動生成論文が国際学会に採択される歴史的成果を達成。科学研究プロセスの革命的転換。",
+              authors: [{"name": "Tsinghua AI Research Team", "affiliation": "Tsinghua University"}],
+              published: "2026-04-18",
+              categories: ["cs.AI", "cs.CL"],
+              link: "https://arxiv.org/list/cs.AI/current",
+              source: "AI Research",
+              institution: "Tsinghua",
+              institution_ja: "清華大学",
+              country: "CN",
+              analysis: {analysis: "完全自動化科学論文生成システムの実現", prospects: "科学研究プロセスのAI駆動化と加速化へ"}
+            },
+            {
+              title: "Density Law of Large Language Models: Meta and OpenAI Confirm Tsinghua Theory",
+              summary: "Tsinghuaが発見したLLM密度法則をMetaとMETRが独立検証。AI性能スケーリングの普遍法則が確立され、次世代AIモデル設計の理論基盤が固まった。",
+              authors: [{"name": "Sun Maosong, Liu Zhiyuan et al.", "affiliation": "Tsinghua University"}],
+              published: "2026-04-20",
+              categories: ["cs.LG", "cs.AI"],
+              link: "https://arxiv.org/list/cs.LG/current",
+              source: "Nature Machine Intelligence",
+              institution: "Tsinghua",
+              institution_ja: "清華大学",
+              country: "CN",
+              analysis: {analysis: "LLM性能スケーリングの普遍法則を確立", prospects: "効率的AI開発と資源最適化の科学的基盤確立"}
             }
           ]
         },
@@ -2115,6 +2180,19 @@ const SEED_DATA = {
               institution_ja: "北京大学",
               country: "CN",
               analysis: {analysis: "ゲノム編集技術の革新的進化", prospects: "複雑な遺伝子疾患治療の新時代へ"}
+            },
+            {
+              title: "Hi-Compass: Depth-Aware Deep Learning for Cell-Type-Specific 3D Genome Organization",
+              summary: "Hi-Compassフレームワークがクロマチン接近性データから細胞型特異的3Dゲノム構造を予測。単一細胞レベルから高カバレッジバルクデータまで全スケールで堅牢な予測を実現。個別化ゲノム医学の基盤技術。",
+              authors: [{"name": "Peking University Genome Research Team", "affiliation": "Peking University"}],
+              published: "2026-04-22",
+              categories: ["q-bio.GN", "cs.AI"],
+              link: "https://www.nature.com/articles/s41467-026-71877-z",
+              source: "Nature Communications",
+              institution: "Peking University",
+              institution_ja: "北京大学",
+              country: "CN",
+              analysis: {analysis: "3Dゲノム構造予測の深層学習実装", prospects: "個別化ゲノム医学と高度なゲノム研究へ"}
             },
             {
               title: "Multi-omics Integration for Disease Mechanism Discovery in Cancer",
@@ -2216,6 +2294,37 @@ const SEED_DATA = {
               institution_ja: "浙江大学",
               country: "CN",
               analysis: {analysis: "トランスフォーマーの効率化による民主化", prospects: "エッジデバイスでの大規模言語モデル運用実現"}
+            }
+          ]
+        },
+        "Chinese Academy of Sciences": {
+          name_ja: "中国科学院",
+          papers: [
+            {
+              title: "EAST Artificial Sun Breaks Through Density Barrier in Fusion Plasma",
+              summary: "CAS所属の核融合炉「東方超環（EAST）」が高密度プラズマの安定動作を実証。従来の経験的密度限界を大幅に超過しながら破壊的不安定性を回避。実用核融合炉開発に向けた重大な進展。",
+              authors: [{"name": "CAS Institute of Plasma Physics", "affiliation": "Chinese Academy of Sciences"}],
+              published: "2026-04-10",
+              categories: ["physics.plas-ph", "physics.ins-det"],
+              link: "https://english.cas.cn/newsroom/",
+              source: "Nature Physics",
+              institution: "Chinese Academy of Sciences",
+              institution_ja: "中国科学院",
+              country: "CN",
+              analysis: {analysis: "核融合プラズマ密度記録の大幅更新", prospects: "商用核融合発電の実現へ向けた大躍進"}
+            },
+            {
+              title: "Quantum Repeater Building Block Enables Device-Independent QKD over 100 km",
+              summary: "中国科学技術大学チームが拡張可能量子リピーターの構築要素を開発。デバイス非依存量子鍵配送（DI-QKD）を100 kmで実現。量子インターネット構築への革新的進展。",
+              authors: [{"name": "PAN Jianwei, ZHANG Qiang et al.", "affiliation": "University of Science and Technology of China"}],
+              published: "2026-04-18",
+              categories: ["quant-ph"],
+              link: "https://english.cas.cn/newsroom/",
+              source: "Nature",
+              institution: "Chinese Academy of Sciences",
+              institution_ja: "中国科学院",
+              country: "CN",
+              analysis: {analysis: "デバイス非依存量子鍵配送の長距離実現", prospects: "量子セキュア通信インフラの構築へ"}
             }
           ]
         },
@@ -2367,17 +2476,30 @@ const SEED_DATA = {
               analysis: {analysis: "合成生物学による細胞プログラミング実現", prospects: "再生医学と臓器再構築技術の革新へ"}
             },
             {
-              title: "NVIDIA GB200 Supercomputer Systems for AI and Quantum Research",
-              summary: "RIKENが2026年春に導入する最先端スーパーコンピュータシステム。AI科学研究用と量子計算用の2システムで、日本の計算科学研究を次世代へ加速。",
+              title: "NVIDIA Blackwell Supercomputer Systems: Japan's AI and Quantum Computing Future",
+              summary: "RIKENが2026年春に導入する最先端スーパーコンピュータシステム。NVIDIA Blackwell GPU 2,140個搭載。AI科学研究用と量子計算用の2システムで、日本の計算科学研究を世界最前線へ加速。",
               authors: [{"name": "S. Matsuoka et al.", "affiliation": "RIKEN Center for Advanced Intelligence Project"}],
-              published: "2026-03-23",
+              published: "2026-04-21",
               categories: ["cs.DC", "quant-ph"],
               link: "https://www.riken.jp/en/research/labs/aip/",
               source: "RIKEN News",
               institution: "RIKEN",
               institution_ja: "理化学研究所",
               country: "JP",
-              analysis: {analysis: "次世代計算インフラによるAI・量子研究の革新", prospects: "日本の計算科学研究のグローバル競争力強化"}
+              analysis: {analysis: "最先端GPUスーパーコンピュータの導入", prospects: "日本の計算科学研究のグローバル競争力強化へ"}
+            },
+            {
+              title: "Quantinuum System H2 Upgrade: Japan's Quantum-HPC Hybrid Computing",
+              summary: "RIKENが量子スーパーコンピュータプラットフォーム「Reimei-Fugaku」をQuantinuum System H2（56キュービット）でアップグレード。量子-HPC ハイブリッド計算による量子優位性実証へ。",
+              authors: [{"name": "RIKEN Quantum Research Team", "affiliation": "RIKEN"}],
+              published: "2026-04-16",
+              categories: ["quant-ph", "cs.DC"],
+              link: "https://www.riken.jp/en/research/",
+              source: "RIKEN News",
+              institution: "RIKEN",
+              institution_ja: "理化学研究所",
+              country: "JP",
+              analysis: {analysis: "量子-HPC ハイブリッドコンピュータの高度化", prospects: "量子優位性実証と実用的量子計算へ"}
             },
             {
               title: "Liquid Biopsy Platform for Discriminating Enzyme Isoforms in Cancer Diagnostics",
@@ -2517,6 +2639,32 @@ const SEED_DATA = {
               institution_ja: "韓国科学技術院",
               country: "KR",
               analysis: {analysis: "CNTによる半導体研磨精度の飛躍的向上", prospects: "2nm世代以降の半導体製造の歩留まり革新へ"}
+            },
+            {
+              title: "ModelSpy: AI Hijacking Attack with a Single Small Antenna",
+              summary: "KAISTチームがDNDSS 2026で優秀論文賞受賞。わずか1本の小型アンテナでAIモデル構造を遠隔盗聴できるModelSpy攻撃システムを開発。AI安全保障研究の重要課題を明示。",
+              authors: [{"name": "Jun Han et al.", "affiliation": "KAIST School of Computing"}],
+              published: "2026-04-19",
+              categories: ["cs.CR", "cs.AI"],
+              link: "https://techxplore.com/news/2026-04-ai-blueprints-stolen-small-antenna.html",
+              source: "NDSS 2026",
+              institution: "KAIST",
+              institution_ja: "韓国科学技術院",
+              country: "KR",
+              analysis: {analysis: "AIモデル盗聴攻撃の実証と防御研究", prospects: "AI安全保障対策の強化と規制設計へ"}
+            },
+            {
+              title: "World-First Foldable Phone Crease Elimination Technology",
+              summary: "折り畳みスマートフォンの永遠の課題である折り目問題をKAISTが解決。接着方式の革新により、折り畳みディスプレイの寿命と耐久性を大幅向上。国内特許取得、米中欧で出願中。",
+              authors: [{"name": "KAIST Flexible Display Team", "affiliation": "KAIST"}],
+              published: "2026-04-20",
+              categories: ["physics.app-ph", "cond-mat.mtrl-sci"],
+              link: "https://en.sedaily.com/society/2026/04/20/kaist-develops-world-first-technology-to-eliminate-foldable",
+              source: "KAIST Research",
+              institution: "KAIST",
+              institution_ja: "韓国科学技術院",
+              country: "KR",
+              analysis: {analysis: "折り畳みディスプレイ折り目問題の革新的解決", prospects: "次世代フレキシブルディスプレイ産業化へ"}
             }
           ]
         },
@@ -2548,6 +2696,32 @@ const SEED_DATA = {
               institution_ja: "ソウル大学校",
               country: "KR",
               analysis: {analysis: "がん代謝研究の計算手法確立", prospects: "代謝療法による新しいがん治療へ"}
+            },
+            {
+              title: "Single-Crystal Cathode Materials: Battery Revolution by Seoul National",
+              summary: "大粒子単結晶陰極材料の革新的合成法を開発。Nature Energyに掲載。構造安定性が大幅向上し、次世代高容量・高耐久バッテリーの実現が加速。",
+              authors: [{"name": "Kisuk Kang et al.", "affiliation": "Seoul National University"}],
+              published: "2026-04-17",
+              categories: ["cond-mat.mtrl-sci", "physics.chem-ph"],
+              link: "https://www.nature.com/articles/",
+              source: "Nature Energy",
+              institution: "Seoul National University",
+              institution_ja: "ソウル大学校",
+              country: "KR",
+              analysis: {analysis: "単結晶陰極材料の構造安定性向上実現", prospects: "次世代高容量バッテリーの産業化へ"}
+            },
+            {
+              title: "Tungsten Catalysts for Noble-Metal-Free Water Electrolysis",
+              summary: "機械学習ガイドで W1-NiFeOOH（タングステン原子分散ナノ構造）を開発。高電流密度13.1 A/cm²を実現。貴金属フリー水電解触媒が産業化段階へ。",
+              authors: [{"name": "Seoul National University Catalyst Team", "affiliation": "Seoul National University"}],
+              published: "2026-04-13",
+              categories: ["cond-mat.mtrl-sci", "physics.chem-ph"],
+              link: "https://www.nature.com/articles/s41467-026-68735-3",
+              source: "Nature Communications",
+              institution: "Seoul National University",
+              institution_ja: "ソウル大学校",
+              country: "KR",
+              analysis: {analysis: "ML駆動型貴金属フリー水電解触媒開発", prospects: "クリーン水素製造と燃料電池車実現へ"}
             }
           ]
         },
@@ -2579,6 +2753,32 @@ const SEED_DATA = {
               institution_ja: "浦項工科大学校",
               country: "KR",
               analysis: {analysis: "トポロジカル効果による革新的光学デバイス", prospects: "光通信と量子情報処理の高度化へ"}
+            },
+            {
+              title: "Edge-Aware Image Manipulation via Diffusion Models",
+              summary: "POSTECH Computer Graphics Labが拡散モデルを用いた新型画像操作技術をWACV 2026で発表。構造保存損失関数により、エッジ情報を正確に保持しながら高品質な画像操作を実現。",
+              authors: [{"name": "POSTECH CG Lab", "affiliation": "POSTECH"}],
+              published: "2026-04-18",
+              categories: ["cs.CV", "cs.LG"],
+              link: "https://cg.postech.ac.kr/",
+              source: "WACV 2026",
+              institution: "POSTECH",
+              institution_ja: "浦項工科大学校",
+              country: "KR",
+              analysis: {analysis: "拡散モデルによる構造保存型画像操作", prospects: "コンテンツ制作と医療画像処理への応用へ"}
+            },
+            {
+              title: "IterQuant: Mixed-Precision LLM Compression Framework",
+              summary: "POSTECHの Efficient Federated Learning Lab (EffL)が DATE 2026で「IterQuant」を発表。複合精度量子化フレームワークでLLM圧縮を効率化。エッジデバイスでの大規模言語モデル運用を実現。",
+              authors: [{"name": "POSTECH EffL", "affiliation": "POSTECH"}],
+              published: "2026-04-19",
+              categories: ["cs.LG", "cs.AI"],
+              link: "https://effl.postech.ac.kr/",
+              source: "DATE 2026",
+              institution: "POSTECH",
+              institution_ja: "浦項工科大学校",
+              country: "KR",
+              analysis: {analysis: "LLM量子化による効率的圧縮実現", prospects: "エッジAIと省電力AI推論実装へ"}
             }
           ]
         },
@@ -2597,6 +2797,32 @@ const SEED_DATA = {
               institution_ja: "延世大学校",
               country: "KR",
               analysis: {analysis: "ウェアラブル生体センサーの実用化", prospects: "個別化予防医学と遠隔医療の実現"}
+            },
+            {
+              title: "RotGS: Rotation-Guided 3D Gaussian Splatting for Turntable Sequences",
+              summary: "Yonsei大学の In-Kwon Lee教授チームがEurographics 2026で採択。SfM不要な3D再構成。ターンテーブル画像シーケンスから直接的かつ堅牢に3Dガウシアンスプラッティングを実現。",
+              authors: [{"name": "In-Kwon Lee et al.", "affiliation": "Yonsei University"}],
+              published: "2026-04-21",
+              categories: ["cs.CV", "cs.GR"],
+              link: "https://cga.yonsei.ac.kr/news",
+              source: "Eurographics 2026",
+              institution: "Yonsei University",
+              institution_ja: "延世大学校",
+              country: "KR",
+              analysis: {analysis: "SfM不要な3D再構成技術の実現", prospects: "3D撮影・VR・ロボットビジョンの簡素化へ"}
+            },
+            {
+              title: "Disruption Timing as Information Structure: Multi-User VR Resilience",
+              summary: "In-Kwon LeeとHayeon Kim教授がCHI 2026で新パラダイム提唱。マルチユーザーVR環境でシステム障害のタイミングを情報構造として利用し、集団リカバリを促進。ディスラプション設計の革新。",
+              authors: [{"name": "In-Kwon Lee, Hayeon Kim et al.", "affiliation": "Yonsei University"}],
+              published: "2026-04-15",
+              categories: ["cs.HC", "cs.CV"],
+              link: "https://cga.yonsei.ac.kr/news",
+              source: "CHI 2026",
+              institution: "Yonsei University",
+              institution_ja: "延世大学校",
+              country: "KR",
+              analysis: {analysis: "VRシステム破壊の設計的活用", prospects: "レジリエントなマルチユーザーVR体験へ"}
             }
           ]
         },
@@ -2684,6 +2910,32 @@ const SEED_DATA = {
               institution_ja: "ロシア科学アカデミー",
               country: "RU",
               analysis: {analysis: "極限微生物のバイオテク応用", prospects: "極限環境バイオ製造プロセスの実現"}
+            },
+            {
+              title: "Muon G-2 Breakthrough Prize 2026: Precision Magnetism Measurement",
+              summary: "ロシア科学アカデミー Budker Institute of Nuclear Physicsがユーゴ磁気モーメント測定でBreakthrough Prize受賞。CERN・Brookhaven National Labと共同で、粒子物理の基礎定数を前例なき精度で測定。",
+              authors: [{"name": "Budker Institute Team et al.", "affiliation": "Russian Academy of Sciences"}],
+              published: "2026-04-22",
+              categories: ["physics.hep-ex", "physics.atom-ph"],
+              link: "https://france.news-pravda.com/en/russia/2026/04/22/93687.html",
+              source: "Breakthrough Prize",
+              institution: "RAS",
+              institution_ja: "ロシア科学アカデミー",
+              country: "RU",
+              analysis: {analysis: "基礎粒子物理測定の精度革新を達成", prospects: "標準モデルを超える新物理の探索へ"}
+            },
+            {
+              title: "Blood-Thinning Medicine from Spruce Wood: Pharmaceutical Innovation",
+              summary: "ロシア科学アカデミー Krasnoyarsk Science Centreが森林廃棄物からガラクトグルコマンナンを化学改質。抗凝固活性が100倍向上。ヘパリン代替医薬品として臨床応用へ。",
+              authors: [{"name": "Krasnoyarsk Science Centre Team", "affiliation": "Russian Academy of Sciences"}],
+              published: "2026-02-15",
+              categories: ["q-bio.BM", "chem.bio"],
+              link: "https://iol.co.za/news/brics/2026-04-09-brics-series-what-russian-scientists-just-did-with-a-spruce-tree/",
+              source: "Chemistry & Industry",
+              institution: "RAS",
+              institution_ja: "ロシア科学アカデミー",
+              country: "RU",
+              analysis: {analysis: "森林廃棄物からの医薬品原料化学改質", prospects: "バイオベース医薬品と循環経済の実現へ"}
             }
           ]
         },
