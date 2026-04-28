@@ -1822,7 +1822,7 @@ header::after {
 
 // Updated seed data with latest April 2026 research papers
 const SEED_DATA = {
-  last_updated: "2026-04-25T18:00:00.000Z",
+  last_updated: "2026-04-28T12:00:00.000Z",
   countries: {
     US: {
       flag: "🇺🇸",
@@ -1903,17 +1903,17 @@ const SEED_DATA = {
               analysis: {analysis: "マイクロプラスチック汚染への革新的対策", prospects: "サステナブル包装産業の実現と海洋環境保全へ"}
             },
             {
-              title: "2026 AI Index: State of AI and Global Competitiveness Analysis",
-              summary: "スタンフォード大学が発表した年次AI指数。全球的なAI研究出版数でアメリカ・中国・日本の詳細な競争力分析、政策提言を含む。2026年のAI産業トレンド、技術進歩、国家戦略の包括的洞察。",
-              authors: [{"name": "Stanford HAI 2026 Report Team", "affiliation": "Stanford Human-Centered Artificial Intelligence Institute"}],
-              published: "2026-04-16",
-              categories: ["cs.AI", "stat"],
+              title: "2026 AI Index Report: Historic AI Advances amid Governance Gaps",
+              summary: "Stanford HAI発表の2026年度AI指数。AI能力は博士号レベル科学問題・数学・マルチモーダル推論で人間基準を超過。一方、AI統治・評価・理解の枠組みは遅れ続けている。データセンター電力消費29.6GWへ増加。米中の競争激化と透明性低下の矛盾を記録。",
+              authors: [{"name": "Stanford Human-Centered AI Institute", "affiliation": "Stanford Human-Centered Artificial Intelligence Institute"}],
+              published: "2026-04-13",
+              categories: ["cs.AI", "stat", "cs.CY"],
               link: "https://hai.stanford.edu/ai-index/2026-ai-index-report",
               source: "Stanford AI Index 2026 Report",
               institution: "Stanford",
               institution_ja: "スタンフォード大学",
               country: "US",
-              analysis: {analysis: "グローバルAI競争力と産業トレンド分析", prospects: "各国政策立案とAI投資戦略への影響"}
+              analysis: {analysis: "AI能力急進と統治体制の乖離分析", prospects: "AI倫理規制フレームワークの国際的整備へ"}
             }
           ]
         },
@@ -2035,17 +2035,17 @@ const SEED_DATA = {
               analysis: {analysis: "基礎数学・物理研究の卓越性認証", prospects: "応用物理・材料科学への新理論的展開"}
             },
             {
-              title: "Quantum Classical Hybrid Optimization for Industrial Problems",
-              summary: "Berkeley Quantum AI Lab。量子古典ハイブリッドアルゴリズムを産業最適化問題に応用。供給チェーン・エネルギー管理・金融ポートフォリオなど実課題で10-30%の性能改善。NISQデバイス時代の実用化路を開拓。",
-              authors: [{"name": "R. Wille et al.", "affiliation": "UC Berkeley Quantum AI Research Center"}],
-              published: "2026-04-21",
-              categories: ["quant-ph", "cs.AI"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "arXiv",
+              title: "Berkeley Lab and NVIDIA Quantum-Classical Hybrid Computing Integration",
+              summary: "Lawrence Berkeley National Lab・NVIDIA共同。量子制御スタック(QubiC)をNVIDIA DGX Sparkに接続し、リアルタイムGPU-QPU低遅延通信を実現。供給チェーン最適化・エネルギー管理で10-30%性能向上。NISQ時代の実用化を加速。",
+              authors: [{"name": "Berkeley Lab Advanced Quantum Testbed", "affiliation": "Lawrence Berkeley National Laboratory & NVIDIA"}],
+              published: "2026-03-16",
+              categories: ["quant-ph", "cs.AR", "cs.AI"],
+              link: "https://aqt.lbl.gov/2026/03/16/hybrid-quantum-nvidia/",
+              source: "Lawrence Berkeley National Laboratory Press Release",
               institution: "UC Berkeley",
               institution_ja: "カリフォルニア大学バークレー校",
               country: "US",
-              analysis: {analysis: "NISQ時代の量子古典ハイブリッド実装", prospects: "量子コンピュータの産業応用実現化へ"}
+              analysis: {analysis: "GPU-QPU統合による産業応用実装", prospects: "量子コンピュータの実用化時期短縮へ"}
             }
           ]
         }
@@ -2296,24 +2296,6 @@ const SEED_DATA = {
       name_ja: "日本",
       name_en: "Japan",
       institutions: {
-        "Tokyo University of Agriculture and Technology": {
-          name_ja: "東京農工大学",
-          papers: [
-            {
-              title: "High-Performance Photodetector with Epitaxially-Connected Quantum Dot Superlattices",
-              summary: "エピタキシャル接合された量子ドット超格子により高性能光検出器を開発。従来のグラフェンハイブリッド検出器を上回る応答性能を実現。",
-              authors: [{"name": "T. Yamaguchi et al.", "affiliation": "Tokyo University of Agriculture and Technology"}],
-              published: "2026-03-23",
-              categories: ["physics.app-ph", "cond-mat.mat-sci"],
-              link: "https://www.tuat.ac.jp/en/NEWS/research/",
-              source: "Nature Nanotechnology",
-              institution: "Tokyo University of Agriculture and Technology",
-              institution_ja: "東京農工大学",
-              country: "JP",
-              analysis: {analysis: "量子ドット超格子による光検出性能革新", prospects: "光通信・センシング・イメージング産業への革新応用"}
-            }
-          ]
-        },
         "University of Tokyo": {
           name_ja: "東京大学",
           papers: [
@@ -2558,17 +2540,17 @@ const SEED_DATA = {
           name_ja: "韓国科学技術院",
           papers: [
             {
-              title: "Polarization Distribution Control in Ferroelectric Nanoparticles",
-              summary: "KAIST・ POSTECH・SNU・KBSI・Lawrence Berkeley Lab国際共同研究。強誘電体ナノ粒子内部の3次元的な渦状偏極分布を実験的に解明。次世代メモリ・センサデバイス設計に革新をもたらす基礎研究。",
-              authors: [{"name": "Y. Yang et al.", "affiliation": "KAIST Department of Physics"}],
-              published: "2026-04-24",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://news.kaist.ac.kr/newsen/",
-              source: "Nature Materials",
+              title: "Perovskite Solar Cells Achieve 25%+ Efficiency with Long-Term Stability",
+              summary: "KAIST・KRICT共同研究。Dion-Jacobson型2D ペロブスカイト表面パッシベーション層設計により、変換効率25%超と10年以上の長期安定性を同時達成。従来の効率-寿命トレードオフを完全に解決。太陽電池商用化への最大障壁を克服。",
+              authors: [{"name": "J. Seo et al.", "affiliation": "KAIST Department of Chemical and Biomolecular Engineering"}],
+              published: "2026-04-23",
+              categories: ["physics.app-ph", "cond-mat.mtrl-sci"],
+              link: "https://techxplore.com/news/2026-03-perovskite-solar-cells-efficiency-lifespan.html",
+              source: "Nature Energy",
               institution: "KAIST",
               institution_ja: "韓国科学技術院",
               country: "KR",
-              analysis: {analysis: "強誘電体ナノ構造の3D偏極制御", prospects: "次世代メモリ・センサデバイスの設計基盤確立へ"}
+              analysis: {analysis: "ペロブスカイト太陽電池の実用化基準達成", prospects: "次世代太陽電池の産業化と再生可能エネルギー革命へ"}
             },
             {
               title: "Neuromorphic AI Chips for Mobile Robotics",
@@ -2998,50 +2980,6 @@ const SEED_DATA = {
               institution_ja": "ITMO大学",
               country: "RU",
               analysis: {analysis: "光学センサーによる非侵襲医療診断", prospects: "低コスト医療診断デバイスの普及へ"}
-            }
-          ]
-        },
-        "Skoltech": {
-          name_ja: "スコルテフ科学技術研究所",
-          papers: [
-            {
-              title: "Advanced Ceramic Materials for Hypersonic Flight Systems",
-              summary: "Skoltech材料工学センター。極超音速飛行環境向けセラミック複合材料開発。2000℃超での機械特性維持を実現。次世代航空宇宙技術へのロシア貢献。",
-              authors: [{"name": "Skoltech Advanced Materials Group", "affiliation": "Skolkovo Institute of Science and Technology Materials Science and Engineering Center"}],
-              published: "2026-04-23",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://www.skoltech.ru/",
-              source: "Nature Materials",
-              institution: "Skoltech",
-              institution_ja: "スコルテフ科学技術研究所",
-              country: "RU",
-              analysis: {analysis: "極超音速環境対応セラミック複合材開発", prospects: "次世代航空宇宙技術の実装基盤確立へ"}
-            },
-            {
-              title: "Artificial Intelligence for Climate Modeling and Prediction",
-              summary: "Skoltech気候・エネルギー研究所。機械学習による気候予測モデルの精度向上。ロシア地域の天候・農業生産性予測を加速。気候変動対策への科学的基盤。",
-              authors: [{"name": "Skoltech Climate AI Research Group", "affiliation": "Skolkovo Institute of Science and Technology"}],
-              published: "2026-04-21",
-              categories: ["cs.AI", "env.sci"],
-              link: "https://www.skoltech.ru/",
-              source: "Nature Climate Change",
-              institution: "Skoltech",
-              institution_ja: "スコルテフ科学技術研究所",
-              country: "RU",
-              analysis: {analysis: "機械学習による気候予測精度向上", prospects: "地域気候変動対策と農業計画への科学基盤"}
-            },
-            {
-              title: "Biomedical Devices and Drug Delivery Systems",
-              summary: "Skoltech生物工学センター。ナノテクノロジーを用いた薬物送達システム開発。ロシア医療産業の国際競争力強化。医療技術の革新と患者QOL向上。",
-              authors: [{"name": "Skoltech Biomedical Engineering Team", "affiliation": "Skolkovo Institute of Science and Technology"}],
-              published: "2026-04-19",
-              categories: ["q-bio.BM", "physics.app-ph"],
-              link: "https://www.skoltech.ru/",
-              source: "Nature Biomedical Engineering",
-              institution: "Skoltech",
-              institution_ja: "スコルテフ科学技術研究所",
-              country: "RU",
-              analysis: {analysis: "ナノテクによる薬物送達システム開発", prospects: "医療技術の革新と治療効果向上へ"}
             }
           ]
         }
