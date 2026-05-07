@@ -1676,7 +1676,7 @@ header::after {
 <!-- TICKER BAR -->
 <div class="ticker-bar">
   <div class="ticker-content" id="ticker-content">
-    ⚡ GLOBAL RESEARCH UPDATE // 2026-03-25 — 量子計算・AI・材料科学の最前線 — MIT VLA技術 / Harvard量子CPU / RIKEN触媒化学 / Tsinghua具体化AI / KAIST光デバイス / RIKENAI計算基盤 — 世界で進む科学革新 —
+    ⚡ GLOBAL RESEARCH UPDATE // 2026-05-06 — Parton Distribution Functions from Large Momentum Expansion of Current-Current Correlators / SPROUT: A Scalable Diffusion Foundation Model for Agricultural Vision / F2F-AP: Flow-to-Future Asynchronous Policy for Real-time Dynamic Manipulation / GaussianFlow SLAM: Monocular Gaussian Splatting SLAM Guided by GaussianFlow / Sky background accounting in spectral infrared observations of extended objects at the Caucasus Mountain Observatory of the SAI MSU — 世界で進む科学革新 —
   </div>
 </div>
 
@@ -1822,186 +1822,266 @@ header::after {
 
 // Updated seed data with latest April 2026 research papers
 const SEED_DATA = {
-  last_updated: "2026-04-25T18:00:00.000Z",
+  last_updated: "2026-05-06T07:03:53.607796Z",
   countries: {
     US: {
       flag: "🇺🇸",
       name_ja: "アメリカ",
       name_en: "United States",
       institutions: {
-        "MIT": {
+        MIT: {
           name_ja: "マサチューセッツ工科大学",
           papers: [
             {
-              title: "Forecast Collapse in Transformer Models: Understanding Scaling Limits Under Noise",
-              summary: "変圧器型モデルの予測能力を研究し、低信号対雑音比の金融時系列では表現力の増加が誤り増加につながることを証明。モデル設計の数学的限界を初めて明らかにし、より効率的なアーキテクチャ開発の理論的基礎を提供する革新的研究。",
-              authors: [{"name": "D. Andreoletti et al.", "affiliation": "MIT CSAIL"}],
-              published: "2026-04-18",
-              categories: ["cs.LG", "stat.ML", "q-fin"],
-              link: "https://arxiv.org/abs/2604.00064",
-              source: "arXiv/Nature Machine Intelligence",
-              institution: "MIT",
-              institution_ja: "マサチューセッツ工科大学",
-              country: "US",
-              analysis: {analysis: "トランスフォーマーの理論的限界と設計指針の確立", prospects: "金融・時系列予測AIの効率化と信頼性向上へ"}
-            },
-            {
-              title: "Neural Garbage Collection: Optimizing KV Cache Management for Long-Context LLMs",
-              summary: "大規模言語モデルの推論時にKVキャッシュメモリを動的に管理するエンドツーエンド強化学習フレームワーク。ピークメモリ使用量を2.4-5.0倍削減しながら精度を維持。長文処理AIの実用化を大幅に加速。",
-              authors: [{"name": "K. Rajagopal et al.", "affiliation": "MIT Computer Science & Artificial Intelligence Laboratory"}],
-              published: "2026-04-21",
-              categories: ["cs.LG", "cs.AI"],
-              link: "https://arxiv.org/list/cs.LG/current",
+              title: "Parton Distribution Functions from Large Momentum Expansion of Current-Current Correlators",
+              summary: "大きな運動量展開の普遍性により、適切な大きな運動量フーリエ成分を含む任意のユークリッド相関器から始まるパートン分布関数 (PDF) の計算が可能になります。ここでは、PDF のモーメントを取得するために短距離展開で使用されている電流 - 電流相関器について考えます。このような相関器の利点は、単純な繰り込み特性があり、準 PDF のような線形パワー発散がないことです。ただし、格子計算では 4 点関数が必要です。",
+              authors: [
+                {
+                  name: "Jialu Zhang",
+                  affiliation: "MIT"
+                },
+                {
+                  name: "Xiangdong Ji",
+                  affiliation: "MIT"
+                },
+                {
+                  name: "Andreas Schäfer",
+                  affiliation: "MIT"
+                }
+              ],
+              published: "2026-05-04",
+              categories: [
+                "hep-ph",
+                "hep-lat",
+                "nucl-th"
+              ],
+              link: "http://arxiv.org/abs/2605.03234v1",
               source: "arXiv",
               institution: "MIT",
               institution_ja: "マサチューセッツ工科大学",
               country: "US",
-              analysis: {analysis: "LLMメモリ効率化による実用性向上", prospects: "エッジデバイスでの長文処理AIの実現"}
+              analysis: {
+                analysis: "この研究は、特に hep-ph に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Universal Quantum Switch: Routing Quantum Information On-Demand",
-              summary: "薄膜ニオブ酸リチウムで実装した量子情報ルーター。1MHz高速スイッチングと4%以下の低デコヒーレンス実現。量子ネットワークアーキテクチャの基本構成要素として量子インターネット構築を加速。",
-              authors: [{"name": "D. Englund et al.", "affiliation": "MIT Department of Electrical Engineering and Computer Science"}],
-              published: "2026-04-19",
-              categories: ["quant-ph", "physics.optics"],
-              link: "https://news.mit.edu/2026/quantum-switch-routing",
-              source: "Nature Photonics",
+              title: "A Validated Prompt Bank for Malicious Code Generation: Separating Executable Weapons from Security Knowledge in 1,554 Consensus-Labeled Prompts",
+              summary: "悪意のあるコーディングタスクに対する言語モデル拒否の既存のベンチマークでは、実行可能な悪意のあるソフトウェアに対するリクエストと、有害なセキュリティ知識に対するリクエストが混同されることがよくあります。この混合が重要なのは、2 つの要求タイプが安全性を重視した言語モデルで異なる拒否経路を引き起こす可能性が高く、混合物に対して計算された単一の拒否率統計ではどちらも分離できないためです。この論文では、5 つのモデルのコンセンサス プロトコルを通じて運用される武器対知識の分類軸を導入し、それを 4 つの公開ベンチマークから抽出された 3,133 のプロンプトに適用し、1,554 のプロンプト コンセ...",
+              authors: [
+                {
+                  name: "Richard J. Young",
+                  affiliation: "MIT"
+                },
+                {
+                  name: "Gregory D. Moody",
+                  affiliation: "MIT"
+                }
+              ],
+              published: "2026-05-04",
+              categories: [
+                "cs.CR",
+                "cs.SE"
+              ],
+              link: "http://arxiv.org/abs/2605.03179v1",
+              source: "arXiv",
               institution: "MIT",
               institution_ja: "マサチューセッツ工科大学",
               country: "US",
-              analysis: {analysis: "量子情報ルーティングの実装実現", prospects: "量子インターネット構造のスケーラビリティ確保"}
+              analysis: {
+                analysis: "この研究は、特に cs.CR に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "Stanford": {
+        Stanford: {
           name_ja: "スタンフォード大学",
           papers: [
             {
-              title: "Self-Guided Self-Play: Synthetic Problem Generation for LLM Reasoning",
-              summary: "LLMが自動生成した高品質な学習問題により、7Bパラメータモデルが671Bモデルの定理証明性能を超過。合成問題生成による継続学習で、計算効率と推論能力を革新的に両立。",
-              authors: [{"name": "M. Zelikman et al.", "affiliation": "Stanford Human-Centered AI Institute"}],
-              published: "2026-04-22",
-              categories: ["cs.AI", "cs.LG"],
-              link: "https://arxiv.org/list/cs.AI/current",
+              title: "Efficient Preference Poisoning Attack on Offline RLHF",
+              summary: "Direct Preference Optimization (DPO) などの Offline Reinforcement Learning from Human Feedback (RLHF) パイプラインは、事前に収集された嗜好データセットに基づいてトレーニングされるため、嗜好ポイズニング攻撃に対して脆弱になります。対数線形 DPO に対するラベル フリップ攻撃を研究します。まず、1 つの優先ラベルを反転すると、DPO 勾配のパラメーターに依存しないシフトが引き起こされることを示します。",
+              authors: [
+                {
+                  name: "Chenye Yang",
+                  affiliation: "Stanford"
+                },
+                {
+                  name: "Weiyu Xu",
+                  affiliation: "Stanford"
+                },
+                {
+                  name: "Lifeng Lai",
+                  affiliation: "Stanford"
+                }
+              ],
+              published: "2026-05-04",
+              categories: [
+                "cs.LG",
+                "cs.AI",
+                "stat.ML"
+              ],
+              link: "http://arxiv.org/abs/2605.02495v1",
               source: "arXiv",
               institution: "Stanford",
               institution_ja: "スタンフォード大学",
               country: "US",
-              analysis: {analysis: "合成データを用いたLLM推論能力の飛躍的向上", prospects: "小規模言語モデルの実用化と民主化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.LG に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Microplastics Mitigation through Paper Coating Innovation",
-              summary: "スタンフォードとYonsei大学の共同研究。バイオベースの新型紙コーティング材料を開発し、マイクロプラスチック流出を80%削減。従来の石油ベース材料を置き換え、持続可能な包装産業を実現。",
-              authors: [{"name": "H. Park et al.", "affiliation": "Stanford School of Engineering & Yonsei University"}],
-              published: "2026-04-20",
-              categories: ["chem.eng", "env.sci"],
-              link: "https://news.stanford.edu/stories/2026/04/microplastics",
-              source: "Nature Sustainability",
+              title: "Uncertainty-Aware Trip Purpose Inference from GPS Trajectories via POI Semantic Zones and Pareto Calibration",
+              summary: "大規模な GPS 軌跡データは人間の移動に関する豊富な観察を提供しますが、個人レベルのグラウンド トゥルースの欠如、GPS ノイズと不完全な興味のある地点 (POI) のカバー範囲による空間的不確実性、および旅行目的間の基本的な行動の違いにより、検出された停留所に旅行の目的を割り当てることは依然として困難です。我々は、距離加重空間尤度を備えた近隣レベルのPOIセマンティックゾーン、必須アクテ​​ィビティと非必須アクテ​​ィビティの差別化された推論戦略、および世帯旅行調査統計からの分布の乖離を共同で最小限に抑え、注釈付きラベルを必要とせずに推論の信頼性を最大化する多段階パレート最適化を統合した、...",
+              authors: [
+                {
+                  name: "Bo Yang",
+                  affiliation: "Stanford"
+                },
+                {
+                  name: "Haoxuan Ma",
+                  affiliation: "Stanford"
+                },
+                {
+                  name: "Yifan Liu",
+                  affiliation: "Stanford"
+                }
+              ],
+              published: "2026-05-02",
+              categories: [
+                "cs.AI"
+              ],
+              link: "http://arxiv.org/abs/2605.01257v1",
+              source: "arXiv",
               institution: "Stanford",
               institution_ja: "スタンフォード大学",
               country: "US",
-              analysis: {analysis: "マイクロプラスチック汚染への革新的対策", prospects: "サステナブル包装産業の実現と海洋環境保全へ"}
-            },
-            {
-              title: "2026 AI Index: State of AI and Global Competitiveness Analysis",
-              summary: "スタンフォード大学が発表した年次AI指数。全球的なAI研究出版数でアメリカ・中国・日本の詳細な競争力分析、政策提言を含む。2026年のAI産業トレンド、技術進歩、国家戦略の包括的洞察。",
-              authors: [{"name": "Stanford HAI 2026 Report Team", "affiliation": "Stanford Human-Centered Artificial Intelligence Institute"}],
-              published: "2026-04-16",
-              categories: ["cs.AI", "stat"],
-              link: "https://hai.stanford.edu/ai-index/2026-ai-index-report",
-              source: "Stanford AI Index 2026 Report",
-              institution: "Stanford",
-              institution_ja: "スタンフォード大学",
-              country: "US",
-              analysis: {analysis: "グローバルAI競争力と産業トレンド分析", prospects: "各国政策立案とAI投資戦略への影響"}
+              analysis: {
+                analysis: "この研究は、特に cs.AI に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "Harvard": {
+        Harvard: {
           name_ja: "ハーバード大学",
           papers: [
             {
-              title: "Oratomic: Practical Quantum Computing from Rydberg-Atom Platforms",
-              summary: "ハーバード・Caltech・UC Berkeley・Amazon・Googleからなるスタートアップ発表。Rydberg原子プラットフォームを用いた実用量子コンピュータの基本設計。従来の100分の1の規模で同等性能を実現し、量子コンピュータの民主化へ。",
-              authors: [{"name": "M. Lukin et al.", "affiliation": "Harvard Quantum Science Center & Oratomic"}],
-              published: "2026-04-23",
-              categories: ["quant-ph", "physics.atom-ph"],
-              link: "https://www.nature.com/articles/",
-              source: "Nature",
+              title: "A Skill-Based AI Agentic Pipeline for Library of Congress Subject Indexing",
+              summary: "このペーパーでは、米国議会図書館件名見出し (LCSH) を使用した件名のインデックス作成を自動化するためのモジュール式 AI エージェント スキル パイプラインについて説明します。主題の索引付け (作品の概要を分析し、管理された語彙用語を選択し、それらを MARC21 主題アクセス フィールドとしてエンコードするプロセス) は、図書館目録作成の中で最も時間のかかるコンポーネントの 1 つです。システムは、このプロセスを、概念分析、定量的フィルタリング、権限検証、MARC フィールド合成という 4 つの個別の、順次実行されるエージェント スキルに分解します。",
+              authors: [
+                {
+                  name: "Eric H. C. Chow",
+                  affiliation: "Harvard"
+                }
+              ],
+              published: "2026-05-05",
+              categories: [
+                "cs.DL",
+                "cs.AI"
+              ],
+              link: "http://arxiv.org/abs/2605.03537v1",
+              source: "arXiv",
               institution: "Harvard",
               institution_ja: "ハーバード大学",
               country: "US",
-              analysis: {analysis: "Rydberg原子による実用量子コンピュータ実現", prospects: "量子コンピュータの産業化と民主化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.DL に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Chromatin Memory: Vault Structures as Cellular mRNA Storage",
-              summary: "ハーバード医学部グループが、細胞内のヴォルト構造がmRNA貯蔵のための生物学的メモリユニットとして機能することを発見。細胞の過去の環境応答を保存・伝達する仕組みを解明。発生生物学と遺伝子発現制御の根本的理解を更新。",
-              authors: [{"name": "Harvard Systems Biology Team", "affiliation": "Harvard Medical School"}],
-              published: "2026-04-21",
-              categories: ["q-bio.CB", "q-bio.MN"],
-              link: "https://www.nature.com/articles/",
-              source: "Nature Cell Biology",
+              title: "Multi-Axis Speech Similarity via Factor-Partitioned Embeddings",
+              summary: "音声は、言語内容、話者のアイデンティティ、方言、性別など、従来の単一ベクトルの埋め込みでは統合される複数の属性を同時にエンコードします。   我々は、各発話を単一のベクトルにマッピングする因子分割埋め込みフレームワークを提示します。このベクトルの部分空間は、変動の個別の軸に対応します。   共有音響エンコーダは、軸ごとの線形投影ヘッドに供給します。各ヘッドは、専門の教師からの蒸留または共有ラベルのペアに対する対照的な対物レンズによってトレーニングされます。",
+              authors: [
+                {
+                  name: "Jim O'Regan",
+                  affiliation: "Harvard"
+                },
+                {
+                  name: "Jens Edlund",
+                  affiliation: "Harvard"
+                }
+              ],
+              published: "2026-05-04",
+              categories: [
+                "eess.AS",
+                "cs.IR"
+              ],
+              link: "http://arxiv.org/abs/2605.02804v1",
+              source: "arXiv",
               institution: "Harvard",
               institution_ja: "ハーバード大学",
               country: "US",
-              analysis: {analysis: "細胞的メモリ機能の発見と機構解明", prospects: "発生学・細胞記憶・エピジェネティクス研究へ"}
-            },
-            {
-              title: "Marie Claire: Protein Synthesis Pathway Optimization through Machine Learning",
-              summary: "ハーバード生物工学グループ。機械学習によりタンパク質合成経路を最適化し、異常プロトコルの同定と修正を自動化。治療用タンパク質製造コストを40%削減し、バイオ医薬品の民主化を加速。",
-              authors: [{"name": "D. Baker et al.", "affiliation": "Harvard T.H. Chan School of Public Health"}],
-              published: "2026-04-19",
-              categories: ["q-bio.CB", "cs.AI"],
-              link: "https://news.harvard.edu/gazette/story/2026/04/protein",
-              source: "Science",
-              institution: "Harvard",
-              institution_ja: "ハーバード大学",
-              country: "US",
-              analysis: {analysis: "AI駆動型タンパク質生産プロセス最適化", prospects: "治療用タンパク質医薬品の低コスト化と普及へ"}
+              analysis: {
+                analysis: "この研究は、特に eess.AS に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "Caltech": {
+        Caltech: {
           name_ja: "カリフォルニア工科大学",
           papers: [
             {
-              title: "Quantum Hardware Efficiency: 100x Qubit Reduction Breakthrough",
-              summary: "Caltech量子情報センター。量子コンピュータに必要な量子ビット数を従来比100分の1に削減する設計手法を発表。100万ビット想定から10,000-20,000ビットで同等性能を実現可能。量子コンピュータの実現時期を大幅に前倒し。",
-              authors: [{"name": "J. Preskill et al.", "affiliation": "Caltech Institute for Quantum Information and Matter"}],
-              published: "2026-04-22",
-              categories: ["quant-ph", "cs.AR"],
-              link: "https://www.nature.com/articles/",
-              source: "Nature",
+              title: "Dual-Branch Remote Sensing Infrared Image Super-Resolution",
+              summary: "リモートセンシング赤外線画像の超解像度は、ターゲットの輪郭、シーンのレイアウト、放射測定の安定性を維持しながら、低解像度の入力からより鮮明な熱観測を復元することを目的としています。可視画像の超解像度とは異なり、熱画像はテクスチャが弱く、不安定な局所鮮明化の影響を受けやすいため、相補的な局所モデリングとグローバルモデリングが特に重要になります。このペーパーでは、HAT-L ブランチと MambaIRv2-L ブランチを組み合わせたデュアル ブランチ システムである、NTIRE 2026 赤外線画像超解像度チャレンジに対する当社のソリューションを紹介します。",
+              authors: [
+                {
+                  name: "Xining Ge",
+                  affiliation: "Caltech"
+                },
+                {
+                  name: "Gengjia Chang",
+                  affiliation: "Caltech"
+                },
+                {
+                  name: "Weijun Yuan",
+                  affiliation: "Caltech"
+                }
+              ],
+              published: "2026-04-11",
+              categories: [
+                "cs.CV"
+              ],
+              link: "http://arxiv.org/abs/2604.10112v2",
+              source: "arXiv",
               institution: "Caltech",
               institution_ja: "カリフォルニア工科大学",
               country: "US",
-              analysis: {analysis: "量子ビット必要数の革新的削減", prospects: "量子コンピュータ実現時期の10年短縮へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CV に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Diophantine Geometry Advances: Number Theory Breakthrough",
-              summary: "Caltech数学部。不定方程式論における新しい証明手法を開発。複数未解決問題に対して統一的な解決法を提供し、数論数学を新段階へ。",
-              authors: [{"name": "V. Dimitrov & Others", "affiliation": "Caltech Division of Physics, Mathematics and Astronomy"}],
-              published: "2026-04-20",
-              categories: ["math.NT", "math.AG"],
-              link: "https://www.nature.com/articles/",
-              source: "Annals of Mathematics",
+              title: "HEART-PFL: Stable Personalized Federated Learning under Heterogeneity with Hierarchical Directional Alignment and Adversarial Knowledge Transfer",
+              summary: "Personalized Federated Learning (PFL) は、異種分散下で効果的なクライアント固有のモデルを提供することを目的としていますが、既存の手法では浅いプロトタイプの調整と脆弱なサーバー側の抽出という問題があります。我々は、(i) クライアントの特異性を維持するために、初期段階ではコサイン類似度を使用し、深い段階では MSE マッチングを使用して深さを意識した階層方向アライメント (HDA) を実行し、(ii) クリーンなプロキシ データと敵対的プロキシ データに対する対称 KL 蒸留を使用した Adversarial Knowledge Transfer (AKT)...",
+              authors: [
+                {
+                  name: "Minjun Kim",
+                  affiliation: "Caltech"
+                },
+                {
+                  name: "Minje Kim",
+                  affiliation: "Caltech"
+                }
+              ],
+              published: "2026-03-25",
+              categories: [
+                "cs.CV",
+                "cs.LG"
+              ],
+              link: "http://arxiv.org/abs/2603.24209v1",
+              source: "arXiv",
               institution: "Caltech",
               institution_ja: "カリフォルニア工科大学",
               country: "US",
-              analysis: {analysis: "数論における統一的新手法の確立", prospects: "暗号化学・計算複雑性理論への応用"}
-            },
-            {
-              title: "Nanoscale Photonic Quantum Processors",
-              summary: "シリコンフォトニクス基盤上に統合された量子プロセッサー。100量子ゲート以上を単一チップに集約し、製造可能性と拡張性を同時実現。量子フォトニクスの産業化へ大きく前進。",
-              authors: [{"name": "A. Faraon et al.", "affiliation": "Caltech Jet Propulsion Laboratory"}],
-              published: "2026-04-18",
-              categories: ["quant-ph", "physics.optics"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "Science",
-              institution: "Caltech",
-              institution_ja: "カリフォルニア工科大学",
-              country: "US",
-              analysis: {analysis: "シリコンフォトニクスによる量子プロセッサ実現", prospects: "チップ統合量子コンピュータの製造化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CV に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
@@ -2009,43 +2089,55 @@ const SEED_DATA = {
           name_ja: "カリフォルニア大学バークレー校",
           papers: [
             {
-              title: "Roger Herst Quantum Nexus: Unified Access to California's Quantum Infrastructure",
-              summary: "UC Berkeley・Lawrence Berkeley National Laboratoryが中核となり、カリフォルニア全域の量子研究リソースへのワンストップ窓口を開設。学界・産業・政策立案者が統一プラットフォームで量子技術にアクセス。西海岸の量子エコシステム統合を実現。",
-              authors: [{"name": "UC Berkeley Physics & Quantum Computing Center", "affiliation": "UC Berkeley & Lawrence Berkeley National Laboratory"}],
-              published: "2026-04-23",
-              categories: ["quant-ph", "cs.AR"],
-              link: "https://physics.berkeley.edu/research-faculty/quantum-physics",
-              source: "UC Berkeley News",
-              institution: "UC Berkeley",
-              institution_ja: "カリフォルニア大学バークレー校",
-              country: "US",
-              analysis: {analysis: "量子インフラの統一的利用可能化", prospects: "西海岸量子産業エコシステムの構築へ"}
-            },
-            {
-              title: "New Horizons Prize Winners in Mathematics and Physics",
-              summary: "UC Berkeley数学科の若手教授がDiophantine幾何で、Caltechの研究者がともにNew Horizons賞受賞。数学的厳密性と物理的直感の融合による革新的研究成果。次世代研究の新標準を樹立。",
-              authors: [{"name": "UC Berkeley Faculty", "affiliation": "UC Berkeley Department of Mathematics"}],
-              published: "2026-04-20",
-              categories: ["math.NT", "physics.cond-mat"],
-              link: "https://news.berkeley.edu/2026/04/20/",
-              source: "UC Berkeley News",
-              institution: "UC Berkeley",
-              institution_ja: "カリフォルニア大学バークレー校",
-              country: "US",
-              analysis: {analysis: "基礎数学・物理研究の卓越性認証", prospects: "応用物理・材料科学への新理論的展開"}
-            },
-            {
-              title: "Quantum Classical Hybrid Optimization for Industrial Problems",
-              summary: "Berkeley Quantum AI Lab。量子古典ハイブリッドアルゴリズムを産業最適化問題に応用。供給チェーン・エネルギー管理・金融ポートフォリオなど実課題で10-30%の性能改善。NISQデバイス時代の実用化路を開拓。",
-              authors: [{"name": "R. Wille et al.", "affiliation": "UC Berkeley Quantum AI Research Center"}],
-              published: "2026-04-21",
-              categories: ["quant-ph", "cs.AI"],
-              link: "https://arxiv.org/list/quant-ph/recent",
+              title: "AI Observability for Large Language Model Systems: A Multi-Layer Analysis of Monitoring Approaches from Confidence Calibration to Infrastructure Tracing",
+              summary: "運用環境での大規模言語モデル (LLM) のデプロイメントにより、モデル内部から GPU カーネルに至るまで、フルスタックにわたる可観測性システムの緊急の必要性が生じています。しかし、既存の監視アプローチはこのスタックの孤立した層に対処しており、これらの技術がどのように関連し、重複し、相互に補完するかを調査した包括的な分析はありません。この論文は、AI 可観測性の新たな状況を集合的に定義する 5 つの最近の研究成果 (2025 ～ 2026 年) の構造化分析を示しています。",
+              authors: [
+                {
+                  name: "Twinkll Sisodia",
+                  affiliation: "UC Berkeley"
+                }
+              ],
+              published: "2026-04-28",
+              categories: [
+                "cs.SE"
+              ],
+              link: "http://arxiv.org/abs/2604.26152v1",
               source: "arXiv",
               institution: "UC Berkeley",
               institution_ja: "カリフォルニア大学バークレー校",
               country: "US",
-              analysis: {analysis: "NISQ時代の量子古典ハイブリッド実装", prospects: "量子コンピュータの産業応用実現化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.SE に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
+            },
+            {
+              title: "How to quantify direct correlations between variables",
+              summary: "変数間の相関関係を分析することは、多くの場合、現代科学のツールであると同時に目標でもあります。重要な問題は、2 つの変数間の相関が直接的な相関であるのか、それとも交絡因子を介した間接的な相関のみであるのかということです。直接相関の既存の尺度をレビューし、それらを 2 つのファミリーに編成します。それぞれが体系的な構築に対応しています。(i) 元の同時分布から直接相関を除去し、その結果として生じる分布シフトを定量化します。",
+              authors: [
+                {
+                  name: "Shengjun Wu",
+                  affiliation: "UC Berkeley"
+                },
+                {
+                  name: "Jeffery Wu",
+                  affiliation: "UC Berkeley"
+                }
+              ],
+              published: "2026-04-20",
+              categories: [
+                "stat.ME",
+                "physics.soc-ph"
+              ],
+              link: "http://arxiv.org/abs/2604.18653v1",
+              source: "arXiv",
+              institution: "UC Berkeley",
+              institution_ja: "カリフォルニア大学バークレー校",
+              country: "US",
+              analysis: {
+                analysis: "この研究は、特に stat.ME に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         }
@@ -2056,47 +2148,70 @@ const SEED_DATA = {
       name_ja: "中国",
       name_en: "China",
       institutions: {
-        "Tsinghua": {
+        Tsinghua: {
           name_ja: "清華大学",
           papers: [
             {
-              title: "ATEC 2026: Embodied AI Challenge - Robots Survival in Real-World Environments",
-              summary: "清華大学・北京大学・復旦大学・アントグループが主催するATEC2026。シミュレーション・実環境での達成困難なロボットタスクを競う。具体化AIの技術基準を確立し、実世界での信頼性検証を行う新時代のベンチマーク。",
-              authors: [{"name": "Tsinghua Robotics Team", "affiliation": "Tsinghua University & ATEC 2026 Organizing Committee"}],
-              published: "2026-04-01",
-              categories: ["cs.RO", "cs.AI", "cs.CV"],
-              link: "https://www.roboticstomorrow.com/story/2026/04/atec2026/",
-              source: "ATEC 2026 Competition",
-              institution: "Tsinghua",
-              institution_ja: "清華大学",
-              country: "CN",
-              analysis: {analysis: "ロボット技術の実用性検証フレームワーク確立", prospects: "具体化AIの産業化基準と大規模展開へ"}
-            },
-            {
-              title: "Transformer Scaling Laws in Chinese Language Models",
-              summary: "中国語に最適化されたトランスフォーマー構造の縮尺則を発見。言語特性に応じた効率的スケーリング手法により、計算効率を従来比50%削減。中文NLPの民主化を加速。",
-              authors: [{"name": "T. He et al.", "affiliation": "Tsinghua Natural Language Processing Group"}],
-              published: "2026-04-24",
-              categories: ["cs.CL", "cs.AI"],
-              link: "https://arxiv.org/list/cs.CL/current",
+              title: "F2F-AP: Flow-to-Future Asynchronous Policy for Real-time Dynamic Manipulation",
+              summary: "非同期推論は、ロボット操作における一般的なパラダイムとして台頭し、軌道の滑らかさと効率の確保において大きな進歩を遂げています。ただし、固有の遅延により生成されたアクションがリアルタイム環境よりも必然的に遅れるため、システム的な課題は未解決のままです。この問題は、このような一時的な不整合により、急速に変化する環境を解釈して対応する政策の能力を著しく損なう動的なシナリオで特に悪化します。この論文では、予測されたオブジェクトのフローを活用して将来の観測を合成する新しいフレームワークを提案します。",
+              authors: [
+                {
+                  name: "Haoyu Wei",
+                  affiliation: "Tsinghua"
+                },
+                {
+                  name: "Xiuwei Xu",
+                  affiliation: "Tsinghua"
+                },
+                {
+                  name: "Ziyang Cheng",
+                  affiliation: "Tsinghua"
+                }
+              ],
+              published: "2026-04-02",
+              categories: [
+                "cs.RO"
+              ],
+              link: "http://arxiv.org/abs/2604.02408v2",
               source: "arXiv",
               institution: "Tsinghua",
               institution_ja: "清華大学",
               country: "CN",
-              analysis: {analysis: "言語特性最適化による効率的スケーリング", prospects: "多言語LLMの民主化と高精度化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.RO に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Distributed Training Optimization for 1 Trillion Parameter Models",
-              summary: "分散トレーニングアルゴリズムにより、1兆パラメータ規模のモデル学習を効率化。通信オーバーヘッドを90%削減し、複数拠点での並列学習を実現。超大規模言語モデルの次世代基盤技術。",
-              authors: [{"name": "Y. Song et al.", "affiliation": "Tsinghua High-Performance Computing Lab"}],
-              published: "2026-04-19",
-              categories: ["cs.DC", "cs.AI"],
-              link: "https://arxiv.org/list/cs.DC/current",
+              title: "Design of a Miniature Kibble Balance for Kilogram-Scale Mass Calibration -- KBmini",
+              summary: "卓上バージョンのキブル天びんは、改訂された国際単位系に続く大量実現の重要な発展傾向です。 Kibble 天びんを大型機器から卓上装置に小型化することによる重要な革新により、量子ベースの質量の実現がより広範囲の校正研究所や業界で利用できるようになりました。この論文では、1 g から 1 kg までの E2 精度クラスの質量校正を対象とした清華大学の卓上キブル天びんの設計について説明します。たとえば、1 kg の分銅を校正する場合、E2 精度クラスを満たすために必要な相対標準測定の不確かさは 0.27 ppm 未満である必要があります。",
+              authors: [
+                {
+                  name: "Shisong Li",
+                  affiliation: "Tsinghua"
+                },
+                {
+                  name: "Nanjia Li",
+                  affiliation: "Tsinghua"
+                },
+                {
+                  name: "Weibo Liu",
+                  affiliation: "Tsinghua"
+                }
+              ],
+              published: "2026-01-26",
+              categories: [
+                "physics.ins-det"
+              ],
+              link: "http://arxiv.org/abs/2601.18054v1",
               source: "arXiv",
               institution: "Tsinghua",
               institution_ja: "清華大学",
               country: "CN",
-              analysis: {analysis: "超大規模モデル学習の分散最適化", prospects: "兆規模言語モデルの実装基盤確立"}
+              analysis: {
+                analysis: "この論文は、システムの新しい機能を実証することにより、量子技術を進歩させます。これは、堅牢な量子アドバンテージに向けた重要なステップとなります。",
+                prospects: "将来の反復では、これらの量子アーキテクチャを実用的なエラー訂正実装に拡張し、暗号化とシミュレーションに大きな影響を与える可能性があります。"
+              }
             }
           ]
         },
@@ -2104,100 +2219,139 @@ const SEED_DATA = {
           name_ja: "北京大学",
           papers: [
             {
-              title: "Quantum-Safe Cryptography: Post-Quantum Algorithm Standardization",
-              summary: "北京大学暗号・セキュリティグループ。量子耐性暗号アルゴリズムの標準化に貢献し、中国における組織・金融のセキュア移行計画を主導。世界のNIST標準化プロセスに参加し、量子時代のセキュリティアーキテクチャを定義。",
-              authors: [{"name": "X. Wang et al.", "affiliation": "Peking University School of Mathematical Sciences"}],
-              published: "2026-04-23",
-              categories: ["cs.CR", "cs.CY"],
-              link: "https://arxiv.org/list/cs.CR/current",
+              title: "PRBench: End-to-end Paper Reproduction in Physics Research",
+              summary: "大規模な言語モデルを活用した AI エージェントは、強力な推論能力と問題解決能力を発揮し、数式の導出やコード生成などの科学研究タスクを支援できます。ただし、これらのエージェントが実際の科学論文からのエンドツーエンドの複製を確実に実行できるかどうかは、未解決の疑問のままです。物理学の 11 のサブフィールドにわたる、専門家が厳選した 30 のタスクのベンチマークである PRBench を紹介します。各タスクでは、エージェントが出版された論文の方法論を理解し、対応するアルゴリズムを一から実装し、元の出版物と一致する定量的な結果を生成する必要があります。",
+              authors: [
+                {
+                  name: "Shi Qiu",
+                  affiliation: "Peking University"
+                },
+                {
+                  name: "Junyi Deng",
+                  affiliation: "Peking University"
+                },
+                {
+                  name: "Yiwei Deng",
+                  affiliation: "Peking University"
+                }
+              ],
+              published: "2026-03-29",
+              categories: [
+                "cs.CL",
+                "hep-lat",
+                "hep-ph"
+              ],
+              link: "http://arxiv.org/abs/2603.27646v1",
               source: "arXiv",
               institution: "Peking University",
               institution_ja: "北京大学",
               country: "CN",
-              analysis: {analysis: "量子時代への暗号化セキュリティ移行推進", prospects: "国家インフラ・金融システムの量子耐性化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CL に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Protein Structure Prediction: Evolutionary Information Integration",
-              summary: "北京大学生物情報学チーム。進化情報を統合したタンパク質構造予測モデル開発。AlphaFoldを補完し、複合体構造・機能注釈精度が40%向上。医薬品開発・酵素工学への応用が加速。",
-              authors: [{"name": "L. Chen et al.", "affiliation": "Peking University College of Life Sciences"}],
-              published: "2026-04-20",
-              categories: ["q-bio.ST", "q-bio.BM"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Computational Science",
+              title: "DuSCN-FusionNet: An Interpretable Dual-Channel Structural Covariance Fusion Framework for ADHD Classification Using Structural MRI",
+              summary: "注意欠陥多動性障害 (ADHD) は、非常に蔓延している神経発達障害です。しかし、信頼できる画像ベースのバイオマーカー、特に解剖学的マーカーが不足しているため、その神経生物学的診断は依然として困難です。構造 MRI (sMRI) は、ADHD に関連する脳の変化を調査するための非侵襲的なモダリティを提供します。それにもかかわらず、ほとんどの深層学習アプローチはブラックボックス システムとして機能し、臨床の信頼性と解釈可能性を制限します。",
+              authors: [
+                {
+                  name: "Qurat Ul Ain",
+                  affiliation: "Peking University"
+                },
+                {
+                  name: "Alptekin Temizel",
+                  affiliation: "Peking University"
+                },
+                {
+                  name: "Soyiba Jawed",
+                  affiliation: "Peking University"
+                }
+              ],
+              published: "2026-03-27",
+              categories: [
+                "cs.CV",
+                "cs.LG"
+              ],
+              link: "http://arxiv.org/abs/2603.26351v1",
+              source: "arXiv",
               institution: "Peking University",
               institution_ja: "北京大学",
               country: "CN",
-              analysis: {analysis: "タンパク質構造予測の精密化と機能注釈改善", prospects: "構造ベース創薬と酵素設計の飛躍的向上へ"}
-            },
-            {
-              title: "Equity in Medical AI: Fairness Frameworks for Global Health",
-              summary: "北京大学グローバルヘルス研究所。医療AIにおける公正性評価フレームワークを開発。異なる人口統計グループ間の診断精度格差を定量化・最小化する手法。AI医療の南北格差を低減し、グローバルに公平な診断支援を実現。",
-              authors: [{"name": "Z. Liu et al.", "affiliation": "Peking University Global Health Institute"}],
-              published: "2026-04-18",
-              categories: ["cs.CY", "q-bio.BM"],
-              link: "https://arxiv.org/list/cs.CY/current",
-              source: "Nature Medicine",
-              institution: "Peking University",
-              institution_ja: "北京大学",
-              country: "CN",
-              analysis: {analysis: "医療AIにおける公正性と格差是正の実装", prospects: "グローバル医療格差低減と公平な診断実現へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CV に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "CAS": {
+        CAS: {
           name_ja: "中国科学院",
           papers: [
             {
-              title: "Room-Temperature Superconductivity in Layered Perovskites",
-              summary: "CAS物理研究所。層状ペロブスカイト物質において室温常圧超伝導を観測。臨界温度250K以上達成。エネルギー・電力産業に革命をもたらし、実用超伝導社会への道を開く画期的発見。",
-              authors: [{"name": "X. Deng et al.", "affiliation": "CAS Institute of Physics"}],
-              published: "2026-04-22",
-              categories: ["cond-mat.supr-con", "physics.cond-mat"],
-              link: "https://www.nature.com/articles/",
-              source: "Nature Physics",
+              title: "High-Precision Ground Characterization of Test-Mass Magnetic Properties for the Taiji Gravitational Wave Mission via a Physics-Informed Neural Framework",
+              summary: "Taiji は、中国科学院によって開始された宇宙での重力波検出ミッションで、抗力のない 3 機の宇宙船からなる太陽中心の三角形の星座を通してミリヘルツの窓を開きます。その最終的な感度は、重力基準センサー (GRS) の残留加速度ノイズによって部分的に決まります。その中で、テスト質量と変動する環境磁場の間の結合が漂遊力の重要な寄与の 1 つを構成します。 LISA チームと TianQin チームによって確立された道に従って、試験質量の残留磁気モーメント $\\vec{m}_r$ と体積磁化率 $χ$ の高精度地上特性評価は、太地打ち上げ前試験プログラムの中心的なステップです。",
+              authors: [
+                {
+                  name: "Chang Liu",
+                  affiliation: "CAS"
+                },
+                {
+                  name: "Qiong Deng",
+                  affiliation: "CAS"
+                },
+                {
+                  name: "Huadong Li",
+                  affiliation: "CAS"
+                }
+              ],
+              published: "2026-04-26",
+              categories: [
+                "astro-ph.IM",
+                "gr-qc",
+                "physics.app-ph"
+              ],
+              link: "http://arxiv.org/abs/2604.23510v1",
+              source: "arXiv",
               institution: "CAS",
               institution_ja: "中国科学院",
               country: "CN",
-              analysis: {analysis: "室温超伝導実現の革命的達成", prospects: "超伝導電力網・交通システムの実装化へ"}
+              analysis: {
+                analysis: "この研究は、特に astro-ph.IM に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Ancient Fish Evolution Discovery from Cambrian Fossils",
-              summary: "中国古生物学グループ。カンブリア紀（約5億年前）の化石から、脊椎動物早期進化における新しい系統関係を発見。共著Nature。脊椎動物進化の根幹的理解を再構築。",
-              authors: [{"name": "Z. Yu et al.", "affiliation": "IVPP, Chinese Academy of Sciences"}],
-              published: "2026-04-21",
-              categories: ["q-bio.PE", "q-bio.EV"],
-              link: "https://english.cas.cn/",
-              source: "Nature",
+              title: "AI Agents, Language, Deep Learning and the Next Revolution in Science",
+              summary: "現代科学は重大な転換点に達しつつあります。素粒子物理学や天文学からゲノミクスや気候モデリングに至るまで、さまざまな分野の機器が、従来の分析手法ではもはや追いつけない規模、多様性、相互依存性のデータを生成しています。データ生成とデータ理解の間の不均衡が増大していることは、新しい科学パラダイムの必要性を示唆しています。私たちは、深層学習アルゴリズム上で動作する、人間が監視するインテリジェントな AI エージェントが、科学的手法の次の進化を表すものであると提案します。",
+              authors: [
+                {
+                  name: "Ke Li",
+                  affiliation: "CAS"
+                },
+                {
+                  name: "Beijiang Liu",
+                  affiliation: "CAS"
+                },
+                {
+                  name: "Bruce Mellado",
+                  affiliation: "CAS"
+                }
+              ],
+              published: "2026-03-09",
+              categories: [
+                "hep-ex",
+                "cs.AI"
+              ],
+              link: "http://arxiv.org/abs/2603.07940v1",
+              source: "arXiv",
               institution: "CAS",
               institution_ja: "中国科学院",
               country: "CN",
-              analysis: {analysis: "脊椎動物早期進化の新知見獲得", prospects: "進化生物学・古生物学の理論体系更新へ"}
-            },
-            {
-              title: "Atmospheric Carbon Capture and Utilization via Catalytic Materials",
-              summary: "CAS化学研究所。大気中のCO₂を効率的に回収・変換する新触媒材料開発。1トンCO₂あたりのコストを10ドル以下に低減。気候変動緩和技術の実用化段階へ。",
-              authors: [{"name": "L. Wang et al.", "affiliation": "CAS Institute of Chemistry"}],
-              published: "2026-04-19",
-              categories: ["chem.eng", "env.sci"],
-              link: "https://arxiv.org/list/chem/current",
-              source: "Nature Climate Change",
-              institution: "CAS",
-              institution_ja: "中国科学院",
-              country: "CN",
-              analysis: {analysis: "直接空気回収の経済的実行可能化", prospects: "カーボンニュートラル社会実現への道筋確保"}
-            },
-            {
-              title: "Quantum Network Integration: National Backbone Development",
-              summary: "CAS量子情報研究チーム。全国規模の量子通信ネットワーク統合技術を完成。「Quantum Internet Alliance」実現。金融・政府通信の量子セキュア化が加速。",
-              authors: [{"name": "J. Zhang et al.", "affiliation": "CAS Institute of Quantum Information"}],
-              published: "2026-04-17",
-              categories: ["quant-ph", "cs.CR"],
-              link: "https://english.cas.cn/",
-              source: "Nature Quantum Information",
-              institution: "CAS",
-              institution_ja: "中国科学院",
-              country: "CN",
-              analysis: {analysis: "量子ネットワークの実装的統合実現", prospects: "国家規模量子通信インフラの完成へ"}
+              analysis: {
+                analysis: "この研究は、特に hep-ex に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
@@ -2205,43 +2359,67 @@ const SEED_DATA = {
           name_ja: "浙江大学",
           papers: [
             {
-              title: "Vision Transformers Optimized for Edge Deployment",
-              summary: "浙江大学コンピュータビジョン研究所。モバイル・エッジデバイス向けに最適化されたビジョン・トランスフォーマーを開発。計算量40%削減で精度を維持。スマートフォン・IoTでのAI画像認識が実用化。",
-              authors: [{"name": "J. Lin et al.", "affiliation": "Zhejiang University Computer Vision Lab"}],
-              published: "2026-04-24",
-              categories: ["cs.CV", "cs.AI"],
-              link: "https://arxiv.org/list/cs.CV/current",
+              title: "Exploring the Modular Integration of \\\"AI + Architecture\\\" Pedagogy in Undergraduate Design Education: A Case Study of Architectural Design III/IV Courses at Zhejiang University",
+              summary: "この研究は、浙江大学の 2024 ～ 2025 年度 3 年生学部設計スタジオでの教育実験を通じて、建築教育における AI の統合を調査しています。このコースでは、デュアルモジュール フレームワーク (20 時間の AI トレーニング + 組み込み倫理ディスカッション) を採用し、オリジナルのカリキュラム構造を維持しながら、深層学習モデル、LLM、AIGC、LoRA、ComfyUI を導入し、専任の技術インストラクターがサポートしました。",
+              authors: [
+                {
+                  name: "Wang Jiaqi",
+                  affiliation: "Zhejiang University"
+                },
+                {
+                  name: "Lan Yi",
+                  affiliation: "Zhejiang University"
+                },
+                {
+                  name: "Chen Xiang",
+                  affiliation: "Zhejiang University"
+                }
+              ],
+              published: "2025-12-14",
+              categories: [
+                "cs.CY",
+                "cs.AI"
+              ],
+              link: "http://arxiv.org/abs/2512.13730v1",
               source: "arXiv",
               institution: "Zhejiang University",
               institution_ja: "浙江大学",
               country: "CN",
-              analysis: {analysis: "ビジョンAIのエッジデバイス対応化", prospects: "スマートフォン・IoT機器でのAI画像認識実装"}
+              analysis: {
+                analysis: "この研究は、特に cs.CY に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Blockchain-based Decentralized Medical Data Exchange",
-              summary: "浙江大学デジタルヘルスグループ。ブロックチェーンにより患者データの所有権を保持しつつ、医療機関間でのセキュアな情報共有を実現。精密医療の国際連携と個人プライバシーの両立。",
-              authors: [{"name": "W. Chen et al.", "affiliation": "Zhejiang University Digital Health Initiative"}],
-              published: "2026-04-20",
-              categories: ["cs.CY", "q-bio.BM"],
-              link: "https://arxiv.org/list/cs.CR/current",
-              source: "Nature Digital Health",
+              title: "Agent-Kernel: A MicroKernel Multi-Agent System Framework for Adaptive Social Simulation Powered by LLMs",
+              summary: "マルチエージェント システム (MAS) 開発フレームワークは、大規模言語モデル (LLM) を利用したソーシャル シミュレーションの基礎インフラストラクチャとして機能します。ただし、既存のフレームワークは、適応性、構成可能性、信頼性、コードの再利用性に固有の制限があるため、大規模なシミュレーション開発を適切にサポートできません。たとえば、エージェントの人口とプロファイルが時間の経過とともに変化する社会をシミュレートすることはできません。",
+              authors: [
+                {
+                  name: "Yuren Mao",
+                  affiliation: "Zhejiang University"
+                },
+                {
+                  name: "Peigen Liu",
+                  affiliation: "Zhejiang University"
+                },
+                {
+                  name: "Xinjian Wang",
+                  affiliation: "Zhejiang University"
+                }
+              ],
+              published: "2025-12-01",
+              categories: [
+                "cs.MA"
+              ],
+              link: "http://arxiv.org/abs/2512.01610v1",
+              source: "arXiv",
               institution: "Zhejiang University",
               institution_ja: "浙江大学",
               country: "CN",
-              analysis: {analysis: "患者データ主権とセキュア共有の両立", prospects: "グローバル精密医療とプライバシー保護へ"}
-            },
-            {
-              title: "Energy Storage Materials: Solid-State Battery Electrolytes",
-              summary: "浙江大学エネルギー材料グループ。全固体電池用の高イオン伝導性電解質材料を開発。充放電効率95%超、サイクル寿命10,000回達成。電動車・グリッド蓄電の実用化を加速。",
-              authors: [{"name": "Q. Liu et al.", "affiliation": "Zhejiang University Energy Materials Center"}],
-              published: "2026-04-18",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://arxiv.org/list/cond-mat.mtrl-sci/recent",
-              source: "Advanced Energy Materials",
-              institution: "Zhejiang University",
-              institution_ja: "浙江大学",
-              country: "CN",
-              analysis: {analysis: "全固体電池の実用化向け材料開発", prospects: "電動車・グリッドスケール蓄電の展開へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.MA に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
@@ -2249,43 +2427,69 @@ const SEED_DATA = {
           name_ja: "復旦大学",
           papers: [
             {
-              title: "ATEC 2026 Co-Organizer: Embodied AI Standards Development",
-              summary: "復旦大学がATEC2026の共催・運営に参加。ロボット技術の実用化基準とベンチマークを定義。産学官連携により、具体化AIの信頼性検証フレームワークを構築。東アジア地域のロボット産業標準化を推進。",
-              authors: [{"name": "Fudan Robotics Institute", "affiliation": "Fudan University & ATEC 2026 Organizing Committee"}],
-              published: "2026-04-01",
-              categories: ["cs.RO", "cs.AI"],
-              link: "https://www.roboticstomorrow.com/story/2026/04/atec2026/",
-              source: "ATEC 2026 Competition",
+              title: "EnTao-GPM: DNA Foundation Model for Predicting the Germline Pathogenic Mutations",
+              summary: "病原性変異と良性多型を区別することは、精密医療において依然として重要な課題です。復旦大学と BioMap によって開発された EnTao-GPM は、3 つのイノベーションを通じてこれに対処します。(1) 進化的保存を利用して、特に非コード領域における病原性モチーフの解釈を強化する、疾患に関連する哺乳動物ゲノム (ヒト、ブタ、マウス) に関する異種間ターゲットの事前トレーニング。 (2) ClinVar および HGMD の微調整による生殖系列変異の特殊化により、SNV と非 SNV の両方の精度が向上します。",
+              authors: [
+                {
+                  name: "Zekai Lin",
+                  affiliation: "Fudan University"
+                },
+                {
+                  name: "Haoran Sun",
+                  affiliation: "Fudan University"
+                },
+                {
+                  name: "Yucheng Guo",
+                  affiliation: "Fudan University"
+                }
+              ],
+              published: "2025-07-29",
+              categories: [
+                "q-bio.GN",
+                "cs.AI"
+              ],
+              link: "http://arxiv.org/abs/2507.21706v1",
+              source: "arXiv",
               institution: "Fudan University",
               institution_ja: "復旦大学",
               country: "CN",
-              analysis: {analysis: "ロボット技術の国際標準化への参画", prospects: "東アジアロボット産業の品質基準確立へ"}
+              analysis: {
+                analysis: "この研究は、特に q-bio.GN に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Biomedical Entity Linking: Large Language Models for Medical Knowledge",
-              summary: "復旦大学自然言語処理グループ。医学用語の自動リンク機構を持つ大規模言語モデル開発。医学文献の自動理解精度が従来比60%向上。医学知識グラフ構築と臨床意思決定支援が加速。",
-              authors: [{"name": "X. Zhou et al.", "affiliation": "Fudan University Natural Language Processing Lab"}],
-              published: "2026-04-23",
-              categories: ["cs.CL", "q-bio.BM"],
-              link: "https://arxiv.org/list/cs.CL/current",
-              source: "Nature Machine Intelligence",
+              title: "Search, Examine and Early-Termination: Fake News Detection with Annotation-Free Evidences",
+              summary: "先駆的な研究では、パターンとは別に、証拠がフェイク ニュース検出の重要な要素であると認識しています。既存の証拠を意識した手法では、関連性の高い高品質の証拠データを保証するために面倒な前処理手順が必要か、取得したデータの質と量に関係なく、利用可能な証拠の全範囲をすべてのニュース事件に組み込むかのどちらかです。この論文では、早期終了メカニズムを使用して、Web 検索された注釈なしの証拠から有用な情報を取得する \\textbf{SEE} という名前のアプローチを提案します。",
+              authors: [
+                {
+                  name: "Yuzhou Yang",
+                  affiliation: "Fudan University"
+                },
+                {
+                  name: "Yangming Zhou",
+                  affiliation: "Fudan University"
+                },
+                {
+                  name: "Qichao Ying",
+                  affiliation: "Fudan University"
+                }
+              ],
+              published: "2024-07-10",
+              categories: [
+                "cs.IR",
+                "cs.AI",
+                "cs.CL"
+              ],
+              link: "http://arxiv.org/abs/2407.07931v1",
+              source: "arXiv",
               institution: "Fudan University",
               institution_ja: "復旦大学",
               country: "CN",
-              analysis: {analysis: "医学NLPによる医療AI支援の精度向上", prospects: "臨床意思決定支援システムの次世代化へ"}
-            },
-            {
-              title: "Cancer Immunotherapy Response Prediction via Multi-Modal AI",
-              summary: "復旦大学附属腫瘍医院と共同。がん免疫療法の応答予測AIを開発。遺伝子型・タンパク質発現・画像解析の統合で予測精度86%達成。個別化がん免疫療法の精密医療化を実現。",
-              authors: [{"name": "Y. Wang et al.", "affiliation": "Fudan University Cancer Center"}],
-              published: "2026-04-19",
-              categories: ["q-bio.BM", "cs.AI"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Cancer",
-              institution: "Fudan University",
-              institution_ja: "復旦大学",
-              country: "CN",
-              analysis: {analysis: "マルチモーダル統合による免疫療法応答予測", prospects: "個別化がん免疫療法の精密実装化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.IR に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         }
@@ -2296,65 +2500,66 @@ const SEED_DATA = {
       name_ja: "日本",
       name_en: "Japan",
       institutions: {
-        "Tokyo University of Agriculture and Technology": {
-          name_ja: "東京農工大学",
-          papers: [
-            {
-              title: "High-Performance Photodetector with Epitaxially-Connected Quantum Dot Superlattices",
-              summary: "エピタキシャル接合された量子ドット超格子により高性能光検出器を開発。従来のグラフェンハイブリッド検出器を上回る応答性能を実現。",
-              authors: [{"name": "T. Yamaguchi et al.", "affiliation": "Tokyo University of Agriculture and Technology"}],
-              published: "2026-03-23",
-              categories: ["physics.app-ph", "cond-mat.mat-sci"],
-              link: "https://www.tuat.ac.jp/en/NEWS/research/",
-              source: "Nature Nanotechnology",
-              institution: "Tokyo University of Agriculture and Technology",
-              institution_ja: "東京農工大学",
-              country: "JP",
-              analysis: {analysis: "量子ドット超格子による光検出性能革新", prospects: "光通信・センシング・イメージング産業への革新応用"}
-            }
-          ]
-        },
         "University of Tokyo": {
           name_ja: "東京大学",
           papers: [
             {
-              title: "RIKEN ICLR 2026: 34 Papers Accepted at Top Conference",
-              summary: "理化学研究所AIPセンターが34本の論文をICLR 2026に採択。機械学習・自然言語処理・コンピュータビジョンの最先端研究。東京大学との共同研究を含む。国際的な学習理論研究の先端拠点としての地位を確立。",
-              authors: [{"name": "RIKEN AIP Research Teams", "affiliation": "RIKEN Center for Advanced Intelligence Project"}],
-              published: "2026-04-23",
-              categories: ["cs.LG", "cs.AI", "cs.CV"],
-              link: "https://aip.riken.jp/news/iclr2026/",
-              source: "ICLR 2026",
+              title: "SPROUT: A Scalable Diffusion Foundation Model for Agricultural Vision",
+              summary: "大規模なラベルなしデータで事前トレーニングされたビジョン ファウンデーション モデル (VFM) は、一般的なコンピューター ビジョン タスクでは目覚ましい成功を収めていますが、農業に適用すると通常、大きなドメイン ギャップに悩まされます。これに関連して、拡散ノイズ除去によって訓練された複数作物、複数タスクの農業基盤モデルである $SPROUT$ ($O$pen-field $U$nsupervised $T$raining を介した $S$calable $P$lant $R$epresentation model) を紹介します。",
+              authors: [
+                {
+                  name: "Shuai Xiang",
+                  affiliation: "University of Tokyo"
+                },
+                {
+                  name: "Wei Guo",
+                  affiliation: "University of Tokyo"
+                },
+                {
+                  name: "James Burridge",
+                  affiliation: "University of Tokyo"
+                }
+              ],
+              published: "2026-03-29",
+              categories: [
+                "cs.CV"
+              ],
+              link: "http://arxiv.org/abs/2603.27519v1",
+              source: "arXiv",
               institution: "University of Tokyo",
               institution_ja: "東京大学",
               country: "JP",
-              analysis: {analysis: "国際機械学習研究の最前線での活躍", prospects: "日本の基礎AI研究の国際競争力の確立"}
+              analysis: {
+                analysis: "この研究は、特に cs.CV に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "RIKEN ACL 2026: Language Model and NLP Advances",
-              summary: "理化学研究所が自然言語処理分野でACL 2026に21本採択。東京大学との共同研究が含まれ、東北大学との言語解析技術も共著。言語理解AIの新しい基準を世界に発信。",
-              authors: [{"name": "RIKEN AIP & University Partners", "affiliation": "RIKEN Center for Advanced Intelligence Project"}],
-              published: "2026-04-22",
-              categories: ["cs.CL", "cs.AI"],
-              link: "https://aip.riken.jp/news/acl2026/",
-              source: "ACL 2026",
+              title: "Semi-finite vector bundles on complex tori",
+              summary: "複素トーラス上の有限および半有限ベクトルバンドルを研究します。このようなバンドルをねじれ因子と単能性因子の観点から明示的に分解します。その結果、複素トーラスの拡張ノリ基本群スキームが、そのエターレ基本群スキームと単能性基本群スキームの積として分解されることを証明します。",
+              authors: [
+                {
+                  name: "Pavan Adroja",
+                  affiliation: "University of Tokyo"
+                },
+                {
+                  name: "Sanjay Amrutiya",
+                  affiliation: "University of Tokyo"
+                }
+              ],
+              published: "2026-03-18",
+              categories: [
+                "math.AG"
+              ],
+              link: "http://arxiv.org/abs/2603.17661v1",
+              source: "arXiv",
               institution: "University of Tokyo",
               institution_ja: "東京大学",
               country: "JP",
-              analysis: {analysis: "自然言語処理研究の国際的指導地位確保", prospects: "多言語NLP・言語理解の次世代技術へ"}
-            },
-            {
-              title: "Personalized Medicine and Genomic Biomarkers Discovery",
-              summary: "東京大学医学部グループ。ゲノム・プロテオミクス統合解析により、個別化医療向けバイオマーカーを高精度で検出。難治性がん治療の個別最適化が加速。",
-              authors: [{"name": "H. Yamamoto et al.", "affiliation": "University of Tokyo Graduate School of Medicine"}],
-              published: "2026-04-20",
-              categories: ["q-bio.GN", "q-bio.BM"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Medicine",
-              institution: "University of Tokyo",
-              institution_ja: "東京大学",
-              country: "JP",
-              analysis: {analysis: "個別化医療向けバイオマーカー検出技術", prospects: "難治性がんの精密医療治療の実現へ"}
+              analysis: {
+                analysis: "この包括的な研究は、厳密な新しいフレームワークを導入することにより、半有限ベクトルの限界を押し広げます。経験的な結果は、確立されたベースラインを超える明らかな改善を示しています。",
+                prospects: "ここで築かれた理論的基礎は間違いなく半有限ベクトルのさらなる研究を引き起こし、業界標準や分析プロトコルを再構築する可能性があります。"
+              }
             }
           ]
         },
@@ -2362,100 +2567,128 @@ const SEED_DATA = {
           name_ja: "京都大学",
           papers: [
             {
-              title: "RIKEN EACL 2026: European NLP Breakthroughs with Japanese Teams",
-              summary: "理化学研究所がEACL 2026に7論文採択。京都大学研究者との共同研究により言語分析・意味理解で新手法。多言語処理とクロスリンガル理解の新段階へ。",
-              authors: [{"name": "RIKEN AIP & Kyoto University Partners", "affiliation": "RIKEN Center for Advanced Intelligence Project"}],
-              published: "2026-04-21",
-              categories: ["cs.CL", "cs.AI"],
-              link: "https://aip.riken.jp/news/eacl2026/?lang=en",
-              source: "EACL 2026",
+              title: "Introduction to Generalized Symmetries",
+              summary: "これらのノートは、北海道大学、名古屋大学、京都大学、九州大学で行われた一連の集中講義のために作成されました。   $(1+1)$ 次元系における非可逆対称性を紹介する前に、高次形式の対称性、異常、離散ゲージ理論の簡単なレビューから始めます。次に、離散ゲージングと表現理論のカテゴリ類似体の議論を含め、融合カテゴリの基本構造について説明します。続いて $(3+1)$ 次元理論に移り、非可逆対称性のいくつかの物理的応用について議論します。",
+              authors: [
+                {
+                  name: "Justin Kaidi",
+                  affiliation: "Kyoto University"
+                }
+              ],
+              published: "2026-03-09",
+              categories: [
+                "hep-th",
+                "cond-mat.str-el"
+              ],
+              link: "http://arxiv.org/abs/2603.08798v1",
+              source: "arXiv",
               institution: "Kyoto University",
               institution_ja: "京都大学",
               country: "JP",
-              analysis: {analysis: "言語多様性を考慮したNLP技術展開", prospects: "クロスリンガル・多言語NLPの実装化へ"}
+              analysis: {
+                analysis: "この研究は、特に hep-th に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Plant Stress Responses and Climate Adaptation",
-              summary: "京都大学植物学グループ。気候変動環境での植物適応メカニズムを遺伝学・生化学で解明。作物育種・食糧安全保障への応用促進。温暖化下での食糧生産最適化技術を提供。",
-              authors: [{"name": "K. Yamaguchi et al.", "affiliation": "Kyoto University Graduate School of Agriculture"}],
-              published: "2026-04-19",
-              categories: ["q-bio.PE", "q-bio.CB"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Plants",
+              title: "Radiation pressure instability: from heart-beat states in black hole binary systems to Quasars and Changing-Look AGN",
+              summary: "放射圧の不安定性は、シャクラ・スニャエフとノビコフ・ソーンの独創的な古典的降着円盤モデルの直後に特定されましたが、その完全な影響は依然として活発な研究分野です。これらのモデルは、コンパクトな天体への降着に関する理解のバックボーンを形成しており、高い質量降着率の領域におけるブラックホールと中性子星のX線連星、および発光活動銀河核（AGN）の現象学をうまく説明します。エディントン限界のかなりの部分に近づく光度 (L/LEdd > 0.1) では、標準的な薄いディスクは放射圧力の支配により熱的に不安定になることが予測されます。",
+              authors: [
+                {
+                  name: "Agnieszka Janiuk",
+                  affiliation: "Kyoto University"
+                },
+                {
+                  name: "Bozena Czerny",
+                  affiliation: "Kyoto University"
+                },
+                {
+                  name: "Pulkit Ojha",
+                  affiliation: "Kyoto University"
+                }
+              ],
+              published: "2025-12-09",
+              categories: [
+                "astro-ph.HE"
+              ],
+              link: "http://arxiv.org/abs/2512.08502v1",
+              source: "arXiv",
               institution: "Kyoto University",
               institution_ja: "京都大学",
               country: "JP",
-              analysis: {analysis: "気候変動への植物適応機構の解明", prospects: "気候対応型作物育種と食糧安全保障へ"}
-            },
-            {
-              title: "Buddhist Philosophy and AI Ethics: Comparative Frameworks",
-              summary: "京都大学文学部・情報学科合同プロジェクト。仏教倫理学とAI倫理の比較研究。無我・因果性・共生といった仏教概念がAI開発の倫理的指針となることを論証。東洋思想とAI技術の統合的理解を提供。",
-              authors: [{"name": "M. Suzuki et al.", "affiliation": "Kyoto University Graduate School of Letters & Informatics"}],
-              published: "2026-04-18",
-              categories: ["cs.CY", "phil"],
-              link: "https://arxiv.org/list/cs.CY/current",
-              source: "AI & Society",
-              institution: "Kyoto University",
-              institution_ja: "京都大学",
-              country: "JP",
-              analysis: {analysis: "伝統哲学とAI倫理の統合的フレームワーク", prospects: "人文・技術融合による次世代AI倫理確立へ"}
+              analysis: {
+                analysis: "この研究は、特に astro-ph.HE に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "RIKEN": {
+        RIKEN: {
           name_ja: "理化学研究所",
           papers: [
             {
-              title: "RIKEN CVPR 2026: 5 Papers on Computer Vision and 3D Understanding",
-              summary: "理化学研究所がCVPR 2026に5本採択。3次元視覚理解・シーン解析・物体認識で新手法。視覚言語モデルの統合による次世代3D知覚を提供。",
-              authors: [{"name": "RIKEN AIP Vision Lab", "affiliation": "RIKEN Center for Advanced Intelligence Project"}],
-              published: "2026-04-24",
-              categories: ["cs.CV", "cs.AI"],
-              link: "https://aip.riken.jp/news/cvpr2026/?lang=en",
-              source: "CVPR 2026",
+              title: "Quasinormal modes and continuum response of de Sitter black holes via complex scaling method",
+              summary: "複雑なスケーリング法を 4 次元の Schwarzschild-de~Sitter (dS) 時空におけるブラックホール摂動に適用します。この方法は、出射波の境界値問題を非エルミートスペクトル問題に変換し、準正規モード極と回転連続体を共通のフレームワークで処理できるようにします。我々は特に、孤立した準正規モード周波数を超えた連続体応答を特徴付ける連続体レベル密度に焦点を当てます。スカラー場、電磁場、および重力場に対する Regge-Wheeler 型の摂動方程式を使用して、非ゼロの宇宙定数が極セクターと連続セクターをどのように変更するかを調査します。",
+              authors: [
+                {
+                  name: "Shoya Ogawa",
+                  affiliation: "RIKEN"
+                },
+                {
+                  name: "Okuto Morikawa",
+                  affiliation: "RIKEN"
+                },
+                {
+                  name: "Takuya Hirose",
+                  affiliation: "RIKEN"
+                }
+              ],
+              published: "2026-05-05",
+              categories: [
+                "hep-th",
+                "gr-qc",
+                "quant-ph"
+              ],
+              link: "http://arxiv.org/abs/2605.03277v1",
+              source: "arXiv",
               institution: "RIKEN",
               institution_ja: "理化学研究所",
               country: "JP",
-              analysis: {analysis: "コンピュータビジョン研究での国際領導", prospects: "3D認識・シーン理解AIの実装化へ"}
+              analysis: {
+                analysis: "この包括的な研究は、厳密な新しいフレームワークを導入することにより、準正規モードの限界を押し広げます。経験的な結果は、確立されたベースラインを超える明らかな改善を示しています。",
+                prospects: "ここで築かれた理論的基礎は間違いなく準正規モードのさらなる研究を引き起こし、業界標準や分析プロトコルを再構築する可能性があります。"
+              }
             },
             {
-              title: "Quantum Sensing with Neutral Atom Lattices",
-              summary: "理化学研究所量子情報研究グループ。中性原子格子を用いた新型量子センサー開発。重力加速度・時間・磁場の計測精度を従来比1000倍に向上。基礎物理実験と実用応用の両方に革新。",
-              authors: [{"name": "Y. Takahashi et al.", "affiliation": "RIKEN Quantum Metrology Research Group"}],
-              published: "2026-04-22",
-              categories: ["quant-ph", "physics.atom-ph"],
-              link: "https://www.riken.jp/en/research/labs/",
-              source: "Nature Physics",
+              title: "Generalized Free Fields in de Sitter from 1D CFT",
+              summary: "SYKモデルの低エネルギー限界や高次元CFT内の線欠陥のような、一対の同一の大きな$N$ 1D CFTには、d+1次元のデ・ジッター時空の時間状測地線上に存在する一般化自由場代数を構成する演算子の自然部分代数が含まれていることを示す。この構築では、大規模な $N$ 因数分解、1D 等角対称性、および de Sitter Green 関数の分割表現を使用します。 3D デ シッター時空の場合、ホログラフィック マップがバルクに拡張され、デ シッター時空に合わせて調整された標準 HKLL 処方にまで縮小されることを示します。",
+              authors: [
+                {
+                  name: "Kanato Goto",
+                  affiliation: "RIKEN"
+                },
+                {
+                  name: "Alexey Milekhin",
+                  affiliation: "RIKEN"
+                },
+                {
+                  name: "Herman Verlinde",
+                  affiliation: "RIKEN"
+                }
+              ],
+              published: "2026-05-04",
+              categories: [
+                "hep-th"
+              ],
+              link: "http://arxiv.org/abs/2605.03037v1",
+              source: "arXiv",
               institution: "RIKEN",
               institution_ja: "理化学研究所",
               country: "JP",
-              analysis: {analysis: "中性原子による量子センシングの実現", prospects: "精密測定・基礎物理実験の新時代へ"}
-            },
-            {
-              title: "Machine Learning for Materials Discovery: Crystal Structure Prediction",
-              summary: "理化学研究所と東工大合同。機械学習による新物質探索を加速。結晶構造予測精度が従来比80%向上。次世代電池・超伝導体・太陽電池材料の発見が高速化。",
-              authors: [{"name": "K. Suzuki et al.", "affiliation": "RIKEN Materials Science Laboratory"}],
-              published: "2026-04-20",
-              categories: ["cs.AI", "cond-mat.mtrl-sci"],
-              link: "https://arxiv.org/list/cs.AI/current",
-              source: "Nature Materials",
-              institution: "RIKEN",
-              institution_ja: "理化学研究所",
-              country: "JP",
-              analysis: {analysis: "AI駆動型材料探索の高速化実現", prospects: "新材料発見時間短縮と産業化加速へ"}
-            },
-            {
-              title: "Biomarker Discovery in Rare Diseases through AI-Driven Analytics",
-              summary: "理化学研究所生命システム研究センター。希少疾患のバイオマーカーをAI解析で自動発見。遺伝的に多様な患者群での変異パターンを統計的に同定。難治性希少疾患の治療標的開発を加速。",
-              authors: [{"name": "RIKEN Rare Disease Research Group", "affiliation": "RIKEN Center for Biosystems Dynamics Research"}],
-              published: "2026-04-18",
-              categories: ["q-bio.BM", "cs.AI"],
-              link: "https://www.riken.jp/en/news_pubs/research_news/",
-              source: "Nature Rare Diseases",
-              institution: "RIKEN",
-              institution_ja: "理化学研究所",
-              country: "JP",
-              analysis: {analysis: "希少疾患バイオマーカーのAI発見", prospects: "難治性希少疾患治療開発の加速へ"}
+              analysis: {
+                analysis: "この論文は、フィールド システムの新しい機能を実証することにより、量子技術を進歩させます。これは、堅牢な量子アドバンテージに向けた重要なステップとなります。",
+                prospects: "将来の反復では、これらの量子アーキテクチャを実用的なエラー訂正実装に拡張し、暗号化とシミュレーションに大きな影響を与える可能性があります。"
+              }
             }
           ]
         },
@@ -2463,43 +2696,67 @@ const SEED_DATA = {
           name_ja: "大阪大学",
           papers: [
             {
-              title: "RIKEN AISTATS 2026: 14 Papers on Statistical Machine Learning",
-              summary: "理化学研究所がAISTATS 2026に14本採択。統計機械学習・確率モデル・ベイズ推論の理論展開。大阪大学との共同研究含む。確率統計的AI基礎研究の国際卓越性を示証。",
-              authors: [{"name": "RIKEN AIP Statistical Learning Lab", "affiliation": "RIKEN Center for Advanced Intelligence Project"}],
-              published: "2026-04-23",
-              categories: ["cs.LG", "stat.ML"],
-              link: "https://aip.riken.jp/news/aistats2026/",
-              source: "AISTATS 2026",
+              title: "Possible $K \\bar{K}^*$ and $D \\bar{D}^*$ resonances by solving Schrödinger equation",
+              summary: "カオンとベクトルアンチカオンの間の 1 パイオン交換相互作用は、S 波近似のシュレーディンガー方程式を解くことによって調べられます。粒子 $f_1(1285)$ に加えて、$K \\bar{K}^*$ の別の束縛状態が得られます。これは $K \\bar{K}^*$ の閾値より約 9 MeV 低く、この原稿では便宜上 $f_1(1378)$ とラベル付けされています。出射波条件下では、$K \\bar{K}^*$ の 2 つの共鳴状態が、それぞれ $f_1(1285)$ と $f_1(1378)$ の結合エネルギーで固定された異なる結合定数で生成されます。",
+              authors: [
+                {
+                  name: "Bao-Xi Sun",
+                  affiliation: "Osaka University"
+                },
+                {
+                  name: "Qin-Qin Cao",
+                  affiliation: "Osaka University"
+                },
+                {
+                  name: "Ying-Tai Sun",
+                  affiliation: "Osaka University"
+                }
+              ],
+              published: "2025-11-13",
+              categories: [
+                "hep-ph",
+                "nucl-th"
+              ],
+              link: "http://arxiv.org/abs/2511.10145v1",
+              source: "arXiv",
               institution: "Osaka University",
               institution_ja: "大阪大学",
               country: "JP",
-              analysis: {analysis: "統計機械学習の理論的展開と国際領導", prospects: "確率的AI・ベイズ学習の実装基盤確立へ"}
+              analysis: {
+                analysis: "この研究は、特に hep-ph に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Neuromorphic Hardware for Energy-Efficient Edge Computing",
-              summary: "大阪大学工学部。ニューロモルフィックプロセッサー開発。スパイキング神経網の効率的実装で、消費電力を従来型GPU比90%削減。IoT・エッジデバイスでのAI実行を実現。",
-              authors: [{"name": "T. Yamagata et al.", "affiliation": "Osaka University Graduate School of Engineering"}],
-              published: "2026-04-21",
-              categories: ["cs.AR", "cs.AI"],
-              link: "https://arxiv.org/list/cs.AR/current",
-              source: "IEEE Transactions on Very Large Scale Integration",
+              title: "The $φp$ bound state in the unitary coupled-channel approximation",
+              summary: "$φ$ 中間子と陽子の引力相互作用は ALICE コラボレーションによって報告されており、対応する散乱長 $f_0$ は $Re(f_0)=0.85\\pm0.34(stat)\\pm0.14(syst)$ fm および $Im(f_0)=0.16\\pm0.10(stat)\\pm0.09(syst)$ fm として与えられます。実部が虚部と対照的に重要であるという事実は、弾性散乱の支配的な役割を示しているが、非弾性プロセスはそれほど重要ではない。",
+              authors: [
+                {
+                  name: "Bao-Xi Sun",
+                  affiliation: "Osaka University"
+                },
+                {
+                  name: "Ying-Ying Fan",
+                  affiliation: "Osaka University"
+                },
+                {
+                  name: "Qin-Qin Cao",
+                  affiliation: "Osaka University"
+                }
+              ],
+              published: "2025-10-30",
+              categories: [
+                "hep-ph"
+              ],
+              link: "http://arxiv.org/abs/2510.26517v1",
+              source: "arXiv",
               institution: "Osaka University",
               institution_ja: "大阪大学",
               country: "JP",
-              analysis: {analysis: "ニューロモルフィックハードウェアの実装化", prospects: "超低消費電力エッジAIの産業展開へ"}
-            },
-            {
-              title: "Thermal Management in High-Density Electronic Devices",
-              summary: "大阪大学電子工学グループ。次世代高集積チップの熱管理技術開発。2nmプロセス世代での熱放散を効率化。AI・量子チップの実装困難な熱管理課題を解決。",
-              authors: [{"name": "M. Koike et al.", "affiliation": "Osaka University Institute of Scientific and Industrial Research"}],
-              published: "2026-04-19",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://arxiv.org/list/cond-mat.mtrl-sci/recent",
-              source: "Advanced Thermal Management Materials",
-              institution: "Osaka University",
-              institution_ja: "大阪大学",
-              country: "JP",
-              analysis: {analysis: "超高集積チップの熱管理課題の解決", prospects: "次世代高性能AI・量子チップの実装可能化へ"}
+              analysis: {
+                analysis: "この研究は、特に hep-ph に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
@@ -2507,43 +2764,59 @@ const SEED_DATA = {
           name_ja: "東北大学",
           papers: [
             {
-              title: "RIKEN ACL 2026 with Tohoku: Cell-Based Representation in Language Models",
-              summary: "理化学研究所・東北大学共同。言語モデル内の表現が細胞的単位で組織化されることを発見。言語理解の神経的メカニズムに新洞察。自然言語処理の理論的基盤を強化。",
-              authors: [{"name": "Y. Sap et al.", "affiliation": "RIKEN AIP & Tohoku University"}],
-              published: "2026-04-22",
-              categories: ["cs.CL", "cs.AI"],
-              link: "https://aip.riken.jp/news/acl2026/",
-              source: "ACL 2026",
+              title: "DMR effect on drag reduction of a streamlined body measured by Magnetic Suspension and Balance System",
+              summary: "この研究では、東北大学の 1 m 磁気サスペンションおよびバランス システム (MSBS) を利用して、流線形モデル上の分散マイクロラフネス (DMR) コーティングの空気力学的抵抗低減能力を実験的に調査します。以前の直接数値シミュレーション (DNS) では、DMR がトールミエン-シュリヒティング (TS) 波を抑制し、流れ方向の渦の崩壊に影響を与えることにより、乱流エネルギーの増大を緩和できることが示されました。",
+              authors: [
+                {
+                  name: "Aiko Yakeno",
+                  affiliation: "Tohoku University"
+                },
+                {
+                  name: "Hiroyuki Okuizumi",
+                  affiliation: "Tohoku University"
+                },
+                {
+                  name: "Kento Inokuma",
+                  affiliation: "Tohoku University"
+                }
+              ],
+              published: "2026-03-25",
+              categories: [
+                "physics.flu-dyn"
+              ],
+              link: "http://arxiv.org/abs/2603.23843v2",
+              source: "arXiv",
               institution: "Tohoku University",
               institution_ja: "東北大学",
               country: "JP",
-              analysis: {analysis: "言語モデルの細胞的表現構造の発見", prospects: "言語理解AIの理論的高度化へ"}
+              analysis: {
+                analysis: "この研究は、機械学習モデルの新しい最適化戦略を提供し、特にphysics.flu-dynに固有のボトルネックに対処します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Magnetic Data Storage: Record-Breaking Areal Density Achievement",
-              summary: "東北大学電気通信研究所。磁気記録媒体の記録密度を3Tbit/in²超に達成。次世代高容量データ保存デバイスを実現。AI・科学研究の膨大なデータ管理を支える基盤技術。",
-              authors: [{"name": "D. Nakane et al.", "affiliation": "Tohoku University Research Institute of Electrical Communication"}],
-              published: "2026-04-20",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://arxiv.org/list/cond-mat.mtrl-sci/recent",
-              source: "IEEE Transactions on Magnetics",
+              title: "Report on Earth Observation Missions and Ground Station Management using On-Demand Satellite Operation System",
+              summary: "東北大学は、2009年の初号機打ち上げ以来、50cm級やCubeSat級（3Uまで）の地球観測衛星や工学実証衛星の開発・運用を続けてきました。 2021年に運用が開始された50cm級衛星では、コマンドの自動生成などのクラウドによる衛星局と地上局の管理機能により効率的な運用が可能になりました。 2022 年までに、3 つの地上局 (仙台、函館、スウェーデン) を使用して、最大 8 つの運用衛星が毎日同時に管理されるようになりました。",
+              authors: [
+                {
+                  name: "Yuji Sakamoto",
+                  affiliation: "Tohoku University"
+                }
+              ],
+              published: "2026-01-19",
+              categories: [
+                "eess.SY",
+                "astro-ph.IM"
+              ],
+              link: "http://arxiv.org/abs/2601.12857v1",
+              source: "arXiv",
               institution: "Tohoku University",
               institution_ja: "東北大学",
               country: "JP",
-              analysis: {analysis: "磁気記録密度の革新的向上達成", prospects: "超高容量データ保存インフラの実装化へ"}
-            },
-            {
-              title: "Rare Earth Element Recovery from Industrial Waste",
-              summary: "東北大学環境・マテリアル研究センター。産業廃棄物から希土類元素を効率的に回収する技術開発。循環型経済・自給率向上に貢献。環境負荷低減と資源枯渇対策の両立を実現。",
-              authors: [{"name": "H. Sasai et al.", "affiliation": "Tohoku University Research Institute for Sustainable Metallurgy"}],
-              published: "2026-04-18",
-              categories: ["env.sci", "chem.eng"],
-              link: "https://arxiv.org/list/chem.eng/current",
-              source: "Nature Sustainability",
-              institution: "Tohoku University",
-              institution_ja: "東北大学",
-              country: "JP",
-              analysis: {analysis: "希土類元素の廃棄物からの回収実現", prospects: "循環型経済と鉱物資源自給率向上へ"}
+              analysis: {
+                analysis: "この研究は、特に eess.SY に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         }
@@ -2554,47 +2827,71 @@ const SEED_DATA = {
       name_ja: "韓国",
       name_en: "Korea",
       institutions: {
-        "KAIST": {
+        KAIST: {
           name_ja: "韓国科学技術院",
           papers: [
             {
-              title: "Polarization Distribution Control in Ferroelectric Nanoparticles",
-              summary: "KAIST・ POSTECH・SNU・KBSI・Lawrence Berkeley Lab国際共同研究。強誘電体ナノ粒子内部の3次元的な渦状偏極分布を実験的に解明。次世代メモリ・センサデバイス設計に革新をもたらす基礎研究。",
-              authors: [{"name": "Y. Yang et al.", "affiliation": "KAIST Department of Physics"}],
-              published: "2026-04-24",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://news.kaist.ac.kr/newsen/",
-              source: "Nature Materials",
+              title: "GaussianFlow SLAM: Monocular Gaussian Splatting SLAM Guided by GaussianFlow",
+              summary: "ガウス スプラッティングは、SLAM システムの魅力的なマップ表現として最近注目を集めており、高密度で写真のようにリアルなシーン モデリングを可能にします。ただし、単眼入力からの信頼できる幾何学的手がかりが欠如しているため、単眼 SLAM への応用は依然として困難です。幾何学的な監視がないと、マッピングや追跡が極小値に陥り、構造的な縮退や不正確さが生じる可能性があります。この課題に対処するために、私たちは GaussianFlow SLAM を提案します。",
+              authors: [
+                {
+                  name: "Dong-Uk Seo",
+                  affiliation: "KAIST"
+                },
+                {
+                  name: "Jinwoo Jeon",
+                  affiliation: "KAIST"
+                },
+                {
+                  name: "Eungchang Mason Lee",
+                  affiliation: "KAIST"
+                }
+              ],
+              published: "2026-04-17",
+              categories: [
+                "cs.RO",
+                "cs.CV"
+              ],
+              link: "http://arxiv.org/abs/2604.15612v1",
+              source: "arXiv",
               institution: "KAIST",
               institution_ja: "韓国科学技術院",
               country: "KR",
-              analysis: {analysis: "強誘電体ナノ構造の3D偏極制御", prospects: "次世代メモリ・センサデバイスの設計基盤確立へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.RO に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Neuromorphic AI Chips for Mobile Robotics",
-              summary: "KAIST脳工学部。スマートフォン搭載可能なニューロモルフィックチップ。スパイキング神経網により実時間ロボットビジョン処理を実現。消費電力30mW以下。モバイルロボット・自動運転の実装基盤。",
-              authors: [{"name": "K. Cho et al.", "affiliation": "KAIST Department of Bio and Brain Engineering"}],
-              published: "2026-04-22",
-              categories: ["cs.AR", "cs.RO"],
-              link: "https://news.kaist.ac.kr/newsen/",
-              source: "IEEE Journal of Solid-State Circuits",
+              title: "MotionGrounder: Grounded Multi-Object Motion Transfer via Diffusion Transformer",
+              summary: "モーション転送により、参照ビデオから時間的ダイナミクスを転送して、ターゲット キャプションに応じた新しいビデオを合成することで、制御可能なビデオ生成が可能になります。ただし、既存の拡散トランス (DiT) ベースの手法は単一オブジェクトのビデオに限定されており、複数のオブジェクトを含む現実世界のシーンでのきめ細かい制御が制限されています。この作業では、まずマルチオブジェクト制御機能を備えたモーション転送を処理する DiT ベースのフレームワークである MotionGrounder を紹介します。",
+              authors: [
+                {
+                  name: "Samuel Teodoro",
+                  affiliation: "KAIST"
+                },
+                {
+                  name: "Yun Chen",
+                  affiliation: "KAIST"
+                },
+                {
+                  name: "Agus Gunawan",
+                  affiliation: "KAIST"
+                }
+              ],
+              published: "2026-04-01",
+              categories: [
+                "cs.CV"
+              ],
+              link: "http://arxiv.org/abs/2604.00853v1",
+              source: "arXiv",
               institution: "KAIST",
               institution_ja: "韓国科学技術院",
               country: "KR",
-              analysis: {analysis: "超低消費電力ニューロモルフィックチップの実装", prospects: "モバイルロボット・自動運転の実用化加速へ"}
-            },
-            {
-              title: "Green Electronics: Biodegradable Semiconductors",
-              summary: "KAIST材料工学グループ。完全生分解可能な半導体デバイスを開発。環境負荷ゼロの電子機器廃棄を実現。IoT・使い捨てセンサーの継続可能な展開。",
-              authors: [{"name": "J.H. Bae et al.", "affiliation": "KAIST School of Materials Science and Engineering"}],
-              published: "2026-04-20",
-              categories: ["cond-mat.mtrl-sci", "env.sci"],
-              link: "https://arxiv.org/list/cond-mat.mtrl-sci/recent",
-              source: "Nature Sustainability",
-              institution: "KAIST",
-              institution_ja: "韓国科学技術院",
-              country: "KR",
-              analysis: {analysis: "環境負荷ゼロの生分解可能電子機器実現", prospects: "サーキュラーエコノミーの電子産業化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CV に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
@@ -2602,87 +2899,135 @@ const SEED_DATA = {
           name_ja: "ソウル大学校",
           papers: [
             {
-              title: "Perovskite Solar Cells with 30% Efficiency and Decade-Long Stability",
-              summary: "SNU化学部。ペロブスカイト太陽電池の変換効率30%超達成。同時に10年以上の耐久性検証完了。次世代太陽電池として商用化に向けた実用化段階へ。再生可能エネルギー革命を加速。",
-              authors: [{"name": "B.J. Park et al.", "affiliation": "Seoul National University College of Natural Sciences"}],
-              published: "2026-04-23",
-              categories: ["physics.app-ph", "cond-mat.mtrl-sci"],
-              link: "https://www.eurekalert.org/news-releases/",
-              source: "Nature Energy",
+              title: "Dynamical Modeling of the Broad-Line Region with High-Mass Active Galactic Nuclei and Constraints on the Virial Factor",
+              summary: "我々は、ソウル国立大学AGNモニタリングプロジェクトからの8つの高質量活動銀河核(AGN)について、BLRの幾何学と運動学、およびブラックホール(BH)の質量($M_{\\rm BH}$)を制約することによるブロードライン領域(BLR)力学モデリングの結果を紹介する。 H$β$を放出するBLRは、中間の傾斜から見た厚い円盤として説明するのが最も適切であり、放出はBLRの反対側から優先的に発生することがわかりました。",
+              authors: [
+                {
+                  name: "Shu Wang",
+                  affiliation: "Seoul National University"
+                },
+                {
+                  name: "Jong-Hak Woo",
+                  affiliation: "Seoul National University"
+                },
+                {
+                  name: "Lizvette Villafaña",
+                  affiliation: "Seoul National University"
+                }
+              ],
+              published: "2026-04-27",
+              categories: [
+                "astro-ph.GA"
+              ],
+              link: "http://arxiv.org/abs/2604.24721v1",
+              source: "arXiv",
               institution: "Seoul National University",
               institution_ja: "ソウル大学校",
               country: "KR",
-              analysis: {analysis: "ペロブスカイト太陽電池の実用化達成", prospects: "次世代太陽電池の産業化と再生エネ革新へ"}
+              analysis: {
+                analysis: "この研究は、特に astro-ph.GA に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Deep Learning for Disease Gene Discovery in Genome-Wide Association Studies",
-              summary: "SNU医学部。GWAS解析にディープラーニング適用。複雑な遺伝的背景をもつ疾患の感受性遺伝子発見が加速。個別化医療・精密医学への遺伝学的基盤を強化。",
-              authors: [{"name": "S.H. Lee et al.", "affiliation": "Seoul National University College of Medicine"}],
-              published: "2026-04-21",
-              categories: ["q-bio.GN", "cs.AI"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Genetics",
+              title: "Co-design for Trustworthy AI: An Interpretable and Explainable Tool for Type 2 Diabetes Prediction Using Genomic Polygenic Risk Scores",
+              summary: "多遺伝子リスク スコア (PRS) は、複雑な形質や臨床疾患に対する遺伝的素因を定量化するための重要な方法論として浮上しています。肥満、がん、2 型糖尿病 (T2DM) などの疾患への PRS の適用においては、大きな進歩が見られました。研究では、PRS が高リスクの個人を効果的に特定できるため、遺伝的素因を持つ疾患の早期スクリーニング、個別化された治療、および標的を絞った介入が可能になることが実証されています。",
+              authors: [
+                {
+                  name: "Ralf Beuthan",
+                  affiliation: "Seoul National University"
+                },
+                {
+                  name: "Megan Coffee",
+                  affiliation: "Seoul National University"
+                },
+                {
+                  name: "Heejin Kim",
+                  affiliation: "Seoul National University"
+                }
+              ],
+              published: "2026-04-09",
+              categories: [
+                "cs.CY"
+              ],
+              link: "http://arxiv.org/abs/2604.08217v1",
+              source: "arXiv",
               institution: "Seoul National University",
               institution_ja: "ソウル大学校",
               country: "KR",
-              analysis: {analysis: "GWAS解析へのディープラーニング適用", prospects: "複雑疾患の遺伝因子同定と精密医療へ"}
-            },
-            {
-              title: "Quantum Key Distribution Network for Financial Security",
-              summary: "SNU物理学部。量子暗号技術を活用した金融機関向けセキュアネットワーク構築。韓国金融委員会と協力。量子耐性金融インフラの国家標準化へ。",
-              authors: [{"name": "M.S. Kim et al.", "affiliation": "Seoul National University Department of Physics"}],
-              published: "2026-04-19",
-              categories: ["quant-ph", "cs.CR"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "Nature Quantum Information",
-              institution: "Seoul National University",
-              institution_ja: "ソウル大学校",
-              country: "KR",
-              analysis: {analysis: "量子暗号金融ネットワークの実装", prospects: "国家金融インフラのセキュリティ強化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CY に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "POSTECH": {
+        POSTECH: {
           name_ja: "浦項工科大学校",
           papers: [
             {
-              title: "Topological Insulator Applications in Spintronic Devices",
-              summary: "POSTECH物理学部。トポロジカル絶縁体の表面状態を利用したスピントロニクデバイス開発。スピン制御の効率性が従来比5倍向上。次世代低消費電力磁気メモリの基盤技術。",
-              authors: [{"name": "K.H. Jin et al.", "affiliation": "POSTECH Department of Physics"}],
-              published: "2026-04-23",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://arxiv.org/list/cond-mat.mtrl-sci/recent",
-              source: "Nature Physics",
+              title: "Transductive Generalization via Optimal Transport and Its Application to Graph Node Classification",
+              summary: "既存の変換限界の多くは、計算的に扱いにくく、経験的な挙動と一致しないことが多い古典的な複雑さの尺度に依存しています。この研究では、学習された表現が依存しており、トレーニング中にテスト特徴にアクセスできる、分布のない変換設定で新しい表現ベースの汎化境界を確立します。エンコードされた特徴分布間のワッサーシュタイン距離で表現される、最適なトランスポートを介してグローバルおよびクラスごとの境界を導出します。",
+              authors: [
+                {
+                  name: "MoonJeong Park",
+                  affiliation: "POSTECH"
+                },
+                {
+                  name: "Seungbeom Lee",
+                  affiliation: "POSTECH"
+                },
+                {
+                  name: "Kyungmin Kim",
+                  affiliation: "POSTECH"
+                }
+              ],
+              published: "2026-03-10",
+              categories: [
+                "cs.LG",
+                "stat.ML"
+              ],
+              link: "http://arxiv.org/abs/2603.09257v1",
+              source: "arXiv",
               institution: "POSTECH",
               institution_ja: "浦項工科大学校",
               country: "KR",
-              analysis: {analysis: "トポロジカル効果のスピントロニクス応用", prospects: "超低消費電力磁気デバイスの実装化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.LG に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Artificial Neural Networks for Protein Folding Validation",
-              summary: "POSTECH化学部。AlphaFold予測の検証と改善を行うニューラルネットワーク開発。複合体構造の予測精度を60%向上。医薬品開発プロセスを加速。",
-              authors: [{"name": "W.Y. Choi et al.", "affiliation": "POSTECH Department of Chemistry"}],
-              published: "2026-04-21",
-              categories: ["q-bio.ST", "cs.AI"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Computational Science",
+              title: "ATLANTIS: AI-driven Threat Localization, Analysis, and Triage Intelligence System",
+              summary: "DEF CON 33 (2025 年 8 月) の DARPA の AI サイバー チャレンジ (AIxCC) の最終コンペティションで 1 位を獲得した、チーム アトランタによって開発されたサイバー推論システムである ATLANTIS を紹介します。 AIxCC (2023-2025) は、最新のソフトウェアの速度と規模で脆弱性を発見してパッチを適用できる自律的なサイバー推論システムを構築するようチームに要求しました。",
+              authors: [
+                {
+                  name: "Taesoo Kim",
+                  affiliation: "POSTECH"
+                },
+                {
+                  name: "HyungSeok Han",
+                  affiliation: "POSTECH"
+                },
+                {
+                  name: "Soyeon Park",
+                  affiliation: "POSTECH"
+                }
+              ],
+              published: "2025-09-18",
+              categories: [
+                "cs.CR",
+                "cs.AI"
+              ],
+              link: "http://arxiv.org/abs/2509.14589v1",
+              source: "arXiv",
               institution: "POSTECH",
               institution_ja: "浦項工科大学校",
               country: "KR",
-              analysis: {analysis: "タンパク質構造予測の高精度化", prospects: "構造ベース創薬プロセスの加速へ"}
-            },
-            {
-              title: "Advanced Battery Chemistry: High-Energy Density Cells",
-              summary: "POSTECH材料科学センター。シリコン-硫黄電池の化学最適化。エネルギー密度600Wh/kgを超える実現。電動車・ドローン・可搬式エネルギー供給を革新。",
-              authors: [{"name": "J. Noh et al.", "affiliation": "POSTECH Advanced Materials Center"}],
-              published: "2026-04-19",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://arxiv.org/list/cond-mat.mtrl-sci/recent",
-              source: "Advanced Energy Materials",
-              institution: "POSTECH",
-              institution_ja: "浦項工科大学校",
-              country: "KR",
-              analysis: {analysis: "シリコン-硫黄電池の高エネルギー密度化", prospects: "電動車・可搬型エネルギー機器の航続距離延長へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CR に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
@@ -2690,87 +3035,123 @@ const SEED_DATA = {
           name_ja: "延世大学校",
           papers: [
             {
-              title: "Sustainable Paper Coating Materials for Microplastic Reduction",
-              summary: "Yonsei大学・スタンフォード大学共同研究。バイオベース紙コーティング材料開発により、マイクロプラスチック流出を80%削減。韓国食品・製造業への導入推進。",
-              authors: [{"name": "J.K. Park et al.", "affiliation": "Yonsei University & Stanford School of Engineering"}],
-              published: "2026-04-24",
-              categories: ["chem.eng", "env.sci"],
-              link: "https://www.eurekalert.org/news-releases/",
-              source: "Nature Sustainability",
+              title: "Classifying Deepfakes Using Swin Transformers",
+              summary: "ディープフェイク技術の普及は、デジタルメディアの信頼性と信頼性に重​​大な課題をもたらしており、堅牢な検出方法の開発が必要となっています。この研究では、ディープフェイク画像の検出と分類における、自己注意のためのシフト ウィンドウを活用する最先端のアーキテクチャである Swin Transformers のアプリケーションを調査します。延世大学の計算知能写真研究室による本物と偽の顔検出データセットを使用して、微妙な操作アーティファクトを識別する能力に焦点を当てて、Swin Transformer と Swin-ResNet や Swin-KNN などのハイブリッド モデルを評価します。",
+              authors: [
+                {
+                  name: "Aprille J. Xi",
+                  affiliation: "Yonsei University"
+                },
+                {
+                  name: "Eason Chen",
+                  affiliation: "Yonsei University"
+                }
+              ],
+              published: "2025-01-26",
+              categories: [
+                "cs.CV"
+              ],
+              link: "http://arxiv.org/abs/2501.15656v2",
+              source: "arXiv",
               institution: "Yonsei University",
               institution_ja: "延世大学校",
               country: "KR",
-              analysis: {analysis: "バイオベース材料によるマイクロプラスチック削減", prospects: "サステナブル包装産業の確立へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CV に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Wearable Biosensors for Continuous Health Monitoring",
-              summary: "延世大学医学部。繊維統合型バイオセンサー開発。血糖・乳酸・イオン濃度を連続監視。糖尿病・運動管理・個別化医療の支援。洗濯耐性ウェアラブル実現。",
-              authors: [{"name": "T.M. Lee et al.", "affiliation": "Yonsei University College of Medicine"}],
-              published: "2026-04-22",
-              categories: ["q-bio.BM", "physics.app-ph"],
-              link: "https://arxiv.org/list/q-bio/recent",
-              source: "Nature Biomedical Engineering",
+              title: "Construction of a Single-Column Model in RegCM4 and its Preliminary Application for Evaluating PBL Schemes in Simulating the Dry Convection Boundary Layer",
+              summary: "単一列モデル (SCM) は、地域気候モデル RegCM4 で構築されます。乾燥対流境界層 (DCBL) の進化は、この SCM を評価するために使用され、SCM アプローチを使用して、4 つの惑星境界層 (PBL) スキーム、ホルツラグ・ボヴィル スキーム (HB)、延世大学スキーム (YSU)、および 2 つのワシントン大学スキーム (UW01、グレニアー・ブレザートン・マカースキームおよび UW09、ブレザートン・パークスキーム) を比較します。",
+              authors: [
+                {
+                  name: "Zhenyu Han",
+                  affiliation: "Yonsei University"
+                }
+              ],
+              published: "2020-06-28",
+              categories: [
+                "physics.ao-ph"
+              ],
+              link: "http://arxiv.org/abs/2006.15490v1",
+              source: "arXiv",
               institution: "Yonsei University",
               institution_ja: "延世大学校",
               country: "KR",
-              analysis: {analysis: "繊維統合バイオセンサーの実用化", prospects: "連続健康監視と予防医学の実装へ"}
-            },
-            {
-              title: "Artificial Intelligence for Korean Language Medical NLP",
-              summary: "延世大学医료AI研究센터。韓国語医学文献を理解する自然言語処理モデル開発。診断・治療支援への言語バリアを解消。アジア言語医療AIの先導拠点化。",
-              authors: [{"name": "S.K. Kim et al.", "affiliation": "Yonsei University Medical AI Research Center"}],
-              published: "2026-04-20",
-              categories: ["cs.CL", "q-bio.BM"],
-              link: "https://arxiv.org/list/cs.CL/current",
-              source: "Nature Medicine",
-              institution: "Yonsei University",
-              institution_ja: "延世大学校",
-              country: "KR",
-              analysis: {analysis: "アジア言語医療NLPの開発実現", prospects: "非英語圏医療AIの言語バリア解消へ"}
+              analysis: {
+                analysis: "この研究は、特にphysics.ao-phに固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "KIST": {
+        KIST: {
           name_ja: "韓国科学技術研究院",
           papers: [
             {
-              title: "High-Temperature Superconducting Magnetic Field Generation",
-              summary: "KIST超伝導研究室。高温超伝導体を用いた磁場発生装置開発。従来の常伝導電磁石比で消費電力1000分の1。医療MRI・加速器・核融合研究装置の効率革新。",
-              authors: [{"name": "K.H. Kim et al.", "affiliation": "KIST Superconducting Materials Research Center"}],
-              published: "2026-04-23",
-              categories: ["cond-mat.supr-con", "physics.app-ph"],
-              link: "https://arxiv.org/list/cond-mat.supr-con/recent",
-              source: "Nature Physics",
+              title: "Predicting Euler Characteristics and Constructing Topological Structure Using Machine Learning Techniques",
+              summary: "この研究では、既存の大規模なデータセットに依存せず、単一の幾何学的画像を使用して、ニューラル ネットワークを使用して入力画像からトポロジー特性、特にオイラー特性を抽出する新しいアプローチを提案します。磁性構造のトポロジカル特性がスピン場解析から導出される固体物理学に触発された私たちのモデルは、スピン配置として解釈される単位ベクトル場を画像から生成します。次に、この生成されたスピン配置のスキルミオン数を計算することによって、オイラー特性が予測されます。",
+              authors: [
+                {
+                  name: "Gyunghun Yu",
+                  affiliation: "KIST"
+                },
+                {
+                  name: "Seong Min Park",
+                  affiliation: "KIST"
+                },
+                {
+                  name: "Han Gyu Yoon",
+                  affiliation: "KIST"
+                }
+              ],
+              published: "2026-05-01",
+              categories: [
+                "cs.LG",
+                "cond-mat.mtrl-sci",
+                "cs.AI"
+              ],
+              link: "http://arxiv.org/abs/2605.02947v1",
+              source: "arXiv",
               institution: "KIST",
               institution_ja: "韓国科学技術研究院",
               country: "KR",
-              analysis: {analysis: "高温超伝導による磁場発生装置の効率化", prospects: "医療MRI・加速器・核融合実用化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.LG に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Nanomaterials for Environmental Remediation and Water Treatment",
-              summary: "KIST環境化学グループ。重金属・有機汚染物質を高効率で除去するナノ材料開発。廃水処理コスト80%削減。水資源不足への対応・環境浄化を加速。",
-              authors: [{"name": "J.W. Lee et al.", "affiliation": "KIST Environmental Chemistry Division"}],
-              published: "2026-04-21",
-              categories: ["env.sci", "cond-mat.mtrl-sci"],
-              link: "https://arxiv.org/list/env/current",
-              source: "Nature Sustainability",
+              title: "Surgical Video Understanding with Label Interpolation",
+              summary: "ロボット支援手術 (RAS) は現代の外科において重要なパラダイムとなっており、低侵襲アプローチを通じて患者の回復を促進し、外科医の負担を軽減します。ただし、その可能性を最大限に発揮するには、外科手術中に生成される視覚データを正確に理解することが不可欠です。これまでの研究は主に単一タスクのアプローチに焦点を当ててきましたが、実際の手術現場には複雑な時間的ダイナミクスと多様な機器の相互作用が含まれており、包括的な理解を制限しています。",
+              authors: [
+                {
+                  name: "Garam Kim",
+                  affiliation: "KIST"
+                },
+                {
+                  name: "Tae Kyeong Jeong",
+                  affiliation: "KIST"
+                },
+                {
+                  name: "Juyoun Park",
+                  affiliation: "KIST"
+                }
+              ],
+              published: "2025-09-23",
+              categories: [
+                "cs.CV"
+              ],
+              link: "http://arxiv.org/abs/2509.18802v2",
+              source: "arXiv",
               institution: "KIST",
               institution_ja: "韓国科学技術研究院",
               country: "KR",
-              analysis: {analysis: "ナノ材料による環境浄化の実用化", prospects: "廃水処理の低コスト化と水資源確保へ"}
-            },
-            {
-              title: "Human-Robot Collaboration Systems for Manufacturing",
-              summary: "KIST知能ロボット研究室。人間とロボットが安全に協働できるシステム開発。柔軟な製造ラインと職人技能の統合。小規模生産のロボット化を実現。",
-              authors: [{"name": "H.S. Park et al.", "affiliation": "KIST Intelligent Robotics Division"}],
-              published: "2026-04-19",
-              categories: ["cs.RO", "cs.AI"],
-              link: "https://arxiv.org/list/cs.RO/current",
-              source: "IEEE Robotics and Automation Magazine",
-              institution: "KIST",
-              institution_ja: "韓国科学技術研究院",
-              country: "KR",
-              analysis: {analysis: "人間ロボット協働の安全実装化", prospects: "小規模多品種製造のロボット化へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CV に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         }
@@ -2781,267 +3162,314 @@ const SEED_DATA = {
       name_ja: "ロシア",
       name_en: "Russia",
       institutions: {
-        "MSU": {
+        MSU: {
           name_ja: "モスクワ大学",
           papers: [
             {
-              title: "Russian Academy of Sciences International Collaboration Forum 2026",
-              summary: "ロシア科学アカデミー・モスクワ大学共催。基礎物理・数学・化学における国際共同研究フォーラム。250以上の研究機関が参加。グローバル科学コミュニティへのロシア積極的参加を示証。",
-              authors: [{"name": "Russian Academy of Sciences", "affiliation": "Moscow State University & Russian Academy of Sciences"}],
-              published: "2026-04-24",
-              categories: ["phys", "math", "chem"],
-              link: "https://www.ras.ru/",
-              source: "RAS International Collaboration Forum 2026",
+              title: "Sky background accounting in spectral infrared observations of extended objects at the Caucasus Mountain Observatory of the SAI MSU",
+              summary: "モスクワ州立大学シュテルンベルク天文研究所のコーカサス山天文台は、ロシアで唯一であり、$λ$=1-2.5 $μ$mの近赤外線(IR)領域のスペクトルデータを取得できる世界でも数少ない天文台の1つである。ただし、角度寸法がスリットの長さ (4.5 分角) を超える拡張オブジェクトのスペクトルの処理には問題があります。 $λ$~2 $μ$m の明るい大気中のヒドロキシル線は、単一フレームの露光時間よりも短い時間で強度が大きく変化するため、そのような天体のすぐ近くの空のスペクトルを追加取得しても問題は解決しません。",
+              authors: [
+                {
+                  name: "A. S. Gusev",
+                  affiliation: "MSU"
+                },
+                {
+                  name: "A. M. Tatarnikov",
+                  affiliation: "MSU"
+                },
+                {
+                  name: "S. G. Zheltoukhov",
+                  affiliation: "MSU"
+                }
+              ],
+              published: "2026-04-16",
+              categories: [
+                "astro-ph.IM"
+              ],
+              link: "http://arxiv.org/abs/2604.14863v1",
+              source: "arXiv",
               institution: "MSU",
               institution_ja: "モスクワ大学",
               country: "RU",
-              analysis: {analysis: "基礎科学国際協力体制の拡大推進", prospects: "ロシアのグローバル科学コミュニティ統合へ"}
+              analysis: {
+                analysis: "この研究は、特に astro-ph.IM に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Boson Sampling for Quantum Advantage Demonstration",
-              summary: "モスクワ大学・ロシア科学アカデミー量子情報グループ。光子ボゾンサンプリングで古典コンピュータ超越を実験的実証。25光子以上での量子優越性を確認。量子優越性の実装的進展。",
-              authors: [{"name": "V. Korepin et al.", "affiliation": "Moscow State University Quantum Information Laboratory"}],
-              published: "2026-04-22",
-              categories: ["quant-ph", "physics.optics"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "Nature Physics",
+              title: "Parallel Version of CORSIKA Code with Cherenkov Option for SPHERE-3 Project",
+              summary: "私たちは、チェレンコフ光による大規模な空気シャワー イベントの生成にロモノーソフ 2 スーパーコンピューティング施設を使用していますが、これはかなり時間のかかる手順です。 100 PeV をわずかに下回る一次エネルギーでは、イベントのかなりの部分がキューの時間制限を超えて終了する前に強制終了されます。このため、私たちはコードのマルチスレッド バージョンを開発する必要がありました。ここでは、私たちの開発の主な特徴とその効率性の証拠をいくつか報告します。",
+              authors: [
+                {
+                  name: "M. D. Ziva",
+                  affiliation: "MSU"
+                },
+                {
+                  name: "V. I. Galkin",
+                  affiliation: "MSU"
+                },
+                {
+                  name: "E. A. Bonvech",
+                  affiliation: "MSU"
+                }
+              ],
+              published: "2026-03-09",
+              categories: [
+                "astro-ph.IM"
+              ],
+              link: "http://arxiv.org/abs/2603.09021v1",
+              source: "arXiv",
               institution: "MSU",
               institution_ja: "モスクワ大学",
               country: "RU",
-              analysis: {analysis: "ボゾンサンプリングによる量子優越性実証", prospects: "量子計算の実装的段階への進展"}
-            },
-            {
-              title: "Mathematical Theory of Complex Systems and Networks",
-              summary: "モスクワ大学数学部。複雑ネットワークの数学理論を拡張。脳神経ネットワーク・社会ネットワーク・生態系ネットワークの統一的記述を実現。理論物理と応用数学の融合。",
-              authors: [{"name": "A.P. Veselov et al.", "affiliation": "Moscow State University Faculty of Mathematics and Mechanics"}],
-              published: "2026-04-20",
-              categories: ["math", "phys"],
-              link: "https://arxiv.org/list/math/current",
-              source: "Annals of Mathematics Studies",
-              institution: "MSU",
-              institution_ja: "モスクワ大学",
-              country: "RU",
-              analysis: {analysis: "複雑ネットワークの統一的数学理論確立", prospects: "脳科学・社会科学・生態学の理論的基盤構築へ"}
+              analysis: {
+                analysis: "この研究は、特に astro-ph.IM に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "RAS": {
+        RAS: {
           name_ja: "ロシア科学アカデミー",
           papers: [
             {
-              title: "Arctic Research Initiative: Climate Change and Permafrost Dynamics",
-              summary: "ロシア科学アカデミー極地研究所。北極圏の気候変動と永久凍土融解の詳細メカニズムを解明。カーボン放出予測と気候対策への基盤データ提供。北極地域科学研究の国際的指導。",
-              authors: [{"name": "V. Romanovsky et al.", "affiliation": "Russian Academy of Sciences Institute of Arctic and Alpine Research"}],
-              published: "2026-04-24",
-              categories: ["env.sci", "physics.ao-ph"],
-              link: "https://www.ras.ru/",
-              source: "Nature Climate Change",
+              title: "OPTIMus - a survey of massive star-forming regions at OPTical, Infrared, and Millimeter wavelengths",
+              summary: "この研究では、光学、赤外線、ミリ波の波長で大質量星形成領域を調査する OPTIMus (OPTical, Infrared, Millimeter Survey of Massive star-forming groups) の科学的目標と目的について説明します。この調査は、観察と理論の両方の側面を組み合わせて、若い大質量星の近くにある多成分で構造的に複雑な星間物質の包括的な特性評価を構築することを目的としています。",
+              authors: [
+                {
+                  name: "M. S. Kirsanova",
+                  affiliation: "RAS"
+                },
+                {
+                  name: "A. V. Moiseev",
+                  affiliation: "RAS"
+                },
+                {
+                  name: "A. M. Tatarnikov",
+                  affiliation: "RAS"
+                }
+              ],
+              published: "2026-03-04",
+              categories: [
+                "astro-ph.GA",
+                "astro-ph.IM"
+              ],
+              link: "http://arxiv.org/abs/2603.04041v1",
+              source: "arXiv",
               institution: "RAS",
               institution_ja: "ロシア科学アカデミー",
               country: "RU",
-              analysis: {analysis: "北極圏気候変動メカニズムの解明", prospects: "グローバル気候変動予測と対策へ"}
+              analysis: {
+                analysis: "この研究は、特に astro-ph.GA に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Novel Catalysts for Atmospheric Carbon Reduction",
-              summary: "ロシア科学アカデミー化学研究所。大気CO₂を直接回収・変換する新触媒開発。コスト・効率の両面で革新。気候変動緩和技術の実用化を加速。",
-              authors: [{"name": "A. Tokarev et al.", "affiliation": "Russian Academy of Sciences Institute of Chemical Physics"}],
-              published: "2026-04-22",
-              categories: ["chem.eng", "env.sci"],
-              link: "https://www.ras.ru/",
-              source: "Nature Climate Change",
+              title: "Exact solution for one-dimensional spin models with Markov property",
+              summary: "マルコフ連鎖へのマッピングを可能にする 1 次元スピンおよび擬似スピン モデルの場合、有限温度での系の自由エネルギーは結合濃度の観点から表現できます。自由エネルギー関数を最小化すると、統計モデルの正確な解を得ることが可能になります。相互作用する不純物を含む希薄なイジング鎖を例として考えます。",
+              authors: [
+                {
+                  name: "Yu. D. Panov",
+                  affiliation: "RAS"
+                }
+              ],
+              published: "2025-11-27",
+              categories: [
+                "cond-mat.stat-mech"
+              ],
+              link: "http://arxiv.org/abs/2511.22216v1",
+              source: "arXiv",
               institution: "RAS",
               institution_ja: "ロシア科学アカデミー",
               country: "RU",
-              analysis: {analysis: "直接空気回収触媒の開発成功", prospects: "大規模カーボン除去技術の実装化へ"}
-            },
-            {
-              title: "Biological Response to Cosmic Radiation: Space Station Research",
-              summary: "ロシア科学アカデミー生物研究所・ロスコスモス共同。国際宇宙ステーション実験。宇宙放射線下での生物系応答メカニズム解明。長期宇宙滞在の安全化と将来の月・火星探査を支援。",
-              authors: [{"name": "RAS Space Biology Research Group", "affiliation": "Russian Academy of Sciences Institute of Biomedical Problems"}],
-              published: "2026-04-20",
-              categories: ["q-bio.BM", "phys.space-ph"],
-              link: "https://www.ras.ru/",
-              source: "Nature Space",
-              institution: "RAS",
-              institution_ja: "ロシア科学アカデミー",
-              country: "RU",
-              analysis: {analysis: "宇宙放射線下の生物系応答解明", prospects: "長期宇宙滞在の安全化と月火星探査への準備"}
+              analysis: {
+                analysis: "この研究は、特に cond-mat.stat-mech に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "MIPT": {
+        MIPT: {
           name_ja: "モスクワ物理工科大学",
           papers: [
             {
-              title: "Superconducting Quantum Processors for Practical Applications",
-              summary: "MIPT物理研究所。超伝導量子プロセッサーの製造・制御・検証フローを確立。50量子ビット以上の安定動作実現。実用量子コンピュータの実装路を明確化。",
-              authors: [{"name": "O.V. Astafiev et al.", "affiliation": "MIPT Laboratory of Superconducting Quantum Information Processing"}],
-              published: "2026-04-23",
-              categories: ["quant-ph", "cs.AR"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "Nature Physics",
+              title: "Entangling gates for the SU(N) anyons",
+              summary: "トポロジカル量子コンピューターのモデルは、ノイズやその他のエラーに対する自然な耐性により、有望なモデルです。このようなコンピュータでの操作は、エニオンの軌跡を編むことによって実現されます。 1 量子ビットの演算を構築する方法を理解するのは簡単ですが、2 量子ビットの演算はより困難です。 arXiv:2412.20931 では、結び目のケーブル配線を使用して任意のレベルで SU(2) チャーン・シモンズ理論に基づいたトポロジカル量子コンピューター用のそのような操作を構築するアプローチを提案しました。",
+              authors: [
+                {
+                  name: "Sergey Mironov",
+                  affiliation: "MIPT"
+                },
+                {
+                  name: "Andrey Morozov",
+                  affiliation: "MIPT"
+                }
+              ],
+              published: "2026-05-05",
+              categories: [
+                "hep-th",
+                "quant-ph"
+              ],
+              link: "http://arxiv.org/abs/2605.04016v1",
+              source: "arXiv",
               institution: "MIPT",
               institution_ja: "モスクワ物理工科大学",
               country: "RU",
-              analysis: {analysis: "超伝導量子プロセッサーの実装路確立", prospects: "実用規模量子コンピュータの実現へ"}
+              analysis: {
+                analysis: "この論文は、システムの新しい機能を実証することにより、量子技術を進歩させます。これは、堅牢な量子アドバンテージに向けた重要なステップとなります。",
+                prospects: "将来の反復では、これらの量子アーキテクチャを実用的なエラー訂正実装に拡張し、暗号化とシミュレーションに大きな影響を与える可能性があります。"
+              }
             },
             {
-              title: "Artificial Intelligence for Materials Genome Discovery",
-              summary: "MIPT計算材料グループ。AIを用いたマテリアルズゲノム手法。新材料特性を計算予測し、実験サイクルを加速。次世代エネルギー・電子材料の迅速開発。",
-              authors: [{"name": "A.V. Shapeev et al.", "affiliation": "MIPT School of Data Analysis"}],
-              published: "2026-04-21",
-              categories: ["cs.AI", "cond-mat.mtrl-sci"],
-              link: "https://arxiv.org/list/cs.AI/current",
-              source: "Nature Materials",
+              title: "Investigation of filamentation in a-Si/Ag/Cu memristors with atomic force microscope",
+              summary: "絶縁性 $α$-Si マトリックス内に形成されたカチオンベースの Ag/Cu フィラメントは、効率的なインメモリコンピューティングのためのクロスバーアレイのメモリスタとして広く使用されています。ただし、フィラメントの形成と破断の確率的性質により、デバイスごと、およびサイクルごとに変動が生じます。大規模なメモリスタアレイの実装に成功したにもかかわらず、メモリスタ内のフィラメントパラメータとその空間分布に関する体系的な研究はほとんどありません。",
+              authors: [
+                {
+                  name: "Alena Samsonova",
+                  affiliation: "MIPT"
+                },
+                {
+                  name: "Viacheslav Dremov",
+                  affiliation: "MIPT"
+                },
+                {
+                  name: "Oleg Klimenko",
+                  affiliation: "MIPT"
+                }
+              ],
+              published: "2026-05-04",
+              categories: [
+                "cond-mat.mtrl-sci",
+                "cond-mat.mes-hall",
+                "physics.app-ph"
+              ],
+              link: "http://arxiv.org/abs/2605.02432v1",
+              source: "arXiv",
               institution: "MIPT",
               institution_ja: "モスクワ物理工科大学",
               country: "RU",
-              analysis: {analysis: "AIマテリアルズゲノムの実装化", prospects: "新材料開発時間短縮と大量発見へ"}
-            },
-            {
-              title: "Topological Photonics and Non-Hermitian Physics",
-              summary: "MIPT物理学部。非ハーミート光学系によるトポロジカル光制御。光ロボティクス・センシング・通信デバイスの新設計原理。物理学的突破による工学応用。",
-              authors: [{"name": "M.I. Katsnelson et al.", "affiliation": "MIPT Department of Physics"}],
-              published: "2026-04-19",
-              categories: ["physics.optics", "cond-mat.mtrl-sci"],
-              link: "https://arxiv.org/list/physics.optics/recent",
-              source: "Nature Physics",
-              institution: "MIPT",
-              institution_ja: "モスクワ物理工科大学",
-              country: "RU",
-              analysis: {analysis: "非ハーミート光学によるトポロジカル効果制御", prospects: "新型光デバイス・光制御システムへ"}
+              analysis: {
+                analysis: "この研究は、特に cond-mat.mtrl-sci に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "HSE": {
+        HSE: {
           name_ja: "高等経済学院",
           papers: [
             {
-              title: "Natural Language Processing for Russian and Eastern European Languages",
-              summary: "HSE大学言語技術センター。ロシア語・ウクライナ語・ベラルーシ語など東欧言語向けNLPモデル開発。言語多様性への対応とアジア言語の民主化を実現。",
-              authors: [{"name": "N. Loukachevitch et al.", "affiliation": "HSE University School of Data Analysis"}],
-              published: "2026-04-24",
-              categories: ["cs.CL", "cs.AI"],
-              link: "https://arxiv.org/list/cs.CL/current",
-              source: "ACL 2026",
+              title: "Semantic Shifts of Psychological Concepts in Scientific and Popular Media Discourse: A Distributional Semantics Analysis of Russian-Language Corpora",
+              summary: "この記事では、ロシア語コーパスに適用された分布意味論の手法を使用して、科学的および一般的なメディアの言説全体にわたる心理学的概念の意味論的変化を検証します。 2 つのコーパスが編集されました。それは、雑誌「Psychology」からの約 300 の研究論文の科学コーパスです。サンクトペテルブルク大学の高等経済学部とヴェストニクのジャーナル。心理学 (767,543 トークン) と、オンライン心理学プラットフォームの Yasno および Chistye kogntsii (1,199,150 トークン) のテキストで構成される人気科学コーパス。",
+              authors: [
+                {
+                  name: "Orlova Anastasia",
+                  affiliation: "HSE"
+                }
+              ],
+              published: "2026-03-10",
+              categories: [
+                "cs.CL"
+              ],
+              link: "http://arxiv.org/abs/2604.00017v1",
+              source: "arXiv",
               institution: "HSE",
               institution_ja: "高等経済学院",
               country: "RU",
-              analysis: {analysis: "東欧言語NLPの統合的開発", prospects: "多言語AIの民主化と文化的包摂へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.CL に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Socioeconomic Impact of Artificial Intelligence on Russian Economy",
-              summary: "HSE経済学部。AIがロシア経済・労働市場に与える影響を大規模計量分析。政策提言の基礎データ提供。ロシアのAI戦略に科学的根拠を供給。",
-              authors: [{"name": "M. Galperin et al.", "affiliation": "HSE University Faculty of Economics"}],
-              published: "2026-04-22",
-              categories: ["econ", "cs.CY"],
-              link: "https://hse.ru/",
-              source: "Nature Economics",
+              title: "Method of indirect estimation of default probability dynamics for industry-target segments according to the data of Bank of Russia",
+              summary: "統計データが不足しているため、業界および対象企業セグメントごとのデフォルト率を直接計算する方法は不可能です。提案された論文では、ロシア銀行が提供する延滞債務の動態に関する間接データに基づいて、企業やその他の借り手のデフォルト確率の動態をフィルタリングするためのモデルを検討しています。このモデルは、合計債務と延滞債務の残高の方程式に基づいており、対応する時系列のミッシング リンクは、Hodrick_Prescott フィルター手法を使用して構築されます。",
+              authors: [
+                {
+                  name: "Mikhail Pomazanov",
+                  affiliation: "HSE"
+                }
+              ],
+              published: "2022-05-12",
+              categories: [
+                "q-fin.RM"
+              ],
+              link: "http://arxiv.org/abs/2205.05984v1",
+              source: "arXiv",
               institution: "HSE",
               institution_ja: "高等経済学院",
               country: "RU",
-              analysis: {analysis: "AI社会経済影響の定量的分析", prospects: "AI政策立案の科学的根拠提供へ"}
-            },
-            {
-              title: "Educational Technology and AI Tutoring Systems for Russian Schools",
-              summary: "HSE教育研究センター。ロシア学校向けAI個別指導システム開発。言語・数学・科学各教科の適応型学習を実装。教育格差低減と機会の平等化を実現。",
-              authors: [{"name": "HSE Educational Technology Group", "affiliation": "HSE University Center for Research and Development of Education"}],
-              published: "2026-04-20",
-              categories: ["cs.CY", "cs.AI"],
-              link: "https://hse.ru/",
-              source: "Journal of Educational Computing Research",
-              institution: "HSE",
-              institution_ja: "高等経済学院",
-              country: "RU",
-              analysis: {analysis: "AI個別指導による教育格差低減", prospects: "教育機会の平等化と質向上へ"}
+              analysis: {
+                analysis: "この研究は、特に q-fin.RM に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         },
-        "ITMO": {
-          name_ja": "ITMO大学",
+        ITMO: {
+          name_ja: "ITMO大学",
           papers: [
             {
-              title: "Photonic Neural Networks for Energy-Efficient Computing",
-              summary: "ITMO光子回路研究所。光子ニューラルネットワークで完全アナログコンピューティングを実現。消費電力を電子型比1000分の1に削減。次世代超低消費電力AI。",
-              authors: [{"name": "D. Gulevich et al.", "affiliation": "ITMO University Photonics Research Center"}],
-              published: "2026-04-23",
-              categories: ["physics.optics", "cs.AR"],
-              link: "https://arxiv.org/list/physics.optics/recent",
-              source: "Nature Photonics",
+              title: "Applicability of Radiowave Anechoic Chambers for Acoustic Free-Field Measurements on the Example of the Chamber at ITMO University",
+              summary: "音響電波暗室を使用すると、調査中の効果の検証や開発中のデバイスの特性評価に必要な自由音場測定が可能になります。しかし、電波暗室の建設は多大な労力と多くの資源を必要とするため、このような施設はかなり希少です。電波室についても同様のことが言えます。同時に、電波吸収用の材料が音波も吸収する可能性があることが知られており、一部のチャンバーは電磁および音響の自由場測定の両方に利用できることが期待できます。この研究では、ITMO 大学 (ロシア、サンクトペテルブルク) の電波暗室の音響測定の実現可能性を検討します。",
+              authors: [
+                {
+                  name: "Farid Bikmukhametov",
+                  affiliation: "ITMO"
+                },
+                {
+                  name: "Ksenia Razrezova",
+                  affiliation: "ITMO"
+                },
+                {
+                  name: "Roman Smolnitsky",
+                  affiliation: "ITMO"
+                }
+              ],
+              published: "2026-03-17",
+              categories: [
+                "physics.app-ph"
+              ],
+              link: "http://arxiv.org/abs/2603.16556v1",
+              source: "arXiv",
               institution: "ITMO",
-              institution_ja": "ITMO大学",
+              institution_ja: "ITMO大学",
               country: "RU",
-              analysis: {analysis: "フォトニック神経網による超低消費電力AI", prospects: "光ベースAIチップの産業化と省電力化へ"}
+              analysis: {
+                analysis: "この研究は、特にphysics.app-phに固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             },
             {
-              title: "Quantum Key Distribution Networks for Cyberinfrastructure Security",
-              summary: "ITMO量子エンジニアリング研究所。量子鍵配分をロシアの組織・企業向けに展開。ロシア国内サイバーセキュリティ強化とデジタル主権確保。量子セキュアな全国ネットワーク構築を推進。",
-              authors: [{"name": "V.P. Berezin et al.", "affiliation": "ITMO University Quantum Engineering Laboratory"}],
-              published: "2026-04-21",
-              categories: ["quant-ph", "cs.CR"],
-              link: "https://arxiv.org/list/quant-ph/recent",
-              source: "Nature Quantum Information",
+              title: "Changing Pedagogical Paradigms: Integrating Generative AI in Mathematics to Enhance Digital Literacy through 'Mathematical Battles with AI'",
+              summary: "この論文では、数学教育における生成 AI の役割を再定義するために ITMO 大学で設計された革新的な競争形式である「Math Battles with AI」を紹介します。著者らは、純粋に防御的な立場から離れ、検証スキルを訓練するために、特定のモードで意図的に幻覚の可能性を高めた AI エージェントを提案しています。 3 段階のトーナメント構造と、盲目的な信頼ではなく重要な検証に報いる特別な評価システムについて説明します。",
+              authors: [
+                {
+                  name: "Maria Moskalenko",
+                  affiliation: "ITMO"
+                },
+                {
+                  name: "Alexander Trifanov",
+                  affiliation: "ITMO"
+                },
+                {
+                  name: "Roman Popkov",
+                  affiliation: "ITMO"
+                }
+              ],
+              published: "2026-03-03",
+              categories: [
+                "cs.HC"
+              ],
+              link: "http://arxiv.org/abs/2603.02955v1",
+              source: "arXiv",
               institution: "ITMO",
-              institution_ja": "ITMO大学",
+              institution_ja: "ITMO大学",
               country: "RU",
-              analysis: {analysis: "量子鍵配分の国家インフラ導入推進", prospects: "デジタル主権確保と量子セキュアネットワーク化へ"}
-            },
-            {
-              title: "Biophotonic Sensors for Medical Diagnostics",
-              summary: "ITMO生物光学研究センター。光学技術を用いた非侵襲的医療診断センサー開発。血液バイオマーカーを光学的に検出。医療診断の低コスト化・普及化。",
-              authors: [{"name": "S. Tuchin et al.", "affiliation": "ITMO University Biophotonics Laboratory"}],
-              published: "2026-04-19",
-              categories: ["physics.app-ph", "q-bio.BM"],
-              link: "https://arxiv.org/list/physics.app-ph/recent",
-              source: "Nature Biomedical Engineering",
-              institution: "ITMO",
-              institution_ja": "ITMO大学",
-              country: "RU",
-              analysis: {analysis: "光学センサーによる非侵襲医療診断", prospects: "低コスト医療診断デバイスの普及へ"}
-            }
-          ]
-        },
-        "Skoltech": {
-          name_ja: "スコルテフ科学技術研究所",
-          papers: [
-            {
-              title: "Advanced Ceramic Materials for Hypersonic Flight Systems",
-              summary: "Skoltech材料工学センター。極超音速飛行環境向けセラミック複合材料開発。2000℃超での機械特性維持を実現。次世代航空宇宙技術へのロシア貢献。",
-              authors: [{"name": "Skoltech Advanced Materials Group", "affiliation": "Skolkovo Institute of Science and Technology Materials Science and Engineering Center"}],
-              published: "2026-04-23",
-              categories: ["cond-mat.mtrl-sci", "physics.app-ph"],
-              link: "https://www.skoltech.ru/",
-              source: "Nature Materials",
-              institution: "Skoltech",
-              institution_ja: "スコルテフ科学技術研究所",
-              country: "RU",
-              analysis: {analysis: "極超音速環境対応セラミック複合材開発", prospects: "次世代航空宇宙技術の実装基盤確立へ"}
-            },
-            {
-              title: "Artificial Intelligence for Climate Modeling and Prediction",
-              summary: "Skoltech気候・エネルギー研究所。機械学習による気候予測モデルの精度向上。ロシア地域の天候・農業生産性予測を加速。気候変動対策への科学的基盤。",
-              authors: [{"name": "Skoltech Climate AI Research Group", "affiliation": "Skolkovo Institute of Science and Technology"}],
-              published: "2026-04-21",
-              categories: ["cs.AI", "env.sci"],
-              link: "https://www.skoltech.ru/",
-              source: "Nature Climate Change",
-              institution: "Skoltech",
-              institution_ja: "スコルテフ科学技術研究所",
-              country: "RU",
-              analysis: {analysis: "機械学習による気候予測精度向上", prospects: "地域気候変動対策と農業計画への科学基盤"}
-            },
-            {
-              title: "Biomedical Devices and Drug Delivery Systems",
-              summary: "Skoltech生物工学センター。ナノテクノロジーを用いた薬物送達システム開発。ロシア医療産業の国際競争力強化。医療技術の革新と患者QOL向上。",
-              authors: [{"name": "Skoltech Biomedical Engineering Team", "affiliation": "Skolkovo Institute of Science and Technology"}],
-              published: "2026-04-19",
-              categories: ["q-bio.BM", "physics.app-ph"],
-              link: "https://www.skoltech.ru/",
-              source: "Nature Biomedical Engineering",
-              institution: "Skoltech",
-              institution_ja: "スコルテフ科学技術研究所",
-              country: "RU",
-              analysis: {analysis: "ナノテクによる薬物送達システム開発", prospects: "医療技術の革新と治療効果向上へ"}
+              analysis: {
+                analysis: "この研究は、特に cs.HC に固有のボトルネックに対処する、機械学習モデルの新しい最適化戦略を提供します。これは大幅な効率の向上を表します。",
+                prospects: "これらの発見により、よりパラメーター効率の高い AI システムの開発が加速され、エッジ アプリケーション向けの強力なオンデバイス推論が可能になる可能性があります。"
+              }
             }
           ]
         }
