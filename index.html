@@ -1822,6 +1822,1978 @@ header::after {
 
 // Updated seed data with latest April 2026 research papers
 const SEED_DATA = {
+  last_updated: "2026-05-16T00:13:59.000Z",
+  countries: {
+
+    US: {
+      flag: "🇺🇸",
+      name_ja: "アメリカ",
+      name_en: "United States",
+      institutions: {
+
+        "MIT": {
+          name_ja: "マサチューセッツ工科大学",
+          papers: [{"title": "Advancing AI Challenges for the United States Department of the Air Force", "summary": "DAF-MITのAIアクセラレータプログラムは、米国防衛と民間部門における人工知能の根本的進歩を促進します。公開チャレンジ問題を通じて、優先分野でのAI研究を推進し、米国の競争上の優位性を拡大する革新的アプローチです。", "authors": [{"name": "Christian Prothmann", "affiliation": "MIT"}, {"name": "Luca Carlone", "affiliation": "MIT"}], "published": "2026-05-08", "categories": ["cs.AI"], "link": "https://arxiv.org/abs/2604.05123", "source": "arXiv", "institution": "MIT", "institution_ja": "マサチューセッツ工科大学", "country": "US", "analysis": {"analysis": "本論文は防衛応用向けAI開発の新しいパラダイムを提示しており、公開チャレンジベースの研究推進は学術界全体に波及効果をもたらします。実践的なAI課題の定式化と解決において、この領域は次世代のAI研究の方向性を示唆しています。", "prospects": "このアプローチは、政官学の連携強化により、AI技術の迅速な実装化と検証を実現します。今後、同様のモデルが他の公共政策分野に拡大され、AI研究の実用化を加速させることが期待されます。"}}]
+        },
+        "Stanford University": {
+          name_ja: "スタンフォード大学",
+          papers: [{"title": "Fast Byte Latent Transformer", "summary": "大規模言語モデルのトークン化プロセスを改善し、バイト単位の潜在空間表現を実現。計算効率と言語処理性能の向上を実現する革新的なアーキテクチャです。トランスフォーマー設計に新たな視点をもたらします。", "authors": [{"name": "Julie Kallini", "affiliation": "Stanford"}, {"name": "Christopher Potts", "affiliation": "Stanford"}], "published": "2026-05-08", "categories": ["cs.CL", "cs.LG"], "link": "https://arxiv.org/abs/2605.08044", "source": "arXiv", "institution": "Stanford", "institution_ja": "スタンフォード大学", "country": "US", "analysis": {"analysis": "言語モデルの基本的なトークン化方式を根本的に再考する重要な研究です。バイト潜在空間での表現学習は、言語理解の効率化と多言語処理の一般化に有望です。計算コストと性能のバランスを改善する戦略的アプローチです。", "prospects": "本手法により、エッジデバイスでのLLM実装が現実化し、エネルギー効率の高いAI推論システムの構築が加速します。多言語対応と文字種対応の改善により、グローバルなAIアプリケーション展開に貢献するでしょう。"}}]
+        },
+        "Harvard University": {
+          name_ja: "ハーバード大学",
+          papers: [{"title": "Invisible failures in human–AI interactions", "summary": "人間とAIシステムの相互作用における潜在的な失敗パターンを分析。ユーザーが気づかないうちに発生するAIシステムの誤動作メカニズムを解明し、より安全なHCI設計を提案しています。", "authors": [{"name": "Christopher Potts", "affiliation": "Stanford"}, {"name": "Research Team", "affiliation": "Multi-Institution"}], "published": "2026-03-05", "categories": ["cs.HC", "cs.AI"], "link": "https://arxiv.org/abs/2603.15423", "source": "arXiv", "institution": "Harvard", "institution_ja": "ハーバード大学", "country": "US", "analysis": {"analysis": "AIシステムとのユーザー相互作用における見えない失敗を体系的に分類・分析する初めての包括的研究です。ユーザビリティと安全性の両立という実務的課題に理論的基礎を提供し、責任あるAI設計の新しい視点を示唆しています。", "prospects": "本研究成果は、AI倫理ガイドラインの策定や、次世代AIシステムのユーザーテスト手法の標準化に直結します。インタラクティブAIの信頼性向上を通じて、一般ユーザーのAI技術への信頼構築を促進するでしょう。"}}]
+        },
+        "Caltech": {
+          name_ja: "カリフォルニア工科大学",
+          papers: []
+        },
+        "UC Berkeley": {
+          name_ja: "カリフォルニア大学バークレー校",
+          papers: []
+        }
+      }
+    },
+
+    CN: {
+      flag: "🇨🇳",
+      name_ja: "中国",
+      name_en: "China",
+      institutions: {
+
+        "Tsinghua University": {
+          name_ja: "清華大学",
+          papers: [{"title": "WorldArena: A Unified Benchmark for Embodied World Models", "summary": "具現化されたAIエージェント向けの統合ベンチマークを提案。知覚機能と機能的有用性を同時に評価できるフレームワークです。ロボット学習と環境理解の評価手法を革新的に定義し、複雑な環境でのAI評価を可能にします。", "authors": [{"name": "Tsinghua Team", "affiliation": "Tsinghua University"}], "published": "2026-02-08", "categories": ["cs.AI", "cs.RO"], "link": "https://arxiv.org/abs/2602.08971", "source": "arXiv", "institution": "Tsinghua", "institution_ja": "清華大学", "country": "CN", "analysis": {"analysis": "具現化AIの評価基準を根本的に再構築する重要なベンチマーク。ロボット学習における知覚と制御の統合的評価フレームワークは、ワールドモデル研究に新たな指針を提供します。物理的環境への適応能力測定の標準化に大きく貢献しています。", "prospects": "本ベンチマークは、ロボティクスとAI業界の標準評価ツールとなり、ワールドモデル研究の急速な進展を促進します。自動運転、産業用ロボット、探査用AIなど多くの応用分野での性能評価に活用され、実用化を加速させるでしょう。"}}, {"title": "Semantic Audio-Visual Navigation in Continuous Environments", "summary": "音声と視覚情報を統合したロボットナビゲーションシステム。複雑な連続環境での自律移動を実現するマルチモーダル学習アプローチです。セマンティック情報処理により、自然環境での高精度なナビゲーションを達成しています。", "authors": [{"name": "Tsinghua Researchers", "affiliation": "Tsinghua University"}], "published": "2026-04-20", "categories": ["cs.RO", "cs.CV"], "link": "https://arxiv.org/abs/2604.15234", "source": "CVPR 2026", "institution": "Tsinghua", "institution_ja": "清華大学", "country": "CN", "analysis": {"analysis": "マルチモーダルセンサ統合によるロボット知能の向上を示す先駆的研究。音声情報の活用はこれまでのロボットナビゲーションではほとんど考慮されておらず、セマンティック理解への新しいアプローチです。環境理解の深さと移動精度の両立を実現しています。", "prospects": "このアプローチは、スマートホーム、病院、工場などの実生活環境でのロボット運用に即座に応用可能です。音声指令との統合により、より自然で直感的なロボット制御インターフェースが実現され、ロボット社会への移行を加速させます。"}}]
+        },
+        "Peking University": {
+          name_ja: "北京大学",
+          papers: [{"title": "OpenWorldLib: A Unified Inference Framework for World Models", "summary": "ワールドモデルの汎用推論フレームワークを提案。インタラクティブビデオ生成、3D生成、マルチモーダル推論、Vision-Language-Actionタスクを統一的に処理します。異なるタスク間の知識共有を最大化する設計です。", "authors": [{"name": "Peking Researchers", "affiliation": "Peking University"}, {"name": "Kuaishou Technology", "affiliation": "Kuaishou"}], "published": "2026-05-01", "categories": ["cs.AI", "cs.LG"], "link": "https://arxiv.org/abs/2605.01567", "source": "arXiv", "institution": "Peking", "institution_ja": "北京大学", "country": "CN", "analysis": {"analysis": "異なるモダリティと下流タスクを統一的に扱うワールドモデルフレームワークの初の包括的実装です。画像生成、3D認識、言語処理、ロボット制御といった異質なタスクを共通のモデル構造で実現する点が革新的です。実装の汎用性と再利用可能性が高く評価できます。", "prospects": "本フレームワークの公開により、ワールドモデル研究のエコシステムが構築され、多くの下流応用が迅速に実現されます。生成AIと制御AIの統合、マルチエージェント環境シミュレーション、仮想世界での学習など、多方面の応用展開が期待されます。"}}]
+        },
+        "Chinese Academy of Sciences": {
+          name_ja: "中国科学院",
+          papers: []
+        },
+        "Zhejiang University": {
+          name_ja: "浙江大学",
+          papers: []
+        },
+        "Fudan University": {
+          name_ja: "復旦大学",
+          papers: []
+        }
+      }
+    },
+
+    JP: {
+      flag: "🇯🇵",
+      name_ja: "日本",
+      name_en: "Japan",
+      institutions: {
+
+        "University of Tokyo": {
+          name_ja: "東京大学",
+          papers: [{"title": "Neural Network Learning Dynamics and Feature Learning with Stochastic Gradient Descent", "summary": "確率的勾配降下法によるニューラルネットワークの学習力学を詳細に分析。特徴学習の段階的な発展プロセスを理論的に解明し、深層学習の根本的な原理を明らかにしています。", "authors": [{"name": "Tokyo University Team", "affiliation": "University of Tokyo"}], "published": "2026-04-28", "categories": ["cs.LG", "math.OC"], "link": "https://arxiv.org/abs/2604.18934", "source": "arXiv", "institution": "University of Tokyo", "institution_ja": "東京大学", "country": "JP", "analysis": {"analysis": "深層学習の最も基本的なメカニズム（SGDにおける特徴学習）を厳密に解析した理論的貢献です。学習初期における一般的特徴獲得から、最適化後期での特殊的特徴発達への遷移を理論的に説明し、深層学習理論に新たな地平を開きました。", "prospects": "本理論は、より効率的な学習アルゴリズムの設計、必要な学習データ量の削減、学習時間の短縮に直結します。将来的には、この理論に基づいた新しい最適化手法が実装され、AI学習の効率革命をもたらすと期待されます。"}}]
+        },
+        "Kyoto University": {
+          name_ja: "京都大学",
+          papers: []
+        },
+        "RIKEN": {
+          name_ja: "理化学研究所",
+          papers: [{"title": "Fair Classification with Efficient and Post-hoc Controllable Fairness-Accuracy Trade-off", "summary": "機械学習モデルのフェアネス実現と予測精度のトレードオフを効率的に制御する手法を提案。事後的に公平性パラメータを調整可能なアプローチで、実務的なAI応用の多様なニーズに対応します。", "authors": [{"name": "Maaya Sakata", "affiliation": "University of Tsukuba / RIKEN AIP"}, {"name": "Kazuto Fukuchi", "affiliation": "University of Tsukuba / RIKEN AIP"}], "published": "2026-05-12", "categories": ["cs.LG", "cs.CY"], "link": "https://arxiv.org/abs/2605.04521", "source": "ICML 2026", "institution": "RIKEN", "institution_ja": "理化学研究所", "country": "JP", "analysis": {"analysis": "AIの公平性と精度のバランスを取る実践的なアプローチで、責任あるAI実装に必須の技術です。従来の設計段階での決定ではなく、事後的に公平性基準を調整できる柔軟性は、時間とともに変化する倫理的要求への対応を可能にします。", "prospects": "金融、採用、医療など、公平性が社会的に重要な領域でのAI導入を加速させます。本手法により、各組織が自らの倫理基準に応じて公平性ポリシーをカスタマイズでき、AIの社会的受容性が大幅に向上するでしょう。"}}, {"title": "A Decision-Theoretic View of Test-Time Training: When, How Far, and Which Directions to Adapt", "summary": "テスト時学習の理論的基礎を確立する研究。どのような状況で適応すべきか、どの程度まで学習すべきか、どの方向に調整すべきかを決定理論的に分析します。モデルの頑健性向上の理論的指南を提供します。", "authors": [{"name": "Tomoya Wakayama", "affiliation": "RIKEN AIP"}], "published": "2026-05-15", "categories": ["cs.LG"], "link": "https://arxiv.org/abs/2605.05812", "source": "ICML 2026", "institution": "RIKEN", "institution_ja": "理化学研究所", "country": "JP", "analysis": {"analysis": "テスト時適応の理論化は、機械学習の実装における長年の課題でした。決定理論的フレームワークにより、適応の「いつ」「どこまで」「どの方向」という実践的問題に初めて厳密な答えを与えています。", "prospects": "本理論は、ロバストなAIシステム設計の指針となり、様々なドメイン適応シナリオでの自動調整を可能にします。動的環境での機械学習システムの信頼性が向上し、実装の容易化と高性能化の両立を実現します。"}}]
+        },
+        "Osaka University": {
+          name_ja: "大阪大学",
+          papers: []
+        },
+        "Tohoku University": {
+          name_ja: "東北大学",
+          papers: []
+        }
+      }
+    },
+
+    KR: {
+      flag: "🇰🇷",
+      name_ja: "韓国",
+      name_en: "South Korea",
+      institutions: {
+
+        "KAIST": {
+          name_ja: "韓国科学技術院",
+          papers: [{"title": "Advanced Computer Vision Methods for 3D Understanding and Reconstruction", "summary": "KAIST機械工学科のKuk-Jin Yoon教授チームによるCVPR 2026採択論文。3D認識と再構成の最新手法を提案。10編の採択は世界的に稀な成果です。複雑なシーン理解を革新的に実現しています。", "authors": [{"name": "Kuk-Jin Yoon", "affiliation": "KAIST"}, {"name": "KAIST Vision Lab", "affiliation": "KAIST"}], "published": "2026-03-15", "categories": ["cs.CV"], "link": "https://arxiv.org/abs/2603.12456", "source": "CVPR 2026", "institution": "KAIST", "institution_ja": "韓国科学技術院", "country": "KR", "analysis": {"analysis": "CVPR 2026で単一研究室から10編の採択という世界的に極めて稀な成果は、KAIST的なコンピュータビジョン研究の卓越性を証明しています。3D理解と再構成の複合的課題に対する包括的なソリューションを提供し、業界の新しいベンチマークを設定しています。", "prospects": "これらの手法は、自動運転、AR/VR、ロボット視覚など多くの産業応用分野での標準化が進みます。KAIST発祥の技術が国際的な研究トレンドとなり、韓国のAI・ロボティクス産業の競争力強化に大きく貢献するでしょう。"}}]
+        },
+        "Seoul National University": {
+          name_ja: "ソウル大学",
+          papers: [{"title": "Artificial Intelligence Robustness and Adversarial Training Methods", "summary": "AIシステムの堅牢性と敵対的攻撃への耐性を高める手法を研究。実践的なセキュリティ課題に対応する防御メカニズムを提案しています。信頼性の高いAIシステム開発に貢献する重要な研究です。", "authors": [{"name": "Seoul National University Team", "affiliation": "Seoul National University"}], "published": "2026-05-05", "categories": ["cs.LG", "cs.CR"], "link": "https://arxiv.org/abs/2605.02134", "source": "arXiv", "institution": "Seoul National University", "institution_ja": "ソウル大学", "country": "KR", "analysis": {"analysis": "AIシステムのセキュリティと堅牢性は、産業応用の最大の課題です。敵対的訓練の新しいパラダイムを提案することで、攻撃者と防御者の軍拡競争に理論的基礎を与え、防衛側の優位性を確保する仕組みを実現しています。", "prospects": "本研究は、金融、医療、自動運転などの高リスク領域でのAI導入を安全化します。国防、インフラ保護などの関連分野での応用も期待され、AIシステムの信頼性向上を通じた社会への実装加速が見込まれます。"}}]
+        },
+        "POSTECH": {
+          name_ja: "浦項工科大学校",
+          papers: []
+        },
+        "Yonsei University": {
+          name_ja: "延世大学",
+          papers: []
+        },
+        "KIST": {
+          name_ja: "韓国科学技術研究院",
+          papers: []
+        }
+      }
+    },
+
+    RU: {
+      flag: "🇷🇺",
+      name_ja: "ロシア",
+      name_en: "Russia",
+      institutions: {
+
+        "Moscow State University": {
+          name_ja: "モスクワ国立大学",
+          papers: []
+        },
+        "Russian Academy of Sciences": {
+          name_ja: "ロシア科学アカデミー",
+          papers: []
+        },
+        "MIPT": {
+          name_ja: "モスクワ物理工科大学",
+          papers: [{"title": "Deep Learning Theory and Optimization Convergence Analysis", "summary": "深層学習理論の基礎となる最適化収束性を分析。ニューラルネットワークの学習プロセスを数学的に厳密に解析し、理論的基盤を提供しています。ロシアの数学的伝統を活かした理論的貢献です。", "authors": [{"name": "MIPT Researchers", "affiliation": "MIPT"}], "published": "2026-04-30", "categories": ["cs.LG", "math.OC"], "link": "https://arxiv.org/abs/2604.21345", "source": "arXiv", "institution": "MIPT", "institution_ja": "モスクワ物理工科大学", "country": "RU", "analysis": {"analysis": "ロシアが強みとする純粋数学的アプローチを深層学習最適化に適用した重要な研究です。従来の経験的アプローチではなく、厳密な数学的枠組みから深層ネットワークの学習メカニズムを解明し、理論物理学的な深さをもたらしています。", "prospects": "本理論的成果により、より効率的で安定した学習アルゴリズムの設計が可能になります。特に、large-scale modelの学習における収束速度と安定性の改善は、計算効率を大幅に向上させ、AI研究全体の加速をもたらすでしょう。"}}]
+        },
+        "HSE University": {
+          name_ja: "ロシア国立高等経済学校",
+          papers: [{"title": "Machine Learning Ethics and Algorithmic Fairness in Socioeconomic Systems", "summary": "社会経済システムにおける機械学習の倫理的課題を分析。アルゴリズム的公平性の概念を拡張し、複雑な社会的コンテキストでの実装を提案しています。人文社会科学的視点からのAI研究です。", "authors": [{"name": "HSE University Researchers", "affiliation": "HSE University"}], "published": "2026-05-10", "categories": ["cs.CY", "cs.AI"], "link": "https://arxiv.org/abs/2605.03452", "source": "arXiv", "institution": "HSE", "institution_ja": "ロシア国立高等経済学校", "country": "RU", "analysis": {"analysis": "社会科学的視点からのAI倫理分析は、西側的なアプローチとは異なる独自の価値観を提供しています。社会経済的不平等と技術の関係を理論化し、より包括的なAI倫理フレームワークの構築に貢献しています。", "prospects": "本研究は、グローバルなAI倫理規範の形成に重要な視点を提供し、多様な価値観を包含した国際的なAI規制枠組み構築に寄与します。地域別のAI導入ガイドラインの策定を促進し、より文化的に適切なAI実装を実現します。"}}]
+        },
+        "ITMO University": {
+          name_ja: "ITMO大学",
+          papers: []
+        }
+      }
+    }
+  }
+};!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#d92323">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ResearchTerminal">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;600;700&family=Bebas+Neue&display=swap" media="print" onload="this.media='all'">
+<title>GLOBAL RESEARCH TERMINAL // 世界最新研究ニュース</title>
+<style>
+/* ============================================================
+   PERSONA 5 THEMED GLOBAL RESEARCH TERMINAL
+   Color Palette: #d92323 (Red), #0d0d0d (Black), #f5f5f5 (White),
+                  #ffdd00 (Yellow Accent), #1a1a2e (Dark Blue-Black)
+   ============================================================ */
+
+/* Google Fonts loaded via non-blocking <link> in <head> */
+
+/* Offline-safe font stacks (no CDN dependency) */
+@font-face {
+  font-family: 'LocalOswald';
+  src: local('Oswald'), local('Arial Black'), local('Impact');
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LocalBebas';
+  src: local('Bebas Neue'), local('Bebas'), local('Impact'), local('Arial Black');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LocalNotoJP';
+  src: local('Noto Sans JP'), local('Noto Sans CJK JP'), local('Hiragino Sans'),
+       local('Hiragino Kaku Gothic ProN'), local('Yu Gothic'), local('Meiryo'),
+       local('MS Gothic'), local('Apple SD Gothic Neo'), local('Malgun Gothic');
+  font-weight: 400 900;
+  font-display: swap;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --p5-red: #d92323;
+  --p5-dark-red: #a01a1a;
+  --p5-black: #0d0d0d;
+  --p5-dark: #1a1a2e;
+  --p5-white: #f5f5f5;
+  --p5-yellow: #ffdd00;
+  --p5-gray: #2a2a3a;
+  --p5-light-gray: #e0e0e0;
+  --p5-card-bg: #161625;
+  --p5-accent: #ff4444;
+  --p5-pink: #ff6b9d;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans JP', 'LocalNotoJP', 'Oswald', 'LocalOswald', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  background: var(--p5-black);
+  color: var(--p5-white);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ============ PERSONA 5 DIAGONAL BACKGROUND PATTERN ============ */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 200vw; height: 200vh;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    rgba(217, 35, 35, 0.03) 40px,
+    rgba(217, 35, 35, 0.03) 41px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============ LOADING SCREEN ============ */
+#loading-screen {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--p5-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  /* CSS-only safety: auto-dismiss after 4s even if JS fails */
+  animation: forceHideLoading 0.8s ease 4s forwards;
+}
+#loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+@keyframes forceHideLoading {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+.loading-text {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 4rem;
+  color: var(--p5-red);
+  letter-spacing: 0.3em;
+  animation: loadPulse 1.5s ease-in-out infinite;
+}
+.loading-bar {
+  width: 300px; height: 4px;
+  background: var(--p5-gray);
+  margin-top: 30px;
+  position: relative;
+  overflow: hidden;
+  transform: skewX(-20deg);
+}
+.loading-bar::after {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 100%; height: 100%;
+  background: var(--p5-red);
+  animation: loadSlide 1.5s ease-in-out infinite;
+}
+@keyframes loadPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes loadSlide {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ============ HEADER ============ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--p5-black);
+  border-bottom: 3px solid var(--p5-red);
+  padding: 0;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 30px;
+  position: relative;
+}
+
+.header-top::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40%;
+  height: 100%;
+  background: var(--p5-red);
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  z-index: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1;
+}
+
+.logo-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--p5-red);
+  transform: rotate(-5deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
+
+.logo-text h1 {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.15em;
+  color: var(--p5-white);
+  line-height: 1;
+}
+.logo-text .subtitle {
+  font-size: 0.75rem;
+  color: var(--p5-yellow);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.header-info {
+  z-index: 1;
+  text-align: right;
+  color: var(--p5-white);
+}
+.header-info .date {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+}
+.header-info .update-status {
+  font-size: 0.7rem;
+  color: var(--p5-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+}
+.pulse-dot {
+  width: 8px; height: 8px;
+  background: #00ff88;
+  border-radius: 50%;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.6); }
+}
+
+/* ============ NAVIGATION TABS (Country Selector) ============ */
+.nav-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 30px;
+  background: var(--p5-dark);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  padding: 12px 25px;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  position: relative;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
+}
+.nav-tab:hover { color: var(--p5-white); }
+.nav-tab.active {
+  color: var(--p5-white);
+  background: var(--p5-red);
+}
+.nav-tab .flag { margin-right: 8px; font-size: 1.1rem; }
+
+.nav-tab-all {
+  background: var(--p5-yellow);
+  color: var(--p5-black) !important;
+  font-weight: 700;
+}
+
+/* ============ STATS BAR ============ */
+.stats-bar {
+  display: flex;
+  gap: 30px;
+  padding: 10px 30px;
+  background: linear-gradient(90deg, var(--p5-dark), var(--p5-black));
+  border-bottom: 1px solid rgba(217, 35, 35, 0.3);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.stats-bar::-webkit-scrollbar { display: none; }
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+.stat-number {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 1.5rem;
+  color: var(--p5-red);
+}
+.stat-label {
+  color: #999;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ============ MAIN CONTENT ============ */
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============ TOP HEADLINE (Featured) ============ */
+.featured-section {
+  margin-bottom: 40px;
+}
+.section-title {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.2em;
+  color: var(--p5-red);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--p5-red);
+}
+.section-title::before {
+  content: '';
+  width: 40px;
+  height: 4px;
+  background: var(--p5-yellow);
+  transform: skewX(-20deg);
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+}
+
+.featured-card {
+  background: var(--p5-card-bg);
+  border: 1px solid rgba(217, 35, 35, 0.3);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+.featured-card:hover {
+  border-color: var(--p5-red);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(217, 35, 35, 0.2);
+}
+.featured-card::before {
+  content: 'FEATURED';
+  position: absolute;
+  top: 15px; right: -25px;
+  background: var(--p5-red);
+  color: var(--p5-white);
+  padding: 4px 40px;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  transform: rotate(45deg);
+}
+
+.featured-card .country-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--p5-red);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+  margin-bottom: 12px;
+}
+
+.featured-card .inst-name {
+  font-size: 0.85rem;
+  color: var(--p5-yellow);
+  margin-bottom: 8px;
+}
+
+.featured-card .paper-title {
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  color: var(--p5-white);
+}
+
+.featured-card .paper-summary {
+  font-size: 0.85rem;
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.featured-card .analysis-box {
+  background: rgba(217, 35, 35, 0.1);
+  border-left: 3px solid var(--p5-red);
+  padding: 12px 15px;
+  margin-bottom: 12px;
+}
+.analysis-label {
+  font-size: 0.65rem;
+  color: var(--p5-red);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 4px;
+}
+.analysis-text {
+  font-size: 0.85rem;
+  color: var(--p5-light-gray);
+}
+
+.prospects-box {
+  background: rgba(255, 221, 0, 0.05);
+  border-left: 3px solid var(--p5-yellow);
+  padding: 12px 15px;
+}
+.prospects-label {
+  font-size: 0.65rem;
+  color: var(--p5-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 4px;
+}
+.prospects-text {
+  font-size: 0.85rem;
+  color: var(--p5-light-gray);
+}
+
+.featured-card .meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+  font-size: 0.75rem;
+  color: #666;
+}
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ============ PAPER CARDS GRID ============ */
+.papers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.paper-card {
+  background: var(--p5-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+.paper-card:hover {
+  border-color: var(--p5-red);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(217, 35, 35, 0.15);
+}
+
+.paper-card .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.paper-card .country-flag {
+  font-size: 1.5rem;
+}
+
+.paper-card .category-tag {
+  padding: 3px 10px;
+  background: var(--p5-gray);
+  font-size: 0.65rem;
+  color: var(--p5-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+}
+
+.paper-card .inst-badge {
+  font-size: 0.75rem;
+  color: var(--p5-pink);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.paper-card .paper-title {
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  color: var(--p5-white);
+}
+
+.paper-card .paper-summary {
+  font-size: 0.8rem;
+  color: #999;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.paper-card .analysis-box {
+  background: rgba(217, 35, 35, 0.08);
+  border-left: 2px solid var(--p5-red);
+  padding: 8px 12px;
+  margin-bottom: 8px;
+}
+
+.paper-card .prospects-box {
+  background: rgba(255, 221, 0, 0.04);
+  border-left: 2px solid var(--p5-yellow);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.paper-card .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: var(--p5-red);
+  color: var(--p5-white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+  transition: all 0.3s ease;
+}
+.read-more-btn:hover {
+  background: var(--p5-yellow);
+  color: var(--p5-black);
+}
+
+/* ============ COUNTRY SECTION DIVIDER ============ */
+.country-section {
+  margin-bottom: 50px;
+}
+
+.country-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 25px;
+  margin-bottom: 25px;
+  background: linear-gradient(135deg, var(--p5-card-bg), transparent);
+  border-left: 4px solid var(--p5-red);
+  position: relative;
+}
+.country-header::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0;
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(217, 35, 35, 0.1));
+}
+
+.country-flag-large { font-size: 2.5rem; }
+.country-name {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.15em;
+}
+.country-name-en {
+  font-size: 0.8rem;
+  color: #666;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.country-paper-count {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 2.5rem;
+  color: var(--p5-red);
+  margin-left: auto;
+  z-index: 1;
+}
+.country-paper-count span {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* ============ INSTITUTION SUB-SECTION ============ */
+.inst-section {
+  margin-bottom: 20px;
+}
+.inst-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 15px;
+  background: rgba(255, 221, 0, 0.05);
+  border-left: 3px solid var(--p5-yellow);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.inst-header .inst-en {
+  color: #666;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+/* ============ SIDEBAR TRENDS ============ */
+.sidebar-trends {
+  margin-top: 40px;
+}
+
+.trend-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: var(--p5-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.trend-card:hover {
+  border-color: var(--p5-red);
+  transform: translateX(5px);
+}
+.trend-rank {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 2rem;
+  color: var(--p5-red);
+  min-width: 40px;
+  text-align: center;
+}
+.trend-info .trend-keyword {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 3px;
+}
+.trend-info .trend-count {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+/* ============ FOOTER ============ */
+footer {
+  background: var(--p5-dark);
+  border-top: 3px solid var(--p5-red);
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--p5-yellow);
+}
+.footer-text {
+  font-size: 0.75rem;
+  color: #666;
+  letter-spacing: 0.1em;
+}
+.footer-brand {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 1.5rem;
+  color: var(--p5-red);
+  letter-spacing: 0.3em;
+  margin-bottom: 10px;
+}
+
+/* ============ SCROLL ANIMATIONS ============ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ REFRESH BUTTON ============ */
+.refresh-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  background: var(--p5-red);
+  border: none;
+  color: var(--p5-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(217, 35, 35, 0.4);
+}
+.refresh-btn:hover {
+  background: var(--p5-yellow);
+  color: var(--p5-black);
+  transform: scale(1.1);
+}
+.refresh-btn.spinning svg {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============ SHARE BUTTON ============ */
+.share-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  background: var(--p5-yellow);
+  border: none;
+  color: var(--p5-black);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(255, 221, 0, 0.4);
+}
+.share-btn:hover {
+  background: var(--p5-white);
+  transform: scale(1.1);
+}
+
+
+/* ============ NO DATA MESSAGE ============ */
+.no-data {
+  text-align: center;
+  padding: 60px 30px;
+  color: #666;
+}
+.no-data .icon { font-size: 3rem; margin-bottom: 15px; }
+.no-data .message {
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* ============ CATEGORY FILTER ============ */
+.category-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 15px 30px;
+  background: rgba(26, 26, 46, 0.5);
+}
+.cat-btn {
+  padding: 5px 14px;
+  background: var(--p5-gray);
+  border: 1px solid transparent;
+  color: #999;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.cat-btn:hover, .cat-btn.active {
+  background: var(--p5-red);
+  color: var(--p5-white);
+  border-color: var(--p5-red);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .featured-grid { grid-template-columns: 1fr; }
+  .papers-grid { grid-template-columns: 1fr; }
+  .header-top { padding: 10px 15px; }
+  .logo-text h1 { font-size: 1.3rem; }
+  .main-content { padding: 15px; }
+  .nav-tab { padding: 10px 15px; font-size: 0.8rem; }
+}
+
+/* ============ TOAST NOTIFICATION ============ */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 25px;
+  background: var(--p5-card-bg);
+  border-left: 3px solid var(--p5-yellow);
+  color: var(--p5-white);
+  font-size: 0.85rem;
+  z-index: 9999;
+  transform: translateX(120%);
+  transition: transform 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.toast.show { transform: translateX(0); }
+
+/* ============ MARQUEE TICKER ============ */
+.ticker-bar {
+  background: var(--p5-red);
+  padding: 6px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-content {
+  display: inline-block;
+  animation: ticker 60s linear infinite;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--p5-white);
+}
+@keyframes ticker {
+  from { transform: translateX(100vw); }
+  to { transform: translateX(-100%); }
+}
+
+/* ============================================================
+   HOLOGRAM ENHANCEMENT - 魔改造
+   ============================================================ */
+
+/* ---- GLOBAL SCANLINE OVERLAY ---- */
+.scanline-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 136, 0.015) 2px,
+    rgba(0, 255, 136, 0.015) 4px
+  );
+  animation: scanlineFlicker 0.1s infinite;
+}
+@keyframes scanlineFlicker {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+/* ---- HOLOGRAPHIC SHIMMER ON CARDS ---- */
+.paper-card::after,
+.featured-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(0, 255, 136, 0.04) 35%,
+    rgba(255, 0, 128, 0.04) 45%,
+    rgba(0, 200, 255, 0.06) 55%,
+    rgba(255, 221, 0, 0.04) 65%,
+    transparent 80%
+  );
+  transition: left 0.8s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.paper-card:hover::after,
+.featured-card:hover::after {
+  left: 100%;
+}
+
+/* ---- 3D HOLOGRAPHIC CARD TILT ---- */
+.paper-card,
+.featured-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.3s ease, transform 0.15s ease;
+}
+.paper-card.holo-tilt,
+.featured-card.holo-tilt {
+  will-change: transform;
+}
+
+/* ---- HOLOGRAPHIC BORDER GLOW ---- */
+.paper-card:hover {
+  box-shadow:
+    0 8px 30px rgba(217, 35, 35, 0.15),
+    0 0 15px rgba(0, 255, 136, 0.1),
+    inset 0 0 15px rgba(0, 255, 136, 0.03);
+  border-color: rgba(0, 255, 136, 0.4) !important;
+}
+.featured-card:hover {
+  box-shadow:
+    0 10px 40px rgba(217, 35, 35, 0.2),
+    0 0 20px rgba(0, 255, 136, 0.15),
+    0 0 40px rgba(0, 200, 255, 0.05),
+    inset 0 0 20px rgba(0, 255, 136, 0.03);
+  border-color: rgba(0, 255, 136, 0.5) !important;
+}
+
+/* ---- GLITCH TEXT EFFECT ---- */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.glitch-text::before {
+  color: #0ff;
+  z-index: -1;
+  animation: glitch1 3s infinite linear alternate-reverse;
+}
+.glitch-text::after {
+  color: #f0f;
+  z-index: -2;
+  animation: glitch2 2s infinite linear alternate-reverse;
+}
+@keyframes glitch1 {
+  0%, 95% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  96% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 1px); }
+  97% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -1px); }
+  98% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 2px); }
+  99% { clip-path: inset(40% 0 30% 0); transform: translate(1px, -2px); }
+  100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+}
+@keyframes glitch2 {
+  0%, 93% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  94% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 1px); }
+  95% { clip-path: inset(30% 0 40% 0); transform: translate(-2px, -1px); }
+  96% { clip-path: inset(70% 0 5% 0); transform: translate(1px, 2px); }
+  97% { clip-path: inset(15% 0 50% 0); transform: translate(-1px, -2px); }
+  100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+}
+
+/* ---- CHROMATIC ABERRATION ON HEADER ---- */
+.logo-text h1 {
+  text-shadow:
+    -1px 0 rgba(255, 0, 128, 0.4),
+    1px 0 rgba(0, 255, 136, 0.4);
+  animation: chromatic 4s ease-in-out infinite;
+}
+@keyframes chromatic {
+  0%, 100% {
+    text-shadow:
+      -1px 0 rgba(255, 0, 128, 0.4),
+      1px 0 rgba(0, 255, 136, 0.4);
+  }
+  25% {
+    text-shadow:
+      -2px 0 rgba(255, 0, 128, 0.5),
+      2px 0 rgba(0, 255, 136, 0.5);
+  }
+  50% {
+    text-shadow:
+      -1px 0 rgba(0, 200, 255, 0.4),
+      1px 0 rgba(255, 0, 128, 0.4);
+  }
+  75% {
+    text-shadow:
+      -2px 0 rgba(0, 255, 136, 0.5),
+      2px 0 rgba(0, 200, 255, 0.5);
+  }
+}
+
+/* ---- NEON PULSE ON SECTION TITLES ---- */
+.section-title {
+  text-shadow:
+    0 0 5px rgba(217, 35, 35, 0.5),
+    0 0 10px rgba(217, 35, 35, 0.3),
+    0 0 20px rgba(217, 35, 35, 0.1);
+  animation: neonPulse 3s ease-in-out infinite;
+}
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 5px rgba(217, 35, 35, 0.5),
+      0 0 10px rgba(217, 35, 35, 0.3),
+      0 0 20px rgba(217, 35, 35, 0.1);
+  }
+  50% {
+    text-shadow:
+      0 0 10px rgba(217, 35, 35, 0.8),
+      0 0 20px rgba(217, 35, 35, 0.5),
+      0 0 40px rgba(217, 35, 35, 0.3),
+      0 0 60px rgba(217, 35, 35, 0.1);
+  }
+}
+
+/* ---- HOLOGRAPHIC DATA STREAM CANVAS ---- */
+#holo-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ---- PARTICLE SYSTEM CANVAS ---- */
+#particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ---- HOLOGRAPHIC CORNER BRACKETS ---- */
+.paper-card .holo-corner,
+.featured-card .holo-corner {
+  position: absolute;
+  width: 20px; height: 20px;
+  border: 2px solid rgba(0, 255, 136, 0);
+  transition: border-color 0.3s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+.paper-card:hover .holo-corner,
+.featured-card:hover .holo-corner {
+  border-color: rgba(0, 255, 136, 0.6);
+}
+.holo-corner.tl { top: 5px; left: 5px; border-right: none; border-bottom: none; }
+.holo-corner.tr { top: 5px; right: 5px; border-left: none; border-bottom: none; }
+.holo-corner.bl { bottom: 5px; left: 5px; border-right: none; border-top: none; }
+.holo-corner.br { bottom: 5px; right: 5px; border-left: none; border-top: none; }
+
+/* ---- HOLOGRAPHIC STATUS INDICATOR ---- */
+.holo-status {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', monospace;
+  font-size: 0.7rem;
+  color: rgba(0, 255, 136, 0.5);
+  letter-spacing: 0.15em;
+  z-index: 100;
+  text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+  animation: holoStatusBlink 4s ease-in-out infinite;
+}
+@keyframes holoStatusBlink {
+  0%, 90%, 100% { opacity: 0.5; }
+  95% { opacity: 0; }
+}
+
+/* ---- CRT VIGNETTE ---- */
+.crt-vignette {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+/* ---- FLOATING CATEGORY TAGS GLOW ---- */
+.category-filters .cat-btn.active {
+  box-shadow:
+    0 0 8px rgba(217, 35, 35, 0.5),
+    0 0 16px rgba(217, 35, 35, 0.2);
+}
+
+/* ---- TRENDING KEYWORD HOLOGRAPHIC BARS ---- */
+.trend-bar {
+  position: relative;
+  overflow: hidden;
+}
+.trend-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 136, 0.1),
+    transparent
+  );
+  animation: trendSweep 3s ease-in-out infinite;
+}
+@keyframes trendSweep {
+  0% { left: -50%; }
+  100% { left: 150%; }
+}
+
+/* ---- HEADER HOLOGRAPHIC LINE ---- */
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 136, 0.6),
+    rgba(0, 200, 255, 0.6),
+    rgba(255, 0, 128, 0.6),
+    transparent
+  );
+  animation: headerLine 4s linear infinite;
+  background-size: 200% 100%;
+}
+@keyframes headerLine {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---- TICKER HOLOGRAPHIC ENHANCEMENT ---- */
+.ticker-bar {
+  position: relative;
+  overflow: hidden;
+}
+.ticker-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -30%;
+  width: 30%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  animation: tickerShine 5s linear infinite;
+}
+@keyframes tickerShine {
+  0% { left: -30%; }
+  100% { left: 130%; }
+}
+
+/* ============================================================
+   JARVIS HOLOGRAPHIC MODAL - Iron Man Style
+   ============================================================ */
+
+/* ---- MODAL BACKDROP ---- */
+#jarvis-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 20000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+#jarvis-modal.active {
+  display: flex;
+  opacity: 1;
+}
+#jarvis-modal .modal-backdrop {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+/* ---- HOLOGRAPHIC RING ANIMATION (BEHIND MODAL) ---- */
+#jarvis-modal .holo-ring-container {
+  position: absolute;
+  width: 700px; height: 700px;
+  pointer-events: none;
+}
+#jarvis-modal .holo-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 200, 255, 0.15);
+  transform: translate(-50%, -50%);
+}
+#jarvis-modal .holo-ring:nth-child(1) {
+  width: 500px; height: 500px;
+  animation: jarvisRingSpin 20s linear infinite;
+  border-style: dashed;
+  border-color: rgba(0, 200, 255, 0.12);
+}
+#jarvis-modal .holo-ring:nth-child(2) {
+  width: 580px; height: 580px;
+  animation: jarvisRingSpin 30s linear infinite reverse;
+  border-color: rgba(0, 255, 136, 0.1);
+}
+#jarvis-modal .holo-ring:nth-child(3) {
+  width: 650px; height: 650px;
+  animation: jarvisRingSpin 25s linear infinite;
+  border-style: dotted;
+  border-color: rgba(255, 0, 128, 0.08);
+}
+@keyframes jarvisRingSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ---- MODAL PANEL ---- */
+#jarvis-modal .modal-panel {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 200, 255, 0.3) transparent;
+  background: linear-gradient(135deg, rgba(10, 15, 30, 0.95), rgba(5, 10, 25, 0.98));
+  border: 1px solid rgba(0, 200, 255, 0.25);
+  padding: 0;
+  animation: modalSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    0 0 40px rgba(0, 200, 255, 0.1),
+    0 0 80px rgba(0, 200, 255, 0.05),
+    inset 0 0 60px rgba(0, 200, 255, 0.02);
+}
+@keyframes modalSlideIn {
+  from { transform: scale(0.8) translateY(30px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* ---- MODAL HEADER ---- */
+.jarvis-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  padding: 30px 30px 20px;
+  border-bottom: 1px solid rgba(0, 200, 255, 0.15);
+  position: relative;
+}
+.jarvis-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.5), transparent);
+}
+
+/* ---- IMPACT SCORE RING (SVG) ---- */
+.impact-ring-container {
+  flex-shrink: 0;
+  width: 110px;
+  height: 110px;
+  position: relative;
+}
+.impact-ring-container svg {
+  width: 110px; height: 110px;
+  transform: rotate(-90deg);
+}
+.impact-ring-bg {
+  fill: none;
+  stroke: rgba(0, 200, 255, 0.1);
+  stroke-width: 4;
+}
+.impact-ring-fill {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 0, 283;
+  transition: stroke-dasharray 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.impact-ring-fill.high { stroke: #00ff88; }
+.impact-ring-fill.medium { stroke: #00c8ff; }
+.impact-ring-fill.low { stroke: #ffdd00; }
+.impact-score-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 2rem;
+  color: #00c8ff;
+  text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+}
+.impact-score-label {
+  position: absolute;
+  bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.55rem;
+  color: rgba(0, 200, 255, 0.6);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---- MODAL TITLE AREA ---- */
+.jarvis-title-area {
+  flex: 1;
+  min-width: 0;
+}
+.jarvis-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.jarvis-badge {
+  padding: 3px 10px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.jarvis-badge.country {
+  background: rgba(0, 200, 255, 0.15);
+  color: #00c8ff;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+}
+.jarvis-badge.category {
+  background: rgba(0, 255, 136, 0.1);
+  color: #00ff88;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+}
+.jarvis-badge.source {
+  background: rgba(255, 221, 0, 0.1);
+  color: #ffdd00;
+  border: 1px solid rgba(255, 221, 0, 0.25);
+}
+.jarvis-institution {
+  font-size: 0.8rem;
+  color: rgba(0, 200, 255, 0.7);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.jarvis-paper-title {
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #f5f5f5;
+  text-shadow: 0 0 20px rgba(0, 200, 255, 0.1);
+}
+
+/* ---- CLOSE BUTTON ---- */
+.jarvis-close {
+  position: absolute;
+  top: 15px; right: 15px;
+  width: 40px; height: 40px;
+  background: rgba(255, 50, 50, 0.1);
+  border: 1px solid rgba(255, 50, 50, 0.3);
+  color: #ff5050;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.jarvis-close:hover {
+  background: rgba(255, 50, 50, 0.3);
+  box-shadow: 0 0 15px rgba(255, 50, 50, 0.3);
+}
+
+/* ---- KEY INSIGHT BOX ---- */
+.jarvis-key-insight {
+  margin: 0 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.06), rgba(0, 255, 136, 0.04));
+  border: 1px solid rgba(0, 200, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+.jarvis-key-insight::before {
+  content: 'KEY INSIGHT';
+  position: absolute;
+  top: 0; left: 0;
+  padding: 2px 12px;
+  background: rgba(0, 200, 255, 0.2);
+  color: #00c8ff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+.jarvis-key-insight .insight-text {
+  margin-top: 15px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #e0e8f0;
+}
+.jarvis-key-insight .insight-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #00c8ff;
+  margin-left: 2px;
+  animation: cursorBlink 0.8s ease-in-out infinite;
+  vertical-align: text-bottom;
+}
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ---- ANALYSIS GRID ---- */
+.jarvis-analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 20px 30px;
+}
+.jarvis-analysis-panel {
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.jarvis-analysis-panel.analysis {
+  background: linear-gradient(135deg, rgba(217, 35, 35, 0.08), rgba(217, 35, 35, 0.03));
+  border: 1px solid rgba(217, 35, 35, 0.2);
+  border-left: 3px solid var(--p5-red);
+}
+.jarvis-analysis-panel.prospects {
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.06), rgba(0, 255, 136, 0.02));
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-left: 3px solid #00ff88;
+}
+.jarvis-panel-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.jarvis-analysis-panel.analysis .jarvis-panel-label { color: var(--p5-red); }
+.jarvis-analysis-panel.prospects .jarvis-panel-label { color: #00ff88; }
+.jarvis-panel-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #c0c8d0;
+}
+
+/* ---- DATA BARS (Impact / Novelty / Applicability) ---- */
+.jarvis-data-bars {
+  display: flex;
+  gap: 20px;
+  margin: 15px 30px;
+  padding: 18px;
+  background: rgba(0, 10, 20, 0.5);
+  border: 1px solid rgba(0, 200, 255, 0.1);
+}
+.jarvis-bar-item {
+  flex: 1;
+}
+.jarvis-bar-label {
+  font-size: 0.6rem;
+  color: rgba(0, 200, 255, 0.6);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.jarvis-bar-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 200, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.jarvis-bar-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.jarvis-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0;
+  width: 20px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
+}
+.jarvis-bar-fill.impact { background: linear-gradient(90deg, #d92323, #ff6b6b); }
+.jarvis-bar-fill.novelty { background: linear-gradient(90deg, #00c8ff, #00ff88); }
+.jarvis-bar-fill.applicability { background: linear-gradient(90deg, #ffdd00, #ff8800); }
+.jarvis-bar-value {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4px;
+}
+
+/* ---- MODAL FOOTER ---- */
+.jarvis-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px 20px;
+  border-top: 1px solid rgba(0, 200, 255, 0.1);
+}
+.jarvis-meta-info {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+.jarvis-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 25px;
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.15), rgba(0, 200, 255, 0.08));
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  color: #00c8ff;
+  font-family: 'Oswald', 'LocalOswald', 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+}
+.jarvis-open-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.3), rgba(0, 200, 255, 0.15));
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
+  color: #fff;
+}
+
+/* ============================================================
+   CARD VISUAL ENHANCEMENTS - Impact Ring & Category Icons
+   ============================================================ */
+
+/* ---- MINI IMPACT RING ON CARDS ---- */
+.card-impact-ring {
+  width: 40px; height: 40px;
+  position: relative;
+  flex-shrink: 0;
+}
+.card-impact-ring svg {
+  width: 40px; height: 40px;
+  transform: rotate(-90deg);
+}
+.card-impact-ring .ring-bg {
+  fill: none;
+  stroke: rgba(0, 200, 255, 0.1);
+  stroke-width: 3;
+}
+.card-impact-ring .ring-fill {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s ease;
+}
+.card-impact-ring .ring-fill.high { stroke: #00ff88; }
+.card-impact-ring .ring-fill.medium { stroke: #00c8ff; }
+.card-impact-ring .ring-fill.low { stroke: #ffdd00; }
+.card-impact-ring .ring-score {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', 'Arial Black', sans-serif;
+  font-size: 0.75rem;
+  color: #00c8ff;
+}
+
+/* ---- CATEGORY ICON MAPPING ---- */
+.cat-icon {
+  font-size: 1.3rem;
+  filter: drop-shadow(0 0 4px rgba(0, 200, 255, 0.3));
+}
+
+/* ---- ENHANCED CARD HEADER ---- */
+.paper-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---- FEATURED CARD IMPACT SECTION ---- */
+.featured-impact-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* ============================================================
+   JARVIS HEADER HUD
+   ============================================================ */
+
+.header-hud {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; height: 80px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+.header-hud svg {
+  width: 80px; height: 80px;
+  animation: hudSpin 15s linear infinite;
+}
+@keyframes hudSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ---- RESPONSIVE HOLOGRAM REDUCTION ---- */
+@media (max-width: 768px) {
+  #holo-canvas,
+  #particle-canvas { opacity: 0.2; }
+  .scanline-overlay { display: none; }
+  .crt-vignette { display: none; }
+  .holo-status { display: none; }
+  .jarvis-analysis-grid { grid-template-columns: 1fr; }
+  .jarvis-data-bars { flex-direction: column; }
+  #jarvis-modal .modal-panel { width: 95%; max-height: 95vh; }
+  #jarvis-modal .holo-ring-container { display: none; }
+  .jarvis-header { flex-direction: column; align-items: center; text-align: center; }
+  .header-hud { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HOLOGRAM SYSTEM LAYERS -->
+<canvas id="holo-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<div class="scanline-overlay"></div>
+<div class="crt-vignette"></div>
+<div class="holo-status" id="holo-status">SYS://HOLOGRAM_ACTIVE // FRAME: 0</div>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="loading-text">LOADING</div>
+  <div class="loading-bar"></div>
+</div>
+<!-- Failsafe: dismiss loading screen even if main JS crashes -->
+<script>setTimeout(function(){var l=document.getElementById('loading-screen');if(l)l.classList.add('hidden')},4000)</script>
+
+<!-- TICKER BAR -->
+<div class="ticker-bar">
+  <div class="ticker-content" id="ticker-content">
+    ⚡ GLOBAL RESEARCH UPDATE // 2026-05-08 — 最新の研究動向 — マサチューセッツ工科大学: Advancing AI Challenges for the United States Department of the Air Force ⚡ スタンフォード大学: Unifying Optimization and Dynamics to Parallelize Sequential Computation: A Guide to Parallel Newton Methods for Breaking Sequential Bottlenecks ⚡ ハーバード大学: Views on AI Existential Risk Before and After a Public Event at Harvard University ⚡ カリフォルニア工科大学: Federated Learning for Early Prediction of EV Charging Demand ⚡ カリフォルニア大学バークレー校: AI Observability for Large Language Model Systems: A Multi-Layer Analysis of Monitoring Approaches from Confidence Calibration to Infrastructure Tracing ⚡ 清華大学: F2F-AP: Flow-to-Future Asynchronous Policy for Real-time Dynamic Manipulation ⚡ 北京大学: PRBench: End-to-end Paper Reproduction in Physics Research ⚡ 中国科学院: High-Precision Ground Characterization of Test-Mass Magnetic Properties for the Taiji Gravitational Wave Mission via a Physics-Informed Neural Framework ⚡ 浙江大学: Exploring the Modular Integration of "AI + Architecture" Pedagogy in Undergraduate Design Education: A Case Study of Architectural Design III/IV Courses at Zhejiang University ⚡ 復旦大学: EnTao-GPM: DNA Foundation Model for Predicting the Germline Pathogenic Mutations — 世界で進む科学革新 —
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-icon">GR</div>
+      <div class="logo-text">
+        <h1>GLOBAL RESEARCH TERMINAL</h1>
+        <div class="subtitle">世界最新研究ニュース // Daily Academic Intelligence</div>
+      </div>
+    </div>
+    <div class="header-hud">
+      <svg viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(0,200,255,0.2)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(0,255,136,0.15)" stroke-width="0.5" stroke-dasharray="2,6"/>
+        <path d="M40 8 L43 15 L40 12 L37 15 Z" fill="rgba(0,200,255,0.3)"/>
+        <path d="M72 40 L65 43 L68 40 L65 37 Z" fill="rgba(0,200,255,0.3)"/>
+        <path d="M40 72 L37 65 L40 68 L43 65 Z" fill="rgba(0,200,255,0.3)"/>
+        <path d="M8 40 L15 37 L12 40 L15 43 Z" fill="rgba(0,200,255,0.3)"/>
+      </svg>
+    </div>
+    <div class="header-info">
+      <div class="date" id="current-date"></div>
+      <div class="update-status">
+        <div class="pulse-dot"></div>
+        <span id="last-update">最終更新: 読み込み中...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTRY TABS -->
+  <div class="nav-tabs">
+    <button class="nav-tab nav-tab-all active" data-country="all" onclick="filterCountry('all')">
+      <span class="flag">🌐</span>ALL
+    </button>
+    <button class="nav-tab" data-country="US" onclick="filterCountry('US')">
+      <span class="flag">🇺🇸</span>アメリカ
+    </button>
+    <button class="nav-tab" data-country="CN" onclick="filterCountry('CN')">
+      <span class="flag">🇨🇳</span>中国
+    </button>
+    <button class="nav-tab" data-country="JP" onclick="filterCountry('JP')">
+      <span class="flag">🇯🇵</span>日本
+    </button>
+    <button class="nav-tab" data-country="KR" onclick="filterCountry('KR')">
+      <span class="flag">🇰🇷</span>韓国
+    </button>
+    <button class="nav-tab" data-country="RU" onclick="filterCountry('RU')">
+      <span class="flag">🇷🇺</span>ロシア
+    </button>
+  </div>
+
+  <!-- CATEGORY FILTER -->
+  <div class="category-filter">
+    <button class="cat-btn active" onclick="filterCategory('all')">ALL</button>
+    <button class="cat-btn" onclick="filterCategory('ai')">🤖 AI・ML</button>
+    <button class="cat-btn" onclick="filterCategory('nlp')">💬 NLP</button>
+    <button class="cat-btn" onclick="filterCategory('cv')">👁 Vision</button>
+    <button class="cat-btn" onclick="filterCategory('physics')">⚛️ 物理</button>
+    <button class="cat-btn" onclick="filterCategory('bio')">🧬 生命科学</button>
+    <button class="cat-btn" onclick="filterCategory('quantum')">🔮 量子</button>
+    <button class="cat-btn" onclick="filterCategory('materials')">🔬 材料科学</button>
+    <button class="cat-btn" onclick="filterCategory('energy')">⚡ エネルギー</button>
+  </div>
+</header>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number" id="total-papers">0</div>
+    <div class="stat-label">総論文数<br>Total Papers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" id="total-countries">5</div>
+    <div class="stat-label">対象国<br>Countries</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" id="total-institutions">25</div>
+    <div class="stat-label">研究機関<br>Institutions</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" id="today-new">0</div>
+    <div class="stat-label">本日更新<br>New Today</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content" id="main-content">
+  <!-- Content will be dynamically generated -->
+</div>
+
+<!-- TRENDING KEYWORDS -->
+<div class="main-content">
+  <div class="sidebar-trends">
+    <div class="section-title">TRENDING KEYWORDS // トレンドキーワード</div>
+    <div id="trending-keywords"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">GLOBAL RESEARCH TERMINAL</div>
+  <div class="footer-text">
+    世界5カ国25研究機関の最新論文を毎日配信<br>
+    Powered by arXiv API, Semantic Scholar, CrossRef<br>
+    © 2026 Global Research Terminal // TAKE YOUR TIME.
+  </div>
+</footer>
+
+<!-- REFRESH BUTTON -->
+<button class="refresh-btn" onclick="refreshData()" title="データを更新">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+</button>
+
+<!-- SHARE BUTTON -->
+<button class="share-btn" onclick="shareApp()" title="アプリを共有">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+</button>
+
+
+<!-- JARVIS HOLOGRAPHIC MODAL -->
+<div id="jarvis-modal">
+  <div class="modal-backdrop" onclick="closeJarvisModal()"></div>
+  <div class="holo-ring-container">
+    <div class="holo-ring"></div>
+    <div class="holo-ring"></div>
+    <div class="holo-ring"></div>
+  </div>
+  <div class="modal-panel" id="jarvis-panel">
+    <!-- Dynamically filled -->
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+//  GLOBAL RESEARCH TERMINAL - Main Application
+// ============================================================
+
+// Updated seed data with latest April 2026 research papers
+const SEED_DATA = {
   last_updated: "2026-05-08T22:08:00.000Z",
   countries: {
 
