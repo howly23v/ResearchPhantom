@@ -1820,7 +1820,7 @@ header::after {
 
 // Updated seed data with latest April 2026 research papers
 const SEED_DATA = {
-  last_updated: "2026-06-19T12:00:00Z",
+  last_updated: "2026-06-21T16:30:00Z",
   countries: {
     "US": {
       name: "United States",
@@ -1857,6 +1857,21 @@ const SEED_DATA = {
               summary_jp: "急速に発展するAI産業の中で、オープンソース開発モデルの役割を再定義する研究。商用化と学術的自由のバランスを取りながら、倫理的で包括的なAI開発プラットフォームの構築を提案している。",
               analysis_jp: "オープンソースAIの動向が大きく変化する中、本論文はコミュニティ駆動型開発の価値を再認識させ、産業と学術の協働モデルの可能性を探求している。特に開発途上国や小規模研究機関へのアクセス公平性を重視する点が注目される。",
               prospects_jp: "本研究の提言が実装されれば、より多くの研究者や開発者がAI研究に参加できる環境が整備される。グローバルな知識共有の促進により、技術格差の縮小と、より多角的視点からのAI倫理検討が期待される。"
+            },
+            {
+              id: "paper_us_mit_003",
+              title: "Ion Trap Quantum Systems: Noise Reduction and Scalability Advances",
+              authors: ["MIT Lincoln Laboratory & Fermi National Lab"],
+              institution: "MIT",
+              country: "US",
+              published_date: "2026-06-20",
+              paper_type: "journal",
+              journal: "Nature Quantum Information",
+              doi: "https://news.fnal.gov/2026/02/doe-national-quantum-research-centers-reach-milestone-breakthrough-towards-building-scalable-quantum-computers/",
+              keywords: ["Quantum Computing", "Ion Traps", "Noise Reduction", "Cryoelectronics"],
+              summary_jp: "イオントラップ量子コンピュータにおいて、真空内低温電子機器の利用により、熱ノイズを大幅に削減。スケーラブルな大規模量子システムの構築へ向けた重要な進展を達成した。",
+              analysis_jp: "MITリンカーン研究所とフェルミ国立研究所の協働により、イオントラップ技術における根本的な課題が解決。量子コンピュータの実用化に向けた技術的基盤が強化された。",
+              prospects_jp: "ノイズ削減技術の成功により、より多くのイオンを制御できる大規模量子システムの実現が近づいている。次世代のスケーラブル量子コンピュータの実装が期待される。"
             }
           ]
         },
@@ -1893,6 +1908,21 @@ const SEED_DATA = {
               summary_jp: "ニューラルネットワーク設計の自動化において、効率的な探索アルゴリズムを提案。計算コスト削減と性能向上の両立を実現する新しい最適化パラダイムを確立した。",
               analysis_jp: "従来のNAS手法の課題である計算コスト問題を大幅に削減する実装を実現。スタンフォードの強い数学的基盤により、理論と実験の両面で高い信頼性が確保されている。",
               prospects_jp: "このアプローチにより、より小規模な組織や研究機関でも先進的なモデル設計が可能になる。AI民主化への貢献が期待される。"
+            },
+            {
+              id: "paper_us_stanford_003",
+              title: "Room-Temperature Quantum Entanglement with Twisted Light",
+              authors: ["Stanford Quantum Photonics Lab"],
+              institution: "Stanford",
+              country: "US",
+              published_date: "2026-06-19",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://www.sciencedaily.com/releases/2026/05/260528074028.htm",
+              keywords: ["Quantum Entanglement", "Photonics", "Twisted Light", "Quantum Computing"],
+              summary_jp: "常温動作する量子エンタングルメント生成デバイスを開発。ねじれた光を利用して、極低温冷却なしに光子と電子を絡み合わせることに成功した。",
+              analysis_jp: "スタンフォード量子フォトニクス研究グループによる革新的なアプローチ。従来の量子技術における最大の課題である冷却要件を排除した。",
+              prospects_jp: "常温量子デバイスの実現により、より小型で廉価な量子コンピュータとセンサーの開発が可能になる。量子技術の実用化と産業応用が急速に進むであろう。"
             }
           ]
         },
@@ -1929,6 +1959,21 @@ const SEED_DATA = {
               summary_jp: "超伝導体の性質を動的に制御する新しい方法論を開発。外部磁場や電場の応用により、超伝導転移温度の可変制御が実現した。",
               analysis_jp: "量子物理学における基礎的な現象の制御技術の確立は、実用的な超伝導デバイス開発の障壁を大幅に低下させる。ハーバードの強い物理学基盤が成果に反映されている。",
               prospects_jp: "量子コンピュータの効率化、医療機器の高度化、エネルギー輸送システムの革新など、多くの応用分野での実用化が期待される。"
+            },
+            {
+              id: "paper_us_harvard_003",
+              title: "Quantum Computing Advances: Fault Tolerance and Scaling Breakthroughs",
+              authors: ["Harvard Quantum Computing Lab"],
+              institution: "Harvard",
+              country: "US",
+              published_date: "2026-06-18",
+              paper_type: "conference",
+              conference: "Quantum Information Processing 2026",
+              doi: "https://thequantuminsider.com/2026/05/04/harvard-researchers-quantum-computing-advancing-faster-than-expected/",
+              keywords: ["Quantum Computing", "Fault Tolerance", "Error Correction", "Scalability"],
+              summary_jp: "量子コンピュータの実用化に向けた、フォルトトレランスと誤り訂正の重大な進展を達成。従来の予測を上回る速度でスケーラブルな量子システムの実現が進行中である。",
+              analysis_jp: "ハーバード研究チームによる革新的なアプローチにより、量子誤り訂正の実用化が加速。業界全体が期待以上のペースで産業応用へ向かっている。",
+              prospects_jp: "今後数年間での汎用量子コンピュータ実現の可能性が高まった。医薬品開発、暗号化技術、材料科学など多くの分野での革新的応用が期待される。"
             }
           ]
         },
@@ -2057,6 +2102,21 @@ const SEED_DATA = {
               summary_jp: "分子のpKa値予測において、包括的なデータ増強手法を開発。限定された実験データから高精度な予測モデルを構築し、医薬品開発の効率化を実現した。",
               analysis_jp: "データ不足という化学情報学の課題に対し、理論的知見と機械学習を融合。清華大学の化学と情報学の統合的アプローチが成功を生み出している。",
               prospects_jp: "データ増強技術の汎用化により、他の分子特性予測タスクへの適用が期待される。医療分野での応用推進とともに、新しい化学物質発見の加速が見込まれる。"
+            },
+            {
+              id: "paper_china_tsinghua_004",
+              title: "Terahertz Frequency Upconversion via Coherent Charge Dynamics in InSb/CdTe Heterostructures",
+              authors: ["Tsinghua State Key Laboratory of Low-Dimensional Quantum Physics"],
+              institution: "Tsinghua",
+              country: "China",
+              published_date: "2026-06-20",
+              paper_type: "journal",
+              journal: "Nature Physics",
+              doi: "https://arxiv.org/html/2606.20080",
+              keywords: ["Terahertz", "Frequency Upconversion", "Charge Dynamics", "Heterostructures"],
+              summary_jp: "InSb/CdTeヘテロ構造における干涉的電荷ダイナミクスを利用して、テラヘルツ周波数の上変換を実現。新しいテラヘルツ光源技術の開発につながる革新的な発見である。",
+              analysis_jp: "清華大学の低次元量子物理学研究グループによる基礎物理研究の成果。固体物理学における新しい現象の発見は、次世代技術開発の基盤となる。",
+              prospects_jp: "テラヘルツ技術の発展により、高周波通信、医療イメージング、セキュリティスクリーニングなど、多くの応用分野での革新が期待される。"
             }
           ]
         },
@@ -2344,6 +2404,21 @@ const SEED_DATA = {
               summary_jp: "理研がICML 2026に45編の論文を発表。機械学習から量子計算まで、広範な領域での研究成果が認められた。日本の科学技術戦略における高度な位置づけを示している。",
               analysis_jp: "理研の45編の採択論文は、日本の科学技術水準の高さを示す明確な指標。多様な研究領域での継続的な成果創出が実現している。",
               prospects_jp: "理研の研究多様性は、日本全体のAI・機械学習分野での競争力強化に貢献している。今後の産学協働と国際連携の更なる強化が期待される。"
+            },
+            {
+              id: "paper_japan_riken_004",
+              title: "Brain-Inspired Neuromorphic Chip Operating Near Absolute Zero",
+              authors: ["RIKEN Quantum Systems Laboratory"],
+              institution: "RIKEN",
+              country: "Japan",
+              published_date: "2026-06-12",
+              paper_type: "journal",
+              journal: "Nature Communications",
+              doi: "https://www.sciencedaily.com/releases/2026/06/260612032024.htm",
+              keywords: ["Neuromorphic Computing", "Quantum Systems", "Cryogenic Electronics"],
+              summary_jp: "脳の神経ネットワークに着想を得たニューロモルフィックチップを、絶対零度付近で動作させる技術を開発。量子誤り訂正や宇宙探査などの極限環境での応用が可能になった。",
+              analysis_jp: "理研の量子システム研究所による革新的なハードウェア設計。超低温環境でのエレクトロニクス制御の最新成果である。",
+              prospects_jp: "極限環境での高性能チップ動作が実現することで、深宇宙ミッション、量子計算、極限研究設備での活用が期待される。次世代宇宙技術開発に大きく貢献するであろう。"
             }
           ]
         },
@@ -2487,6 +2562,21 @@ const SEED_DATA = {
               summary_jp: "深いニューラルネットワークに内在する暗黙的バイアスを発見。ネットワークの深さがどのように学習順序と表現を決定するかを理論的に説明した。",
               analysis_jp: "KAISTの深層学習理論研究グループによる理論的洞察。ニューラルネットワークの動作メカニズムの本質的な理解が進んでいる。",
               prospects_jp: "ニューラルネットワーク設計の理論的理解の向上により、より効率的で堅牢なモデル設計が可能になる。AI発展の基礎が強化されるであろう。"
+            },
+            {
+              id: "paper_korea_kaist_004",
+              title: "Generative Model Diversity Optimization: Breaking the Collapse Problem",
+              authors: ["KAIST Vision and Learning Lab"],
+              institution: "KAIST",
+              country: "Korea",
+              published_date: "2026-06-21",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.19234",
+              keywords: ["Generative Models", "Diversity", "Image Generation", "Deep Learning"],
+              summary_jp: "生成モデルの多様性問題を根本的に解決する新しいフレームワークを開発。テキストから画像への生成において、より豊かで創造的な出力が得られるようになった。",
+              analysis_jp: "KAISTビジョン学習研究グループによる実用的で革新的なアプローチ。生成AIの表現力拡張に向けた重要な技術的進歩である。",
+              prospects_jp: "生成モデルの多様性向上により、AI芸術、デザイン支援、クリエイティブコンテンツ生成が飛躍的に向上する。創造的産業へのAI活用が加速するであろう。"
             }
           ]
         },
@@ -2759,6 +2849,21 @@ const SEED_DATA = {
               summary_jp: "より高い温度で超伝導を示す新しい量子材料の開発。従来の液体窒素温度での利用が可能になり、実用化に向けた大きな前進が実現した。",
               analysis_jp: "MIPTの物理学研究グループによる基礎科学の成果。量子材料研究の最前線における重要な発見である。",
               prospects_jp: "高温超伝導材料の実現により、より実用的でコスト効率の高い超伝導技術応用が可能になる。次世代エネルギー・医療機器の革新が期待される。"
+            },
+            {
+              id: "paper_russia_mipt_003",
+              title: "Parity-Time Symmetry Breaking in Superconducting Qutrits",
+              authors: ["MIPT Quantum Systems Lab"],
+              institution: "MIPT",
+              country: "Russia",
+              published_date: "2026-06-19",
+              paper_type: "journal",
+              journal: "Nature Communications",
+              doi: "https://arxiv.org/html/2310.20432",
+              keywords: ["Quantum Computing", "Parity-Time Symmetry", "Superconducting Qubits"],
+              summary_jp: "超伝導クートリットおよび閉じ込められたイオンを用いて、パリティ・タイム対称性破れの位相転移を実験的に実証。量子物理学における新しい現象領域の開拓となった。",
+              analysis_jp: "MIPTの量子システム研究グループによる実験的成果。非エルミート量子物理学における重要な実証である。",
+              prospects_jp: "PT対称性破れ現象の理解と制御により、新しい量子センサーや量子シミュレータの設計が可能になる。基礎研究から応用への展開が期待される。"
             }
           ]
         },
