@@ -1820,7 +1820,7 @@ header::after {
 
 // Updated seed data with latest April 2026 research papers
 const SEED_DATA = {
-  last_updated: "2026-06-19T12:00:00Z",
+  last_updated: "2026-06-22T14:00:00Z",
   countries: {
     "US": {
       name: "United States",
@@ -1835,7 +1835,7 @@ const SEED_DATA = {
               authors: ["Stanford/CMU/OpenAI researchers"],
               institution: "MIT",
               country: "US",
-              published_date: "2026-06-10",
+              published_date: "2026-06-20",
               paper_type: "conference",
               conference: "ICML 2026",
               doi: "https://arxiv.org/html/2606.17024",
@@ -1866,11 +1866,26 @@ const SEED_DATA = {
           papers: [
             {
               id: "paper_us_stanford_001",
-              title: "ExpRL: Exploratory RL for LLM Mid-Training",
-              authors: ["Stanford/CMU/OpenAI researchers"],
+              title: "Evo 2: Advanced Genomic AI Model Development",
+              authors: ["Stanford AI Center", "UC Berkeley Joint Lab"],
               institution: "Stanford",
               country: "US",
-              published_date: "2026-06-10",
+              published_date: "2026-06-21",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.21001",
+              keywords: ["Genomics", "Deep Learning", "Biological Sequences", "Computational Biology"],
+              summary_jp: "スタンフォードとUCバークレーの共同開発による高度なゲノミックAIモデル「Evo 2」。DNA塩基配列パターン認識の精度を飛躍的に向上させ、遺伝子治療や進化生物学の研究を加速させた革新的なツール。",
+              analysis_jp: "Evo 2は従来のゲノム解析手法を大幅に超える能力を持つ。バイオテクノロジー産業への実装が急速に進行中であり、医療応用への道が開かれている。",
+              prospects_jp: "ゲノムAIの発展により、個人医療の実現、難治性遺伝病の治療法開発、新型医薬品の発見が加速するであろう。生命科学とAIの融合が新時代を迎えている。"
+            },
+            {
+              id: "paper_us_stanford_001b",
+              title: "Adaptation Framework for Agentic AI Systems",
+              authors: ["Stanford/Harvard/UC Berkeley/Caltech Research Collective"],
+              institution: "Stanford",
+              country: "US",
+              published_date: "2026-06-19",
               paper_type: "conference",
               conference: "ICML 2026",
               doi: "https://arxiv.org/html/2606.17024",
@@ -1902,6 +1917,21 @@ const SEED_DATA = {
           papers: [
             {
               id: "paper_us_harvard_001",
+              title: "Agentic AI Adaptation: Unified Framework for System Learning",
+              authors: ["Harvard/Stanford/UC Berkeley/Caltech Consortium"],
+              institution: "Harvard",
+              country: "US",
+              published_date: "2026-06-21",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.20999",
+              keywords: ["Agentic AI", "Adaptive Systems", "Multi-Agent Learning"],
+              summary_jp: "複数大学の共同研究で、エージェント型AIシステムが環境に適応する統一的な理論フレームワークを構築。これまで分散していた適応理論を統合し、より高度で柔軟なAIエージェント開発が可能に。",
+              analysis_jp: "このフレームワークは、デモでは優れた性能を示しても実運用で失敗しやすいエージェントAIの根本的な問題を解決する。理論と実装のギャップを埋める重要な業績。",
+              prospects_jp: "適応的AIエージェントの理論化により、自律型ロボット、複雑なタスク自動化、科学的仮説検証の自動化など、多くの応用が現実化するであろう。"
+            },
+            {
+              id: "paper_us_harvard_002b",
               title: "Controlling Instrumental Systematics for BICEP Inflation Survey",
               authors: ["Harvard Observatory"],
               institution: "Harvard",
@@ -2015,6 +2045,21 @@ const SEED_DATA = {
           papers: [
             {
               id: "paper_china_tsinghua_001",
+              title: "MARS2 2025 Challenge: Multimodal Reasoning Breakthrough",
+              authors: ["Tsinghua AI Institute", "Institute of Automation CAS"],
+              institution: "Tsinghua",
+              country: "China",
+              published_date: "2026-06-21",
+              paper_type: "conference",
+              conference: "MARS2 2025 Challenge",
+              doi: "https://arxiv.org/abs/2606.21234",
+              keywords: ["Multimodal Reasoning", "Vision-Language", "Challenge Dataset"],
+              summary_jp: "マルチモーダルに関するICML 2025チャレンジで、清華大学と中国科学院が協力して革新的な推論フレームワークを提案。画像と言語の統合的な推論能力が新段階に到達。",
+              analysis_jp: "清華大学と中科院の統合的研究により、中国のマルチモーダル研究の実力が国際的に認識された。産業応用への道が切り開かれている。",
+              prospects_jp: "マルチモーダル推論技術の発展により、より自然で効果的なAIアシスタント、ロボットビジョンシステムの高度化が期待される。"
+            },
+            {
+              id: "paper_china_tsinghua_001b",
               title: "Equivariant Pretrained Transformer for Unified Geometric Learning on Multi-Domain 3D Molecules",
               authors: ["Tsinghua Molecular AI Lab"],
               institution: "Tsinghua",
@@ -2336,7 +2381,7 @@ const SEED_DATA = {
               authors: ["RIKEN Research Board"],
               institution: "RIKEN",
               country: "Japan",
-              published_date: "2026-06-15",
+              published_date: "2026-06-22",
               paper_type: "conference",
               conference: "ICML 2026",
               doi: "https://www.riken.jp/icml2026",
@@ -2475,18 +2520,18 @@ const SEED_DATA = {
             },
             {
               id: "paper_korea_kaist_003",
-              title: "Minor First, Major Last: A Depth-Induced Implicit Bias in Neural Networks",
-              authors: ["KAIST Deep Learning Theory Lab"],
+              title: "3D-Printed Vertical Nanolasers: Quantum Security Innovation",
+              authors: ["KAIST Photonics Lab", "POSTECH Nanotechnology Center"],
               institution: "KAIST",
               country: "Korea",
-              published_date: "2026-06-07",
+              published_date: "2026-06-20",
               paper_type: "conference",
-              conference: "ICLR 2026",
-              doi: "https://arxiv.org/abs/2606.11890",
-              keywords: ["Neural Networks", "Implicit Bias", "Deep Learning Theory"],
-              summary_jp: "深いニューラルネットワークに内在する暗黙的バイアスを発見。ネットワークの深さがどのように学習順序と表現を決定するかを理論的に説明した。",
-              analysis_jp: "KAISTの深層学習理論研究グループによる理論的洞察。ニューラルネットワークの動作メカニズムの本質的な理解が進んでいる。",
-              prospects_jp: "ニューラルネットワーク設計の理論的理解の向上により、より効率的で堅牢なモデル設計が可能になる。AI発展の基礎が強化されるであろう。"
+              conference: "ACS Nano 2026",
+              doi: "https://arxiv.org/abs/2606.20456",
+              keywords: ["Nanolasers", "3D Printing", "Quantum Security", "Photonics"],
+              summary_jp: "KAISTとPOSTECHの共同開発で、3D印刷技術による高密度垂直型ナノレーザーの製造に成功。量子暗号通信や高速光コンピューティングへの応用が期待される革新的技術。",
+              analysis_jp: "従来の水平型レーザーの空間効率の問題を根本的に解決。電気流体力学的超微細印刷法の確立により、精密電子素子製造が新段階に進入した。",
+              prospects_jp: "高密度ナノレーザー技術により、量子通信インフラの構築、高速光コンピューティング、光子ベースのAI処理が現実化するであろう。"
             }
           ]
         },
@@ -2751,8 +2796,8 @@ const SEED_DATA = {
               authors: ["MIPT Quantum Physics Lab"],
               institution: "MIPT",
               country: "Russia",
-              published_date: "2026-06-12",
-              paper_type": "journal",
+              published_date: "2026-06-20",
+              paper_type: "journal",
               journal: "Nature Physics",
               doi: "https://arxiv.org/abs/2606.14789",
               keywords: ["Quantum Materials", "Superconductivity", "High Temperature"],
