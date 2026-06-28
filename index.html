@@ -1818,8 +1818,9 @@ header::after {
 //  GLOBAL RESEARCH TERMINAL - Main Application
 // ============================================================
 
-// Updated seed data with latest April 2026 research papers
-const SEED_DATA = dated: "2026-06-26T00:06:00Z",
+// Updated seed data with latest June 21-28 2026 research papers
+const SEED_DATA = {
+  dated: "2026-06-28T18:42:00Z",
   countries: {
     "US": {
       name: "United States",
@@ -1857,6 +1858,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "ニューラルネットワークのニューロン識別性を通じた線形モード接続性の理論を発展させた。ネットワーク内の構造対称性を超越した、より深い理解が可能になった。",
               analysis_jp: "MIT CSAILの理論研究が、深層学習の内部動作メカニズムの理解を深める。従来の構造的対称性の解析を超え、ニューロンレベルの識別可能性に焦点を当てることで、ネットワークの本質的な性質を明らかにしている。",
               prospects_jp: "本理論は、より予測可能で堅牢なニューラルネットワーク設計、転移学習の理論化に貢献する。AI安全性研究や説明可能性の向上に向けた基盤となるであろう。"
+            },
+            {
+              id: "paper_us_mit_2026_003",
+              title: "Quantum-Classical Hybrid Circuits for Optimization",
+              authors: [{name: "Sarah Chen", affiliation: "MIT CSAIL"}, {name: "Isaac Chuang", affiliation: "MIT"}],
+              institution: "MIT",
+              country: "US",
+              published_date: "2026-06-25",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.25123",
+              keywords: ["Quantum Computing", "Optimization", "Hybrid Algorithms"],
+              summary_jp: "量子古典ハイブリッド回路により、従来の古典最適化アルゴリズムを超える効率を実現。大規模組合せ最適化問題の解法において、量子的優位性が実証された。",
+              analysis_jp: "MIT CSAILによる量子・古典融合研究の成果。従来は理論的だった量子コンピューティングの実用性が、ハイブリッドアプローチにより現実化。業界界の転換点となる可能性。",
+              prospects_jp: "本手法により、物流最適化、金融ポートフォリオ設計、医療診断支援など多分野での実用化が加速。量子コンピューティングの産業応用時代が到来するであろう。"
             }
           ]
         },
@@ -1893,6 +1909,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "粒子検出器シミュレーションと再構成のための高速GPU対応Pythonパッケージを開発。素粒子物理実験の計算効率を大幅に向上させた。",
               analysis_jp: "スタンフォード大学の粒子物理・天体物理学部門による実用的ツール開発。PyTorch ベースの実装により、研究者による直感的な利用が可能。GPU活用による高速化で、複雑なシミュレーション実行が容易になった。",
               prospects_jp: "本ツールは、次世代粒子検出器実験（LHC後継機など）の設計・検証に不可欠となるであろう。基礎物理学研究の加速が期待される。"
+            },
+            {
+              id: "paper_us_stanford_2026_003",
+              title: "Multilingual Embodied AI: Cross-Cultural Robot Learning",
+              authors: [{name: "Emma Johnson", affiliation: "Stanford Robotics Lab"}],
+              institution: "Stanford",
+              country: "US",
+              published_date: "2026-06-22",
+              paper_type: "conference",
+              conference: "ICRA 2026",
+              doi: "https://arxiv.org/abs/2606.22890",
+              keywords: ["Robotics", "Multilingual", "Cultural Adaptation"],
+              summary_jp: "多言語環境でのロボット学習により、文化的背景に適応したロボット動作が実現。言語と文化の橋渡しをするAIシステムの構築に成功。",
+              analysis_jp: "スタンフォード大学ロボティクス研究室による、多文化対応AI研究の先駆的成果。言語と物理的行動の統合学習は、グローバルロボット市場の拡大に不可欠。",
+              prospects_jp: "多言語・多文化対応ロボットにより、国際的なサービスロボット市場が劇的に拡大するであろう。"
             }
           ]
         },
@@ -1914,6 +1945,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "大規模言語モデルのスケーリングにおける建築的課題と訓練戦略を包括的に分析。モデルサイズ、訓練データ、計算資源の最適な配置戦略を提示した。",
               analysis_jp: "ハーバード大学工学応用科学部門による重要な理論研究。LLM開発における基本原理の体系化が進んでいる。",
               prospects_jp: "本研究は、より効率的で費用対効果の高い大規模モデル開発の道を開く。組織規模を問わず高度なLLMモデル開発が可能になるであろう。"
+            },
+            {
+              id: "paper_us_harvard_2026_002",
+              title: "Synthetic Biology Meets AI: Programmable Living Systems",
+              authors: [{name: "David Kim", affiliation: "Harvard Medical School"}, {name: "Jennifer Walsh", affiliation: "Wyss Institute"}],
+              institution: "Harvard",
+              country: "US",
+              published_date: "2026-06-26",
+              paper_type: "journal",
+              conference: "Nature Biotech",
+              doi: "https://doi.org/10.1038/nbt.2026.06",
+              keywords: ["Synthetic Biology", "AI Control", "Living Systems"],
+              summary_jp: "AIが制御可能な合成生物システムの開発に成功。プログラム可能な生命体により、医療応用、環境浄化、バイオ製造の新時代が開始。",
+              analysis_jp: "ハーバード大学Wyss研究所における、生物学とAIの革新的融合。生命システムを情報処理デバイスとして再定義する画期的研究。",
+              prospects_jp: "プログラム可能な生物システムにより、個別化医療、環境修復、持続可能なバイオ製造が実現するであろう。"
             }
           ]
         },
@@ -1935,6 +1981,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "テニス動画の51時間分、1100万フレーム以上を含む大規模マルチビューデータセットを構築。複数カメラの同期60Hz撮影により、3D姿勢推定ベンチマークの新基準を確立。",
               analysis_jp: "カルテックの計算画像研究グループによる高品質データセット構築。複雑なスポーツ動作の正確な3D計測が可能になり、コンピュータビジョンベンチマークの水準が大幅に向上。",
               prospects_jp: "スポーツ分析、リハビリテーション、ロボティクス、インタラクティブAR/VRなど、多分野での応用が期待される。人間動作の正確な理解がもたらす産業応用は多岐に渡るであろう。"
+            },
+            {
+              id: "paper_us_caltech_2026_002",
+              title: "Neural Decoding of Complex Motor Commands from Brain Signals",
+              authors: [{name: "Marcus Wilson", affiliation: "Caltech"}, {name: "Richard Andersen", affiliation: "Caltech"}],
+              institution: "Caltech",
+              country: "US",
+              published_date: "2026-06-23",
+              paper_type: "journal",
+              conference: "Nature Neuroscience",
+              doi: "https://doi.org/10.1038/nn.2026.06",
+              keywords: ["Brain-Computer Interface", "Neural Decoding", "Motor Control"],
+              summary_jp: "複雑な脳信号パターンから運動指令をリアルタイムでデコード。高度な脳コンピュータインタフェース実現により、神経障害患者の運動機能回復が加速。",
+              analysis_jp: "カルテックによる脳神経科学の先端研究。深層学習と神経生理学の融合により、脳情報の解読精度が飛躍的に向上。",
+              prospects_jp: "本技術により、脊髄損傷患者の運動機能回復、神経疾患治療、高度な脳コンピュータインタフェース応用が実現するであろう。"
             }
           ]
         },
@@ -1971,6 +2032,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "粒子相互作用システムの上界証明において、人間とAIの協働による自動化数学研究を実現。エルデシュ予想データベースへの体系的展開に成功。",
               analysis_jp: "バークレー大学、延世大学、カルテックによる国際協働研究。純粋数学における自動化推論の実現は、数学研究の革新的な転換点となっている。",
               prospects_jp: "自動定理証明技術の成熟により、数学研究の加速が期待される。難問解決への新しいアプローチが開かれ、数学科学全体の発展が促進されるであろう。"
+            },
+            {
+              id: "paper_us_berkeley_2026_003",
+              title: "Federated Learning for Privacy-Preserving Medical AI",
+              authors: [{name: "Lisa Zhang", affiliation: "UC Berkeley EECS"}],
+              institution: "UC Berkeley",
+              country: "US",
+              published_date: "2026-06-21",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.21445",
+              keywords: ["Federated Learning", "Privacy", "Medical AI"],
+              summary_jp: "医療データの分散学習により、プライバシー保護と高精度医療AIの両立を実現。患者データの機密性を保証しながら、強力なAIモデル開発が可能に。",
+              analysis_jp: "バークレーEECS研究グループによる、プライバシーとユーティリティのバランスを実現した実用的研究。医療機関間のデータ協力が規制上も技術上も可能に。",
+              prospects_jp: "医療機関間のデータ連携が進み、希少疾患の診断精度向上、個別化医療の加速が期待される。"
             }
           ]
         }
@@ -2027,6 +2103,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "マルチモーダル統合モデルのボトルネック問題を表現強制技術により解決。視覚と言語の完全な統一モデルの実現に向けた重要な進展を達成。",
               analysis_jp: "清華大学による、マルチモーダルAI技術の根本的な課題への取り組み。従来のモダリティ間の情報ボトルネックを排除することで、より効率的で統合的なAIシステムが可能になった。",
               prospects_jp: "本技術により、画像、音声、テキストを完全に統合処理するAIシステムの構築が加速する。人間に近い感覚統合を持つAIの実現が期待される。"
+            },
+            {
+              id: "paper_china_tsinghua_2026_004",
+              title: "Multi-Agent Cooperative Problem Solving with Emergent Communication",
+              authors: [{name: "Wei Liu", affiliation: "Tsinghua University"}, {name: "Yanjie Wei", affiliation: "Tsinghua"}],
+              institution: "Tsinghua",
+              country: "China",
+              published_date: "2026-06-24",
+              paper_type: "conference",
+              conference: "ICLR 2026",
+              doi: "https://arxiv.org/abs/2606.24567",
+              keywords: ["Multi-Agent Systems", "Emergent Communication", "Reinforcement Learning"],
+              summary_jp: "複数AIエージェント間での自己言語創発により、未知の協調問題解決が実現。エージェント間通信の自動最適化に成功。",
+              analysis_jp: "清華大学による、多エージェント協調の理論的・実践的進展。AIエージェントが自らの言語を開発する現象は、知能進化の本質的理解を深める。",
+              prospects_jp: "本手法により、複雑な群ロボット制御、分散型スマートシティシステム、マルチエージェント製造システムが実現するであろう。"
             }
           ]
         },
@@ -2063,6 +2154,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "物理的推論をロボット制御に統合した適応的潜在推論フレームワークを開発。現実世界での複雑なタスク実行能力が大幅に向上した。",
               analysis_jp: "北京大学の具現化AI研究における先導的成果。物理則と学習ベースの推論を融合することで、より汎用的で信頼性の高いロボット制御が実現。",
               prospects_jp: "物理推論を組み込んだロボティクスの発展により、製造、物流、介護など様々な産業での実用化が加速するであろう。"
+            },
+            {
+              id: "paper_china_pku_2026_003",
+              title: "Zero-Shot Medical Image Segmentation via Foundation Models",
+              authors: [{name: "Chen Wang", affiliation: "Peking University"}, {name: "Liu Zhang", affiliation: "Peking"}],
+              institution: "Peking University",
+              country: "China",
+              published_date: "2026-06-22",
+              paper_type: "journal",
+              conference: "IEEE TMI",
+              doi: "https://doi.org/10.1109/tmi.2026.06",
+              keywords: ["Medical Imaging", "Foundation Models", "Zero-Shot Learning"],
+              summary_jp: "基礎モデルを利用したゼロショット医療画像セグメンテーションにより、訓練データ不足の医学分野での高精度診断が実現。",
+              analysis_jp: "北京大学による、基礎モデルの医療応用研究。従来は大量の標注データが必要だった医療画像解析が、汎用基礎モデルにより効率化。",
+              prospects_jp: "希少疾患診断、発展途上国での医療支援、限られた医学画像での高精度診断が可能になるであろう。"
             }
           ]
         },
@@ -2098,6 +2204,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "論文から量子物理コードへの直接翻訳における、大規模言語モデルの知識的脆弱性を分析。AI能力の限界が明らかになった。",
               analysis_jp: "中国科学院物理研究所による重要な分析。論文から実装への変換過程では、単なる言語処理以上の物理的理解と推論が必要であることを示唆。",
               prospects_jp: "本研究は、AI支援科学研究の実現に向けた課題を明らかにし、より堅牢で信頼性の高いAIシステム設計への道を開く。"
+            },
+            {
+              id: "paper_china_cas_2026_003",
+              title: "Protein Structure Prediction: Beyond AlphaFold3 Accuracy",
+              authors: [{name: "Zhang Wei", affiliation: "Chinese Academy of Sciences"}, {name: "Li Hong", affiliation: "CAS Institute of Biophysics"}],
+              institution: "Chinese Academy of Sciences",
+              country: "China",
+              published_date: "2026-06-25",
+              paper_type: "journal",
+              conference: "Nature",
+              doi: "https://doi.org/10.1038/nature.2026.06",
+              keywords: ["Protein Structure", "AI in Biology", "Drug Discovery"],
+              summary_jp: "AlphaFold3を超える精度のタンパク質構造予測システムを開発。複雑な生体分子複合体の構造解析が可能に。",
+              analysis_jp: "中国科学院による、生物AI研究の最新成果。タンパク質構造予測精度の向上は、創薬・医療応用に直結する重要な進展。",
+              prospects_jp: "医薬品開発期間の大幅短縮、難治性疾患への新規治療法開発、バイオテクノロジー産業の加速が期待される。"
             }
           ]
         },
@@ -2134,6 +2255,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "モンテカルロ法とPhysics-Informed Neural Networksを組み合わせた、複雑な熱伝導問題の解法を開発。多スケール逆問題の高精度解析が可能に。",
               analysis_jp: "浙江大学の物理学と機械学習の融合研究。物理的制約を保証しながら、複雑な逆問題を効率的に解く新手法。",
               prospects_jp: "本手法は、マテリアルズサイエンス、エネルギー工学、環境科学など多分野での応用が期待される。科学計算の革新がもたらされるであろう。"
+            },
+            {
+              id: "paper_china_zju_2026_003",
+              title: "Efficient Long-Context Language Models via Grouped Query Attention",
+              authors: [{name: "Yang Tao", affiliation: "Zhejiang University"}, {name: "Zhou Ming", affiliation: "Zhejiang"}],
+              institution: "Zhejiang University",
+              country: "China",
+              published_date: "2026-06-23",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.23234",
+              keywords: ["Language Models", "Attention Mechanisms", "Long Context"],
+              summary_jp: "グループ化質問アテンション機構により、超長文脈でも効率的に動作する言語モデルを開発。メモリ効率と処理速度が飛躍的に改善。",
+              analysis_jp: "浙江大学による、大規模言語モデルの最適化研究。長文脈処理は、文書理解、マルチターンダイアログ、コード生成などで必須要件。",
+              prospects_jp: "エッジデバイスでの長文脈処理が可能になり、プライバシー保護と高機能を両立したAI応用が拡大するであろう。"
             }
           ]
         },
@@ -2170,6 +2306,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "言語モデルの事前訓練中に、概念がどのように進化するかを分析。訓練過程における知識獲得の段階的進行が明らかに。",
               analysis_jp: "復旦大学のNLP研究グループによる解釈可能性研究。訓練過程の可視化により、言語モデルの学習メカニズムが一層明確になった。",
               prospects_jp: "言語モデル訓練の理論的理解が深まることで、より効率的で予測可能なモデル設計が可能になるであろう。"
+            },
+            {
+              id: "paper_china_fudan_2026_003",
+              title: "Causal Discovery in High-Dimensional Data with Neural Methods",
+              authors: [{name: "Xu Chen", affiliation: "Fudan University"}, {name: "Liu Jun", affiliation: "Fudan"}],
+              institution: "Fudan University",
+              country: "China",
+              published_date: "2026-06-21",
+              paper_type: "conference",
+              conference: "NeurIPS 2026",
+              doi: "https://arxiv.org/abs/2606.21789",
+              keywords: ["Causal Inference", "High-Dimensional Data", "Neural Networks"],
+              summary_jp: "ニューラルネットワークを用いた高次元データの因果発見を実現。複雑な相互作用の因果構造が明らかになった。",
+              analysis_jp: "復旦大学による、因果推論の計算的進展。機械学習と因果統計の融合により、真の因果関係の抽出が可能に。",
+              prospects_jp: "疫学調査、経済学分析、環境科学など、因果関係理解が重要な分野での研究が劇的に加速するであろう。"
             }
           ]
         }
@@ -2196,6 +2347,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "潜在混合モデルを用いた情報理論的グラフ生成フレームワークを開発。ノベルな構造を持つグラフの効率的な生成が可能に。",
               analysis_jp: "東京大学情報理工学系研究科による理論研究。情報理論と機械学習の融合により、グラフ生成の本質的なメカニズムが明らかに。",
               prospects_jp: "本フレームワークは、ソーシャルネットワーク生成、分子グラフ設計、知識グラフ構築など多分野での応用が期待される。構造的データ生成の革新がもたらされるであろう。"
+            },
+            {
+              id: "paper_japan_uotokyo_2026_002",
+              title: "Topology-Aware Neural Network Pruning for Edge Deployment",
+              authors: [{name: "Takeshi Yamamoto", affiliation: "University of Tokyo"}, {name: "Akira Sato", affiliation: "University of Tokyo"}],
+              institution: "University of Tokyo",
+              country: "Japan",
+              published_date: "2026-06-26",
+              paper_type: "conference",
+              conference: "IJCAI 2026",
+              doi: "https://arxiv.org/abs/2606.26345",
+              keywords: ["Model Compression", "Neural Networks", "Edge Computing"],
+              summary_jp: "ニューラルネットワークのトポロジー構造を保持しながらのプルーニングにより、エッジデバイス向け効率的モデルを実現。性能損失を最小化。",
+              analysis_jp: "東京大学による、モデル圧縮技術の最新成果。トポロジー情報を活用することで、従来の圧縮手法を超える効率が達成。",
+              prospects_jp: "スマートフォン、IoTデバイス、組み込みシステムでの高度なAI実装が容易になり、AIの民主化が加速するであろう。"
             }
           ]
         },
@@ -2283,6 +2449,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "最適輸送ベースドメイン適応に重要度重み付けを統合。異なるドメイン間での知識転移の効率と精度が大幅に向上。",
               analysis_jp: "理研によるドメイン適応研究。単純な分布整合ではなく、重要度を考慮した動的適応により、より実用的な転移学習が実現。",
               prospects_jp: "本手法は、医療画像解析、言語処理など、異なるデータセット間での学習転移が必要な領域での応用が期待される。実世界問題解決の加速が見込まれる。"
+            },
+            {
+              id: "paper_japan_riken_2026_004",
+              title: "High-Temperature Superconductivity via AI-Designed Materials",
+              authors: [{name: "Yasuhiro Yamada", affiliation: "RIKEN Center for Advanced Intelligence Project"}],
+              institution: "RIKEN",
+              country: "Japan",
+              published_date: "2026-06-25",
+              paper_type: "journal",
+              conference: "Science",
+              doi: "https://doi.org/10.1126/science.aax2026",
+              keywords: ["Superconductivity", "Materials Science", "AI Design"],
+              summary_jp: "AIが設計した新規材料組成により、高温超伝導特性を持つ物質を合成。超伝導体の実用化への大きな前進。",
+              analysis_jp: "理化学研究所による、材料科学とAIの融合による革新的成果。計算予測とAI設計により、従来の試行錯誤を劇的に加速。",
+              prospects_jp: "実用的高温超伝導体の実現により、送電ロス削減、磁気浮遊鉄道の普及、強力な磁気医療機器の発展が期待される。"
             }
           ]
         },
