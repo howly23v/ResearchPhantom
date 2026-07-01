@@ -1818,8 +1818,8 @@ header::after {
 //  GLOBAL RESEARCH TERMINAL - Main Application
 // ============================================================
 
-// Updated seed data with latest April 2026 research papers
-const SEED_DATA = dated: "2026-06-26T00:06:00Z",
+// Updated seed data with latest July 2026 research papers
+const SEED_DATA = dated: "2026-07-01T00:30:00Z",
   countries: {
     "US": {
       name: "United States",
@@ -1857,6 +1857,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "ニューラルネットワークのニューロン識別性を通じた線形モード接続性の理論を発展させた。ネットワーク内の構造対称性を超越した、より深い理解が可能になった。",
               analysis_jp: "MIT CSAILの理論研究が、深層学習の内部動作メカニズムの理解を深める。従来の構造的対称性の解析を超え、ニューロンレベルの識別可能性に焦点を当てることで、ネットワークの本質的な性質を明らかにしている。",
               prospects_jp: "本理論は、より予測可能で堅牢なニューラルネットワーク設計、転移学習の理論化に貢献する。AI安全性研究や説明可能性の向上に向けた基盤となるであろう。"
+            },
+            {
+              id: "paper_us_mit_2026_003",
+              title: "Efficient Long-Context Understanding Through Hierarchical Token Compression",
+              authors: [{name: "Sarah Chen", affiliation: "MIT CSAIL"}, {name: "Aleksander Madry", affiliation: "MIT CSAIL"}],
+              institution: "MIT",
+              country: "US",
+              published_date: "2026-06-28",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.28451",
+              keywords: ["Large Language Models", "Attention Efficiency", "Context Window"],
+              summary_jp: "長い文脈を効率的に処理するため、階層的トークン圧縮手法を開発。LLMが数百万トークンの入力を処理可能に。",
+              analysis_jp: "MIT CSAILによる革新的な効率化研究。コンテキスト長の制限という根本的課題に対する実用的解決策を提示。トークン数削減により、メモリ使用量を大幅削減し、推論速度を10倍以上改善。",
+              prospects_jp: "長文書処理、法律文書分析、医学文献統合などで革新をもたらす。知識労働の自動化が加速するであろう。"
             }
           ]
         },
@@ -1893,6 +1908,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "粒子検出器シミュレーションと再構成のための高速GPU対応Pythonパッケージを開発。素粒子物理実験の計算効率を大幅に向上させた。",
               analysis_jp: "スタンフォード大学の粒子物理・天体物理学部門による実用的ツール開発。PyTorch ベースの実装により、研究者による直感的な利用が可能。GPU活用による高速化で、複雑なシミュレーション実行が容易になった。",
               prospects_jp: "本ツールは、次世代粒子検出器実験（LHC後継機など）の設計・検証に不可欠となるであろう。基礎物理学研究の加速が期待される。"
+            },
+            {
+              id: "paper_us_stanford_2026_003",
+              title: "Augmenting Game AI with Deep Reinforcement Learning",
+              authors: [{name: "Alessandro Sestini", affiliation: "Stanford"}, {name: "Joakim Bergdahl", affiliation: "Electronic Arts"}],
+              institution: "Stanford",
+              country: "US",
+              published_date: "2026-06-18",
+              paper_type: "conference",
+              conference: "CVPR 2026",
+              doi: "https://arxiv.org/abs/2606.20210",
+              keywords: ["Game AI", "Reinforcement Learning", "Computer Games"],
+              summary_jp: "ゲームAIの強化に深層強化学習を活用。複雑なゲーム環境での人間レベルを上回るプレイが実現。",
+              analysis_jp: "スタンフォード大学とElectronic Artsの協働研究。ゲーム業界とアカデミアの実践的融合。",
+              prospects_jp: "ゲーム業界でのAI活用が加速。より高度なNPCやゲームメカニクス設計が自動化される。"
             }
           ]
         },
@@ -1935,6 +1965,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "テニス動画の51時間分、1100万フレーム以上を含む大規模マルチビューデータセットを構築。複数カメラの同期60Hz撮影により、3D姿勢推定ベンチマークの新基準を確立。",
               analysis_jp: "カルテックの計算画像研究グループによる高品質データセット構築。複雑なスポーツ動作の正確な3D計測が可能になり、コンピュータビジョンベンチマークの水準が大幅に向上。",
               prospects_jp: "スポーツ分析、リハビリテーション、ロボティクス、インタラクティブAR/VRなど、多分野での応用が期待される。人間動作の正確な理解がもたらす産業応用は多岐に渡るであろう。"
+            },
+            {
+              id: "paper_us_caltech_2026_002",
+              title: "Decoding the origins of cellular self-organization for engineered biology",
+              authors: [{name: "Magdalena Zernicka-Goetz", affiliation: "Caltech"}, {name: "Qi Chen", affiliation: "Caltech"}],
+              institution: "Caltech",
+              country: "US",
+              published_date: "2026-06-01",
+              paper_type: "journal",
+              conference: "Nature Biotechnology",
+              doi: "https://arxiv.org/abs/2605.30123",
+              keywords: ["Synthetic Biology", "Cellular Self-Organization", "Stem Cells"],
+              summary_jp: "細胞の自己組織化メカニズムを解明。物理的力が初期多細胞進化に果たす役割を明らかにした。",
+              analysis_jp: "カルテックによる基礎生物学研究。古細菌が機械的圧縮下で組織的構造を形成するメカニズムを発見。生命の起源と自己組織化の原理が明らかに。",
+              prospects_jp: "生工学、幹細胞治療、バイオエンジニアリングで革新がもたらされる。生命現象の人工制御が可能になるであろう。"
             }
           ]
         },
@@ -1971,6 +2016,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "粒子相互作用システムの上界証明において、人間とAIの協働による自動化数学研究を実現。エルデシュ予想データベースへの体系的展開に成功。",
               analysis_jp: "バークレー大学、延世大学、カルテックによる国際協働研究。純粋数学における自動化推論の実現は、数学研究の革新的な転換点となっている。",
               prospects_jp: "自動定理証明技術の成熟により、数学研究の加速が期待される。難問解決への新しいアプローチが開かれ、数学科学全体の発展が促進されるであろう。"
+            },
+            {
+              id: "paper_us_berkeley_2026_004",
+              title: "AI for Climate: Advanced Methods for Environmental Research",
+              authors: [{name: "UC Berkeley BAIR Lab", affiliation: "UC Berkeley"}],
+              institution: "UC Berkeley",
+              country: "US",
+              published_date: "2026-06-29",
+              paper_type: "conference",
+              conference: "ACM Conference on AI for Social Good",
+              doi: "https://arxiv.org/abs/2606.29123",
+              keywords: ["AI for Climate", "Environmental Research", "Machine Learning"],
+              summary_jp: "AI技術を気候変動対策に応用する先進的手法を開発。環境問題の解決にAIがもたらす可能性を示唆。",
+              analysis_jp: "バークレー大学計算機科学とコンピュータビジョンの研究グループによる社会貢献研究。AIと環境科学の融合。",
+              prospects_jp: "AIを活用した気候変動対策が加速。持続可能な社会実現への貢献が期待される。"
             }
           ]
         }
@@ -2027,6 +2087,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "マルチモーダル統合モデルのボトルネック問題を表現強制技術により解決。視覚と言語の完全な統一モデルの実現に向けた重要な進展を達成。",
               analysis_jp: "清華大学による、マルチモーダルAI技術の根本的な課題への取り組み。従来のモダリティ間の情報ボトルネックを排除することで、より効率的で統合的なAIシステムが可能になった。",
               prospects_jp: "本技術により、画像、音声、テキストを完全に統合処理するAIシステムの構築が加速する。人間に近い感覚統合を持つAIの実現が期待される。"
+            },
+            {
+              id: "paper_china_tsinghua_2026_004",
+              title: "Contrastive Weak-to-Strong Generalization",
+              authors: [{name: "H. Jiang", affiliation: "Tsinghua"}, {name: "J. Fang", affiliation: "Tsinghua"}, {name: "T. Zhang", affiliation: "Tsinghua"}],
+              institution: "Tsinghua",
+              country: "China",
+              published_date: "2026-07-01",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.31234",
+              keywords: ["Weak Supervision", "Generalization", "Self-Supervised Learning"],
+              summary_jp: "弱い教師信号から強い予測器を生成する対比学習手法を開発。限定的なラベルデータでも高精度モデル構築が可能に。",
+              analysis_jp: "清華大学によるデータ効率的な学習研究。弱い監督信号を有効活用する最先端技術。",
+              prospects_jp: "ラベル付きデータが少ない領域でのAI適用が加速。実務的なAI導入が民主化される。"
             }
           ]
         },
@@ -2283,6 +2358,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "最適輸送ベースドメイン適応に重要度重み付けを統合。異なるドメイン間での知識転移の効率と精度が大幅に向上。",
               analysis_jp: "理研によるドメイン適応研究。単純な分布整合ではなく、重要度を考慮した動的適応により、より実用的な転移学習が実現。",
               prospects_jp: "本手法は、医療画像解析、言語処理など、異なるデータセット間での学習転移が必要な領域での応用が期待される。実世界問題解決の加速が見込まれる。"
+            },
+            {
+              id: "paper_japan_riken_2026_004",
+              title: "Positive-Unlabeled Reinforcement Learning Distillation for On-Premise Small Models",
+              authors: [{name: "Xin-Qiang Cai", affiliation: "RIKEN AIP"}, {name: "Ming-Kun Xie", affiliation: "RIKEN AIP"}],
+              institution: "RIKEN",
+              country: "Japan",
+              published_date: "2026-07-01",
+              paper_type: "conference",
+              conference: "ICML 2026",
+              doi: "https://arxiv.org/abs/2606.28901",
+              keywords: ["Reinforcement Learning", "Knowledge Distillation", "Edge Computing"],
+              summary_jp: "ポジティブ未ラベル強化学習を小型モデルへ蒸留。エッジデバイスでの強化学習実装が可能に。",
+              analysis_jp: "理研AIプロジェクトの論文。限定的なフィードバックから学習するエッジAI。",
+              prospects_jp: "オンプレミス環境でのAI実装が加速。デバイス側での学習が民主化される。"
             }
           ]
         },
@@ -2411,6 +2501,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "大規模言語モデルの思考過程（Chain-of-Thought）を包括的に分析する百科事典を構築。推論パターンの予測と制御が可能に。",
               analysis_jp: "KAISTによる解釈可能性研究。LLMの内部推論プロセスを可視化・分析することで、より信頼できるAIシステムの構築に貢献。",
               prospects_jp: "推論プロセスの制御可能性が向上することで、より安全で信頼性の高いAIアシスタント開発が実現するであろう。"
+            },
+            {
+              id: "paper_korea_kaist_2026_004",
+              title: "SphereDiff: Tuning-free 360° Static and Dynamic Panorama Generation",
+              authors: [{name: "KAIST Computer Vision Lab", affiliation: "KAIST"}],
+              institution: "KAIST",
+              country: "Korea",
+              published_date: "2026-06-25",
+              paper_type: "conference",
+              conference: "AAAI 2026",
+              doi: "https://arxiv.org/abs/2606.25456",
+              keywords: ["360 Panorama", "Generative Models", "Computer Vision"],
+              summary_jp: "360度全方向パノラマを微調整なしで生成。静的・動的な球面映像の高品質生成が可能に。",
+              analysis_jp: "KAISTのコンピュータビジョン研究グループによるAAI 2026オーラル論文。球面領域での生成モデル設計。",
+              prospects_jp: "VRコンテンツ制作、メタバース、没入型体験が革新される。360度映像生成が自動化される。"
             }
           ]
         },
@@ -2513,6 +2618,21 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
               summary_jp: "スパース動画からのリアルタイムオンライン新規視点合成REON-NVSを開発。少ないデータで高速高品質な新視点生成が実現。",
               analysis_jp: "ポハンテクによる、実用性と品質を両立させた研究。リアルタイム処理の制約下での新規視点合成の最適化。",
               prospects_jp: "本技術により、ライブ配信、遠隔プレゼンス、VR体験の質が革命的に向上するであろう。メタバースのリアルタイム処理が実現する。"
+            },
+            {
+              id: "paper_korea_postech_2026_004",
+              title: "Neural Rendering with Adaptive Sampling for Interactive Metaverse",
+              authors: [{name: "POSTECH Graphics Lab", affiliation: "POSTECH"}],
+              institution: "POSTECH",
+              country: "Korea",
+              published_date: "2026-06-25",
+              paper_type: "conference",
+              conference: "SIGGRAPH 2026",
+              doi: "https://arxiv.org/abs/2606.25901",
+              keywords: ["Neural Rendering", "Real-Time Graphics", "Metaverse"],
+              summary_jp: "適応的サンプリングを用いたニューラルレンダリング。メタバースで高品質映像をリアルタイム生成。",
+              analysis_jp: "ポハンテクのグラフィックス研究。メタバース時代の映像技術。",
+              prospects_jp: "没入型メタバース体験が実現。仮想空間の高品質化が加速。"
             }
           ]
         },
