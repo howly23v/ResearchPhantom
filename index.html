@@ -1728,6 +1728,65 @@ header::after {
   animation: chipPulse 2.2s ease-in-out infinite;
 }
 @keyframes chipPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+
+/* ---- RESULT VIZ (実験結果のアニメーション可視化) ---- */
+.bq-viz { grid-column: 1 / -1; min-height: 118px; }
+.viz-caption {
+  font-family: 'Oswald', 'LocalOswald', sans-serif;
+  color: var(--p5-yellow);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.bq-viz.on .viz-caption, .bq-viz.done .viz-caption { opacity: 1; }
+.viz-bars { display: grid; grid-template-columns: 70px 1fr 84px; gap: 8px 10px; align-items: center; }
+.viz-bar-label { font-size: 0.72rem; color: #8a8a9a; letter-spacing: 0.05em; text-align: right; }
+.viz-bar-track { background: #1c1c2a; height: 16px; position: relative; overflow: hidden; }
+.viz-bar-fill { height: 100%; width: 0; transition: width 1.1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.viz-bar-fill.loser { background: #6e2a2a; }
+.viz-bar-fill.winner {
+  background: repeating-linear-gradient(-45deg, var(--p5-yellow), var(--p5-yellow) 8px, #d9b400 8px, #d9b400 16px);
+}
+.viz-value {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', sans-serif;
+  font-size: 1.15rem;
+  color: var(--p5-white);
+  letter-spacing: 0.04em;
+}
+.viz-value.winner { color: var(--p5-yellow); font-size: 1.35rem; }
+.viz-gauge-wrap { display: flex; align-items: center; gap: 18px; }
+.viz-gauge-svg { width: 110px; height: 66px; flex: none; }
+.viz-gauge-bg { fill: none; stroke: #1c1c2a; stroke-width: 10; }
+.viz-gauge-fill { fill: none; stroke: var(--p5-yellow); stroke-width: 10; }
+.viz-gauge-num {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', sans-serif;
+  font-size: 2rem;
+  color: var(--p5-yellow);
+}
+.viz-gauge-label { font-size: 0.75rem; color: #8a8a9a; }
+.viz-orbit { position: relative; height: 96px; display: flex; align-items: center; justify-content: center; }
+.orbit-core { font-size: 2.1rem; z-index: 2; animation: chipPulse 2.4s ease-in-out infinite; }
+.orbit-ring {
+  position: absolute; top: 50%; left: 50%;
+  border: 1px dashed rgba(217, 35, 35, 0.55);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.orbit-rotor {
+  position: absolute; top: 50%; left: 50%;
+  animation: orbitSpin linear infinite;
+}
+.orbit-dot {
+  position: absolute;
+  width: 7px; height: 7px;
+  background: var(--p5-yellow);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 221, 0, 0.7);
+}
+@keyframes orbitSpin { to { transform: rotate(360deg); } }
+.viz-note { font-size: 0.7rem; color: #8a8a9a; margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -3636,6 +3695,10 @@ function openJarvisModal(idx) {
           <div class="bq-label">🚀 意義 — なにがうれしい?</div>
           <div class="bq-body" id="bq-impact-text" style="opacity:0;transition:opacity 0.8s;"></div>
         </div>
+        <div class="bq bq-viz" id="bq-viz">
+          <div class="bq-label">📈 実験結果 — 数字で見る</div>
+          <div id="bq-viz-body"></div>
+        </div>
       </div>
       <div class="briefing-progress"><div class="briefing-progress-fill" id="briefing-progress"></div></div>
     </div>
@@ -3821,6 +3884,95 @@ function getStoryboard(paper) {
   return sb || buildFallbackStoryboard(paper);
 }
 
+// ---- RESULT VIZ: 実験結果のアニメーション可視化 ----
+// LLMは数値パラメータ(viz)だけを出す。動きはここの手作りテンプレートが担当。
+function vizFmt(v, unit) {
+  const n = Number(v);
+  if (!isFinite(n)) return String(v);
+  const decimals = Math.abs(n) < 1 ? 2 : (Math.abs(n) < 10 && !Number.isInteger(n)) ? 1 : 0;
+  return n.toFixed(decimals) + (unit || '');
+}
+
+function _bCountUp(el, to, ms, unit) {
+  if (!el) return;
+  const n = Number(to);
+  if (!isFinite(n)) { el.textContent = String(to); return; }
+  const steps = 24;
+  for (let i = 1; i <= steps; i++) {
+    _bLater(() => {
+      const eased = 1 - Math.pow(1 - i / steps, 3);
+      el.textContent = vizFmt(n * eased, unit);
+    }, (ms / steps) * i);
+  }
+}
+
+function renderResultViz(sb, paper) {
+  const viz = sb && sb.viz;
+  if (viz && viz.type === 'compare_bars' && viz.before && viz.after) {
+    const b = Number(viz.before.value), a = Number(viz.after.value);
+    const max = Math.max(Math.abs(b), Math.abs(a)) || 1;
+    const higher = viz.higherIsBetter !== false;
+    const afterWins = higher ? a >= b : a <= b;
+    return `
+      <div class="viz-caption">${viz.caption || ''}</div>
+      <div class="viz-bars">
+        <div class="viz-bar-label">${viz.before.label || '従来'}</div>
+        <div class="viz-bar-track"><div class="viz-bar-fill ${afterWins ? 'loser' : 'winner'}" id="viz-bar-before" data-w="${(Math.abs(b) / max * 100).toFixed(1)}"></div></div>
+        <div class="viz-value ${afterWins ? '' : 'winner'}" id="viz-val-before">0</div>
+        <div class="viz-bar-label">${viz.after.label || '本手法'}</div>
+        <div class="viz-bar-track"><div class="viz-bar-fill ${afterWins ? 'winner' : 'loser'}" id="viz-bar-after" data-w="${(Math.abs(a) / max * 100).toFixed(1)}"></div></div>
+        <div class="viz-value ${afterWins ? 'winner' : ''}" id="viz-val-after">0</div>
+      </div>`;
+  }
+  if (viz && viz.type === 'gauge' && isFinite(Number(viz.value))) {
+    return `
+      <div class="viz-caption">${viz.caption || ''}</div>
+      <div class="viz-gauge-wrap">
+        <svg class="viz-gauge-svg" viewBox="0 0 110 62">
+          <path class="viz-gauge-bg" d="M 10 57 A 45 45 0 0 1 100 57"/>
+          <path class="viz-gauge-fill" id="viz-gauge-fill" d="M 10 57 A 45 45 0 0 1 100 57"
+                stroke-dasharray="0 141.4" style="transition: stroke-dasharray 1.2s cubic-bezier(0.2,0.8,0.2,1);"/>
+        </svg>
+        <div>
+          <div class="viz-gauge-num" id="viz-gauge-num">0</div>
+          <div class="viz-gauge-label">${viz.label || ''}</div>
+        </div>
+      </div>`;
+  }
+  // 数値なし: カテゴリ・アンビエント(数字を創作しないための安全弁)
+  const icon = (typeof getCategoryIcon === 'function') ? getCategoryIcon((paper && paper.categories) || []) : '🔬';
+  const rings = [{ d: 64, s: 5 }, { d: 88, s: 8 }, { d: 112, s: 12 }];
+  return `
+    <div class="viz-orbit">
+      <span class="orbit-core">${icon}</span>
+      ${rings.map(r => `
+        <span class="orbit-ring" style="width:${r.d}px;height:${r.d}px;"></span>
+        <span class="orbit-rotor" style="animation-duration:${r.s}s;"><span class="orbit-dot" style="transform:translate(-50%,-50%) translateY(-${r.d / 2}px);"></span></span>
+      `).join('')}
+    </div>
+    <div class="viz-note">この論文は数値比較よりも理論・手法の提案が主役です</div>`;
+}
+
+function playVizAnimations(sb) {
+  const viz = sb && sb.viz;
+  if (viz && viz.type === 'compare_bars' && viz.before && viz.after) {
+    const bb = document.getElementById('viz-bar-before');
+    const ba = document.getElementById('viz-bar-after');
+    if (bb) bb.style.width = bb.dataset.w + '%';
+    _bCountUp(document.getElementById('viz-val-before'), viz.before.value, 1000, viz.unit || '');
+    _bLater(() => {
+      if (ba) ba.style.width = ba.dataset.w + '%';
+      _bCountUp(document.getElementById('viz-val-after'), viz.after.value, 1000, viz.unit || '');
+    }, 350);
+  } else if (viz && viz.type === 'gauge') {
+    const v = Math.max(0, Math.min(100, Number(viz.value)));
+    const fill = document.getElementById('viz-gauge-fill');
+    if (fill) fill.style.strokeDasharray = (v / 100 * 141.4).toFixed(1) + ' 141.4';
+    _bCountUp(document.getElementById('viz-gauge-num'), viz.value, 1200, viz.unit || '');
+  }
+  // orbit テンプレートはCSSアニメーションが自走する
+}
+
 // ---- 再生制御(モーダルを閉じたら途中でも確実に停止する) ----
 let _briefingTimers = [];
 let _briefingPaper = null;
@@ -3871,6 +4023,10 @@ function playBriefing(sb, onDone) {
     (i > 0 ? '<span class="flow-arrow">▶</span>' : '') +
     `<span class="flow-node" id="bq-node-${i}">${step}</span>`
   ).join('');
+  const vizPanel = document.getElementById('bq-viz');
+  const vizBody = document.getElementById('bq-viz-body');
+  if (vizPanel) vizPanel.classList.remove('on', 'done');
+  if (vizBody) vizBody.innerHTML = renderResultViz(sb, _briefingPaper);
   const prog = document.getElementById('briefing-progress');
   if (prog) { prog.style.transition = 'none'; prog.style.width = '0'; }
 
@@ -3913,8 +4069,16 @@ function playBriefing(sb, onDone) {
     it.style.opacity = '1';
   }, t);
   t += 1100;
+  _bLater(() => document.getElementById('bq-impact').classList.replace('on', 'done'), t);
+
+  // Scene 5(フィナーレ): 実験結果ビジュアライザ
   _bLater(() => {
-    document.getElementById('bq-impact').classList.replace('on', 'done');
+    if (vizPanel) vizPanel.classList.add('on');
+    playVizAnimations(sb);
+  }, t);
+  t += (sb && sb.viz) ? 2100 : 1500;
+  _bLater(() => {
+    if (vizPanel) vizPanel.classList.replace('on', 'done');
     if (typeof onDone === 'function') onDone();
   }, t);
 

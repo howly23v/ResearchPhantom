@@ -56,8 +56,12 @@ function buildPrompt(p) {
   return `あなたは科学コミュニケーターです。以下の論文情報を、初心者向けの「自動ブリーフィング」用データに変換してください。
 出力は次の形式のJSONオブジェクトのみ。コードフェンスや説明文は一切付けないこと。
 
-{"problem":"研究前に何が問題だったか。平易な日本語で40字以内","method":["やったことを最大3ステップ、各12字以内の短い名詞句"],"result":"何が起きた/わかったか。40字以内","metric":{"value":"象徴的な数値+単位(例: 3倍, 97%減, 0.03%)","label":"何の指標か8字以内"},"impact":"社会や生活の何がうれしくなるか。40字以内"}
+{"problem":"研究前に何が問題だったか。平易な日本語で40字以内","method":["やったことを最大3ステップ、各12字以内の短い名詞句"],"result":"何が起きた/わかったか。40字以内","metric":{"value":"象徴的な数値+単位(例: 3倍, 97%減, 0.03%)","label":"何の指標か8字以内"},"impact":"社会や生活の何がうれしくなるか。40字以内","viz":<下記参照>}
 
+"viz" は実験結果をアニメーション表示するためのデータ。本文から読み取れる実数値がある場合のみ、次のどちらかの形式で出力:
+- 従来手法との比較ができる場合: {"type":"compare_bars","unit":"%","before":{"label":"従来","value":1.2},"after":{"label":"本手法","value":0.03},"higherIsBetter":false,"caption":"エラー率を97%削減"}
+- 単一の達成率(0〜100の値)の場合: {"type":"gauge","value":95,"unit":"%","label":"精度","caption":"精度95%を達成"}
+本文に具体的な数値が無い場合は必ず "viz": null とする。数値の創作・推測は厳禁。
 数値的な成果が本文から読み取れない場合は "metric": null とすること。専門用語はできるだけ日常語に言い換えること。
 
 論文タイトル: ${p.title}
@@ -153,7 +157,40 @@ function parseStoryboard(raw) {
     result: clamp(obj.result, 48),
     metric,
     impact: clamp(obj.impact, 48),
+    viz: parseViz(obj.viz),
   };
+}
+
+// viz の検証: 型と数値をホワイトリストで確認。少しでも怪しければ null(アンビエント表示に落ちる)
+function parseViz(viz) {
+  if (!viz || typeof viz !== 'object') return null;
+  try {
+    if (viz.type === 'compare_bars') {
+      const b = Number(viz.before && viz.before.value);
+      const a = Number(viz.after && viz.after.value);
+      if (!isFinite(b) || !isFinite(a)) return null;
+      return {
+        type: 'compare_bars',
+        unit: clamp(viz.unit, 8),
+        before: { label: clamp((viz.before.label || '従来'), 10), value: b },
+        after: { label: clamp((viz.after.label || '本手法'), 10), value: a },
+        higherIsBetter: viz.higherIsBetter !== false,
+        caption: clamp(viz.caption, 30),
+      };
+    }
+    if (viz.type === 'gauge') {
+      const v = Number(viz.value);
+      if (!isFinite(v) || v < 0 || v > 100) return null;
+      return {
+        type: 'gauge',
+        value: v,
+        unit: clamp(viz.unit, 8),
+        label: clamp(viz.label, 10),
+        caption: clamp(viz.caption, 30),
+      };
+    }
+  } catch (_) { /* fall through */ }
+  return null;
 }
 
 // ---- 5. メイン ----
@@ -164,8 +201,10 @@ async function main() {
     storyboards = JSON.parse(fs.readFileSync(STORYBOARDS_PATH, 'utf8'));
   }
 
-  const pending = papers.filter((p) => p.id && !storyboards[p.id]);
-  console.log(`論文 ${papers.length} 件 / 生成済み ${papers.length - pending.length} 件 / 未生成 ${pending.length} 件`);
+  // v2(viz対応)より古いエントリは再生成対象にする
+  const SCHEMA_V = 2;
+  const pending = papers.filter((p) => p.id && (!storyboards[p.id] || storyboards[p.id].v !== SCHEMA_V));
+  console.log(`論文 ${papers.length} 件 / 最新版生成済み ${papers.length - pending.length} 件 / 生成対象 ${pending.length} 件`);
 
   if (DRY_RUN) {
     pending.slice(0, 3).forEach((p) => console.log('--- prompt sample ---\n' + buildPrompt(p).slice(0, 400)));
@@ -188,7 +227,7 @@ async function main() {
       try {
         const raw = await provider.call(prompt);
         const sb = parseStoryboard(raw);
-        storyboards[p.id] = { ...sb, title: p.title, generated: provider.name };
+        storyboards[p.id] = { ...sb, v: 2, title: p.title, generated: provider.name };
         generated++;
         done = true;
         console.log(`✔ [${provider.name}] ${p.id}`);
