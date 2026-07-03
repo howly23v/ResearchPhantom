@@ -180,3 +180,35 @@ No extra steps needed. Just edit `index.html` and push — the site updates auto
 **https://howly23v.github.io/ResearchPhantom/** に反映します（設定済み）。
 
 特別な操作は不要です。`index.html` を編集して push するだけで、サイトが更新されます。
+
+---
+
+### ▶ AUTO BRIEFING（論文の自動解説アニメーション）
+
+論文カードをタップすると、その論文が
+**「❓課題 → 🛠手法 → 📊結果 → 🚀意義」** の4ステップで
+アイアンマンのHUDのように順番にアニメーション表示されます。
+
+#### 仕組み
+
+| ファイル | 役割 |
+| --- | --- |
+| [`storyboards.json`](storyboards.json) | 論文ごとの解説データ（AIが自動生成） |
+| [`scripts/generate_storyboards.mjs`](scripts/generate_storyboards.mjs) | 解説データの生成スクリプト |
+| [`.github/workflows/generate-storyboards.yml`](.github/workflows/generate-storyboards.yml) | 毎日自動で新着論文分を生成 |
+
+生成は **GitHub Models（無料・APIキー不要）** で行い、
+使えない場合は Gemini（`GEMINI_API_KEY` を Secrets に設定した場合のみ）→
+それも無理ならブラウザ側の簡易生成、と自動で切り替わります。
+**どの段階でも表示は止まりません。**
+
+#### ローカルGPUで一括生成する（任意）
+
+[Ollama](https://ollama.com/) を入れた PC（例: RTX 3070）なら、
+レート制限なしで全論文分を一気に生成できます:
+
+```bash
+ollama pull qwen2.5:7b
+PROVIDER=ollama node scripts/generate_storyboards.mjs
+# 生成された storyboards.json をコミットして push すれば反映
+```
