@@ -1,0 +1,58 @@
+name: Generate paper storyboards
+
+on:
+  schedule:
+    - cron: "30 0 * * *"   # 毎日 09:30 JST
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths: ["index.html"]  # 論文データ更新時にも走る(storyboards.jsonのコミットではループしない)
+
+permissions:
+  contents: write
+  models: read   # GitHub Models をGITHUB_TOKENで呼ぶための権限(APIキー不要)
+  actions: write # 生成後にPagesデプロイをディスパッチするため
+
+concurrency:
+  group: storyboards
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Generate storyboards (GitHub Models -> Gemini -> skip)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/generate_storyboards.mjs
+
+      - name: Commit updated storyboards
+        id: commit
+        run: |
+          if git diff --quiet -- storyboards.json 2>/dev/null && git ls-files --error-unmatch storyboards.json >/dev/null 2>&1; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "変更なし"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add storyboards.json
+            if git diff --cached --quiet; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              echo "変更なし"
+            else
+              git commit -m "chore: 論文ストーリーボードを自動生成"
+              git push
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      # GITHUB_TOKENによるpushはワークフローを連鎖起動しないため、Pagesデプロイを明示的に起動
+      - name: Trigger Pages deploy
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main --repo "$GITHUB_REPOSITORY"

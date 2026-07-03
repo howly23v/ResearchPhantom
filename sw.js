@@ -1,5 +1,5 @@
 // Service Worker for GLOBAL RESEARCH TERMINAL
-const CACHE_NAME = 'grterm-v1';
+const CACHE_NAME = 'grterm-v2';
 const ASSETS = [
   './',
   './index.html',

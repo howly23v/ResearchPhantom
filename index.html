@@ -1654,6 +1654,80 @@ header::after {
   .jarvis-header { flex-direction: column; align-items: center; text-align: center; }
   .header-hud { display: none; }
 }
+/* ============ AUTO BRIEFING (自動解説HUD) ============ */
+.jarvis-briefing {
+  border: 1px solid var(--p5-gray);
+  background: rgba(13, 13, 13, 0.55);
+  padding: 14px 16px;
+  margin: 18px 0;
+}
+.briefing-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.briefing-title {
+  font-family: 'Oswald', 'LocalOswald', sans-serif;
+  color: var(--p5-yellow);
+  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+}
+.briefing-replay {
+  background: transparent;
+  border: 1px solid var(--p5-red);
+  color: var(--p5-red);
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  font-family: inherit;
+}
+.briefing-replay:hover { background: var(--p5-red); color: #fff; }
+.briefing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.bq {
+  border: 1px solid var(--p5-gray);
+  background: var(--p5-card-bg);
+  padding: 10px 12px;
+  opacity: 0.4;
+  transition: opacity 0.35s ease, border-color 0.35s ease;
+  min-height: 82px;
+}
+.bq.on { opacity: 1; border-color: var(--p5-red); }
+.bq.done { opacity: 1; }
+.bq-label { font-size: 0.7rem; color: #8a8a9a; letter-spacing: 0.08em; margin-bottom: 6px; }
+.bq.on .bq-label { color: var(--p5-accent); }
+.bq-body { font-size: 0.85rem; line-height: 1.6; color: var(--p5-white); }
+.bq-cursor { color: var(--p5-red); animation: bqBlink 0.9s steps(1) infinite; display: none; }
+@keyframes bqBlink { 50% { opacity: 0; } }
+.bq-flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.flow-node {
+  border: 1px solid #3a3a4a;
+  color: #55556a;
+  font-size: 0.72rem;
+  padding: 3px 9px;
+  white-space: nowrap;
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+.flow-node.lit { color: var(--p5-white); border-color: var(--p5-red); background: rgba(217, 35, 35, 0.15); }
+.flow-arrow { color: #55556a; font-size: 0.72rem; }
+.bq-metric {
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--p5-yellow);
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.2, 1.6, 0.4, 1);
+  vertical-align: middle;
+}
+.bq-metric.pop { transform: scale(1); }
+.bq-metric-label { font-size: 0.7rem; color: #8a8a9a; margin-left: 4px; }
+.briefing-progress { height: 3px; background: var(--p5-gray); margin-top: 12px; }
+.briefing-progress-fill { height: 100%; width: 0; background: var(--p5-red); }
+.briefing-chip {
+  color: var(--p5-yellow);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  animation: chipPulse 2.2s ease-in-out infinite;
+}
+@keyframes chipPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
 </style>
 </head>
 <body>
@@ -1819,7 +1893,8 @@ header::after {
 // ============================================================
 
 // Updated seed data with latest April 2026 research papers
-const SEED_DATA = dated: "2026-06-26T00:06:00Z",
+const SEED_DATA = {
+  dated: "2026-06-26T00:06:00Z",
   countries: {
     "US": {
       name: "United States",
@@ -2793,7 +2868,53 @@ const SEED_DATA = dated: "2026-06-26T00:06:00Z",
   }
 };
 
-let currentData = SEED_DATA;
+// ---- スキーマ互換レイヤー: 自動更新される新形式データを描画用形式へ正規化 ----
+const COUNTRY_META = {
+  US: { flag: '🇺🇸', name_ja: 'アメリカ', name_en: 'United States' },
+  JP: { flag: '🇯🇵', name_ja: '日本', name_en: 'Japan' },
+  CN: { flag: '🇨🇳', name_ja: '中国', name_en: 'China' },
+  UK: { flag: '🇬🇧', name_ja: 'イギリス', name_en: 'United Kingdom' },
+  GB: { flag: '🇬🇧', name_ja: 'イギリス', name_en: 'United Kingdom' },
+  DE: { flag: '🇩🇪', name_ja: 'ドイツ', name_en: 'Germany' },
+  FR: { flag: '🇫🇷', name_ja: 'フランス', name_en: 'France' },
+  KR: { flag: '🇰🇷', name_ja: '韓国', name_en: 'South Korea' },
+  CH: { flag: '🇨🇭', name_ja: 'スイス', name_en: 'Switzerland' },
+  CA: { flag: '🇨🇦', name_ja: 'カナダ', name_en: 'Canada' },
+  AU: { flag: '🇦🇺', name_ja: 'オーストラリア', name_en: 'Australia' },
+  IN: { flag: '🇮🇳', name_ja: 'インド', name_en: 'India' },
+  IL: { flag: '🇮🇱', name_ja: 'イスラエル', name_en: 'Israel' },
+  SG: { flag: '🇸🇬', name_ja: 'シンガポール', name_en: 'Singapore' },
+  NL: { flag: '🇳🇱', name_ja: 'オランダ', name_en: 'Netherlands' },
+  RU: { flag: '🇷🇺', name_ja: 'ロシア', name_en: 'Russia' },
+  IT: { flag: '🇮🇹', name_ja: 'イタリア', name_en: 'Italy' },
+  ES: { flag: '🇪🇸', name_ja: 'スペイン', name_en: 'Spain' },
+  SE: { flag: '🇸🇪', name_ja: 'スウェーデン', name_en: 'Sweden' },
+  TW: { flag: '🇹🇼', name_ja: '台湾', name_en: 'Taiwan' }
+};
+
+function ensureNormalized(data) {
+  if (!data || !data.countries) return data;
+  for (const [cc, country] of Object.entries(data.countries)) {
+    const meta = COUNTRY_META[cc] || {};
+    if (!country.flag) country.flag = meta.flag || '🌐';
+    if (!country.name_ja) country.name_ja = meta.name_ja || country.name || cc;
+    if (!country.name_en) country.name_en = meta.name_en || country.name || cc;
+    for (const inst of Object.values(country.institutions || {})) {
+      for (const p of (inst.papers || [])) {
+        if (!p.summary && p.summary_jp) p.summary = p.summary_jp;
+        if (!p.analysis) p.analysis = { analysis: p.analysis_jp || '', prospects: p.prospects_jp || '' };
+        if (!p.published && p.published_date) p.published = p.published_date;
+        if (!p.link && p.doi) p.link = p.doi;
+        if (!p.categories && p.keywords) p.categories = p.keywords;
+        if (!p.source) p.source = p.conference || 'arXiv';
+        if (!p.institution_ja) p.institution_ja = p.institution || inst.name || '';
+      }
+    }
+  }
+  return data;
+}
+
+let currentData = ensureNormalized(SEED_DATA);
 let activeCountry = 'all';
 let activeCategory = 'all';
 
@@ -2894,6 +3015,7 @@ function filterPapers(papers) {
 }
 
 function renderAll() {
+  ensureNormalized(currentData); // キャッシュ復元データ等も描画前に正規化
   _paperRegistry.length = 0; // Reset registry on re-render
   const allPapers = getAllPapers();
   const filtered = filterPapers(allPapers);
@@ -3082,6 +3204,7 @@ function renderFeaturedCard(paper) {
         <div class="meta-item">📅 ${paper.published || ''}</div>
         <div class="meta-item">📖 ${paper.source || ''}</div>
         <div class="meta-item">${(paper.categories || []).slice(0,3).join(' / ')}</div>
+        <div class="meta-item briefing-chip">▶ BRIEFING</div>
       </div>
     </div>
   `;
@@ -3114,6 +3237,7 @@ function renderPaperCard(paper) {
       </div>
       <div class="card-footer">
         <span>📅 ${paper.published || ''} | 📖 ${paper.source || ''}</span>
+        <span class="briefing-chip">▶ BRIEFING</span>
         <a class="read-more-btn" href="${paper.link || '#'}" target="_blank" rel="noopener" onclick="event.stopPropagation()">SCAN →</a>
       </div>
     </div>
@@ -3490,6 +3614,32 @@ function openJarvisModal(idx) {
       </div>
     </div>
 
+    <div class="jarvis-briefing" id="jarvis-briefing">
+      <div class="briefing-head">
+        <span class="briefing-title">▶ AUTO BRIEFING // 自動解説</span>
+        <button class="briefing-replay" onclick="replayBriefing()">⟲ REPLAY</button>
+      </div>
+      <div class="briefing-grid">
+        <div class="bq" id="bq-problem">
+          <div class="bq-label">❓ 課題 — なにが問題?</div>
+          <div class="bq-body"><span id="bq-problem-text"></span><span class="bq-cursor" id="bq-problem-cursor">▊</span></div>
+        </div>
+        <div class="bq" id="bq-method">
+          <div class="bq-label">🛠 手法 — どうやった?</div>
+          <div class="bq-body bq-flow" id="bq-method-flow"></div>
+        </div>
+        <div class="bq" id="bq-result">
+          <div class="bq-label">📊 結果 — なにが起きた?</div>
+          <div class="bq-body"><span id="bq-result-text"></span><span class="bq-metric" id="bq-metric"></span></div>
+        </div>
+        <div class="bq" id="bq-impact">
+          <div class="bq-label">🚀 意義 — なにがうれしい?</div>
+          <div class="bq-body" id="bq-impact-text" style="opacity:0;transition:opacity 0.8s;"></div>
+        </div>
+      </div>
+      <div class="briefing-progress"><div class="briefing-progress-fill" id="briefing-progress"></div></div>
+    </div>
+
     <div class="jarvis-key-insight">
       <div class="insight-text" id="jarvis-typewriter"></div>
     </div>
@@ -3562,11 +3712,15 @@ function openJarvisModal(idx) {
     });
   }, 300);
 
-  // Typewriter effect for summary
-  typewriterEffect('jarvis-typewriter', paper.summary, 18);
+  // Auto-briefing: 4象限アニメーション → 終了後にサマリーのタイプライター
+  _briefingPaper = paper;
+  playBriefing(getStoryboard(paper), () => {
+    typewriterEffect('jarvis-typewriter', paper.summary || '', 18);
+  });
 }
 
 function closeJarvisModal() {
+  cancelBriefing();
   const modal = document.getElementById('jarvis-modal');
   modal.classList.remove('active');
   document.body.style.overflow = '';
@@ -3615,6 +3769,166 @@ function typewriterEffect(elementId, text, speed) {
     }
   }
   type();
+}
+
+// ============================================================
+//  AUTO-BRIEFING ENGINE (論文ごとの自動解説アニメーション)
+//  データ源: storyboards.json (CIでLLM生成) → 無ければその場で抽出
+// ============================================================
+
+let STORYBOARDS = {};
+fetch('storyboards.json')
+  .then(r => (r.ok ? r.json() : {}))
+  .then(d => { STORYBOARDS = d || {}; })
+  .catch(() => {});
+
+function bqFirstSentence(text, max) {
+  if (!text) return '';
+  let s = String(text).trim();
+  const cut = s.search(/[。．.!?！？]/);
+  if (cut > 8) s = s.slice(0, cut + 1);
+  return s.length > max ? s.slice(0, max - 1) + '…' : s;
+}
+
+function bqExtractMetric(text) {
+  if (!text) return null;
+  const m = String(text).match(/(約?\d+(?:\.\d+)?)\s*(倍|%|％|percent|pt|ポイント|桁|x|X)/);
+  if (!m) return null;
+  const unit = m[2] === 'percent' ? '%' : m[2];
+  return { value: m[1] + unit, label: '' };
+}
+
+// storyboards.json に無い論文はクライアント側で即席生成(最終防衛線)
+function buildFallbackStoryboard(paper) {
+  const a = paper.analysis || {};
+  const joined = [paper.summary, a.analysis, a.prospects].filter(Boolean).join(' ');
+  let method = (paper.categories || paper.keywords || []).slice(0, 3).map(String);
+  if (method.length === 0) method = [bqFirstSentence(paper.title || 'research', 20)];
+  return {
+    problem: bqFirstSentence(paper.summary, 60) || bqFirstSentence(paper.title, 60),
+    method: method,
+    result: bqFirstSentence(a.analysis, 60) || bqFirstSentence(paper.summary, 60),
+    metric: bqExtractMetric(joined),
+    impact: bqFirstSentence(a.prospects, 60) || '応用先を探索中',
+    generated: 'client'
+  };
+}
+
+function getStoryboard(paper) {
+  const sb = (paper.id && STORYBOARDS[paper.id]) ||
+             (paper.link && STORYBOARDS[paper.link]) ||
+             (paper.title && STORYBOARDS[paper.title]);
+  return sb || buildFallbackStoryboard(paper);
+}
+
+// ---- 再生制御(モーダルを閉じたら途中でも確実に停止する) ----
+let _briefingTimers = [];
+let _briefingPaper = null;
+
+function _bLater(fn, ms) {
+  const t = setTimeout(fn, ms);
+  _briefingTimers.push(t);
+}
+
+function cancelBriefing() {
+  _briefingTimers.forEach(clearTimeout);
+  _briefingTimers = [];
+}
+
+function _bTypewrite(textElId, cursorElId, text, speed, startAt) {
+  const chars = Array.from(text || '');
+  const cursor = cursorElId ? document.getElementById(cursorElId) : null;
+  if (cursor) _bLater(() => { cursor.style.display = 'inline'; }, startAt);
+  chars.forEach((ch, i) => {
+    _bLater(() => {
+      const el = document.getElementById(textElId);
+      if (el) el.textContent += ch;
+    }, startAt + i * speed);
+  });
+  const end = startAt + chars.length * speed;
+  if (cursor) _bLater(() => { cursor.style.display = 'none'; }, end + 250);
+  return end;
+}
+
+function playBriefing(sb, onDone) {
+  cancelBriefing();
+
+  // --- リセット ---
+  ['bq-problem', 'bq-method', 'bq-result', 'bq-impact'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('on', 'done');
+  });
+  const pt = document.getElementById('bq-problem-text');
+  const rt = document.getElementById('bq-result-text');
+  const it = document.getElementById('bq-impact-text');
+  const mt = document.getElementById('bq-metric');
+  const flow = document.getElementById('bq-method-flow');
+  if (!pt || !flow) return;
+  pt.textContent = ''; rt.textContent = '';
+  it.textContent = sb.impact || ''; it.style.opacity = '0';
+  mt.textContent = ''; mt.classList.remove('pop');
+  flow.innerHTML = (sb.method || []).map((step, i) =>
+    (i > 0 ? '<span class="flow-arrow">▶</span>' : '') +
+    `<span class="flow-node" id="bq-node-${i}">${step}</span>`
+  ).join('');
+  const prog = document.getElementById('briefing-progress');
+  if (prog) { prog.style.transition = 'none'; prog.style.width = '0'; }
+
+  const SPEED = 34; // ms/文字
+  let t = 350;
+
+  // Scene 1: 課題(タイプライター)
+  _bLater(() => document.getElementById('bq-problem').classList.add('on'), t);
+  t = _bTypewrite('bq-problem-text', 'bq-problem-cursor', sb.problem || '', SPEED, t + 150) + 350;
+  _bLater(() => {
+    document.getElementById('bq-problem').classList.replace('on', 'done');
+  }, t);
+
+  // Scene 2: 手法(ノードが順に点灯)
+  _bLater(() => document.getElementById('bq-method').classList.add('on'), t);
+  (sb.method || []).forEach((_, i) => {
+    _bLater(() => {
+      const n = document.getElementById('bq-node-' + i);
+      if (n) n.classList.add('lit');
+    }, t + 250 + i * 420);
+  });
+  t += 250 + Math.max((sb.method || []).length, 1) * 420 + 300;
+  _bLater(() => document.getElementById('bq-method').classList.replace('on', 'done'), t);
+
+  // Scene 3: 結果(タイプライター + 指標ポップ)
+  _bLater(() => document.getElementById('bq-result').classList.add('on'), t);
+  t = _bTypewrite('bq-result-text', null, sb.result || '', SPEED, t + 150) + 200;
+  if (sb.metric && sb.metric.value) {
+    _bLater(() => {
+      mt.innerHTML = `${sb.metric.value}<span class="bq-metric-label">${sb.metric.label || ''}</span>`;
+      requestAnimationFrame(() => mt.classList.add('pop'));
+    }, t);
+    t += 700;
+  }
+  _bLater(() => document.getElementById('bq-result').classList.replace('on', 'done'), t);
+
+  // Scene 4: 意義(フェードイン)
+  _bLater(() => {
+    document.getElementById('bq-impact').classList.add('on');
+    it.style.opacity = '1';
+  }, t);
+  t += 1100;
+  _bLater(() => {
+    document.getElementById('bq-impact').classList.replace('on', 'done');
+    if (typeof onDone === 'function') onDone();
+  }, t);
+
+  // 進行バー(全体時間に合わせて一本流す)
+  if (prog) {
+    requestAnimationFrame(() => {
+      prog.style.transition = `width ${t}ms linear`;
+      prog.style.width = '100%';
+    });
+  }
+}
+
+function replayBriefing() {
+  if (_briefingPaper) playBriefing(getStoryboard(_briefingPaper));
 }
 
 // ============================================================
