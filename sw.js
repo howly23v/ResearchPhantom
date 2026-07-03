@@ -56,6 +56,22 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // storyboards.json: network-first (毎日更新されるため鮮度優先、404はキャッシュしない)
+  if (url.origin === self.location.origin && url.pathname.endsWith('storyboards.json')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   // Same-origin assets: cache-first
   if (url.origin === self.location.origin) {
     event.respondWith(
