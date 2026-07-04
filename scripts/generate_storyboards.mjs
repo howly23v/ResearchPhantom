@@ -31,7 +31,11 @@ const MAX_NEW = Number(process.env.MAX_NEW || 120); // 1回の実行で生成す
 const GH_MODEL = process.env.GH_MODEL || 'openai/gpt-4o-mini';
 const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'qwen2.5:7b';
-const OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
+// Ollama接続先: カンマ区切りで複数指定可(Mac/Windowsどちらで実行しても、
+// どちらのマシンのOllamaでも使えるようにする)。全滅時はLANを自動探索。
+const OLLAMA_URLS = (process.env.OLLAMA_URLS || process.env.OLLAMA_URL || 'http://localhost:11434')
+  .split(',').map((s) => s.trim()).filter(Boolean);
+let OLLAMA_RESOLVED = null; // resolveOllamaUrl() が設定する
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -141,8 +145,50 @@ async function callGemini(prompt) {
   return data.candidates[0].content.parts[0].text;
 }
 
+async function probeOllama(url, timeoutMs = 900) {
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+    const res = await fetch(`${url}/api/tags`, { signal: ctrl.signal });
+    clearTimeout(timer);
+    return res.ok;
+  } catch (_) {
+    return false;
+  }
+}
+
+// 接続先の解決: 指定リスト → ダメならLAN(/24)を自動探索
+async function resolveOllamaUrl() {
+  for (const url of OLLAMA_URLS) {
+    if (await probeOllama(url)) return url;
+  }
+  console.log('指定先にOllamaが見つからないため、LANを自動探索します…');
+  const os = await import('node:os');
+  const nets = os.networkInterfaces();
+  const prefixes = new Set();
+  for (const ifaces of Object.values(nets)) {
+    for (const ni of ifaces || []) {
+      if (ni.family === 'IPv4' && !ni.internal) {
+        prefixes.add(ni.address.split('.').slice(0, 3).join('.'));
+      }
+    }
+  }
+  for (const prefix of prefixes) {
+    const ips = Array.from({ length: 254 }, (_, i) => `${prefix}.${i + 1}`);
+    const CHUNK = 50;
+    for (let i = 0; i < ips.length; i += CHUNK) {
+      const results = await Promise.all(
+        ips.slice(i, i + CHUNK).map(async (ip) => (await probeOllama(`http://${ip}:11434`, 400)) ? ip : null)
+      );
+      const hit = results.find(Boolean);
+      if (hit) return `http://${hit}:11434`;
+    }
+  }
+  return null;
+}
+
 async function callOllama(prompt) {
-  const res = await fetch(`${OLLAMA_URL}/api/chat`, {
+  const res = await fetch(`${OLLAMA_RESOLVED}/api/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -245,6 +291,18 @@ async function main() {
     pending.slice(0, 3).forEach((p) => console.log('--- prompt sample ---\n' + buildPrompt(p).slice(0, 400)));
     console.log('DRY_RUN: API呼び出しなしで終了');
     return;
+  }
+
+  if (PROVIDER === 'ollama') {
+    OLLAMA_RESOLVED = await resolveOllamaUrl();
+    if (!OLLAMA_RESOLVED) {
+      console.error(`Ollamaが見つかりません。次のどちらかを用意してください:
+  - このマシン: ollama serve を起動し、ollama pull ${OLLAMA_MODEL}
+  - 別マシン(Windows等): そちらで環境変数 OLLAMA_HOST=0.0.0.0 を設定してOllamaを再起動
+    (ファイアウォールでTCP 11434を許可)。IPを知っていれば OLLAMA_URLS="http://<IP>:11434" で直指定も可`);
+      process.exit(1);
+    }
+    console.log(`Ollama接続先: ${OLLAMA_RESOLVED} / モデル: ${OLLAMA_MODEL}`);
   }
 
   let generated = 0;
