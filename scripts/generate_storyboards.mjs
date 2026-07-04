@@ -51,8 +51,42 @@ function extractPapers() {
   return papers;
 }
 
+// ---- 1.5. arXiv原文アブストラクト取得(実験の実数値はここにしか無いことが多い) ----
+function extractArxivId(p) {
+  const url = String(p.doi || p.link || '');
+  const m = url.match(/arxiv\.org\/(?:abs|pdf|html)\/([0-9]{4}\.[0-9]{4,5})/);
+  return m ? m[1] : null;
+}
+
+async function fetchAbstract(arxivId, expectedTitle) {
+  if (!arxivId) return '';
+  try {
+    const res = await fetch(`https://export.arxiv.org/api/query?id_list=${arxivId}`);
+    if (!res.ok) return '';
+    const xml = await res.text();
+    const entry = xml.match(/<entry>[\s\S]*?<\/entry>/);
+    if (!entry) return '';
+    const t = entry[0].match(/<title>([\s\S]*?)<\/title>/);
+    const s = entry[0].match(/<summary>([\s\S]*?)<\/summary>/);
+    if (!t || !s) return '';
+    // データ側のarXivリンクが別論文を指していることがある。
+    // タイトルの単語一致率が低い場合は「別論文の数値」を混入させないため破棄する。
+    const words = (x) => String(x).toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').split(/\s+/).filter((w) => w.length > 3);
+    const fetched = new Set(words(t[1]));
+    const expected = words(expectedTitle || '');
+    const overlap = expected.filter((w) => fetched.has(w)).length;
+    if (expected.length === 0 || overlap / expected.length < 0.5) {
+      console.log(`  (arXiv ${arxivId} はタイトル不一致 — アブストラクト不使用)`);
+      return '';
+    }
+    return s[1].replace(/\s+/g, ' ').trim().slice(0, 2000);
+  } catch (_) {
+    return '';
+  }
+}
+
 // ---- 2. プロンプト ----
-function buildPrompt(p) {
+function buildPrompt(p, abstract) {
   return `あなたは科学コミュニケーターです。以下の論文情報を、初心者向けの「自動ブリーフィング」用データに変換してください。
 出力は次の形式のJSONオブジェクトのみ。コードフェンスや説明文は一切付けないこと。
 
@@ -68,7 +102,8 @@ function buildPrompt(p) {
 概要: ${p.summary_jp || p.summary || ''}
 解析: ${p.analysis_jp || (p.analysis && p.analysis.analysis) || ''}
 展望: ${p.prospects_jp || (p.analysis && p.analysis.prospects) || ''}
-キーワード: ${(p.keywords || p.categories || []).join(', ')}`;
+キーワード: ${(p.keywords || p.categories || []).join(', ')}${abstract ? `
+原文アブストラクト(vizの数値はここに書かれた実数値を最優先で使うこと): ${abstract}` : ''}`;
 }
 
 // ---- 3. プロバイダ実装 ----
@@ -201,8 +236,8 @@ async function main() {
     storyboards = JSON.parse(fs.readFileSync(STORYBOARDS_PATH, 'utf8'));
   }
 
-  // v2(viz対応)より古いエントリは再生成対象にする
-  const SCHEMA_V = 2;
+  // v3(arXivアブストラクト参照のviz)より古いエントリは再生成対象にする
+  const SCHEMA_V = 3;
   const pending = papers.filter((p) => p.id && (!storyboards[p.id] || storyboards[p.id].v !== SCHEMA_V));
   console.log(`論文 ${papers.length} 件 / 最新版生成済み ${papers.length - pending.length} 件 / 生成対象 ${pending.length} 件`);
 
@@ -220,14 +255,16 @@ async function main() {
       console.log(`上限 ${MAX_NEW} 件に到達 — 残りは次回の実行で処理`);
       break;
     }
-    const prompt = buildPrompt(p);
+    const abstract = await fetchAbstract(extractArxivId(p), p.title);
+    await sleep(600); // arXiv APIへの配慮
+    const prompt = buildPrompt(p, abstract);
     let done = false;
     for (const provider of PROVIDERS) {
       if (deadProviders.has(provider.name)) continue;
       try {
         const raw = await provider.call(prompt);
         const sb = parseStoryboard(raw);
-        storyboards[p.id] = { ...sb, v: 2, title: p.title, generated: provider.name };
+        storyboards[p.id] = { ...sb, v: SCHEMA_V, title: p.title, generated: provider.name };
         generated++;
         done = true;
         console.log(`✔ [${provider.name}] ${p.id}`);
