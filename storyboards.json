@@ -1,91 +1,91 @@
 {
   "paper_china_cas_2026_001": {
-    "problem": "科学研究の支援が不足していた",
+    "problem": "科学研究の支援が不足していた。",
     "method": [
       "文献検索機能の開発",
-      "革新評価機能の統合",
-      "エージェント開発の実施"
+      "革新評価の統合",
+      "エージェント機能の実装"
     ],
-    "result": "ScienceOne 100システムが完成した",
+    "result": "ScienceOne 100システムが完成した。",
     "metric": null,
-    "impact": "研究が加速し、成果が増える期待",
+    "impact": "研究が加速し、科学競争力が向上する。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "ScienceOne 100: AI Model System for Scientific Research",
     "generated": "github-models"
   },
   "paper_china_cas_2026_002": {
     "problem": "量子コード生成の限界が問題だった",
     "method": [
-      "量子コードの分析",
-      "言語モデルの評価",
-      "知識の脆弱性調査"
+      "量子コード生成の分析",
+      "AIの知識的脆弱性調査",
+      "物理的理解の必要性確認"
     ],
-    "result": "AIの能力に限界があることがわかった",
+    "result": "AIの量子コード生成に限界があることが判明",
     "metric": null,
-    "impact": "より信頼性の高いAIが期待できる",
+    "impact": "AIが科学研究を支援しやすくなる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "From Paper to Program: Knowledge Bottlenecks in Quantum Code Generation",
     "generated": "github-models"
   },
   "paper_china_fudan_2026_001": {
-    "problem": "複雑なシステムの応答が理解しにくい",
+    "problem": "複雑なシステムの解析が困難だった。",
     "method": [
       "ニューラルオペレータの利用",
-      "応答の分解表現",
-      "非線形制御の実現"
+      "動的応答の分解",
+      "持続的応答の表現"
     ],
-    "result": "複雑なシステムの応答を分解できた",
+    "result": "非線形システムの制御が可能になった。",
     "metric": null,
-    "impact": "気象予測などの精度が向上する",
+    "impact": "気象予測などの精度向上が期待。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Factorized Neural Operators Decompose Dynamic and Persistent Responses",
     "generated": "github-models"
   },
   "paper_china_fudan_2026_002": {
-    "problem": "言語モデルの学習過程が不明瞭だった",
+    "problem": "言語モデルの進化が不明だった",
     "method": [
-      "言語モデルを訓練",
-      "知識の進化を分析",
-      "結果を可視化"
+      "概念の分析",
+      "訓練過程の可視化",
+      "知識獲得の段階的進行"
     ],
-    "result": "言語モデルの知識獲得の進行が明らかに",
+    "result": "言語モデルの学習メカニズムが明確に",
     "metric": null,
-    "impact": "より効率的なモデル設計が期待できる",
+    "impact": "効率的なモデル設計が可能になる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Evolution of Concepts in Language Model Pre-Training",
     "generated": "github-models"
   },
   "paper_china_pku_2026_001": {
-    "problem": "自動運転の遅延が問題だった",
+    "problem": "自動運転の遅延が問題だった。",
     "method": [
       "トークン剪定の開発",
-      "運転制御の実装",
-      "リアルタイム化"
+      "モデルの効率化",
+      "リアルタイム制御"
     ],
-    "result": "低遅延で運転制御が実現した",
+    "result": "自動運転の実用化が進んだ。",
     "metric": null,
-    "impact": "自動運転技術が進化しやすくなる",
+    "impact": "自動運転技術が身近になる。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "FastDriveVLA: Efficient End-to-End Driving via Token Pruning",
     "generated": "github-models"
   },
   "paper_china_pku_2026_002": {
     "problem": "ロボットのタスク実行が難しかった",
     "method": [
-      "物理則の統合",
-      "学習推論の融合",
-      "適応的フレームワークの開発"
+      "物理的推論の統合",
+      "適応的フレームワーク開発",
+      "複雑タスクの実行"
     ],
-    "result": "ロボットの複雑なタスク実行能力が向上した",
+    "result": "ロボットのタスク実行能力が向上した",
     "metric": null,
-    "impact": "様々な産業でロボットが活躍する",
+    "impact": "製造や介護などで役立つロボットが増える",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Adaptive Physical Latent Reasoning for Embodied AI",
     "generated": "github-models"
   },
@@ -114,152 +114,152 @@
     "generated": "github-models"
   },
   "paper_china_tsinghua_2026_002": {
-    "problem": "AI生成画像の信頼性が低い",
+    "problem": "AI編集画像の検出が難しい",
     "method": [
       "高品質データセット構築",
-      "10万枚の画像収集",
-      "AIGC検出精度向上"
+      "多様な画像生成",
+      "新手法の提案"
     ],
-    "result": "AI生成画像の操作検出が進化した",
+    "result": "10万枚の画像で検出精度が向上",
     "metric": null,
-    "impact": "メディアの信頼性が高まる",
+    "impact": "デジタルメディアの信頼性が向上",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Impostor: An Agent-Curated Benchmark for AI-Generated Content Detection",
     "generated": "github-models"
   },
   "paper_china_tsinghua_2026_003": {
-    "problem": "マルチモーダルAIの統合が難しい",
+    "problem": "マルチモーダルモデルの性能が低い",
     "method": [
-      "ボトルネック排除",
-      "表現強制技術",
-      "モデル統合"
+      "表現強制技術の提案",
+      "視覚表現の予測",
+      "ピクセル拡散のガイド"
     ],
-    "result": "視覚と言語の統一モデルが進展した",
+    "result": "ボトルネックを排除し性能向上を実現",
     "metric": null,
-    "impact": "画像や音声を統合したAIが実現する",
+    "impact": "画像や音声を統合したAIが進化する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Representation Forcing for Bottleneck-Free Unified Multimodal Models",
     "generated": "github-models"
   },
   "paper_china_zju_2026_001": {
-    "problem": "言語モデルの処理が遅い問題",
+    "problem": "言語モデルの推論が遅い問題",
     "method": [
       "MiniMaxアルゴリズム…",
       "スパースアテンション最適化",
-      "推論速度向上"
+      "大規模モデル適用"
     ],
-    "result": "大規模モデルの推論速度が向上した",
+    "result": "推論速度が大幅に向上した。",
     "metric": null,
-    "impact": "スマホやIoTでAIが使いやすくなる",
+    "impact": "スマホやIoTでAIが使いやすくなる。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "MiniMax Sparse Attention",
     "generated": "github-models"
   },
   "paper_china_zju_2026_002": {
-    "problem": "複雑な熱伝導問題の解決が難しい",
+    "problem": "複雑な熱伝導問題の解法が難しい",
     "method": [
       "モンテカルロ法の利用",
-      "物理制約の適用",
+      "ニューラルネットワークの適用",
       "逆問題の解析"
     ],
     "result": "新手法で高精度な解析が可能に",
     "metric": null,
     "impact": "多分野での応用が期待される",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Monte Carlo Physics-Informed Neural Networks for Heat Conduction",
     "generated": "github-models"
   },
   "paper_japan_kyoto_2026_001": {
-    "problem": "生物の運動メカニズムが不明だった",
+    "problem": "生物の運動原理が不明だった",
     "method": [
       "データ収集",
       "幾何学的位相分析",
-      "運動パターンの解明"
+      "運動パターン生成"
     ],
-    "result": "動物の移動戦略の数学的原理が分かった",
+    "result": "動物の移動戦略の数学的原理が明らかに",
     "metric": null,
-    "impact": "ロボットやリハビリに役立つ技術が進む",
+    "impact": "ロボットやリハビリ技術が進化する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Data-Driven Geometric Phase in Biological Locomotion",
     "generated": "github-models"
   },
   "paper_japan_kyoto_2026_002": {
-    "problem": "自己注意メカニズムの理解が不足していた",
+    "problem": "自己注意メカニズムの理解が不足",
     "method": [
-      "ガウス過程の解析",
-      "数学的証明",
-      "Transformerの理解"
+      "漸近的スペクトル解析",
+      "ガウス過程との同等性証明",
+      "Transformerの動…"
     ],
-    "result": "自己注意の数学的本質が明らかになった",
+    "result": "自己注意メカニズムの数学的本質が明らかに",
     "metric": null,
-    "impact": "より効率的なAIモデルが期待できる",
+    "impact": "より効率的なAIモデルの設計が可能に",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Gaussian Equivalence for Self-Attention: Asymptotic Spectral Analysis",
     "generated": "github-models"
   },
   "paper_japan_osaka_2026_001": {
-    "problem": "超伝導メカニズムが不明だった",
+    "problem": "UTe2の超伝導特性が不明だった。",
     "method": [
-      "UTe2の解析",
-      "多軌道計算",
-      "磁気揺らぎの研究"
+      "多軌道計算を実施",
+      "磁気特性を解析",
+      "圧力効果を評価"
     ],
-    "result": "UTe2の超伝導メカニズムが理解できた",
+    "result": "UTe2の磁気特性の理解が進んだ。",
     "metric": null,
-    "impact": "次世代超伝導デバイスの開発が進む",
+    "impact": "次世代超伝導デバイスの開発が期待。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Magnetic Fluctuations and Anisotropy in UTe2: Multi-Orbital Study",
     "generated": "github-models"
   },
   "paper_japan_osaka_2026_002": {
-    "problem": "新材料の探索が非効率だった。",
+    "problem": "新材料の効率的な探索が難しい",
     "method": [
-      "逆材料設計の開発",
-      "密度汎関数理論の導入",
-      "計算的最適化"
+      "逆設計フレームワーク開発",
+      "微分可能性を導入",
+      "材料の最適化"
     ],
-    "result": "新材料の効率的な探索が可能に。",
+    "result": "新材料の探索が効率化された",
     "metric": null,
-    "impact": "持続可能な材料社会の実現が進む。",
+    "impact": "革新的な材料発見が加速する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "A Differentiable DFT-Based Framework for Inverse Materials Design",
     "generated": "github-models"
   },
   "paper_japan_riken_2026_001": {
-    "problem": "強化学習の理論が不十分だった。",
+    "problem": "強化学習の理論が未発達だった。",
     "method": [
-      "後悔境界を導出",
-      "データ依存を考慮",
-      "分散依存を考慮"
+      "後悔境界の導出",
+      "データ分布の考慮",
+      "理論の精密化"
     ],
-    "result": "強化学習理論が大幅に進展した。",
+    "result": "データ依存と分散依存の後悔境界を導出。",
     "metric": null,
-    "impact": "より信頼性の高い学習が実現する。",
+    "impact": "信頼性の高い学習が実現する。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Data- and Variance-Dependent Regret Bounds for Online Tabular MDPs",
     "generated": "github-models"
   },
   "paper_japan_riken_2026_002": {
-    "problem": "医学テキストの処理が難しい",
+    "problem": "医学テキスト処理の精度が低い",
     "method": [
-      "自動ラベル付け開発",
+      "自動ラベル付けの開発",
       "LLMを活用",
-      "精度向上の検証"
+      "未見概念への対応"
     ],
     "result": "医学テキスト処理の精度が大幅に向上",
     "metric": null,
     "impact": "医療AIの進化が期待できる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Better Generalizing to Unseen Biomedical Concepts: Automatic Labeling Pipeline",
     "generated": "github-models"
   },
@@ -274,277 +274,293 @@
     "metric": null,
     "impact": "医療や言語処理での応用が期待される",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Incorporating Importance Weighting in Optimal Transport Based Domain Alignment",
     "generated": "github-models"
   },
   "paper_japan_tohoku_2026_001": {
-    "problem": "宇宙ニュートリノの追跡が困難だった",
+    "problem": "宇宙ニュートリノの発生源が不明",
     "method": [
-      "宇宙ニュートリノを検出",
       "光学観測を実施",
-      "データを解析"
+      "背景率を評価",
+      "潮汐破壊事象を分析"
     ],
-    "result": "高エネルギー現象の理解が進展した",
+    "result": "観測対象内に潮汐破壊事象はなし",
     "metric": null,
-    "impact": "宇宙の極限現象がより理解できる",
+    "impact": "宇宙現象の理解が進むことが期待",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Deep Optical Follow-up Observations to IceCube Cosmic Neutrinos",
     "generated": "github-models"
   },
   "paper_japan_tohoku_2026_002": {
-    "problem": "初期宇宙のブラックホール成長が不明",
+    "problem": "超大質量ブラックホールの成長が不明",
     "method": [
-      "高精度観測を実施",
-      "VLBAを使用",
-      "ラジオジェット解析"
+      "VLBAによる観測",
+      "高解像度で解析",
+      "ジェットの特性を特定"
     ],
-    "result": "超大質量ブラックホールの成長が解明",
+    "result": "超エディントン降着のジェット構造を解明",
     "metric": null,
-    "impact": "宇宙の進化に関する理解が深まる",
+    "impact": "宇宙の進化を再考する手助けになる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "A VLBA-Resolved Jet in Super-Eddington Accretion Quasar at z=3.4",
     "generated": "github-models"
   },
   "paper_japan_uotokyo_2026_001": {
-    "problem": "グラフ生成が効率的でなかった",
+    "problem": "グラフ生成が難しかった。",
     "method": [
       "潜在混合モデルの開発",
       "情報理論の適用",
-      "新しいグラフ生成"
+      "グラフ生成の効率化"
     ],
-    "result": "新しい構造のグラフを効率的に生成可能",
+    "result": "新しい構造のグラフを生成できる。",
     "metric": null,
-    "impact": "多様な分野での応用が期待される",
+    "impact": "さまざまな分野での応用が期待。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "An Information Theoretic Framework for Graph Novelty Generation",
     "generated": "github-models"
   },
   "paper_korea_kaist_2026_001": {
     "problem": "従来手法の限界があった。",
     "method": [
-      "ニューラルネット解析",
-      "動的性質の評価",
-      "構造の推論"
+      "動的性質の分析",
+      "構造の推論",
+      "非線形性の探求"
     ],
-    "result": "非線形ダイナミクスの本質が明らかに。",
+    "result": "非線形ダイナミクスの重要性が明らかに。",
     "metric": null,
-    "impact": "より効率的なAI設計が可能になる。",
+    "impact": "より優れたAI設計が可能になる。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Dynamics Reveals Structure: Challenging Linear Propagation",
     "generated": "github-models"
   },
   "paper_korea_kaist_2026_002": {
-    "problem": "強化学習の安定性が不足していた。",
+    "problem": "従来の強化学習は不安定だった",
     "method": [
       "正規化フローの導入",
       "ポリシーの設計",
-      "タスク制御の実施"
+      "性能の評価"
     ],
-    "result": "安定性と表現力を両立できた。",
+    "result": "安定性と表現力を両立できた",
     "metric": null,
-    "impact": "ロボットや自動運転が進化する。",
+    "impact": "ロボットや自動運転が進化する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Q-Flow: Stable and Expressive Reinforcement Learning with Flow-Based Policy",
     "generated": "github-models"
   },
   "paper_korea_kaist_2026_003": {
-    "problem": "AIの思考過程が不明瞭だった",
+    "problem": "AIの思考過程が不明瞭だった。",
     "method": [
-      "思考過程を分析",
-      "推論パターンを予測",
-      "制御方法を構築"
+      "思考過程の分析",
+      "推論パターンの予測",
+      "制御手法の構築"
     ],
-    "result": "AIの思考過程を理解できるようになった",
+    "result": "AIの思考過程を可視化できた。",
     "metric": null,
-    "impact": "より安全なAIアシスタントが実現する",
+    "impact": "信頼性の高いAIアシスタントが実現。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "The CoT Encyclopedia: Analyzing and Controlling Chain-of-Thought Reasoning",
     "generated": "github-models"
   },
   "paper_korea_kist_2026_001": {
     "problem": "従来のロボットは動作が不自然だった",
     "method": [
+      "ソフト素材の開発",
       "AI制御の統合",
-      "柔軟素材の使用",
       "ユーザー意図の解析"
     ],
-    "result": "ユーザーの意図を正確に読み取れるようになった",
+    "result": "AIがユーザーの意図を正確に読み取る",
     "metric": null,
     "impact": "障害者支援や介護が進化する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Wearable Soft Robots with AI Integration",
     "generated": "github-models"
   },
   "paper_korea_kist_2026_002": {
     "problem": "水素燃料電池の性能が低かった。",
     "method": [
-      "新型膜材料の開発",
+      "膜材料を開発",
       "エネルギー効率向上",
-      "耐久性の改善"
+      "耐久性を改善"
     ],
     "result": "エネルギー変換効率と耐久性が向上した。",
     "metric": null,
     "impact": "水素社会の実現が近づく。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Hydrogen Fuel Cell Membrane Development for Next-Generation Energy",
     "generated": "github-models"
   },
   "paper_korea_postech_2026_001": {
-    "problem": "動画生成の質が低かった。",
+    "problem": "リアルな動画生成が難しかった。",
     "method": [
       "合成運動データ作成",
       "動画生成モデル学習",
-      "リアルなシーン生成"
+      "動的シーン生成"
     ],
-    "result": "合成データで動画生成が向上した。",
+    "result": "合成データで動画生成の質が向上。",
     "metric": null,
-    "impact": "映像制作やゲームが進化する。",
+    "impact": "映像制作やゲーム開発が進化する。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Learning to Generate Highly Dynamic Videos Using Synthetic Motion Data",
     "generated": "github-models"
   },
   "paper_korea_postech_2026_002": {
-    "problem": "動く物体の3D再構成が難しい",
+    "problem": "従来の3D再構成が不正確だった",
     "method": [
       "構造認識の導入",
       "ガウシアン処理",
       "物体再構成"
     ],
-    "result": "高精度な3Dモデル化が可能になった",
+    "result": "動く物体の3Dモデルが高精度で作成可能に",
     "metric": null,
-    "impact": "ARや自動運転での活用が期待される",
+    "impact": "ARや自動運転技術が進化する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "StructureGS: Structure-Aware Gaussian Splatting for Object Reconstruction",
     "generated": "github-models"
   },
   "paper_korea_postech_2026_003": {
-    "problem": "少ないデータで新視点を作るのが難しい",
+    "problem": "少ないデータで新視点生成が難しい",
     "method": [
       "スパース動画収集",
       "新視点合成手法開発",
-      "リアルタイム処理実装"
+      "リアルタイム処理実現"
     ],
-    "result": "少ないデータでも高品質な新視点生成が可能に",
+    "result": "少ないデータでも高品質な視点生成が可能に",
     "metric": null,
     "impact": "ライブ配信やVR体験が向上する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "REON-NVS: Real-Time Online Novel-View Synthesis from Sparse Videos",
     "generated": "github-models"
   },
   "paper_korea_snu_2026_001": {
-    "problem": "プロンプトインジェクション攻撃が問題だった",
+    "problem": "プロンプトインジェクション攻撃が危険だった",
     "method": [
-      "因果属性の利用",
-      "防止技術の開発",
-      "安全性の向上"
+      "因果属性を用いる",
+      "間接防止技術開発",
+      "LLMの安全性向上"
     ],
-    "result": "LLMの安全性が大幅に向上した",
+    "result": "新技術によりLLMの安全性が向上した",
     "metric": null,
-    "impact": "より安全なAIサービスが提供される",
+    "impact": "AIサービスがより安全に利用できる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "CausalArmor: Efficient Indirect Prompt Injection Guardrails",
     "generated": "github-models"
   },
   "paper_korea_snu_2026_002": {
     "problem": "言語モデルの知識形成が不明だった",
     "method": [
-      "訓練データを分析",
-      "知識形成を解明",
-      "モデルの理解を深め"
+      "訓練データ分析",
+      "知識形成メカニズム解明",
+      "結果の解釈"
     ],
-    "result": "訓練データが知識形成に影響することがわかった",
+    "result": "訓練データが知識形成に影響することが分かった",
     "metric": null,
-    "impact": "より良い言語モデルの開発が期待できる",
+    "impact": "より信頼性の高い言語モデルが作れる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "How Training Data Shapes Parametric and In-Context Knowledge",
     "generated": "github-models"
   },
   "paper_korea_snu_2026_003": {
-    "problem": "プライバシー保護と性能の両立が難しい",
+    "problem": "暗号化データ処理が遅い",
     "method": [
-      "準同型暗号の統合",
-      "ハードウェア設計",
-      "性能評価"
+      "ハードウェア最適化",
+      "データ圧縮",
+      "新技術の導入"
     ],
-    "result": "プライバシー保護と性能が両立した",
-    "metric": null,
-    "impact": "プライバシー保護AIが実用化される",
-    "viz": null,
-    "v": 2,
+    "result": "新技術で処理速度が大幅向上",
+    "metric": {
+      "value": "8.74倍",
+      "label": "性能向上"
+    },
+    "impact": "暗号化データ処理が迅速に行える",
+    "viz": {
+      "type": "compare_bars",
+      "unit": "倍",
+      "before": {
+        "label": "従来",
+        "value": 1
+      },
+      "after": {
+        "label": "本手法",
+        "value": 8.74
+      },
+      "higherIsBetter": true,
+      "caption": "性能が8.74倍向上"
+    },
+    "v": 3,
     "title": "WHET: Welding Homomorphic Encryption to Accelerator Architectures",
     "generated": "github-models"
   },
   "paper_korea_yonsei_2026_001": {
-    "problem": "数学研究の自動化が進んでいなかった。",
+    "problem": "数学研究の自動化が進んでいなかった",
     "method": [
-      "AIエージェント開発",
-      "数学者との協働",
-      "証明の自動化"
+      "AIエージェントの開発",
+      "独立集合の証明",
+      "人間との協働"
     ],
-    "result": "AIが独立集合の証明を自動で行った。",
+    "result": "AIが数学研究を自動化できることがわかった",
     "metric": null,
-    "impact": "数学研究が加速し新たな発見が期待。",
+    "impact": "数学研究が加速し新しい発見が期待できる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Towards Autonomous Mathematics Research",
     "generated": "github-models"
   },
   "paper_korea_yonsei_2026_002": {
-    "problem": "AI評価が固定的で多様性がない",
+    "problem": "AI評価が固定的で多様性が欠如",
     "method": [
-      "ユーザーの目的確認",
-      "評価基準の設定",
-      "動的評価の提案"
+      "データセット分析",
+      "インターフェース設計",
+      "ユーザー評価の実施"
     ],
-    "result": "ユーザー中心の評価方法を提案した",
+    "result": "ユーザーが評価基準を定義できることがわかった",
     "metric": null,
-    "impact": "多様な声がAI開発に反映される",
+    "impact": "多様なユーザーの声がAI開発に反映される",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Who Defines 'Best'? Towards Interactive User-Defined Evaluation",
     "generated": "github-models"
   },
   "paper_russia_hse_2026_001": {
-    "problem": "ソーシャルネットワーク分析が難しい",
+    "problem": "従来の分析手法が不十分だった",
     "method": [
-      "グラフニューラルネットワー…",
-      "社会構造の解析",
-      "予測精度の向上"
+      "グラフ構造の作成",
+      "ニューラルネットワーク適用",
+      "結果の評価"
     ],
-    "result": "新手法により社会構造の理解が進む",
+    "result": "社会構造の理解と予測が向上した",
     "metric": null,
-    "impact": "教育や健康政策に役立つ可能性",
+    "impact": "教育や健康政策に役立つ可能性がある",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Social Network Analysis using Graph Neural Networks",
     "generated": "github-models"
   },
   "paper_russia_hse_2026_002": {
-    "problem": "経済予測の精度が低かった。",
+    "problem": "経済予測が不正確だった。",
     "method": [
       "機械学習手法の開発",
       "モデルの構築",
-      "データの解析"
+      "予測の検証"
     ],
-    "result": "インフレやGDPの予測が正確にできる。",
+    "result": "インフレやGDPの予測が可能に。",
     "metric": null,
-    "impact": "経済政策の立案がより効果的になる。",
+    "impact": "経済政策がより効果的になる。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Economic Forecasting with Advanced Machine Learning",
     "generated": "github-models"
   },
@@ -552,89 +568,105 @@
     "problem": "対話型AIが不明点を解決できない",
     "method": [
       "不確実性を分解",
-      "質問能力を向上",
-      "対話を改善"
+      "明確さを求める",
+      "新しい基準を設定"
     ],
-    "result": "不明点を効率的に解決できるようになった",
-    "metric": null,
-    "impact": "より自然なAIアシスタントが実現する",
-    "viz": null,
-    "v": 2,
+    "result": "新手法で明確さが大幅に向上した",
+    "metric": {
+      "value": "73%増",
+      "label": "明確さF1"
+    },
+    "impact": "対話型AIがより賢くなる",
+    "viz": {
+      "type": "compare_bars",
+      "unit": "%",
+      "before": {
+        "label": "従来",
+        "value": 1.2
+      },
+      "after": {
+        "label": "本手法",
+        "value": 0.03
+      },
+      "higherIsBetter": false,
+      "caption": "エラー率を97%削減"
+    },
+    "v": 3,
     "title": "Uncertainty Decomposition for Clarification-Seeking in LLM Agents",
     "generated": "github-models"
   },
   "paper_russia_itmo_2026_002": {
-    "problem": "従来のモデルに限界があった",
+    "problem": "言語モデルの性能比較が難しい",
     "method": [
-      "拡散モデルの設計",
-      "実験的分析の実施",
-      "結果の比較検討"
+      "拡散モデルを分析",
+      "8つの評価基準で比較",
+      "生成品質と効率を評価"
     ],
-    "result": "新しいモデルが可能性を示した",
+    "result": "拡散モデルの特性と限界が明らかに",
     "metric": null,
-    "impact": "多様で高品質なテキスト生成が期待",
+    "impact": "多様で高品質なテキスト生成が可能に",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Diffusion Language Models: Experimental Analysis",
     "generated": "github-models"
   },
   "paper_russia_itmo_2026_003": {
-    "problem": "従来の電子回路が遅い",
+    "problem": "従来の電子回路が遅い問題",
     "method": [
       "光技術の研究",
-      "新しい回路設計",
-      "AI処理の実装"
+      "AI処理の実装",
+      "省電力化の実現"
     ],
     "result": "光を使ったコンピュータが実現した",
     "metric": null,
-    "impact": "AI処理が高速化し省エネになる",
+    "impact": "AI処理が高速化し生活が便利に",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Photonics and Advanced Optical Computing",
     "generated": "github-models"
   },
   "paper_russia_mipt_2026_001": {
-    "problem": "高温で超伝導が難しい問題",
+    "problem": "高温超伝導材料が不足していた",
     "method": [
-      "新材料の開発",
-      "液体窒素での実験",
-      "性能評価"
+      "新材料の合成",
+      "特性の評価",
+      "実用化の検討"
     ],
-    "result": "新材料が液体窒素温度で超伝導を示した",
+    "result": "液体窒素で超伝導を示す材料を開発",
     "metric": null,
-    "impact": "エネルギーや医療分野で革新が期待",
+    "impact": "エネルギーや医療での革新が期待される",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Quantum Materials: High-Temperature Superconductivity",
     "generated": "github-models"
   },
   "paper_russia_mipt_2026_002": {
-    "problem": "量子回路の理解が不十分だった。",
+    "problem": "量子回路の理解が進んでいなかった。",
     "method": [
-      "ランダム量子回路の構築",
-      "時間反転対称性の検証",
-      "測定誘起相転移の解析"
+      "時間反転対称性の研究",
+      "ランダム量子回路の解析",
+      "測定誘起相転移の調査"
     ],
-    "result": "量子情報の理論が進展した。",
+    "result": "量子情報の理論がより深まった。",
     "metric": null,
-    "impact": "エラー耐性の強い量子コンピュータが期待。",
+    "impact": "エラーに強い量子コンピュータが期待できる。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Random Quantum Circuits with Time-Reversal Symmetry",
     "generated": "github-models"
   },
   "paper_russia_msu_2026_001": {
-    "problem": "複雑なクエリの実行が遅かった",
+    "problem": "従来の手法は安定性に欠けた。",
     "method": [
-      "モンテカルロ木探索の利用",
-      "訓練なしで実装",
-      "クエリ最適化"
+      "新しいMCTSフレームワー…",
+      "内部コストモデル利用",
+      "選択ポリシー改良"
     ],
-    "result": "実行時間を大幅に短縮できた",
+    "result": "複雑なクエリの実行時間を短縮。",
     "metric": null,
-    "impact": "大規模データ分析が効率化する",
+    "impact": "データ分析システムの効率が向上する。",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Practical Training-Free MCTS Query Optimization",
     "generated": "github-models"
   },
@@ -642,44 +674,44 @@
     "problem": "深層学習の理論が不明確だった",
     "method": [
       "代数幾何学の適用",
-      "ニューラルネットの分析",
-      "数学的本質の解明"
+      "数学的本質の解明",
+      "ニューラルネットワークの分析"
     ],
-    "result": "深層学習の数学的基盤が明らかに",
+    "result": "ニューラルネットワークの本質が明らかに",
     "metric": null,
-    "impact": "より信頼性の高いAIが実現する",
+    "impact": "より堅牢なAIシステムが期待できる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Algebraic Geometry Applications in Deep Learning Theory",
     "generated": "github-models"
   },
   "paper_russia_ras_2026_001": {
-    "problem": "大規模機械学習の効率が悪い",
+    "problem": "大規模機械学習の効率が悪かった",
     "method": [
-      "新アルゴリズムを開発",
-      "複数マシンで協調",
-      "分散最適化を実施"
+      "新アルゴリズムの開発",
+      "複数マシンの協調",
+      "効率的な学習"
     ],
-    "result": "分散学習が効率的に行えるようになった",
+    "result": "分散最適化により学習効率が向上",
     "metric": null,
-    "impact": "多くの組織がAIを活用できるようになる",
+    "impact": "多くの組織がAIを活用できる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Distributed Optimization for Large-Scale Machine Learning",
     "generated": "github-models"
   },
   "paper_russia_ras_2026_002": {
-    "problem": "学習アルゴリズムの収束が不明確だった。",
+    "problem": "学習アルゴリズムの収束が不明だった",
     "method": [
       "情報理論の応用",
       "数学的解析",
       "理論と実装の統合"
     ],
-    "result": "学習アルゴリズムの収束特性を明確化。",
+    "result": "学習アルゴリズムの収束特性を明らかにした",
     "metric": null,
-    "impact": "より効率的で信頼できるAIが実現。",
+    "impact": "より効率的で信頼できるAIが実現する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Information Theory and Convergence Analysis for Learning Systems",
     "generated": "github-models"
   },
