@@ -212,3 +212,26 @@ ollama pull qwen2.5:7b
 PROVIDER=ollama node scripts/generate_storyboards.mjs
 # 生成された storyboards.json をコミットして push すれば反映
 ```
+
+##### 2台持ち（Mac + Windows など）の場合
+
+スクリプトは **どのマシンで実行しても動く** ように、Ollama を次の順で自動的に探します:
+
+1. `OLLAMA_URLS`（カンマ区切りで複数指定可）または `OLLAMA_URL` で指定した接続先
+2. 実行マシン自身の `http://localhost:11434`
+3. **同じLAN内の別マシン**（/24を自動スキャン）
+
+GPUがあるマシン（例: Windows + RTX 3070）を LAN に公開しておく一度きりの設定:
+
+```powershell
+# Windows (PowerShell) — 一度だけ
+winget install Ollama.Ollama
+[Environment]::SetEnvironmentVariable("OLLAMA_HOST", "0.0.0.0", "User")
+# Ollamaを再起動してから:
+ollama pull qwen2.5:7b
+# ファイアウォールで11434を許可（初回のダイアログでOK。手動なら:）
+netsh advfirewall firewall add rule name="Ollama" dir=in action=allow protocol=TCP localport=11434
+```
+
+以後、Mac側から `PROVIDER=ollama node scripts/generate_storyboards.mjs` を実行するだけで、
+WindowsのGPUが自動的に見つかって使われます（IP指定: `OLLAMA_URLS="http://192.168.x.x:11434"`）。
