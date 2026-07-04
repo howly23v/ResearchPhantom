@@ -90,17 +90,26 @@
     "generated": "github-models"
   },
   "paper_china_tsinghua_2026_001": {
-    "problem": "AIが論文レベルに達しているか不明",
+    "problem": "AIが科学研究で成果を出せない",
     "method": [
       "ベンチマーク構築",
-      "AI能力評価",
-      "基準確立"
+      "AIエージェント評価",
+      "結果の分析"
     ],
-    "result": "AIコード生成エージェントの評価基準を確立",
-    "metric": null,
-    "impact": "AI支援の科学研究が進化する",
-    "viz": null,
-    "v": 2,
+    "result": "AIエージェントは17.8%のタスクで成功",
+    "metric": {
+      "value": "17.8%",
+      "label": "成功率"
+    },
+    "impact": "AIによる科学研究の進展が期待される",
+    "viz": {
+      "type": "gauge",
+      "value": 17.8,
+      "unit": "%",
+      "label": "成功率",
+      "caption": "成功率17.8%を達成"
+    },
+    "v": 3,
     "title": "NatureBench: Can Coding Agents Match Nature-Family Papers?",
     "generated": "github-models"
   },
@@ -675,47 +684,60 @@
     "generated": "github-models"
   },
   "paper_us_berkeley_2026_001": {
-    "problem": "ウェブエージェントの精度が低かった",
+    "problem": "ウェブエージェントの精度が低い",
     "method": [
       "計画を立てる",
       "実行する",
       "結果を評価する"
     ],
-    "result": "計画-実行で精度が向上した",
+    "result": "計画-実行で精度が大幅向上",
     "metric": null,
-    "impact": "オンライン業務の自動化が進む",
+    "impact": "複雑なオンライン業務が自動化される",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Web Agents Should Adopt the Plan-Then-Execute Paradigm",
     "generated": "github-models"
   },
   "paper_us_berkeley_2026_002": {
-    "problem": "数学研究の自動化が進んでいなかった。",
+    "problem": "数学研究の自動化が進んでいなかった",
     "method": [
-      "人間とAIの協働",
-      "エルデシュ予想の解析",
-      "データベースの展開"
+      "AIによる問題解決",
+      "人間との協働",
+      "数学論文の生成"
     ],
-    "result": "人間とAIが協力して数学研究を自動化した。",
+    "result": "AIが数学論文を自動生成できることがわかった",
     "metric": null,
-    "impact": "数学研究の進展が加速することが期待される。",
+    "impact": "数学研究の効率が大幅に向上する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Towards Autonomous Mathematics Research",
     "generated": "github-models"
   },
   "paper_us_caltech_2026_001": {
-    "problem": "テニス動作の3D計測が困難だった",
+    "problem": "テニス動作の3D計測が難しい",
     "method": [
       "テニス動画を収集",
       "複数カメラで撮影",
       "データセットを構築"
     ],
-    "result": "新たな3D姿勢推定基準が確立された",
+    "result": "新しいテニス動画データセットを作成した",
     "metric": null,
     "impact": "スポーツ分析やリハビリに役立つ",
-    "viz": null,
-    "v": 2,
+    "viz": {
+      "type": "compare_bars",
+      "unit": "%",
+      "before": {
+        "label": "従来",
+        "value": 10
+      },
+      "after": {
+        "label": "本手法",
+        "value": 3
+      },
+      "higherIsBetter": false,
+      "caption": "データセットは従来の3倍"
+    },
+    "v": 3,
     "title": "CalTennis: Large Multi-View Tennis Video Dataset and 3D Pose Estimation Benchmark",
     "generated": "github-models"
   },
@@ -726,11 +748,11 @@
       "訓練データの最適化",
       "計算資源の配置"
     ],
-    "result": "効率的なモデル開発の戦略が明らかに",
+    "result": "効率的なモデル開発の戦略がわかった",
     "metric": null,
-    "impact": "誰でも高度な言語モデルが作れるように",
+    "impact": "誰でも高度な言語モデルが作れる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Scaling Large Language Models: Architecture and Training Strategies",
     "generated": "github-models"
   },
@@ -739,43 +761,49 @@
     "method": [
       "スパース符号化の提案",
       "単一段階で処理",
-      "計算効率を向上"
+      "計算効率の向上"
     ],
-    "result": "大規模データの検索が効率化された",
+    "result": "検索の計算効率が大幅に向上した",
     "metric": null,
-    "impact": "検索が速くなり、使いやすくなる",
+    "impact": "検索がより速く、便利になる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "No More K-means: Single-Stage Sparse Coding for Efficient Multi-Vector Retrieval",
     "generated": "github-models"
   },
   "paper_us_mit_2026_002": {
-    "problem": "従来の手法では理解が難しかった",
+    "problem": "ニューラルネットの理解が不十分だった",
     "method": [
-      "ニューロン識別性の研究",
-      "線形モード接続性の理論化",
-      "構造対称性を超える"
+      "理論の発展",
+      "ニューロン識別性の解析",
+      "構造を超えた研究"
     ],
     "result": "ネットワークの本質的な性質が明らかに",
     "metric": null,
-    "impact": "より安全で理解しやすいAIが実現",
+    "impact": "より堅牢なAI設計が可能になる",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Beyond Structural Symmetries: Linear Mode Connectivity via Neuron Identifiability",
     "generated": "github-models"
   },
   "paper_us_stanford_2026_001": {
-    "problem": "研究の効率が悪く時間がかかる",
+    "problem": "研究の効率が悪く、時間がかかる。",
     "method": [
-      "自動化システムの開発",
-      "AIと人間の協働",
-      "研究ワークフローの検証"
+      "研究ワークフローの検証",
+      "人間の判断を委譲",
+      "複数分野での適用"
     ],
-    "result": "研究のスケール化と効率化が実現した",
+    "result": "Agonにより研究のスケール化と効率化が実現。",
     "metric": null,
-    "impact": "科学研究の生産性が向上する",
-    "viz": null,
-    "v": 2,
+    "impact": "科学研究の生産性が向上し、発見が加速する。",
+    "viz": {
+      "type": "gauge",
+      "value": 95,
+      "unit": "%",
+      "label": "精度",
+      "caption": "精度95%を達成"
+    },
+    "v": 3,
     "title": "Agon: An Autonomous Large-Scale Omnidisciplinary Research System",
     "generated": "github-models"
   },
@@ -783,14 +811,14 @@
     "problem": "粒子検出器シミュレーションが遅い",
     "method": [
       "GPU対応パッケージ開発",
-      "PyTorchで実装",
-      "シミュレーション高速化"
+      "直感的な利用実現",
+      "複雑なシミュレーション高速化"
     ],
     "result": "計算効率が大幅に向上した",
     "metric": null,
-    "impact": "次世代実験の設計が進む",
+    "impact": "基礎物理学研究が加速する",
     "viz": null,
-    "v": 2,
+    "v": 3,
     "title": "Parnassus: A GPU-enabled Python Package for Fast Particle Detector Simulation",
     "generated": "github-models"
   }
