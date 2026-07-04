@@ -1787,6 +1787,27 @@ header::after {
 }
 @keyframes orbitSpin { to { transform: rotate(360deg); } }
 .viz-note { font-size: 0.7rem; color: #8a8a9a; margin-top: 6px; }
+
+/* ---- 掲載論文数バッジ(stickyヘッダー内 = 全ビュー・スクロール中も常時表示) ---- */
+.paper-count-badge {
+  display: inline-block;
+  margin: 4px 0;
+  padding: 2px 10px;
+  border: 1px solid var(--p5-yellow);
+  color: var(--p5-yellow);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  background: rgba(255, 221, 0, 0.06);
+  transform: skewX(-8deg);
+}
+.paper-count-badge #header-paper-count {
+  font-family: 'Bebas Neue', 'LocalBebas', 'Impact', sans-serif;
+  font-size: 1.05rem;
+  vertical-align: -1px;
+}
+@media (max-width: 600px) {
+  .paper-count-badge { font-size: 0.65rem; padding: 1px 7px; }
+}
 </style>
 </head>
 <body>
@@ -1833,6 +1854,9 @@ header::after {
     </div>
     <div class="header-info">
       <div class="date" id="current-date"></div>
+      <div class="paper-count-badge" title="掲載論文数">
+        📚 掲載論文 <span id="header-paper-count">--</span> 件
+      </div>
       <div class="update-status">
         <div class="pulse-dot"></div>
         <span id="last-update">最終更新: 読み込み中...</span>
@@ -3081,6 +3105,8 @@ function renderAll() {
 
   // Update stats
   document.getElementById('total-papers').textContent = allPapers.length;
+  const headerCount = document.getElementById('header-paper-count');
+  if (headerCount) headerCount.textContent = allPapers.length;
   document.getElementById('today-new').textContent = filtered.length;
 
   const mainContent = document.getElementById('main-content');
