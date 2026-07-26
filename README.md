@@ -141,7 +141,7 @@ No extra steps needed. Just edit `index.html` and push — the site updates auto
 - 🧬 生命科学 / ⚛️ 物理 / 🔮 量子 / 🔬 材料科学 / ⚡ エネルギー など、**分野ごと**に最新論文を表示
 - 📊 各論文の「**解析・評価**」や 🚀「**将来の発展性**」もまとめて表示
 - 🌍 国・研究機関ごとの動きもチェックできる
-- 🎮 赤 × 黒の **ペルソナ5風デザイン**
+- 🎮 赤 × 黒の 目に優しいデザイン**
 
 ---
 
@@ -204,7 +204,7 @@ No extra steps needed. Just edit `index.html` and push — the site updates auto
 
 #### ローカルGPUで一括生成する（任意）
 
-[Ollama](https://ollama.com/) を入れた PC（例: RTX 3070）なら、
+[Ollama](https://ollama.com/) を入れた PC（例: RTX 3090）なら、
 レート制限なしで全論文分を一気に生成できます:
 
 ```bash
