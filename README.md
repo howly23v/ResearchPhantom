@@ -21,6 +21,28 @@
   </a>
 </p>
 
+## Daily updates and one-year archive / 毎日更新と1年分の履歴
+
+Official arXiv RSS listings are collected by `Daily paper archive` every day at **15:30 JST**, after publication in US Eastern time. GitHub scheduling can be delayed. No API key or LLM is required for paper updates.
+
+The date selector opens a saved daily listing. History accumulates **from the first successful run**, retaining one calendar year. This does not backfill unsaved dates or all historical arXiv papers. Only the date catalog and the selected snapshot are fetched; cards are rendered 10 at a time (the app's existing display limit). Identical snapshots share one file; unreferenced expired snapshots are removed. Offline caching keeps only the last opened snapshot.
+
+Official RSS does not reliably include author affiliations. New papers appear under **所属未確認**, without guessed countries or institutions. The existing institution-specific dataset remains available as a separate selector option. New abstracts are in the original language; curated translations and storyboards remain available for the existing dataset.
+
+Acquisition failure leaves the previous archive intact and fails the Actions run. A successful data commit explicitly dispatches Pages deployment, because pushes made with `GITHUB_TOKEN` do not trigger push workflows.
+
+毎日 **15:30（日本時間）** に取得・保存し、公開サイトへ反映します。日付を選ぶと保存済みの一覧を開けます。保存は初回の成功日から蓄積され、過去1年分を保持します。未保存の過去1年を自動で埋めるものではありません。所属や国は推測せず、新着は原文要旨を表示します。
+
+| File | Purpose |
+| --- | --- |
+| `scripts/update_papers.py` | Official feed collection, deduplication and calendar-year retention |
+| `data/manifest.json` | Catalog of saved dates and acquisition timestamps |
+| `data/snapshots/*.json` | Content-addressed daily listings, loaded on selection |
+| `data/seed.json` | Existing institution-specific data |
+| `.github/workflows/update-papers.yml` | Daily update and explicit Pages deployment |
+
+Verification: `python -m unittest discover -s tests -v` and `node tests/test_archive_ui.mjs`.
+
 ---
 
 <a id="english"></a>
@@ -48,9 +70,9 @@ Click the red **OPEN THE APP** button above, or tap / click the link below. Work
 
 1. Click the green **"Code"** button at the top right → **"Download ZIP"**
 2. Extract the downloaded ZIP file
-3. **Double-click** `index.html` inside the folder → it opens in your browser. That's it!
+3. Run `python -m http.server` in the folder, then open `http://localhost:8000`.
 
-> 💡 `index.html` is the **entire app in a single file**. No server setup or build process needed.
+> 💡 `index.html` contains the UI; data is loaded from `data/`. Local viewing requires an HTTP server, with no build process.
 
 ---
 
@@ -77,7 +99,7 @@ Kept intentionally simple so even beginners can read it.
 | [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) | Auto-publish to GitHub Pages |
 
 - Runs on **vanilla HTML / CSS / JavaScript** — no frameworks
-- Data is fetched from the arXiv public API (`https://export.arxiv.org/api/query`)
+- Daily data is collected from official arXiv RSS feeds by GitHub Actions; browsers read saved data
 - Edit `<style>` in `index.html` to change the **appearance**; edit `<script>` to change the **behavior**
 
 #### Recommended First Step
@@ -127,10 +149,9 @@ No extra steps needed. Just edit `index.html` and push — the site updates auto
 
 1. このページ右上の緑の **「Code」** ボタン → **「Download ZIP」** でダウンロード
 2. ダウンロードしたZIPを展開（解凍）する
-3. その中の **`index.html`** を **ダブルクリック**
-   → いつものブラウザで開きます。これだけ！
+3. フォルダ内で `python -m http.server` を実行し、ブラウザで `http://localhost:8000` を開きます。
 
-> 💡 `index.html` という **1ファイルがアプリ本体** です。サーバーの構築やビルドなど、難しい準備は一切いりません。
+> 💡 `index.html` が画面、`data/` が保存データです。ローカル閲覧にはHTTPサーバーが必要ですが、ビルドは不要です。
 
 ---
 
@@ -157,7 +178,7 @@ No extra steps needed. Just edit `index.html` and push — the site updates auto
 | [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) | GitHub Pages へ自動公開するための設定 |
 
 - フレームワーク無しの **素の HTML / CSS / JavaScript** だけで動きます
-- データは arXiv の公開API（`https://export.arxiv.org/api/query`）から取得しています
+- データは GitHub Actions が arXiv 公式RSSから毎日取得し、ブラウザは保存データを読み込みます
 - `index.html` の中の `<style>` を変えれば **見た目** が、`<script>` を変えれば **動き** が変わります
 
 #### 最初の一歩におすすめ

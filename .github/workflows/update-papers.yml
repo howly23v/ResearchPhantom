@@ -1,0 +1,58 @@
+name: Daily paper archive
+
+on:
+  schedule:
+    # After arXiv's midnight US Eastern feed publication (both EST and EDT).
+    - cron: '30 6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/update_papers.py
+      - .github/workflows/update-papers.yml
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: paper-archive
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+      - name: Test acquisition and retention
+        run: python -m unittest discover -s tests -v
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Test archive UI behavior
+        run: node tests/test_archive_ui.mjs
+      - name: Collect official daily listings
+        run: python scripts/update_papers.py
+      - name: Commit archive
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/manifest.json data/snapshots
+          if git diff --cached --quiet; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          else
+            git commit -m 'data: update daily papers and rolling year archive'
+            git pull --rebase origin main
+            git push
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      # A GITHUB_TOKEN push does not trigger push workflows.
+      - name: Publish updated archive
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main --repo "$GITHUB_REPOSITORY"

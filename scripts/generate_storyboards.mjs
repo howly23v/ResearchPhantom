@@ -1,7 +1,7 @@
 // ============================================================
 // storyboards.json 自動生成スクリプト
 //
-// index.html の SEED_DATA から論文を読み取り、未生成のものだけ
+// data/seed.json から既存の論文を読み取り、未生成のものだけ
 // LLM で「自動ブリーフィング」用ストーリーボードに変換して
 // storyboards.json に追記する。
 //
@@ -18,7 +18,6 @@
 // ============================================================
 
 import fs from 'node:fs';
-import vm from 'node:vm';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -39,12 +38,9 @@ let OLLAMA_RESOLVED = null; // resolveOllamaUrl() が設定する
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// ---- 1. index.html から論文を抽出 ----
+// ---- 1. 既存の研究機関別データから論文を抽出 ----
 function extractPapers() {
-  const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  const m = html.match(/const SEED_DATA = (\{[\s\S]*?\n\};)/);
-  if (!m) throw new Error('SEED_DATA が index.html に見つかりません');
-  const seed = vm.runInNewContext('(' + m[1].replace(/;\s*$/, '') + ')', {}, { timeout: 5000 });
+  const seed = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/seed.json'), 'utf8'));
   const papers = [];
   for (const country of Object.values(seed.countries || {})) {
     for (const inst of Object.values(country.institutions || {})) {

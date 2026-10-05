@@ -1,98 +1,34 @@
-// Service Worker for GLOBAL RESEARCH TERMINAL
-const CACHE_NAME = 'grterm-v2';
-const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json'
-];
-
-// Install: cache core assets
+// Network-first for mutable catalogs and app shell; offline fallback.
+const CACHE_NAME = 'grterm-v3';
+const ASSETS = ['./', './index.html', './manifest.json', './data/seed.json'];
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
   self.skipWaiting();
 });
-
-// Activate: clean old caches
 self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
-
-// Fetch: network-first for API, cache-first for assets
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
-
-  // API requests (arXiv): network-first with cache fallback
-  if (url.hostname.includes('arxiv.org')) {
-    event.respondWith(
-      fetch(event.request)
-        .then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          return response;
-        })
-        .catch(() => caches.match(event.request))
-    );
-    return;
-  }
-
-  // Google Fonts: network-first with cache fallback (graceful degradation)
-  if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
-    event.respondWith(
-      fetch(event.request)
-        .then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          return response;
-        })
-        .catch(() => caches.match(event.request))
-    );
-    return;
-  }
-
-  // storyboards.json: network-first (毎日更新されるため鮮度優先、404はキャッシュしない)
-  if (url.origin === self.location.origin && url.pathname.endsWith('storyboards.json')) {
-    event.respondWith(
-      fetch(event.request)
-        .then(response => {
-          if (response.ok) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          }
-          return response;
-        })
-        .catch(() => caches.match(event.request))
-    );
-    return;
-  }
-
-  // Same-origin assets: cache-first
-  if (url.origin === self.location.origin) {
-    event.respondWith(
-      caches.match(event.request).then(cached => {
-        if (cached) {
-          // Background update
-          fetch(event.request).then(response => {
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, response));
-          }).catch(() => {});
-          return cached;
+  if (url.origin !== self.location.origin) return;
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    try {
+      const response = await fetch(event.request);
+      if (response.ok) {
+        // Cache only the last opened daily snapshot, not an entire year's payloads.
+        if (url.pathname.includes('/data/snapshots/')) {
+          const keys = await cache.keys();
+          await Promise.all(keys.filter(k => new URL(k.url).pathname.includes('/data/snapshots/') && k.url !== event.request.url).map(k => cache.delete(k)));
         }
-        return fetch(event.request).then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          return response;
-        });
-      })
-    );
-    return;
-  }
-
-  // Everything else: network only
-  event.respondWith(fetch(event.request));
+        await cache.put(event.request, response.clone());
+      }
+      return response;
+    } catch (error) {
+      const cached = await cache.match(event.request);
+      if (cached) return cached;
+      throw error;
+    }
+  })());
 });
