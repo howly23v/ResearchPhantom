@@ -25,7 +25,9 @@ const manifest = {days:[{date:'2026-10-05',path:newPath,count:25,announcements:2
   {date:'2026-10-04',path:oldPath,count:1,announcements:1,checked_at:'2026-10-04T06:30:00Z',feed_dates:[]}]};
 let failing = false;
 const requests=[];
-const payloads = {'data/manifest.json':manifest,[newPath]:data(Array.from({length:25},(_,i)=>paper(i))),[oldPath]:data([paper(99)]),
+const newBriefing = newPath.replace('snapshots', 'briefings');
+const payloads = {[newBriefing]:{'7':{title_ja:'七番目<b>の論文',summary_ja:'日本語のまとめ',problem:'課題',method:['手法'],result:'結果',impact:'意義',v:3}},
+  'data/manifest.json':manifest,[newPath]:data(Array.from({length:25},(_,i)=>paper(i))),[oldPath]:data([paper(99)]),
   'data/seed.json':JSON.parse(fs.readFileSync(new URL('data/seed.json',root)))};
 const context = vm.createContext({console, URL, Date, Math, setTimeout(){}, setInterval(){},
   navigator:{onLine:true}, IntersectionObserver:class {observe(){}},
@@ -34,8 +36,13 @@ const context = vm.createContext({console, URL, Date, Math, setTimeout(){}, setI
   fetch: async path => {requests.push(path);return {ok:!failing,status:failing?503:200,json:async()=>structuredClone(payloads[path])};}});
 vm.runInContext(script,context);
 await vm.runInContext('fetchLivePapers()',context);
-assert.deepEqual(requests,['data/manifest.json',newPath]);
+assert.deepEqual(requests,['data/manifest.json',newBriefing,newPath]);
 assert.equal(vm.runInContext('_paperRegistry.length',context),10);
+// Briefed paper is shown first, in Japanese, with escaped LLM text.
+assert.equal(vm.runInContext('_paperRegistry[0].id',context),'7');
+assert.match(element('main-content').innerHTML,/七番目&lt;b&gt;の論文/);
+assert.match(element('main-content').innerHTML,/日本語のまとめ/);
+assert.match(element('archive-status').textContent,/動画解説 1 本/);
 assert.match(element('main-content').innerHTML,/&lt;img/);
 assert.doesNotMatch(element('main-content').innerHTML,/<img src=x/);
 vm.runInContext('changePage(1)',context);
@@ -43,14 +50,17 @@ assert.equal(vm.runInContext('_paperRegistry.length',context),10);
 vm.runInContext('changePage(1)',context);
 assert.equal(vm.runInContext('_paperRegistry.length',context),5);
 vm.runInContext("filterCategory('quantum')",context);
+// Paper 7 is quantum-ph and briefed: it stays first within the filtered list.
+assert.equal(vm.runInContext('_paperRegistry[0].id',context),'7');
 assert.equal(vm.runInContext('_paperRegistry.length',context),10);
 assert.match(element('page-status').textContent,/該当 12 件/);
 await vm.runInContext("selectArchive('2026-10-04')",context);
 assert.equal(vm.runInContext('getAllPapers()[0].id',context),'99');
 assert.equal(requests.at(-1),oldPath);
+assert.equal(vm.runInContext('Object.keys(DAILY_BRIEFINGS).length',context),0);
 failing = true;
 await vm.runInContext("selectArchive('2026-10-05')",context);
 assert.equal(vm.runInContext('getAllPapers()[0].id',context),'99');
 assert.equal(element('archive-date').value,'2026-10-04');
 assert.match(element('archive-status').textContent,/読み込み失敗/);
-console.log('PASS: loads only chosen day, 10 cards/page, filters, escaping, history, failure preserves data');
+console.log('PASS: loads only chosen day and its briefings, briefed papers first, 10 cards/page, filters, escaping, history, failure preserves data');

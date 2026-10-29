@@ -1,22 +1,28 @@
 name: Daily paper archive
 
+# GitHub上で動くのでPCの電源は不要。取得 → 動画解説(AI)生成 → コミット → Pages公開まで一括で行う。
 on:
   schedule:
-    # After arXiv's midnight US Eastern feed publication (both EST and EDT).
-    - cron: '30 6 * * *'
+    # arXiv RSSの更新(米東部の深夜0時 = 04:00/05:00 UTC)の後。GitHubの定時実行は遅れたり
+    # 抜けたりするため2回目は保険(同じ日を上書きするだけで、解説は生成済み分をスキップする)。
+    - cron: '37 5 * * *'   # 14:37 JST
+    - cron: '19 7 * * *'   # 16:19 JST
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - scripts/update_papers.py
+      - scripts/generate_storyboards.mjs
       - .github/workflows/update-papers.yml
 
 permissions:
   contents: write
   actions: write
+  models: read   # GitHub Models を GITHUB_TOKEN で呼ぶ(APIキー不要)
 
+# 論文データと解説の両ワークフローで共有し、mainへのpushが衝突しないようにする
 concurrency:
-  group: paper-archive
+  group: content-update
   cancel-in-progress: false
 
 jobs:
@@ -32,20 +38,31 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
-      - name: Test archive UI behavior
-        run: node tests/test_archive_ui.mjs
+      - name: Test archive UI and briefing selection
+        run: |
+          node tests/test_archive_ui.mjs
+          node tests/test_storyboards.mjs
       - name: Collect official daily listings
         run: python scripts/update_papers.py
+      # LLMが使えない日でも論文一覧の公開は止めない
+      - name: Generate video briefings for today's picks (GitHub Models -> Gemini)
+        continue-on-error: true
+        timeout-minutes: 30
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/generate_storyboards.mjs
       - name: Commit archive
         id: commit
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/manifest.json data/snapshots
+          git add data/manifest.json data/snapshots storyboards.json
+          [ -d data/briefings ] && git add -A data/briefings
           if git diff --cached --quiet; then
             echo 'changed=false' >> "$GITHUB_OUTPUT"
           else
-            git commit -m 'data: update daily papers and rolling year archive'
+            git commit -m 'data: update daily papers, briefings and rolling year archive'
             git pull --rebase origin main
             git push
             echo 'changed=true' >> "$GITHUB_OUTPUT"

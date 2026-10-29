@@ -1,9 +1,11 @@
 // ============================================================
 // storyboards.json 自動生成スクリプト
 //
-// data/seed.json から既存の論文を読み取り、未生成のものだけ
-// LLM で「自動ブリーフィング」用ストーリーボードに変換して
-// storyboards.json に追記する。
+// 2系統の論文を LLM で「自動ブリーフィング」(動画風の解説) に変換する:
+//   A. data/seed.json の既存論文       → storyboards.json
+//   B. 毎日の arXiv 新着(最新スナップショット)から分野ごとに数本を選抜
+//                                       → data/briefings/<スナップショットと同じハッシュ>.json
+// 生成済みのものはスキップするので、何度実行しても同じ論文に二重課金しない。
 //
 // プロバイダ優先順位(自動フォールバック):
 //   1. GitHub Models  … CI では GITHUB_TOKEN だけで動く(無料)
@@ -15,11 +17,12 @@
 //   CI:              node scripts/generate_storyboards.mjs
 //   ローカル一括:     PROVIDER=ollama node scripts/generate_storyboards.mjs
 //   動作確認のみ:     DRY_RUN=1 node scripts/generate_storyboards.mjs
+//   新着の選抜数:     DAILY_PER_CATEGORY=4 (分野ごと) / DAILY_DAYS=1 (遡る日数)
 // ============================================================
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STORYBOARDS_PATH = path.join(ROOT, 'storyboards.json');
@@ -27,8 +30,12 @@ const STORYBOARDS_PATH = path.join(ROOT, 'storyboards.json');
 const DRY_RUN = !!process.env.DRY_RUN;
 const PROVIDER = process.env.PROVIDER || '';        // '' = 自動 / 'ollama' = ローカル
 const MAX_NEW = Number(process.env.MAX_NEW || 120); // 1回の実行で生成する上限
-const GH_MODEL = process.env.GH_MODEL || 'openai/gpt-4o-mini';
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+const DAILY_PER_CATEGORY = Number(process.env.DAILY_PER_CATEGORY || 4);
+const DAILY_DAYS = Number(process.env.DAILY_DAYS || 1);
+// 先頭のモデルが廃止・利用不可でも次で続行できるよう、カンマ区切りで複数指定可
+const GH_MODELS = (process.env.GH_MODEL || 'openai/gpt-4o-mini,openai/gpt-4.1-mini')
+  .split(',').map((s) => s.trim()).filter(Boolean);
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'qwen2.5:7b';
 // Ollama接続先: カンマ区切りで複数指定可(Mac/Windowsどちらで実行しても、
 // どちらのマシンのOllamaでも使えるようにする)。全滅時はLANを自動探索。
@@ -49,6 +56,71 @@ function extractPapers() {
   }
   if (papers.length === 0) throw new Error('論文が0件です — SEED_DATA の形式が変わった可能性');
   return papers;
+}
+
+// ---- 1.2. 毎日の新着から「気軽に見られる」数本を分野ごとに選ぶ ----
+// UIのカテゴリボタンと同じ分類。どの分野を選んでも解説付きの論文が上に並ぶようにする。
+export const CATEGORY_GROUPS = {
+  ai: ['cs.AI', 'cs.LG'], nlp: ['cs.CL'], cv: ['cs.CV'], physics: ['physics', 'hep', 'astro'],
+  bio: ['q-bio'], quantum: ['quant-ph'], materials: ['cond-mat'], energy: ['eess'],
+};
+
+// LLM を使わない決定的なスコア: 新規投稿・具体的な数値成果・分野横断を優先
+export function dailyScore(p) {
+  const text = String(p.summary || '');
+  let score = 0;
+  if (p.announce_type === 'new') score += 4;
+  else if (/replace/.test(p.announce_type || '')) score -= 4;
+  if (/\d+(?:\.\d+)?\s*(?:%|×|x\b|-?fold|times)/i.test(text)) score += 3;
+  if (/state-of-the-art|outperform|first|novel|breakthrough/i.test(text)) score += 1;
+  if (text.length >= 500 && text.length <= 2000) score += 1;
+  const groups = Object.values(CATEGORY_GROUPS)
+    .filter((cats) => (p.categories || []).some((c) => cats.some((g) => c.includes(g)))).length;
+  if (groups >= 2) score += 1;
+  if (/withdrawn|erratum|this paper has been/i.test(text)) score -= 10;
+  return score;
+}
+
+export function pickDailyPapers(papers, perCategory = DAILY_PER_CATEGORY) {
+  const picked = new Map();
+  for (const cats of Object.values(CATEGORY_GROUPS)) {
+    // 主分類(先頭)がこの分野の論文を優先し、無ければクロスリストからも拾う
+    const inGroup = (c) => cats.some((g) => String(c).includes(g));
+    const candidates = papers
+      .filter((p) => p.id && !picked.has(p.id) && (p.categories || []).some(inGroup))
+      .map((p) => ({ p, s: dailyScore(p) + (inGroup((p.categories || [])[0]) ? 2 : 0) }))
+      .sort((a, b) => b.s - a.s || String(b.p.id).localeCompare(String(a.p.id)));
+    for (const { p } of candidates.slice(0, perCategory)) picked.set(p.id, p);
+  }
+  return [...picked.values()];
+}
+
+function snapshotPapers(data) {
+  const papers = [];
+  for (const country of Object.values((data && data.countries) || {})) {
+    for (const inst of Object.values(country.institutions || {})) papers.push(...(inst.papers || []));
+  }
+  return papers;
+}
+
+// 最新 DAILY_DAYS 日分のスナップショット(同一内容の日は1つにまとめる)
+function dailyTargets() {
+  const manifestPath = path.join(ROOT, 'data/manifest.json');
+  if (!fs.existsSync(manifestPath)) return [];
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const seen = new Set();
+  const targets = [];
+  for (const day of (manifest.days || []).slice(0, DAILY_DAYS)) {
+    if (!/^data\/snapshots\/[a-f0-9]{64}\.json$/.test(day.path) || seen.has(day.path)) continue;
+    seen.add(day.path);
+    const snapshot = JSON.parse(fs.readFileSync(path.join(ROOT, day.path), 'utf8'));
+    targets.push({
+      date: day.date,
+      file: path.join(ROOT, day.path.replace('data/snapshots/', 'data/briefings/')),
+      papers: pickDailyPapers(snapshotPapers(snapshot)),
+    });
+  }
+  return targets;
 }
 
 // ---- 1.5. arXiv原文アブストラクト取得(実験の実数値はここにしか無いことが多い) ----
@@ -90,7 +162,7 @@ function buildPrompt(p, abstract) {
   return `あなたは科学コミュニケーターです。以下の論文情報を、初心者向けの「自動ブリーフィング」用データに変換してください。
 出力は次の形式のJSONオブジェクトのみ。コードフェンスや説明文は一切付けないこと。
 
-{"problem":"研究前に何が問題だったか。平易な日本語で40字以内","method":["やったことを最大3ステップ、各12字以内の短い名詞句"],"result":"何が起きた/わかったか。40字以内","metric":{"value":"象徴的な数値+単位(例: 3倍, 97%減, 0.03%)","label":"何の指標か8字以内"},"impact":"社会や生活の何がうれしくなるか。40字以内","viz":<下記参照>}
+{"title_ja":"論文タイトルを中学生にも伝わる日本語に。30字以内","summary_ja":"この論文のまとめ。何をして何がわかったかを平易な日本語で100字以内","problem":"研究前に何が問題だったか。平易な日本語で40字以内","method":["やったことを最大3ステップ、各12字以内の短い名詞句"],"result":"何が起きた/わかったか。40字以内","metric":{"value":"象徴的な数値+単位(例: 3倍, 97%減, 0.03%)","label":"何の指標か8字以内"},"impact":"社会や生活の何がうれしくなるか。40字以内","viz":<下記参照>}
 
 "viz" は実験結果をアニメーション表示するためのデータ。本文から読み取れる実数値がある場合のみ、次のどちらかの形式で出力:
 - 従来手法との比較ができる場合: {"type":"compare_bars","unit":"%","before":{"label":"従来","value":1.2},"after":{"label":"本手法","value":0.03},"higherIsBetter":false,"caption":"エラー率を97%削減"}
@@ -107,17 +179,17 @@ function buildPrompt(p, abstract) {
 }
 
 // ---- 3. プロバイダ実装 ----
-async function callGitHubModels(prompt) {
+async function callGitHubModels(prompt, model) {
   const token = process.env.GITHUB_TOKEN;
   if (!token) throw new Error('GITHUB_TOKEN 未設定');
   const res = await fetch('https://models.github.ai/inference/chat/completions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
     body: JSON.stringify({
-      model: GH_MODEL,
+      model,
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.3,
-      max_tokens: 500,
+      max_tokens: 700,
     }),
   });
   if (!res.ok) throw new Error(`GitHub Models ${res.status}: ${(await res.text()).slice(0, 200)}`);
@@ -203,17 +275,20 @@ async function callOllama(prompt) {
 const PROVIDERS = PROVIDER === 'ollama'
   ? [{ name: 'ollama', call: callOllama, waitMs: 0 }]
   : [
-      { name: 'github-models', call: callGitHubModels, waitMs: 4500 }, // 15 RPM
+      ...GH_MODELS.map((model) => ({
+        name: `github-models:${model}`, call: (prompt) => callGitHubModels(prompt, model), waitMs: 4500, // 15 RPM
+      })),
       { name: 'gemini', call: callGemini, waitMs: 6500 },              // 10 RPM
     ];
 
 // ---- 4. 出力の検証・整形 ----
+// LLM出力はUIで innerHTML に入る箇所があるため、タグになり得る文字を落とす
 function clamp(s, max) {
-  s = String(s || '').trim();
+  s = String(s || '').replace(/[<>]/g, '').trim();
   return s.length > max ? s.slice(0, max - 1) + '…' : s;
 }
 
-function parseStoryboard(raw) {
+export function parseStoryboard(raw) {
   let text = String(raw).trim()
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/\s*```$/, '');
@@ -229,6 +304,8 @@ function parseStoryboard(raw) {
     metric = { value: clamp(obj.metric.value, 10), label: clamp(obj.metric.label, 10) };
   }
   return {
+    ...(obj.title_ja ? { title_ja: clamp(obj.title_ja, 40) } : {}),
+    ...(obj.summary_ja ? { summary_ja: clamp(obj.summary_ja, 130) } : {}),
     problem: clamp(obj.problem, 48),
     method: method.length ? method : ['新手法の考案'],
     result: clamp(obj.result, 48),
@@ -280,11 +357,34 @@ async function main() {
 
   // v3(arXivアブストラクト参照のviz)より古いエントリは再生成対象にする
   const SCHEMA_V = 3;
-  const pending = papers.filter((p) => p.id && (!storyboards[p.id] || storyboards[p.id].v !== SCHEMA_V));
-  console.log(`論文 ${papers.length} 件 / 最新版生成済み ${papers.length - pending.length} 件 / 生成対象 ${pending.length} 件`);
+  const isFresh = (store, id) => store[id] && store[id].v === SCHEMA_V;
+
+  // 毎日の新着を先に(その日の目玉なので)、次に既存データの未生成分
+  const outputs = [];
+  const jobs = [];
+  for (const target of dailyTargets()) {
+    const store = fs.existsSync(target.file) ? JSON.parse(fs.readFileSync(target.file, 'utf8')) : {};
+    const output = { file: target.file, store, changed: !fs.existsSync(target.file) };
+    outputs.push(output);
+    const todo = target.papers.filter((p) => !isFresh(store, p.id));
+    console.log(`新着 ${target.date}: 選抜 ${target.papers.length} 件 / 生成対象 ${todo.length} 件`);
+    // 新着の要旨はそのまま原文アブストラクト。未翻訳の定型文(analysis)はプロンプトに入れない
+    for (const p of todo) jobs.push({ p, output, prompt: async () => buildPrompt({ title: p.title, categories: p.categories }, p.summary) });
+  }
+  const seedOutput = { file: STORYBOARDS_PATH, store: storyboards, changed: false, pretty: true };
+  outputs.push(seedOutput);
+  const pending = papers.filter((p) => p.id && !isFresh(storyboards, p.id));
+  console.log(`既存データ ${papers.length} 件 / 最新版生成済み ${papers.length - pending.length} 件 / 生成対象 ${pending.length} 件`);
+  for (const p of pending) {
+    jobs.push({ p, output: seedOutput, prompt: async () => {
+      const abstract = await fetchAbstract(extractArxivId(p), p.title);
+      await sleep(600); // arXiv APIへの配慮
+      return buildPrompt(p, abstract);
+    } });
+  }
 
   if (DRY_RUN) {
-    pending.slice(0, 3).forEach((p) => console.log('--- prompt sample ---\n' + buildPrompt(p).slice(0, 400)));
+    for (const job of jobs.slice(0, 3)) console.log('--- prompt sample ---\n' + (await job.prompt()).slice(0, 400));
     console.log('DRY_RUN: API呼び出しなしで終了');
     return;
   }
@@ -304,21 +404,20 @@ async function main() {
   let generated = 0;
   const deadProviders = new Set();
 
-  for (const p of pending) {
+  for (const { p, output, prompt: makePrompt } of jobs) {
     if (generated >= MAX_NEW) {
       console.log(`上限 ${MAX_NEW} 件に到達 — 残りは次回の実行で処理`);
       break;
     }
-    const abstract = await fetchAbstract(extractArxivId(p), p.title);
-    await sleep(600); // arXiv APIへの配慮
-    const prompt = buildPrompt(p, abstract);
+    const prompt = await makePrompt();
     let done = false;
     for (const provider of PROVIDERS) {
       if (deadProviders.has(provider.name)) continue;
       try {
         const raw = await provider.call(prompt);
         const sb = parseStoryboard(raw);
-        storyboards[p.id] = { ...sb, v: SCHEMA_V, title: p.title, generated: provider.name };
+        output.store[p.id] = { ...sb, v: SCHEMA_V, title: p.title, generated: provider.name };
+        output.changed = true;
         generated++;
         done = true;
         console.log(`✔ [${provider.name}] ${p.id}`);
@@ -326,8 +425,8 @@ async function main() {
         break;
       } catch (e) {
         console.log(`✖ [${provider.name}] ${p.id}: ${e.message}`);
-        // 認証エラーや枠切れはそのプロバイダを以後スキップ
-        if (/401|403|429|未設定/.test(e.message)) deadProviders.add(provider.name);
+        // 認証エラー・枠切れ・モデル廃止はそのプロバイダを以後スキップ
+        if (/401|403|404|429|未設定|unknown_model|unavailable_model/.test(e.message)) deadProviders.add(provider.name);
       }
     }
     if (!done && deadProviders.size >= PROVIDERS.length) {
@@ -336,13 +435,16 @@ async function main() {
     }
   }
 
-  if (generated > 0) {
-    const sorted = Object.fromEntries(Object.entries(storyboards).sort(([a], [b]) => a.localeCompare(b)));
-    fs.writeFileSync(STORYBOARDS_PATH, JSON.stringify(sorted, null, 2) + '\n');
-    console.log(`storyboards.json を更新: +${generated} 件 (合計 ${Object.keys(sorted).length} 件)`);
-  } else {
-    console.log('新規生成なし');
+  for (const output of outputs.filter((o) => o.changed)) {
+    const sorted = Object.fromEntries(Object.entries(output.store).sort(([a], [b]) => a.localeCompare(b)));
+    fs.mkdirSync(path.dirname(output.file), { recursive: true });
+    fs.writeFileSync(output.file, (output.pretty ? JSON.stringify(sorted, null, 2) : JSON.stringify(sorted)) + '\n');
+    console.log(`${path.relative(ROOT, output.file)} を更新 (合計 ${Object.keys(sorted).length} 件)`);
   }
+  console.log(generated > 0 ? `新規生成 ${generated} 件` : '新規生成なし');
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+// テストから関数だけ読み込めるよう、直接実行時のみ main を走らせる
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}

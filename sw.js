@@ -17,10 +17,11 @@ self.addEventListener('fetch', event => {
     try {
       const response = await fetch(event.request);
       if (response.ok) {
-        // Cache only the last opened daily snapshot, not an entire year's payloads.
-        if (url.pathname.includes('/data/snapshots/')) {
+        // Cache only the last opened daily snapshot/briefing, not an entire year's payloads.
+        const daily = ['/data/snapshots/', '/data/briefings/'].find(dir => url.pathname.includes(dir));
+        if (daily) {
           const keys = await cache.keys();
-          await Promise.all(keys.filter(k => new URL(k.url).pathname.includes('/data/snapshots/') && k.url !== event.request.url).map(k => cache.delete(k)));
+          await Promise.all(keys.filter(k => new URL(k.url).pathname.includes(daily) && k.url !== event.request.url).map(k => cache.delete(k)));
         }
         await cache.put(event.request, response.clone());
       }
