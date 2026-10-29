@@ -44,6 +44,16 @@ jobs:
       - name: Collect official daily listings
         run: python scripts/update_papers.py
       # LLMが使えない日でも論文一覧の公開は止めない
+      # キーの値は出さず、有無と置き場所だけを表示(Variables は公開リポジトリだと誰でも読めるため警告)
+      - name: Check LLM API keys
+        run: |
+          echo "Repository secrets: GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY != '' }} OPENCODE_API_KEY=${{ secrets.OPENCODE_API_KEY != '' }}"
+          if [ '${{ vars.GEMINI_API_KEY != '' || vars.OPENCODE_API_KEY != '' }}' = 'true' ]; then
+            echo "::warning::APIキーが Variables に入っています。公開されるので Secrets に移し、キーを再発行してください"
+          fi
+          if [ '${{ secrets.GEMINI_API_KEY == '' && secrets.OPENCODE_API_KEY == '' }}' = 'true' ]; then
+            echo "::warning::GEMINI_API_KEY / OPENCODE_API_KEY が Settings → Secrets and variables → Actions → Secrets(Repository secrets)にありません。動画解説は生成されません"
+          fi
       # Secrets: GEMINI_API_KEY(Google AI Studio)と OPENCODE_API_KEY(opencode.ai/zen)。片方だけでも動く
       # 品質優先: Gemini Flash → OpenCode 無料モデル → Gemini Flash-Lite(Variables の LLM_ORDER で変更可)
       - name: Generate video briefings for today's picks (Gemini / OpenCode free tiers)
