@@ -8,9 +8,11 @@
 // 生成済みのものはスキップするので、何度実行しても同じ論文に二重課金しない。
 //
 // プロバイダ優先順位(自動フォールバック):
-//   1. OpenCode Zen   … OPENCODE_API_KEY(リポジトリの Secrets)の無料モデル
-//   2. Gemini         … GEMINI_API_KEY があれば(無料枠・予備)
-//   3. Ollama         … PROVIDER=ollama 指定時(ローカルGPU、制限なし)
+//   品質の高い順に試し、枠切れ・障害なら次へ(LLM_ORDER で並べ替え可):
+//   1. gemini-flash   … GEMINI_API_KEY(Google AI Studio、無料枠)の Gemini Flash 最新版
+//   2. opencode       … OPENCODE_API_KEY(OpenCode Zen)の無料モデル
+//   3. gemini-lite    … 同じ Gemini キーの Flash-Lite(日次上限が大きい保険)
+//   Ollama            … PROVIDER=ollama 指定時(ローカルGPU、制限なし)
 //   ※ 以前使っていた GitHub Models は 2026-07-30 にサービス終了したため削除
 //   LLM が全滅した論文はスキップ(閲覧側のフォールバック生成が表示を担保)
 //
@@ -39,8 +41,11 @@ const OPENCODE_BASE = process.env.OPENCODE_BASE_URL || 'https://opencode.ai/zen/
 const OPENCODE_MODEL = process.env.OPENCODE_MODEL || '';
 const OPENCODE_SESSION = `researchphantom-${Date.now()}`; // 実行ごとの安定したセッションID
 let OPENCODE_QUEUE = null; // resolveOpenCodeModels() が設定する(先頭が使用中)
+const GEMINI_BASE = process.env.GEMINI_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta';
 const GEMINI_MODEL = process.env.GEMINI_MODEL || '';
-let GEMINI_RESOLVED = null; // resolveGeminiModel() が設定する
+let GEMINI_TIERS = null; // resolveGeminiModels() が設定する { flash: [...], lite: [...] }
+const LLM_ORDER = (process.env.LLM_ORDER || 'gemini-flash,opencode,gemini-lite')
+  .split(',').map((s) => s.trim()).filter(Boolean);
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'qwen2.5:7b';
 // Ollama接続先: カンマ区切りで複数指定可(Mac/Windowsどちらで実行しても、
 // どちらのマシンのOllamaでも使えるようにする)。全滅時はLANを自動探索。
@@ -195,34 +200,61 @@ async function readJson(res, name) {
   }
 }
 
-// 1日分(約32本)を無料枠に収めるため、日次上限の大きい Flash-Lite の最新版を優先する
-export function chooseGeminiModel(models) {
+// モデル一覧から Flash(高品質)と Flash-Lite(日次上限が大きい)をそれぞれ新しい順に並べる
+export function chooseGeminiModels(models) {
   const version = (n) => n.match(/^gemini-([\d.]+)/)[1].split('.').map(Number);
-  const rank = (n) => [n.includes('flash-lite') ? 1 : 0, ...version(n)];
+  const newestFirst = (a, b) => {
+    const va = version(a), vb = version(b);
+    for (let i = 0; i < Math.max(va.length, vb.length); i++) {
+      if ((vb[i] || 0) !== (va[i] || 0)) return (vb[i] || 0) - (va[i] || 0);
+    }
+    return a.localeCompare(b);
+  };
   const usable = (models || [])
     .filter((m) => (m.supportedGenerationMethods || []).includes('generateContent'))
     .map((m) => String(m.name || '').replace(/^models\//, ''))
     .filter((n) => /^gemini-[\d.]+-flash/.test(n) && !/preview|exp|image|tts|audio|live|thinking/.test(n));
-  usable.sort((a, b) => {
-    const ra = rank(a), rb = rank(b);
-    for (let i = 0; i < Math.max(ra.length, rb.length); i++) {
-      if ((rb[i] || 0) !== (ra[i] || 0)) return (rb[i] || 0) - (ra[i] || 0);
-    }
-    return a.localeCompare(b);
-  });
-  return usable[0] || null;
+  return {
+    flash: usable.filter((n) => !n.includes('flash-lite')).sort(newestFirst),
+    lite: usable.filter((n) => n.includes('flash-lite')).sort(newestFirst),
+  };
 }
 
-async function resolveGeminiModel(key) {
-  if (GEMINI_MODEL) return GEMINI_MODEL;
+async function resolveGeminiModels(key) {
+  if (GEMINI_MODEL) return { flash: GEMINI_MODEL.split(',').map((m) => m.trim()).filter(Boolean), lite: [] };
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000&key=${key}`);
-    const chosen = chooseGeminiModel((await readJson(res, 'Gemini models')).models);
-    if (chosen) return chosen;
+    const res = await fetch(`${GEMINI_BASE}/models?pageSize=1000&key=${key}`);
+    const tiers = chooseGeminiModels((await readJson(res, 'Gemini models')).models);
+    if (tiers.flash.length || tiers.lite.length) return tiers;
   } catch (e) {
     console.log(`Geminiモデル一覧の取得に失敗: ${e.message}`);
   }
-  return 'gemini-flash-lite-latest'; // Google が用意している最新版エイリアス
+  // Google が用意している最新版エイリアス
+  return { flash: ['gemini-flash-latest'], lite: ['gemini-flash-lite-latest'] };
+}
+
+// モデル候補を先頭から使い、モデル単位の失敗(廃止・枠切れ)は次の候補へ。分間制限(429)は1回だけ待って再試行
+async function withModelQueue(name, queue, request) {
+  let waited = false;
+  while (queue.length) {
+    const model = queue[0];
+    const res = await request(model);
+    try {
+      return { model, data: await readJson(res, `${name}(${model})`) };
+    } catch (e) {
+      if (res.status === 401) throw e; // キー自体が無効: 全モデル共通なので打ち切り
+      if (!/400|402|403|404|429|非JSON応答/.test(e.message)) throw e;
+      if (res.status === 429 && !waited) {
+        waited = true;
+        await sleep(Number(process.env.RETRY_WAIT_MS || 30000));
+        continue;
+      }
+      console.log(`✖ ${e.message} — 次のモデルへ`);
+      queue.shift();
+      waited = false;
+    }
+  }
+  throw new Error(`${name} 未設定: 使えるモデルがありません`);
 }
 
 // 日本語の要約が得意な系統を優先。無料一覧に無ければ "-free" の先頭、最後に big-pickle
@@ -259,11 +291,8 @@ async function callOpenCode(prompt) {
     OPENCODE_QUEUE = await resolveOpenCodeModels(key);
     console.log(`OpenCodeモデル候補: ${OPENCODE_QUEUE.join(', ')}`);
   }
-  // モデル単位の失敗(廃止・枠切れ)は次の無料モデルへ切り替えて続行。分間制限(429)は1回だけ待って再試行
-  let waited = false;
-  while (OPENCODE_QUEUE.length) {
-    const model = OPENCODE_QUEUE[0];
-    const res = await fetch(`${OPENCODE_BASE}/chat/completions`, {
+  const { data } = await withModelQueue('OpenCode', OPENCODE_QUEUE, (model) =>
+    fetch(`${OPENCODE_BASE}/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -276,47 +305,29 @@ async function callOpenCode(prompt) {
         temperature: 0.3,
         max_tokens: 2000,
       }),
-    });
-    try {
-      const data = await readJson(res, `OpenCode(${model})`);
-      const content = data.choices[0].message.content || '';
-      return content.replace(/<think>[\s\S]*?<\/think>/g, '');
-    } catch (e) {
-      if (res.status === 401) throw e; // キー自体が無効: 全モデル共通なので打ち切り
-      if (!/400|402|403|404|429|非JSON応答/.test(e.message)) throw e;
-      if (res.status === 429 && !waited) {
-        waited = true;
-        await sleep(30000);
-        continue;
-      }
-      console.log(`✖ ${e.message} — 次の無料モデルへ`);
-      OPENCODE_QUEUE.shift();
-      waited = false;
-    }
-  }
-  throw new Error('OpenCode 未設定: 使える無料モデルがありません');
+    }));
+  return (data.choices[0].message.content || '').replace(/<think>[\s\S]*?<\/think>/g, '');
 }
 
-async function callGemini(prompt) {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error('GEMINI_API_KEY 未設定');
-  if (!GEMINI_RESOLVED) {
-    GEMINI_RESOLVED = await resolveGeminiModel(key);
-    console.log(`Geminiモデル: ${GEMINI_RESOLVED}`);
-  }
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_RESOLVED}:generateContent?key=${key}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.3, responseMimeType: 'application/json' },
-      }),
+function geminiCaller(tier) {
+  return async (prompt) => {
+    const key = process.env.GEMINI_API_KEY;
+    if (!key) throw new Error('GEMINI_API_KEY 未設定');
+    if (!GEMINI_TIERS) {
+      GEMINI_TIERS = await resolveGeminiModels(key);
+      console.log(`Geminiモデル候補: Flash=${GEMINI_TIERS.flash.join(', ') || 'なし'} / Lite=${GEMINI_TIERS.lite.join(', ') || 'なし'}`);
     }
-  );
-  const data = await readJson(res, 'Gemini');
-  return data.candidates[0].content.parts.map((part) => part.text || '').join('');
+    const { data } = await withModelQueue('Gemini', GEMINI_TIERS[tier], (model) =>
+      fetch(`${GEMINI_BASE}/models/${model}:generateContent?key=${key}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.3, responseMimeType: 'application/json' },
+        }),
+      }));
+    return data.candidates[0].content.parts.map((part) => part.text || '').join('');
+  };
 }
 
 async function probeOllama(url, timeoutMs = 900) {
@@ -381,8 +392,12 @@ async function callOllama(prompt) {
 const PROVIDERS = PROVIDER === 'ollama'
   ? [{ name: 'ollama', call: callOllama, waitMs: 0 }]
   : [
-      { name: 'opencode', call: callOpenCode, waitMs: 6000 },
-      { name: 'gemini', call: callGemini, waitMs: 13000 }, // 無料枠の最も厳しいRPM(5)でも収まる間隔
+      // waitMs: Gemini は無料枠の最も厳しいRPM(5)でも収まる間隔
+      ...LLM_ORDER.map((name) => ({
+        'gemini-flash': { name, call: geminiCaller('flash'), waitMs: 13000 },
+        opencode: { name, call: callOpenCode, waitMs: 6000 },
+        'gemini-lite': { name, call: geminiCaller('lite'), waitMs: 13000 },
+      })[name]).filter(Boolean),
     ];
 
 // ---- 4. 出力の検証・整形 ----

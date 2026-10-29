@@ -27,11 +27,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Generate storyboards (OpenCode Zen free models -> Gemini -> skip)
+      - name: Generate storyboards (Gemini Flash -> OpenCode -> Gemini Flash-Lite -> skip)
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
           OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          LLM_ORDER: ${{ vars.LLM_ORDER }}
           DAILY_DAYS: ${{ inputs.daily_days }}
           DAILY_PER_CATEGORY: ${{ inputs.per_category }}
         run: node scripts/generate_storyboards.mjs
