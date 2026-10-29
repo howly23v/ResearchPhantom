@@ -16,6 +16,10 @@
 </p>
 
 <p align="center">
+  🗂 <b><a href="https://howly23v.github.io/ResearchPhantom/portfolio/">Portfolio — これまでに作った作品一覧</a></b>
+</p>
+
+<p align="center">
   <a href="https://github.com/howly23v/ResearchPhantom/actions/workflows/deploy.yml">
     <img src="https://github.com/howly23v/ResearchPhantom/actions/workflows/deploy.yml/badge.svg" alt="Deploy status">
   </a>
@@ -41,8 +45,9 @@ Acquisition failure leaves the previous archive intact and fails the Actions run
 | `data/briefings/*.json` | Japanese briefings for the day's picks (same hash as the snapshot) |
 | `data/seed.json` | Existing institution-specific data |
 | `.github/workflows/update-papers.yml` | Daily update, briefing generation and explicit Pages deployment |
+| `portfolio/` | Portfolio page; add a work by appending one entry to `portfolio/works.js` |
 
-Verification: `python -m unittest discover -s tests -v`, `node tests/test_archive_ui.mjs` and `node tests/test_storyboards.mjs`.
+Verification: `python -m unittest discover -s tests -v`, `node tests/test_archive_ui.mjs`, `node tests/test_storyboards.mjs` and `node tests/test_portfolio.mjs`.
 
 ---
 
