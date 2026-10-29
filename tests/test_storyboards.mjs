@@ -1,6 +1,6 @@
 // Daily pick selection and LLM output validation, without any network access.
 import assert from 'node:assert/strict';
-import { CATEGORY_GROUPS, chooseGeminiModel, pickDailyPapers, parseStoryboard } from '../scripts/generate_storyboards.mjs';
+import { CATEGORY_GROUPS, chooseGeminiModel, chooseOpenCodeModels, pickDailyPapers, parseStoryboard } from '../scripts/generate_storyboards.mjs';
 
 const paper = (id, categories, summary = 'A method.', announce_type = 'new') =>
   ({ id, title: 'Paper ' + id, summary, categories, announce_type });
@@ -39,4 +39,11 @@ assert.equal(chooseGeminiModel([
 assert.equal(chooseGeminiModel([{ name: 'models/gemini-3.8-flash', supportedGenerationMethods: gen }]), 'gemini-3.8-flash');
 assert.equal(chooseGeminiModel([]), null);
 
-console.log('PASS: daily picks are unique, prefer new numeric results, LLM output is sanitized, Gemini model choice');
+assert.deepEqual(chooseOpenCodeModels([
+  { id: 'claude-sonnet-5' }, { id: 'nemotron-3-ultra-free' }, { id: 'big-pickle' },
+  { id: 'mimo-v2.5-free' }, { id: 'deepseek-v4-flash-free' }, { id: 'zeta-free' },
+]), ['deepseek-v4-flash-free', 'mimo-v2.5-free', 'nemotron-3-ultra-free', 'zeta-free', 'big-pickle'],
+'only free models, preferred families first, big-pickle last');
+assert.deepEqual(chooseOpenCodeModels([{ id: 'gpt-5' }]), []);
+
+console.log('PASS: daily picks are unique, prefer new numeric results, LLM output is sanitized, Gemini/OpenCode model choice');

@@ -27,8 +27,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Generate storyboards (Gemini free tier -> skip)
+      - name: Generate storyboards (OpenCode Zen free models -> Gemini -> skip)
         env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DAILY_DAYS: ${{ inputs.daily_days }}
           DAILY_PER_CATEGORY: ${{ inputs.per_category }}

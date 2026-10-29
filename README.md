@@ -27,7 +27,7 @@ Official arXiv RSS listings are collected by `Daily paper archive` every day at 
 
 The date selector opens a saved daily listing. History accumulates **from the first successful run**, retaining one calendar year. This does not backfill unsaved dates or all historical arXiv papers. Only the date catalog and the selected snapshot are fetched; cards are rendered 10 at a time (the app's existing display limit). Identical snapshots share one file; unreferenced expired snapshots are removed. Offline caching keeps only the last opened snapshot.
 
-Official RSS does not reliably include author affiliations. New papers appear under **所属未確認**, without guessed countries or institutions. The existing institution-specific dataset remains available as a separate selector option. Each day, about 4 papers per field (32 in total) are picked and given a Japanese title, a short summary and an AUTO BRIEFING animation via the Gemini API free tier (requires a `GEMINI_API_KEY` repository secret; GitHub Models was retired on 2026-07-30). They are listed first and marked 🎬. Other papers show the original abstract. If the LLM is unavailable, the listing is still published.
+Official RSS does not reliably include author affiliations. New papers appear under **所属未確認**, without guessed countries or institutions. The existing institution-specific dataset remains available as a separate selector option. Each day, about 4 papers per field (32 in total) are picked and given a Japanese title, a short summary and an AUTO BRIEFING animation via OpenCode Zen free models (requires an `OPENCODE_API_KEY` repository secret; GitHub Models was retired on 2026-07-30). They are listed first and marked 🎬. Other papers show the original abstract. If the LLM is unavailable, the listing is still published.
 
 Acquisition failure leaves the previous archive intact and fails the Actions run. A successful data commit explicitly dispatches Pages deployment, because pushes made with `GITHUB_TOKEN` do not trigger push workflows.
 
@@ -219,17 +219,21 @@ No extra steps needed. Just edit `index.html` and push — the site updates auto
 | [`scripts/generate_storyboards.mjs`](scripts/generate_storyboards.mjs) | 解説データの生成スクリプト |
 | [`.github/workflows/generate-storyboards.yml`](.github/workflows/generate-storyboards.yml) | 手動での再試行・過去日の補完（毎日の生成は `update-papers.yml` が担当） |
 
-生成は **Gemini API の無料枠** で行います（以前使っていた GitHub Models は 2026-07-30 にサービス終了）。
+生成は **OpenCode Zen の無料モデル** で行います（以前使っていた GitHub Models は 2026-07-30 にサービス終了）。
 キーが無い・枠切れの場合はブラウザ側の簡易生成に自動で切り替わり、**表示は止まりません。**
 
-#### 初回設定（1回だけ・無料）
+#### 初回設定（1回だけ）
 
-1. [Google AI Studio](https://aistudio.google.com/apikey) で「Create API key」を押してキーを発行
+1. [opencode.ai/zen](https://opencode.ai/zen) にログインし、API キーを発行（無料モデルだけ使うなら課金不要）
 2. GitHub のこのリポジトリ → **Settings → Secrets and variables → Actions → New repository secret**
-3. Name に `GEMINI_API_KEY`、Secret に発行したキーを貼って保存
+3. Name に `OPENCODE_API_KEY`、Secret に発行したキーを貼って保存
 4. **Actions → Daily paper archive → Run workflow** で今日の分がすぐ生成されます（以後は毎日自動）
 
-モデルは無料枠で日次上限が大きい Flash-Lite の最新版を自動選択します（`GEMINI_MODEL` で固定も可）。
+無料モデル（IDが `-free` で終わるもの）は入れ替わりが激しいため、毎回 `/models` から自動で選び、
+使えなくなったモデルは次の無料モデルに切り替えます。固定したい場合は **Variables** に
+`OPENCODE_MODEL`（例: `deepseek-v4-flash-free`、カンマ区切りで複数可）を設定します。
+無料モデルは入力が提供元の改善に使われる場合があります（扱うのは公開論文の要旨のみ）。
+予備として `GEMINI_API_KEY` を設定すると、OpenCode が全滅した日に Gemini 無料枠で補います。
 
 #### ローカルGPUで一括生成する（任意）
 

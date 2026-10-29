@@ -44,11 +44,13 @@ jobs:
       - name: Collect official daily listings
         run: python scripts/update_papers.py
       # LLMが使えない日でも論文一覧の公開は止めない
-      # 要: リポジトリの Secrets に GEMINI_API_KEY(Google AI Studio で無料発行)
-      - name: Generate video briefings for today's picks (Gemini free tier)
+      # 要: リポジトリの Secrets に OPENCODE_API_KEY(opencode.ai/zen で発行、無料モデルを使用)
+      - name: Generate video briefings for today's picks (OpenCode Zen free models)
         continue-on-error: true
         timeout-minutes: 30
         env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/generate_storyboards.mjs
       - name: Commit archive
