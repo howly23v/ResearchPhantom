@@ -29,6 +29,7 @@ class DailyArchive(unittest.TestCase):
         self.assertEqual(papers[0]['id'], '2610.00001')
         self.assertEqual(papers[0]['summary'], 'A measured result.')
         self.assertEqual(papers[0]['country'], 'UNKNOWN')
+        self.assertEqual(papers[0]['announce_type'], 'new')
         self.assertEqual(set(papers[0]['categories']), set(updater.FEEDS))
         self.assertEqual(delays, [3] * (len(updater.FEEDS) - 1))
 
@@ -48,11 +49,15 @@ class DailyArchive(unittest.TestCase):
             papers, date = updater.parse_feed(feed(), 'cs.AI')
             first = updater.save_snapshot(papers, [date], datetime(2025, 10, 4, tzinfo=timezone.utc), root)
             removed = root / first['days'][0]['path']
+            briefing = root / first['days'][0]['path'].replace('snapshots', 'briefings')
+            briefing.parent.mkdir(parents=True)
+            briefing.write_text('{}')
             changed = [dict(papers[0], title='New title')]
             updater.save_snapshot(changed, [date], datetime(2025, 10, 5, tzinfo=timezone.utc), root)
             result = updater.save_snapshot(changed, [date], datetime(2026, 10, 4, 16, tzinfo=timezone.utc), root)
             self.assertEqual([d['date'] for d in result['days']], ['2026-10-05', '2025-10-05'])
             self.assertFalse(removed.exists())
+            self.assertFalse(briefing.exists())
             self.assertEqual(len(list((root / 'data/snapshots').glob('*.json'))), 1)
             self.assertEqual(updater.year_ago(datetime(2024, 2, 29).date()).isoformat(), '2023-02-28')
 

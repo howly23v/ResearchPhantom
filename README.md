@@ -23,25 +23,26 @@
 
 ## Daily updates and one-year archive / 毎日更新と1年分の履歴
 
-Official arXiv RSS listings are collected by `Daily paper archive` every day at **15:30 JST**, after publication in US Eastern time. GitHub scheduling can be delayed. No API key or LLM is required for paper updates.
+Official arXiv RSS listings are collected by `Daily paper archive` every day at **14:37 JST** (with a backup run at 16:19 JST), after publication in US Eastern time. It runs on GitHub Actions, so no PC needs to be on. GitHub scheduling can be delayed. No API key or LLM is required for paper updates.
 
 The date selector opens a saved daily listing. History accumulates **from the first successful run**, retaining one calendar year. This does not backfill unsaved dates or all historical arXiv papers. Only the date catalog and the selected snapshot are fetched; cards are rendered 10 at a time (the app's existing display limit). Identical snapshots share one file; unreferenced expired snapshots are removed. Offline caching keeps only the last opened snapshot.
 
-Official RSS does not reliably include author affiliations. New papers appear under **所属未確認**, without guessed countries or institutions. The existing institution-specific dataset remains available as a separate selector option. New abstracts are in the original language; curated translations and storyboards remain available for the existing dataset.
+Official RSS does not reliably include author affiliations. New papers appear under **所属未確認**, without guessed countries or institutions. The existing institution-specific dataset remains available as a separate selector option. Each day, about 4 papers per field (32 in total) are picked and given a Japanese title, a short summary and an AUTO BRIEFING animation via GitHub Models (free, `GITHUB_TOKEN` only). They are listed first and marked 🎬. Other papers show the original abstract. If the LLM is unavailable, the listing is still published.
 
 Acquisition failure leaves the previous archive intact and fails the Actions run. A successful data commit explicitly dispatches Pages deployment, because pushes made with `GITHUB_TOKEN` do not trigger push workflows.
 
-毎日 **15:30（日本時間）** に取得・保存し、公開サイトへ反映します。日付を選ぶと保存済みの一覧を開けます。保存は初回の成功日から蓄積され、過去1年分を保持します。未保存の過去1年を自動で埋めるものではありません。所属や国は推測せず、新着は原文要旨を表示します。
+毎日 **14:37（日本時間、16:19に保険の再実行）** に GitHub 上で取得・保存し、公開サイトへ反映します（PCの電源は不要）。分野ごとに約4本（計32本）を選び、AIが日本語タイトル・要約・動画風の自動解説（🎬 動画解説）を付けて一覧の先頭に表示します。日付を選ぶと保存済みの一覧を開けます。保存は初回の成功日から蓄積され、過去1年分を保持します。未保存の過去1年を自動で埋めるものではありません。所属や国は推測せず、新着は原文要旨を表示します。
 
 | File | Purpose |
 | --- | --- |
 | `scripts/update_papers.py` | Official feed collection, deduplication and calendar-year retention |
 | `data/manifest.json` | Catalog of saved dates and acquisition timestamps |
 | `data/snapshots/*.json` | Content-addressed daily listings, loaded on selection |
+| `data/briefings/*.json` | Japanese briefings for the day's picks (same hash as the snapshot) |
 | `data/seed.json` | Existing institution-specific data |
-| `.github/workflows/update-papers.yml` | Daily update and explicit Pages deployment |
+| `.github/workflows/update-papers.yml` | Daily update, briefing generation and explicit Pages deployment |
 
-Verification: `python -m unittest discover -s tests -v` and `node tests/test_archive_ui.mjs`.
+Verification: `python -m unittest discover -s tests -v`, `node tests/test_archive_ui.mjs` and `node tests/test_storyboards.mjs`.
 
 ---
 
@@ -216,7 +217,7 @@ No extra steps needed. Just edit `index.html` and push — the site updates auto
 | --- | --- |
 | [`storyboards.json`](storyboards.json) | 論文ごとの解説データ（AIが自動生成） |
 | [`scripts/generate_storyboards.mjs`](scripts/generate_storyboards.mjs) | 解説データの生成スクリプト |
-| [`.github/workflows/generate-storyboards.yml`](.github/workflows/generate-storyboards.yml) | 毎日自動で新着論文分を生成 |
+| [`.github/workflows/generate-storyboards.yml`](.github/workflows/generate-storyboards.yml) | 手動での再試行・過去日の補完（毎日の生成は `update-papers.yml` が担当） |
 
 生成は **GitHub Models（無料・APIキー不要）** で行い、
 使えない場合は Gemini（`GEMINI_API_KEY` を Secrets に設定した場合のみ）→

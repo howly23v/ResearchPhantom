@@ -2143,7 +2143,8 @@ function renderAll() {
   ensureNormalized(currentData); // キャッシュ復元データ等も描画前に正規化
   _paperRegistry.length = 0; // Reset registry on re-render
   const allPapers = getAllPapers();
-  const matching = filterPapers(allPapers);
+  // 動画解説(AIブリーフィング)付きの論文を先頭に。sortは安定なので元の並びは保たれる
+  const matching = filterPapers(allPapers).sort((a, b) => (b.has_briefing ? 1 : 0) - (a.has_briefing ? 1 : 0));
   const pageCount = Math.ceil(matching.length / PAGE_SIZE);
   currentPage = Math.max(0, Math.min(currentPage, pageCount - 1));
   const filtered = matching.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
@@ -2325,8 +2326,8 @@ function renderFeaturedCard(paper) {
         <span class="cat-icon">${icon}</span>
       </div>
       <div class="inst-name">${paper.institution_ja || paper.institution || ''} (${paper.institution || ''})</div>
-      <div class="paper-title">${paper.title}</div>
-      <div class="paper-summary">${paper.summary}</div>
+      <div class="paper-title">${paper.title_ja || paper.title}</div>
+      <div class="paper-summary">${paper.summary_ja || paper.summary}</div>
       <div class="analysis-box">
         <div class="analysis-label">📊 解析・評価</div>
         <div class="analysis-text">${analysis.analysis || ''}</div>
@@ -2339,7 +2340,7 @@ function renderFeaturedCard(paper) {
         <div class="meta-item">📅 ${paper.published || ''}</div>
         <div class="meta-item">📖 ${paper.source || ''}</div>
         <div class="meta-item">${(paper.categories || []).slice(0,3).join(' / ')}</div>
-        <div class="meta-item briefing-chip">▶ BRIEFING</div>
+        <div class="meta-item briefing-chip">${paper.has_briefing ? '🎬 動画解説' : '▶ BRIEFING'}</div>
       </div>
     </div>
   `;
@@ -2360,8 +2361,8 @@ function renderPaperCard(paper) {
         <div class="category-tag">${cats}</div>
       </div>
       <div class="inst-badge">${paper.institution_ja || ''}</div>
-      <div class="paper-title">${paper.title}</div>
-      <div class="paper-summary">${paper.summary}</div>
+      <div class="paper-title">${paper.title_ja || paper.title}</div>
+      <div class="paper-summary">${paper.summary_ja || paper.summary}</div>
       <div class="analysis-box">
         <div class="analysis-label">📊 解析</div>
         <div class="analysis-text">${analysis.analysis || ''}</div>
@@ -2372,7 +2373,7 @@ function renderPaperCard(paper) {
       </div>
       <div class="card-footer">
         <span>📅 ${paper.published || ''} | 📖 ${paper.source || ''}</span>
-        <span class="briefing-chip">▶ BRIEFING</span>
+        <span class="briefing-chip">${paper.has_briefing ? '🎬 動画解説' : '▶ BRIEFING'}</span>
         <a class="read-more-btn" href="${paper.link || '#'}" target="_blank" rel="noopener" onclick="event.stopPropagation()">SCAN →</a>
       </div>
     </div>
@@ -2440,6 +2441,37 @@ let archiveManifest = { days: [] };
 let selectedEntry = null;
 let loadSequence = 0;
 let showingSeed = false;
+// 選択日の動画解説(CIでLLM生成)。スナップショットと同じハッシュ名で data/briefings/ に置かれる
+let DAILY_BRIEFINGS = {};
+
+async function loadBriefings(snapshotPath) {
+  try {
+    const response = await fetch(snapshotPath.replace('data/snapshots/', 'data/briefings/'));
+    if (!response.ok) return {};
+    const data = await response.json();
+    if (!data || typeof data !== 'object' || Array.isArray(data)) return {};
+    // 一部の項目は innerHTML で描画されるため、文字列はすべてエスケープしておく
+    return JSON.parse(JSON.stringify(data), (key, value) => typeof value === 'string' ? escapeArchiveText(value) : value);
+  } catch (error) {
+    return {}; // 解説が無くても一覧表示は止めない
+  }
+}
+
+function applyBriefings(data, briefings) {
+  for (const country of Object.values(data.countries || {})) {
+    for (const inst of Object.values(country.institutions || {})) {
+      for (const p of (inst.papers || [])) {
+        const sb = p.id && briefings[p.id];
+        if (!sb) continue;
+        p.has_briefing = true;
+        if (sb.title_ja) p.title_ja = sb.title_ja;
+        if (sb.summary_ja) p.summary_ja = sb.summary_ja;
+        p.analysis = { analysis: sb.result || '', prospects: sb.impact || '' };
+      }
+    }
+  }
+  return data;
+}
 
 function escapeArchiveText(value) {
   return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -2467,11 +2499,14 @@ async function selectArchive(date) {
   const status = document.getElementById('archive-status');
   status.textContent = '選択日のデータを読み込み中...';
   try {
+    const briefingsRequest = entry ? loadBriefings(path) : Promise.resolve({});
     const response = await fetch(path);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = safeArchiveData(await response.json());
+    const briefings = await briefingsRequest;
     if (sequence !== loadSequence) return;
-    currentData = data;
+    DAILY_BRIEFINGS = briefings;
+    currentData = applyBriefings(data, briefings);
     selectedEntry = entry || null;
     showingSeed = date === 'seed';
     currentPage = 0;
@@ -2479,7 +2514,8 @@ async function selectArchive(date) {
     select.value = date;
     const checked = entry ? new Date(entry.checked_at).toLocaleString('ja-JP', {timeZone:'Asia/Tokyo'}) : data.dated;
     document.getElementById('last-update').textContent = `${entry ? '取得確認' : '既存データ更新'}: ${checked || '不明'}`;
-    status.textContent = entry ? `保存日 ${entry.date} · ${entry.count} 件 · フィード更新: ${(entry.feed_dates || []).join(' / ') || '不明'}${entry.announcements === 0 ? '（新着なし・直前の一覧）' : ''}` : '研究機関別の既存データ（自動更新開始前）';
+    const briefingCount = Object.keys(briefings).length;
+    status.textContent = entry ? `${briefingCount ? `🎬 動画解説 ${briefingCount} 本 · ` : ''}保存日 ${entry.date} · ${entry.count} 件 · フィード更新: ${(entry.feed_dates || []).join(' / ') || '不明'}${entry.announcements === 0 ? '（新着なし・直前の一覧）' : ''}` : '研究機関別の既存データ（自動更新開始前）';
   } catch (error) {
     if (sequence !== loadSequence) return;
     select.value = showingSeed ? 'seed' : (selectedEntry ? selectedEntry.date : '');
@@ -2617,7 +2653,8 @@ function openJarvisModal(idx) {
           ${categoryBadges}
         </div>
         <div class="jarvis-institution">${icon} ${paper.institution_ja || ''} (${paper.institution || ''})</div>
-        <div class="jarvis-paper-title">${paper.title}</div>
+        <div class="jarvis-paper-title">${paper.title_ja || paper.title}</div>
+        ${paper.title_ja ? `<div class="jarvis-institution">${paper.title}</div>` : ''}
       </div>
     </div>
 
@@ -2726,7 +2763,7 @@ function openJarvisModal(idx) {
   // Auto-briefing: 4象限アニメーション → 終了後にサマリーのタイプライター
   _briefingPaper = paper;
   playBriefing(getStoryboard(paper), () => {
-    typewriterEffect('jarvis-typewriter', paper.summary || '', 18);
+    typewriterEffect('jarvis-typewriter', paper.summary_ja || paper.summary || '', 18);
   });
 }
 
@@ -2826,7 +2863,8 @@ function buildFallbackStoryboard(paper) {
 }
 
 function getStoryboard(paper) {
-  const sb = (paper.id && STORYBOARDS[paper.id]) ||
+  const sb = (paper.id && DAILY_BRIEFINGS[paper.id]) ||
+             (paper.id && STORYBOARDS[paper.id]) ||
              (paper.link && STORYBOARDS[paper.link]) ||
              (paper.title && STORYBOARDS[paper.title]);
   return sb || buildFallbackStoryboard(paper);

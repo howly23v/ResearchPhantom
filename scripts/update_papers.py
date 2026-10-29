@@ -39,6 +39,7 @@ def parse_feed(raw, category):
             raise ValueError(f'{category}: invalid paper link: {link}')
         description = plain(item.findtext('description'))
         # RSS prepends the arXiv announcement identifier/type to the abstract.
+        announce = re.match(r'^arXiv:\S+\s+Announce Type:\s*([\w-]+)', description)
         description = re.sub(r'^arXiv:.*?Announce Type:.*?Abstract:\s*', '', description)
         cats = [plain(el.text) for el in item.findall('category') if plain(el.text)]
         if category not in cats:
@@ -53,6 +54,7 @@ def parse_feed(raw, category):
             'authors': [{'name': authors}] if authors else [],
             'published': item.findtext('pubDate', '')[:],
             'categories': cats, 'link': link, 'source': 'arXiv RSS',
+            'announce_type': announce[1] if announce else '',
             'institution': 'Unverified', 'institution_ja': '所属情報未確認',
             'country': 'UNKNOWN',
             'analysis': {'analysis': '原文要旨を掲載（未翻訳・未評価）',
@@ -105,6 +107,10 @@ def save_snapshot(papers, feed_dates, now, root=ROOT):
     referenced = {d['path'] for d in days}
     for path in (data_dir / 'snapshots').glob('*.json'):
         if path.relative_to(root).as_posix() not in referenced:
+            path.unlink()
+    # Briefings share their snapshot's content hash and expire with it.
+    for path in (data_dir / 'briefings').glob('*.json'):
+        if f'data/snapshots/{path.name}' not in referenced:
             path.unlink()
     return manifest
 
