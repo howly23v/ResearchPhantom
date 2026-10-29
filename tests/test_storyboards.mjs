@@ -1,6 +1,6 @@
 // Daily pick selection and LLM output validation, without any network access.
 import assert from 'node:assert/strict';
-import { CATEGORY_GROUPS, chooseGeminiModel, chooseOpenCodeModels, pickDailyPapers, parseStoryboard } from '../scripts/generate_storyboards.mjs';
+import { CATEGORY_GROUPS, chooseGeminiModels, chooseOpenCodeModels, pickDailyPapers, parseStoryboard } from '../scripts/generate_storyboards.mjs';
 
 const paper = (id, categories, summary = 'A method.', announce_type = 'new') =>
   ({ id, title: 'Paper ' + id, summary, categories, announce_type });
@@ -28,16 +28,17 @@ assert.throws(() => parseStoryboard('{"problem":"only"}'));
 assert.equal('title_ja' in parseStoryboard('{"problem":"p","result":"r","impact":"i"}'), false);
 
 const gen = ['generateContent'];
-assert.equal(chooseGeminiModel([
-  { name: 'models/gemini-3.8-flash', supportedGenerationMethods: gen },
+assert.deepEqual(chooseGeminiModels([
+  { name: 'models/gemini-3.6-flash', supportedGenerationMethods: gen },
+  { name: 'models/gemini-3.10-flash', supportedGenerationMethods: gen },
   { name: 'models/gemini-3.10-flash-lite-preview', supportedGenerationMethods: gen },
   { name: 'models/gemini-3.5-flash-lite', supportedGenerationMethods: gen },
   { name: 'models/gemini-3.6-flash-lite', supportedGenerationMethods: gen },
   { name: 'models/gemini-3.9-pro', supportedGenerationMethods: gen },
   { name: 'models/gemini-3.7-flash-lite', supportedGenerationMethods: ['embedContent'] },
-]), 'gemini-3.6-flash-lite', 'newest stable Flash-Lite that can generate content');
-assert.equal(chooseGeminiModel([{ name: 'models/gemini-3.8-flash', supportedGenerationMethods: gen }]), 'gemini-3.8-flash');
-assert.equal(chooseGeminiModel([]), null);
+]), { flash: ['gemini-3.10-flash', 'gemini-3.6-flash'], lite: ['gemini-3.6-flash-lite', 'gemini-3.5-flash-lite'] },
+'stable models that can generate content, Flash and Flash-Lite each newest first');
+assert.deepEqual(chooseGeminiModels([]), { flash: [], lite: [] });
 
 assert.deepEqual(chooseOpenCodeModels([
   { id: 'claude-sonnet-5' }, { id: 'nemotron-3-ultra-free' }, { id: 'big-pickle' },
