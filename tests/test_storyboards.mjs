@@ -1,6 +1,6 @@
 // Daily pick selection and LLM output validation, without any network access.
 import assert from 'node:assert/strict';
-import { CATEGORY_GROUPS, pickDailyPapers, parseStoryboard } from '../scripts/generate_storyboards.mjs';
+import { CATEGORY_GROUPS, chooseGeminiModel, pickDailyPapers, parseStoryboard } from '../scripts/generate_storyboards.mjs';
 
 const paper = (id, categories, summary = 'A method.', announce_type = 'new') =>
   ({ id, title: 'Paper ' + id, summary, categories, announce_type });
@@ -27,4 +27,16 @@ assert.equal(sb.viz, null, 'out-of-range gauge is rejected');
 assert.throws(() => parseStoryboard('{"problem":"only"}'));
 assert.equal('title_ja' in parseStoryboard('{"problem":"p","result":"r","impact":"i"}'), false);
 
-console.log('PASS: daily picks are unique, prefer new numeric results, and LLM output is sanitized');
+const gen = ['generateContent'];
+assert.equal(chooseGeminiModel([
+  { name: 'models/gemini-3.8-flash', supportedGenerationMethods: gen },
+  { name: 'models/gemini-3.10-flash-lite-preview', supportedGenerationMethods: gen },
+  { name: 'models/gemini-3.5-flash-lite', supportedGenerationMethods: gen },
+  { name: 'models/gemini-3.6-flash-lite', supportedGenerationMethods: gen },
+  { name: 'models/gemini-3.9-pro', supportedGenerationMethods: gen },
+  { name: 'models/gemini-3.7-flash-lite', supportedGenerationMethods: ['embedContent'] },
+]), 'gemini-3.6-flash-lite', 'newest stable Flash-Lite that can generate content');
+assert.equal(chooseGeminiModel([{ name: 'models/gemini-3.8-flash', supportedGenerationMethods: gen }]), 'gemini-3.8-flash');
+assert.equal(chooseGeminiModel([]), null);
+
+console.log('PASS: daily picks are unique, prefer new numeric results, LLM output is sanitized, Gemini model choice');

@@ -18,7 +18,6 @@ on:
 permissions:
   contents: write
   actions: write
-  models: read   # GitHub Models を GITHUB_TOKEN で呼ぶ(APIキー不要)
 
 # 論文データと解説の両ワークフローで共有し、mainへのpushが衝突しないようにする
 concurrency:
@@ -45,11 +44,11 @@ jobs:
       - name: Collect official daily listings
         run: python scripts/update_papers.py
       # LLMが使えない日でも論文一覧の公開は止めない
-      - name: Generate video briefings for today's picks (GitHub Models -> Gemini)
+      # 要: リポジトリの Secrets に GEMINI_API_KEY(Google AI Studio で無料発行)
+      - name: Generate video briefings for today's picks (Gemini free tier)
         continue-on-error: true
         timeout-minutes: 30
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/generate_storyboards.mjs
       - name: Commit archive

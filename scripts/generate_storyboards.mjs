@@ -8,9 +8,9 @@
 // 生成済みのものはスキップするので、何度実行しても同じ論文に二重課金しない。
 //
 // プロバイダ優先順位(自動フォールバック):
-//   1. GitHub Models  … CI では GITHUB_TOKEN だけで動く(無料)
-//   2. Gemini         … GEMINI_API_KEY があれば(無料枠)
-//   3. Ollama         … PROVIDER=ollama 指定時(ローカルGPU、制限なし)
+//   1. Gemini         … GEMINI_API_KEY(リポジトリの Secrets)があれば(無料枠)
+//   2. Ollama         … PROVIDER=ollama 指定時(ローカルGPU、制限なし)
+//   ※ 以前使っていた GitHub Models は 2026-07-30 にサービス終了したため削除
 //   LLM が全滅した論文はスキップ(閲覧側のフォールバック生成が表示を担保)
 //
 // 使い方:
@@ -32,10 +32,9 @@ const PROVIDER = process.env.PROVIDER || '';        // '' = 自動 / 'ollama' = 
 const MAX_NEW = Number(process.env.MAX_NEW || 120); // 1回の実行で生成する上限
 const DAILY_PER_CATEGORY = Number(process.env.DAILY_PER_CATEGORY || 4);
 const DAILY_DAYS = Number(process.env.DAILY_DAYS || 1);
-// 先頭のモデルが廃止・利用不可でも次で続行できるよう、カンマ区切りで複数指定可
-const GH_MODELS = (process.env.GH_MODEL || 'openai/gpt-4o-mini,openai/gpt-4.1-mini')
-  .split(',').map((s) => s.trim()).filter(Boolean);
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+// 無料枠のモデル名は頻繁に入れ替わるため、未指定ならモデル一覧APIから自動で選ぶ
+const GEMINI_MODEL = process.env.GEMINI_MODEL || '';
+let GEMINI_RESOLVED = null; // resolveGeminiModel() が設定する
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'qwen2.5:7b';
 // Ollama接続先: カンマ区切りで複数指定可(Mac/Windowsどちらで実行しても、
 // どちらのマシンのOllamaでも使えるようにする)。全滅時はLANを自動探索。
@@ -179,38 +178,67 @@ function buildPrompt(p, abstract) {
 }
 
 // ---- 3. プロバイダ実装 ----
-async function callGitHubModels(prompt, model) {
-  const token = process.env.GITHUB_TOKEN;
-  if (!token) throw new Error('GITHUB_TOKEN 未設定');
-  const res = await fetch('https://models.github.ai/inference/chat/completions', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    body: JSON.stringify({
-      model,
-      messages: [{ role: 'user', content: prompt }],
-      temperature: 0.3,
-      max_tokens: 700,
-    }),
+// 200でもJSON以外が返る(API廃止・障害)場合は、そのプロバイダごと打ち切れるよう明示的に失敗させる
+async function readJson(res, name) {
+  const text = await res.text();
+  if (!res.ok) throw new Error(`${name} ${res.status}: ${text.slice(0, 200)}`);
+  try {
+    return JSON.parse(text);
+  } catch (_) {
+    throw new Error(`${name} 非JSON応答: ${text.slice(0, 80)}`);
+  }
+}
+
+// 1日分(約32本)を無料枠に収めるため、日次上限の大きい Flash-Lite の最新版を優先する
+export function chooseGeminiModel(models) {
+  const version = (n) => n.match(/^gemini-([\d.]+)/)[1].split('.').map(Number);
+  const rank = (n) => [n.includes('flash-lite') ? 1 : 0, ...version(n)];
+  const usable = (models || [])
+    .filter((m) => (m.supportedGenerationMethods || []).includes('generateContent'))
+    .map((m) => String(m.name || '').replace(/^models\//, ''))
+    .filter((n) => /^gemini-[\d.]+-flash/.test(n) && !/preview|exp|image|tts|audio|live|thinking/.test(n));
+  usable.sort((a, b) => {
+    const ra = rank(a), rb = rank(b);
+    for (let i = 0; i < Math.max(ra.length, rb.length); i++) {
+      if ((rb[i] || 0) !== (ra[i] || 0)) return (rb[i] || 0) - (ra[i] || 0);
+    }
+    return a.localeCompare(b);
   });
-  if (!res.ok) throw new Error(`GitHub Models ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const data = await res.json();
-  return data.choices[0].message.content;
+  return usable[0] || null;
+}
+
+async function resolveGeminiModel(key) {
+  if (GEMINI_MODEL) return GEMINI_MODEL;
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000&key=${key}`);
+    const chosen = chooseGeminiModel((await readJson(res, 'Gemini models')).models);
+    if (chosen) return chosen;
+  } catch (e) {
+    console.log(`Geminiモデル一覧の取得に失敗: ${e.message}`);
+  }
+  return 'gemini-flash-lite-latest'; // Google が用意している最新版エイリアス
 }
 
 async function callGemini(prompt) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error('GEMINI_API_KEY 未設定');
+  if (!GEMINI_RESOLVED) {
+    GEMINI_RESOLVED = await resolveGeminiModel(key);
+    console.log(`Geminiモデル: ${GEMINI_RESOLVED}`);
+  }
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${key}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_RESOLVED}:generateContent?key=${key}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.3, responseMimeType: 'application/json' },
+      }),
     }
   );
-  if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const data = await res.json();
-  return data.candidates[0].content.parts[0].text;
+  const data = await readJson(res, 'Gemini');
+  return data.candidates[0].content.parts.map((part) => part.text || '').join('');
 }
 
 async function probeOllama(url, timeoutMs = 900) {
@@ -275,10 +303,7 @@ async function callOllama(prompt) {
 const PROVIDERS = PROVIDER === 'ollama'
   ? [{ name: 'ollama', call: callOllama, waitMs: 0 }]
   : [
-      ...GH_MODELS.map((model) => ({
-        name: `github-models:${model}`, call: (prompt) => callGitHubModels(prompt, model), waitMs: 4500, // 15 RPM
-      })),
-      { name: 'gemini', call: callGemini, waitMs: 6500 },              // 10 RPM
+      { name: 'gemini', call: callGemini, waitMs: 13000 }, // 無料枠の最も厳しいRPM(5)でも収まる間隔
     ];
 
 // ---- 4. 出力の検証・整形 ----
@@ -426,7 +451,7 @@ async function main() {
       } catch (e) {
         console.log(`✖ [${provider.name}] ${p.id}: ${e.message}`);
         // 認証エラー・枠切れ・モデル廃止はそのプロバイダを以後スキップ
-        if (/401|403|404|429|未設定|unknown_model|unavailable_model/.test(e.message)) deadProviders.add(provider.name);
+        if (/400|401|403|404|429|未設定|非JSON応答/.test(e.message)) deadProviders.add(provider.name);
       }
     }
     if (!done && deadProviders.size >= PROVIDERS.length) {

@@ -14,7 +14,6 @@ on:
 
 permissions:
   contents: write
-  models: read   # GitHub Models をGITHUB_TOKENで呼ぶための権限(APIキー不要)
   actions: write # 生成後にPagesデプロイをディスパッチするため
 
 concurrency:
@@ -28,9 +27,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Generate storyboards (GitHub Models -> Gemini -> skip)
+      - name: Generate storyboards (Gemini free tier -> skip)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DAILY_DAYS: ${{ inputs.daily_days }}
           DAILY_PER_CATEGORY: ${{ inputs.per_category }}
