@@ -47,11 +47,12 @@ jobs:
       # キーの値は出さず、有無と置き場所だけを表示(Variables は公開リポジトリだと誰でも読めるため警告)
       - name: Check LLM API keys
         run: |
-          echo "Repository secrets: GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY != '' }} OPENCODE_API_KEY=${{ secrets.OPENCODE_API_KEY != '' }}"
+          # 既存の短い名前(GEMINI / POEN)でも受け付ける
+          echo "Repository secrets: Gemini=${{ (secrets.GEMINI_API_KEY || secrets.GEMINI) != '' }} OpenCode=${{ (secrets.OPENCODE_API_KEY || secrets.POEN) != '' }}"
           if [ '${{ vars.GEMINI_API_KEY != '' || vars.OPENCODE_API_KEY != '' }}' = 'true' ]; then
             echo "::warning::APIキーが Variables に入っています。公開されるので Secrets に移し、キーを再発行してください"
           fi
-          if [ '${{ secrets.GEMINI_API_KEY == '' && secrets.OPENCODE_API_KEY == '' }}' = 'true' ]; then
+          if [ '${{ (secrets.GEMINI_API_KEY || secrets.GEMINI) == '' && (secrets.OPENCODE_API_KEY || secrets.POEN) == '' }}' = 'true' ]; then
             echo "::warning::GEMINI_API_KEY / OPENCODE_API_KEY が Settings → Secrets and variables → Actions → Secrets(Repository secrets)にありません。動画解説は生成されません"
           fi
       # Secrets: GEMINI_API_KEY(Google AI Studio)と OPENCODE_API_KEY(opencode.ai/zen)。片方だけでも動く
@@ -60,9 +61,9 @@ jobs:
         continue-on-error: true
         timeout-minutes: 30
         env:
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY || secrets.POEN }}
           OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           LLM_ORDER: ${{ vars.LLM_ORDER }}
         run: node scripts/generate_storyboards.mjs
