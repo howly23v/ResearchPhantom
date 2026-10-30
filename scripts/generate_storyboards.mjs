@@ -33,8 +33,9 @@ const STORYBOARDS_PATH = path.join(ROOT, 'storyboards.json');
 const DRY_RUN = !!process.env.DRY_RUN;
 const PROVIDER = process.env.PROVIDER || '';        // '' = 自動 / 'ollama' = ローカル
 const MAX_NEW = Number(process.env.MAX_NEW || 120); // 1回の実行で生成する上限
-// 応答が返らないAPIで止まらないよう1リクエストごとに打ち切る。全体もCIの制限(30分)より前に切り上げる
-const REQUEST_TIMEOUT_MS = Number(process.env.REQUEST_TIMEOUT_MS || 90000);
+// 応答が返らないAPIで止まらないよう1リクエストごとに打ち切る(考えてから答えるモデルは1件1〜3分かかる)。
+// 全体もCIの制限(30分)より前に切り上げる
+const REQUEST_TIMEOUT_MS = Number(process.env.REQUEST_TIMEOUT_MS || 240000);
 const TIME_BUDGET_MS = Number(process.env.TIME_BUDGET_MS || 20 * 60 * 1000);
 const DAILY_PER_CATEGORY = Number(process.env.DAILY_PER_CATEGORY || 4);
 const DAILY_DAYS = Number(process.env.DAILY_DAYS || 1);
@@ -237,6 +238,7 @@ async function resolveGeminiModels(key) {
 }
 
 // モデル候補を先頭から使い、モデル単位の失敗(廃止・枠切れ)は次の候補へ。分間制限(429)は1回だけ待って再試行
+const timeouts = new Map(); // モデルごとの連続タイムアウト回数
 async function withModelQueue(name, queue, request) {
   let waited = false;
   while (queue.length) {
@@ -245,12 +247,19 @@ async function withModelQueue(name, queue, request) {
     try {
       res = await request(model, AbortSignal.timeout(REQUEST_TIMEOUT_MS));
     } catch (e) {
-      // タイムアウト・接続断はそのモデルの不調として次の候補へ
-      console.log(`✖ ${name}(${model}) 応答なし: ${e.name === 'TimeoutError' ? `${REQUEST_TIMEOUT_MS / 1000}秒で打ち切り` : e.message} — 次のモデルへ`);
-      queue.shift();
-      waited = false;
-      continue;
+      // タイムアウト・接続断: この論文は次のプロバイダへ回し、2回続いたモデルは以後使わない
+      const count = (timeouts.get(model) || 0) + 1;
+      timeouts.set(model, count);
+      const reason = e.name === 'TimeoutError' ? `${REQUEST_TIMEOUT_MS / 1000}秒で打ち切り` : e.message;
+      if (count >= 2) {
+        console.log(`✖ ${name}(${model}) 応答なし(${reason})が続いたため次のモデルへ`);
+        queue.shift();
+        waited = false;
+        continue;
+      }
+      throw new Error(`${name}(${model}) 応答なし: ${reason}`);
     }
+    timeouts.delete(model);
     try {
       return { model, data: await readJson(res, `${name}(${model})`) };
     } catch (e) {
