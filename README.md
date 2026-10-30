@@ -227,7 +227,7 @@ No extra steps needed. Just edit `index.html` and push — the site updates auto
 生成は無料枠のAIを **品質の高い順** に使います（以前使っていた GitHub Models は 2026-07-30 にサービス終了）。
 
 1. **Gemini Flash**（`GEMINI_API_KEY`）… 高品質。1日の無料枠が小さめ
-2. **OpenCode Zen の無料モデル**（`OPENCODE_API_KEY`）
+2. **OpenCode Zen の無料モデル**（`OPENCODE_API_KEY`）… ※ 2026-10 時点、無料モデルは OpenCode アプリ専用で API からは `FreeUsageLimitError` になります（有料の OpenCode Go 契約時のみ有効）
 3. **Gemini Flash-Lite**（同じ Gemini キー）… 1日の無料枠が大きい保険
 
 枠切れ・障害になったら自動で次へ切り替えます。順番は Variables の `LLM_ORDER`（例: `opencode,gemini-flash,gemini-lite`）で変更できます。
