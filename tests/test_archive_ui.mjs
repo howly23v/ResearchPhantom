@@ -18,15 +18,18 @@ script = script.slice(0, script.indexOf('//  JARVIS HOLOGRAPHIC MODAL SYSTEM'));
 const oldPath = `data/snapshots/${'a'.repeat(64)}.json`;
 const newPath = `data/snapshots/${'b'.repeat(64)}.json`;
 const paper = i => ({id:String(i),title:i === 0 ? '<img src=x onerror=alert(1)>' : 'Paper '+i,
-  summary:'Abstract', published:'2026-10-05', categories:i%2?['quant-ph']:['cs.AI'],
-  link:'https://arxiv.org/abs/2610.00001', institution:'Unverified'});
+  summary:i === 3 ? "We study a worker's checks. It is a long setup. Speed improves by 24% over the baseline. Done." : 'Abstract',
+  published:'2026-10-05', categories:i%2?['quant-ph']:['cs.AI'],
+  link:'https://arxiv.org/abs/2610.00001', institution:'Unverified',
+  analysis:{analysis:'原文要旨を掲載（未翻訳・未評価）', prospects:'詳しい結果と制約は原論文をご確認ください'}});
 const data = papers => ({dated:'2026-10-05',countries:{UNKNOWN:{institutions:{Unverified:{papers}}}}});
 const manifest = {days:[{date:'2026-10-05',path:newPath,count:25,announcements:25,checked_at:'2026-10-05T06:30:00Z',feed_dates:[]},
   {date:'2026-10-04',path:oldPath,count:1,announcements:1,checked_at:'2026-10-04T06:30:00Z',feed_dates:[]}]};
 let failing = false;
 const requests=[];
 const newBriefing = newPath.replace('snapshots', 'briefings');
-const payloads = {[newBriefing]:{'7':{title_ja:'七番目<b>の論文',summary_ja:'日本語のまとめ',problem:'課題',method:['手法'],result:'結果',impact:'意義',v:3}},
+const payloads = {[newBriefing]:{'7':{title_ja:'七番目<b>の論文',summary_ja:'日本語のまとめ',problem:'課題',method:['手法'],result:'結果',impact:'意義',v:3},
+  '5':{kind:'digest',title_ja:'五番目の論文',summary_ja:'五番目の要約',point:'速さ2倍'}},
   'data/manifest.json':manifest,[newPath]:data(Array.from({length:25},(_,i)=>paper(i))),[oldPath]:data([paper(99)]),
   'data/seed.json':JSON.parse(fs.readFileSync(new URL('data/seed.json',root)))};
 const context = vm.createContext({console, URL, Date, Math, setTimeout(){}, setInterval(){},
@@ -42,7 +45,15 @@ assert.equal(vm.runInContext('_paperRegistry.length',context),10);
 assert.equal(vm.runInContext('_paperRegistry[0].id',context),'7');
 assert.match(element('main-content').innerHTML,/七番目&lt;b&gt;の論文/);
 assert.match(element('main-content').innerHTML,/日本語のまとめ/);
-assert.match(element('archive-status').textContent,/動画解説 1 本/);
+assert.match(element('archive-status').textContent,/動画解説 1 本 · 🇯🇵 日本語要約 2 本/);
+// Placeholder analysis text is never shown; digest-only papers show their Japanese summary and point, without a video briefing.
+assert.doesNotMatch(element('main-content').innerHTML,/原文要旨を掲載|原論文をご確認ください/);
+assert.match(element('main-content').innerHTML,/五番目の論文[\s\S]*Paper 5[\s\S]*五番目の要約[\s\S]*ポイント[\s\S]*速さ2倍/);
+assert.equal(vm.runInContext("getAllPapers().find(p => p.id === '5').has_briefing",context),undefined);
+// Untranslated papers show the opening sentences and the sentence with a numeric result.
+assert.match(element('main-content').innerHTML,/原文要旨<\/span>We study a worker&#39;s checks\. It is a long setup\./);
+assert.match(element('main-content').innerHTML,/注目の結果（原文）[\s\S]*Speed improves by 24% over the baseline\./);
+assert.equal(vm.runInContext("decodeArchiveText(escapeArchiveText(`a'b \"c\" <d> & e`))",context),`a'b "c" <d> & e`);
 assert.match(element('main-content').innerHTML,/&lt;img/);
 assert.doesNotMatch(element('main-content').innerHTML,/<img src=x/);
 vm.runInContext('changePage(1)',context);

@@ -57,9 +57,10 @@ jobs:
           fi
       # Secrets: GEMINI_API_KEY(Google AI Studio)と OPENCODE_API_KEY(opencode.ai/zen)。片方だけでも動く
       # 品質優先: Gemini Flash → OpenCode 無料モデル → Gemini Flash-Lite(Variables の LLM_ORDER で変更可)
-      - name: Generate video briefings for today's picks (Gemini / OpenCode free tiers)
+      # 選抜した約32本は動画解説、それ以外の新着は日本語タイトル・要約・ポイントの短い紹介(まとめて生成)
+      - name: Generate video briefings and Japanese summaries (Gemini / OpenCode free tiers)
         continue-on-error: true
-        timeout-minutes: 30
+        timeout-minutes: 45
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY || secrets.POEN }}
           OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
