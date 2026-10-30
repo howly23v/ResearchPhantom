@@ -72,14 +72,22 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # 実行中に別の実行が main を更新していても、保存済みの解説を失わずに積む
+          git fetch origin main
+          node scripts/merge_briefings.mjs
           git add data/manifest.json data/snapshots storyboards.json
           [ -d data/briefings ] && git add -A data/briefings
           if git diff --cached --quiet; then
             echo 'changed=false' >> "$GITHUB_OUTPUT"
           else
             git commit -m 'data: update daily papers, briefings and rolling year archive'
-            git pull --rebase origin main
-            git push
+            # 競合時はこの実行(新しい方)のデータを優先。push が競合したら取り直して再試行
+            for attempt in 1 2 3; do
+              if git pull --rebase -X theirs origin main && git push; then break; fi
+              git rebase --abort 2>/dev/null || true
+              [ "$attempt" = 3 ] && exit 1
+              sleep 5
+            done
             echo 'changed=true' >> "$GITHUB_OUTPUT"
           fi
       # A GITHUB_TOKEN push does not trigger push workflows.
