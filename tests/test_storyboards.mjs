@@ -1,6 +1,6 @@
 // Daily pick selection and LLM output validation, without any network access.
 import assert from 'node:assert/strict';
-import { CATEGORY_GROUPS, chooseGeminiModels, chooseOpenCodeModels, pickDailyPapers, parseStoryboard } from '../scripts/generate_storyboards.mjs';
+import { CATEGORY_GROUPS, buildDigestPrompt, chooseGeminiModels, chooseOpenCodeModels, parseDigests, pickDailyPapers, parseStoryboard } from '../scripts/generate_storyboards.mjs';
 
 const paper = (id, categories, summary = 'A method.', announce_type = 'new') =>
   ({ id, title: 'Paper ' + id, summary, categories, announce_type });
@@ -47,4 +47,16 @@ assert.deepEqual(chooseOpenCodeModels([
 'only free models, preferred families first, big-pickle last');
 assert.deepEqual(chooseOpenCodeModels([{ id: 'gpt-5' }]), []);
 
-console.log('PASS: daily picks are unique, prefer new numeric results, LLM output is sanitized, Gemini/OpenCode model choice');
+// Batched Japanese summaries for papers outside the daily picks.
+const digestPrompt = buildDigestPrompt([paper('a1', ['cs.AI'], 'Long  abstract\nwith spaces.'), paper('b2', ['quant-ph'])]);
+assert.match(digestPrompt, /2本のarXiv論文/);
+assert.match(digestPrompt, /\[1\] id: a1\nタイトル: Paper a1\n要旨: Long abstract with spaces\./);
+const digests = parseDigests('```json\n[{"id":"a1","title_ja":"<i>題</i>","summary_ja":"要約","point":"成果"},' +
+  '{"id":"zz","title_ja":"x","summary_ja":"y"},{"id":"b2","title_ja":"題2"},{"id":"a1","title_ja":"重複","summary_ja":"z"}]\n```', ['a1', 'b2']);
+assert.deepEqual(digests, { a1: { kind: 'digest', title_ja: 'i題/i', summary_ja: '要約', point: '成果' } },
+  'only requested ids with title and summary are kept, first answer wins, markup is removed');
+assert.deepEqual(Object.keys(parseDigests('{"papers":[{"id":"b2","title_ja":"t","summary_ja":"s"}]}', ['b2'])), ['b2'], 'wrapped arrays are accepted');
+assert.throws(() => parseDigests('[]', ['a1']), /0件/);
+assert.throws(() => parseDigests('not json', ['a1']));
+
+console.log('PASS: daily picks are unique, prefer new numeric results, LLM output is sanitized, Gemini/OpenCode model choice, batched summaries');

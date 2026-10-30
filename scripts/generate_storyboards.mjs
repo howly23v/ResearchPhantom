@@ -16,11 +16,15 @@
 //   ※ 以前使っていた GitHub Models は 2026-07-30 にサービス終了したため削除
 //   LLM が全滅した論文はスキップ(閲覧側のフォールバック生成が表示を担保)
 //
+// 選抜外の新着にも、日本語タイトル・要約・ポイントだけの短い紹介(kind: "digest")を
+// まとめて付ける。1回の呼び出しで DIGEST_BATCH 本ずつ、日次上限の大きい Flash-Lite を優先。
+//
 // 使い方:
 //   CI:              node scripts/generate_storyboards.mjs
 //   ローカル一括:     PROVIDER=ollama node scripts/generate_storyboards.mjs
 //   動作確認のみ:     DRY_RUN=1 node scripts/generate_storyboards.mjs
 //   新着の選抜数:     DAILY_PER_CATEGORY=4 (分野ごと) / DAILY_DAYS=1 (遡る日数)
+//   全件の短い要約:   DIGEST=0 で無効 / DIGEST_BATCH=12 / DIGEST_MAX_BATCHES=45 / DIGEST_ORDER
 // ============================================================
 
 import fs from 'node:fs';
@@ -45,6 +49,11 @@ const GEMINI_BASE = process.env.GEMINI_BASE_URL || 'https://generativelanguage.g
 const GEMINI_MODEL = process.env.GEMINI_MODEL || '';
 let GEMINI_TIERS = null; // resolveGeminiModels() が設定する { flash: [...], lite: [...] }
 const LLM_ORDER = (process.env.LLM_ORDER || 'gemini-flash,opencode,gemini-lite')
+  .split(',').map((s) => s.trim()).filter(Boolean);
+const DIGEST = process.env.DIGEST !== '0';
+const DIGEST_BATCH = Number(process.env.DIGEST_BATCH || 12);
+const DIGEST_MAX_BATCHES = Number(process.env.DIGEST_MAX_BATCHES || 45);
+const DIGEST_ORDER = (process.env.DIGEST_ORDER || 'gemini-lite,opencode,gemini-flash')
   .split(',').map((s) => s.trim()).filter(Boolean);
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'qwen2.5:7b';
 // Ollama接続先: カンマ区切りで複数指定可(Mac/Windowsどちらで実行しても、
@@ -124,10 +133,12 @@ function dailyTargets() {
     if (!/^data\/snapshots\/[a-f0-9]{64}\.json$/.test(day.path) || seen.has(day.path)) continue;
     seen.add(day.path);
     const snapshot = JSON.parse(fs.readFileSync(path.join(ROOT, day.path), 'utf8'));
+    const all = snapshotPapers(snapshot);
     targets.push({
       date: day.date,
       file: path.join(ROOT, day.path.replace('data/snapshots/', 'data/briefings/')),
-      papers: pickDailyPapers(snapshotPapers(snapshot)),
+      papers: pickDailyPapers(all),
+      all,
     });
   }
   return targets;
@@ -186,6 +197,47 @@ function buildPrompt(p, abstract) {
 展望: ${p.prospects_jp || (p.analysis && p.analysis.prospects) || ''}
 キーワード: ${(p.keywords || p.categories || []).join(', ')}${abstract ? `
 原文アブストラクト(vizの数値はここに書かれた実数値を最優先で使うこと): ${abstract}` : ''}`;
+}
+
+// 選抜外の新着をまとめて短く紹介する(1回の呼び出しで複数本)
+export function buildDigestPrompt(batch) {
+  const items = batch.map((p, i) => `[${i + 1}] id: ${p.id}
+タイトル: ${p.title}
+要旨: ${String(p.summary || '').replace(/\s+/g, ' ').slice(0, 1200)}`).join('\n\n');
+  return `あなたは科学コミュニケーターです。以下の${batch.length}本のarXiv論文それぞれについて、日本語の短い紹介を作ってください。
+出力はJSON配列のみ。コードフェンスや説明文は一切付けないこと。入力と同じ順番・同じ件数で、各要素は次の形式:
+{"id":"入力の id をそのまま","title_ja":"タイトルを中学生にも伝わる日本語に。30字以内","summary_ja":"何をして何がわかったかを平易な日本語で。80〜110字","point":"一番の成果や新しさ。要旨に数値があれば含める。40字以内"}
+要旨に書かれていない内容や数値は絶対に創作しないこと。専門用語はできるだけ日常語に言い換えること。
+
+${items}`;
+}
+
+// 配列(または {"papers":[...]} などの包み)を受け取り、入力にある id だけを検証して返す
+export function parseDigests(raw, ids) {
+  let text = String(raw).trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch (_) {
+    const start = text.indexOf('['), end = text.lastIndexOf(']');
+    if (start === -1 || end === -1) throw new Error('JSON配列が見つかりません');
+    data = JSON.parse(text.slice(start, end + 1));
+  }
+  if (!Array.isArray(data)) data = Object.values(data || {}).find(Array.isArray) || [];
+  const wanted = new Set(ids.map(String));
+  const out = {};
+  for (const item of data) {
+    const id = item && String(item.id || '').trim();
+    if (!wanted.has(id) || out[id] || !item.title_ja || !item.summary_ja) continue;
+    out[id] = {
+      kind: 'digest',
+      title_ja: clamp(item.title_ja, 40),
+      summary_ja: clamp(item.summary_ja, 130),
+      ...(item.point ? { point: clamp(item.point, 48) } : {}),
+    };
+  }
+  if (Object.keys(out).length === 0) throw new Error('有効な要約が0件');
+  return out;
 }
 
 // ---- 3. プロバイダ実装 ----
@@ -389,16 +441,17 @@ async function callOllama(prompt) {
 }
 
 // 名前 / 呼び出し / 呼び出し間隔(無料枠のレート制限対策)
-const PROVIDERS = PROVIDER === 'ollama'
+// waitMs: Gemini は無料枠の最も厳しいRPM(5)でも収まる間隔
+const CALLERS = {
+  'gemini-flash': { call: geminiCaller('flash'), waitMs: 13000 },
+  opencode: { call: callOpenCode, waitMs: 6000 },
+  'gemini-lite': { call: geminiCaller('lite'), waitMs: 13000 },
+};
+const providersFor = (order) => PROVIDER === 'ollama'
   ? [{ name: 'ollama', call: callOllama, waitMs: 0 }]
-  : [
-      // waitMs: Gemini は無料枠の最も厳しいRPM(5)でも収まる間隔
-      ...LLM_ORDER.map((name) => ({
-        'gemini-flash': { name, call: geminiCaller('flash'), waitMs: 13000 },
-        opencode: { name, call: callOpenCode, waitMs: 6000 },
-        'gemini-lite': { name, call: geminiCaller('lite'), waitMs: 13000 },
-      })[name]).filter(Boolean),
-    ];
+  : order.filter((name) => CALLERS[name]).map((name) => ({ name, ...CALLERS[name] }));
+const PROVIDERS = providersFor(LLM_ORDER);
+const DIGEST_PROVIDERS = providersFor(DIGEST_ORDER);
 
 // ---- 4. 出力の検証・整形 ----
 // LLM出力はUIで innerHTML に入る箇所があるため、タグになり得る文字を落とす
@@ -504,6 +557,8 @@ async function main() {
 
   if (DRY_RUN) {
     for (const job of jobs.slice(0, 3)) console.log('--- prompt sample ---\n' + (await job.prompt()).slice(0, 400));
+    const sample = dailyTargets()[0];
+    if (DIGEST && sample) console.log('--- digest prompt sample ---\n' + buildDigestPrompt(sample.all.slice(0, 2)).slice(0, 600));
     console.log('DRY_RUN: API呼び出しなしで終了');
     return;
   }
@@ -554,6 +609,46 @@ async function main() {
     }
   }
 
+  // 選抜外の新着: 日本語の短い紹介をまとめて生成(解説・紹介が無い論文だけ)
+  let digested = 0;
+  if (DIGEST) {
+    const batches = [];
+    for (const target of dailyTargets()) {
+      const output = outputs.find((o) => o.file === target.file);
+      const todo = target.all.filter((p) => p.id && p.title && !output.store[p.id]);
+      console.log(`新着 ${target.date}: 要約対象 ${todo.length} / ${target.all.length} 件`);
+      for (let i = 0; i < todo.length; i += DIGEST_BATCH) batches.push({ output, batch: todo.slice(i, i + DIGEST_BATCH) });
+    }
+    for (const { output, batch } of batches.slice(0, DIGEST_MAX_BATCHES)) {
+      const ids = batch.map((p) => p.id);
+      let done = false;
+      for (const provider of DIGEST_PROVIDERS) {
+        if (deadProviders.has(provider.name)) continue;
+        try {
+          const digests = parseDigests(await provider.call(buildDigestPrompt(batch)), ids);
+          const titles = Object.fromEntries(batch.map((p) => [p.id, p.title]));
+          for (const [id, d] of Object.entries(digests)) {
+            output.store[id] = { ...d, title: titles[id], generated: provider.name };
+          }
+          output.changed = true;
+          digested += Object.keys(digests).length;
+          done = true;
+          console.log(`✔ [${provider.name}] 要約 ${Object.keys(digests).length}/${batch.length} 件`);
+          if (provider.waitMs) await sleep(provider.waitMs);
+          break;
+        } catch (e) {
+          console.log(`✖ [${provider.name}] 要約 ${ids[0]}…: ${e.message}`);
+          if (/400|401|403|404|429|未設定|非JSON応答/.test(e.message)) deadProviders.add(provider.name);
+        }
+      }
+      if (!done && DIGEST_PROVIDERS.every((p) => deadProviders.has(p.name))) {
+        console.log('要約: 全プロバイダ利用不可 — 残りは次回の実行で処理');
+        break;
+      }
+    }
+    if (batches.length > DIGEST_MAX_BATCHES) console.log(`要約: 上限 ${DIGEST_MAX_BATCHES} 回に到達 — 残りは次回の実行で処理`);
+  }
+
   for (const output of outputs.filter((o) => o.changed)) {
     const sorted = Object.fromEntries(Object.entries(output.store).sort(([a], [b]) => a.localeCompare(b)));
     fs.mkdirSync(path.dirname(output.file), { recursive: true });
@@ -561,6 +656,7 @@ async function main() {
     console.log(`${path.relative(ROOT, output.file)} を更新 (合計 ${Object.keys(sorted).length} 件)`);
   }
   console.log(generated > 0 ? `新規生成 ${generated} 件` : '新規生成なし');
+  if (DIGEST) console.log(digested > 0 ? `要約 ${digested} 件` : '要約の新規生成なし');
 }
 
 // テストから関数だけ読み込めるよう、直接実行時のみ main を走らせる

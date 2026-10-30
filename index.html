@@ -397,6 +397,24 @@ header {
   color: var(--p5-white);
 }
 
+.paper-title-en {
+  font-size: 0.72rem;
+  color: #777;
+  line-height: 1.4;
+  margin: -4px 0 10px;
+}
+.lang-chip {
+  display: inline-block;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  margin-right: 6px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  color: #aaa;
+  vertical-align: 1px;
+}
+
 .featured-card .paper-summary {
   font-size: 0.85rem;
   color: #aaa;
@@ -2303,8 +2321,50 @@ function miniImpactRing(score) {
     </div>`;
 }
 
+// ---- 要約ブロック(カード共通) ----
+// 日本語要約があればそれを、無ければ英語原文の冒頭2文と「数字の出てくる一文」を短く見せる。
+// 保存データは描画前に HTML エスケープ済みなので、切り詰めは一度戻してから行い、再度エスケープする。
+function decodeArchiveText(value) {
+  return String(value || '').replace(/&(lt|gt|quot|#39|amp);/g, (m, e) => ({lt:'<', gt:'>', quot:'"', '#39':"'", amp:'&'}[e]));
+}
+function clipText(escaped, max) {
+  const s = decodeArchiveText(escaped).replace(/\s+/g, ' ').trim();
+  return escapeArchiveText(s.length > max ? s.slice(0, max - 1) + '…' : s);
+}
+function splitSentences(escaped) {
+  return decodeArchiveText(escaped).replace(/\s+/g, ' ').match(/[^.!?。]+(?:[.!?。]+(?=\s|$)|$)/g) || [];
+}
+const RESULT_SENTENCE = /\d/;
+const RESULT_WORDS = /%|×|\b\d+(?:\.\d+)?x\b|times|fold|improv|outperform|reduc|achiev|accura|faster|speedup|lower|higher|increase|decrease/i;
+function paperDigest(paper) {
+  const a = paper.analysis || {};
+  // 研究機関別の既存データは summary 自体が日本語
+  const jaSummary = paper.summary_ja || (/[\u3040-\u30ff\u4e00-\u9fff]/.test(paper.summary || '') ? clipText(paper.summary, 220) : '');
+  if (jaSummary) {
+    return { ja: true, evaluated: !!a.analysis, lead: jaSummary, point: a.analysis || paper.point_ja || '', future: a.prospects || '' };
+  }
+  const sents = splitSentences(paper.summary).map(s => s.trim()).filter(Boolean);
+  const lead = clipText(escapeArchiveText(sents.slice(0, 2).join(' ')), 260);
+  const found = sents.slice(2).find(s => RESULT_SENTENCE.test(s) && RESULT_WORDS.test(s));
+  return { ja: false, lead, point: a.analysis || (found ? clipText(escapeArchiveText(found), 200) : ''), future: a.prospects || '' };
+}
+function renderDigestBlock(paper, pointLabel, futureLabel) {
+  const d = paperDigest(paper);
+  return `
+      <div class="paper-title">${paper.title_ja || paper.title}</div>
+      ${paper.title_ja ? `<div class="paper-title-en">${paper.title}</div>` : ''}
+      <div class="paper-summary">${d.ja ? '' : '<span class="lang-chip">原文要旨</span>'}${d.lead}</div>
+      ${d.point ? `<div class="analysis-box">
+        <div class="analysis-label">${!d.ja ? '💡 注目の結果（原文）' : d.evaluated ? '📊 ' + pointLabel : '💡 ポイント'}</div>
+        <div class="analysis-text">${d.point}</div>
+      </div>` : ''}
+      ${d.future ? `<div class="prospects-box">
+        <div class="prospects-label">🚀 ${futureLabel}</div>
+        <div class="prospects-text">${d.future}</div>
+      </div>` : ''}`;
+}
+
 function renderFeaturedCard(paper) {
-  const analysis = paper.analysis || {};
   const idx = registerPaper(paper);
   const score = calcImpactScore(paper);
   const icon = getCategoryIcon(paper.categories);
@@ -2326,16 +2386,7 @@ function renderFeaturedCard(paper) {
         <span class="cat-icon">${icon}</span>
       </div>
       <div class="inst-name">${paper.institution_ja || paper.institution || ''} (${paper.institution || ''})</div>
-      <div class="paper-title">${paper.title_ja || paper.title}</div>
-      <div class="paper-summary">${paper.summary_ja || paper.summary}</div>
-      <div class="analysis-box">
-        <div class="analysis-label">📊 解析・評価</div>
-        <div class="analysis-text">${analysis.analysis || ''}</div>
-      </div>
-      <div class="prospects-box">
-        <div class="prospects-label">🚀 将来の発展性</div>
-        <div class="prospects-text">${analysis.prospects || ''}</div>
-      </div>
+      ${renderDigestBlock(paper, '解析・評価', '将来の発展性')}
       <div class="meta">
         <div class="meta-item">📅 ${paper.published || ''}</div>
         <div class="meta-item">📖 ${paper.source || ''}</div>
@@ -2347,7 +2398,6 @@ function renderFeaturedCard(paper) {
 }
 
 function renderPaperCard(paper) {
-  const analysis = paper.analysis || {};
   const cats = (paper.categories || []).slice(0,2).join(', ');
   const idx = registerPaper(paper);
   const score = calcImpactScore(paper);
@@ -2361,16 +2411,7 @@ function renderPaperCard(paper) {
         <div class="category-tag">${cats}</div>
       </div>
       <div class="inst-badge">${paper.institution_ja || ''}</div>
-      <div class="paper-title">${paper.title_ja || paper.title}</div>
-      <div class="paper-summary">${paper.summary_ja || paper.summary}</div>
-      <div class="analysis-box">
-        <div class="analysis-label">📊 解析</div>
-        <div class="analysis-text">${analysis.analysis || ''}</div>
-      </div>
-      <div class="prospects-box">
-        <div class="prospects-label">🚀 発展性</div>
-        <div class="prospects-text">${analysis.prospects || ''}</div>
-      </div>
+      ${renderDigestBlock(paper, '解析', '発展性')}
       <div class="card-footer">
         <span>📅 ${paper.published || ''} | 📖 ${paper.source || ''}</span>
         <span class="briefing-chip">${paper.has_briefing ? '🎬 動画解説' : '▶ BRIEFING'}</span>
@@ -2457,15 +2498,23 @@ async function loadBriefings(snapshotPath) {
   }
 }
 
+// 以前の取得処理が全論文に入れていた定型文。情報が無いので表示しない
+const ANALYSIS_BOILERPLATE = /原文要旨を掲載|原論文をご確認ください/;
+
 function applyBriefings(data, briefings) {
   for (const country of Object.values(data.countries || {})) {
     for (const inst of Object.values(country.institutions || {})) {
       for (const p of (inst.papers || [])) {
+        const a = p.analysis;
+        if (a && (ANALYSIS_BOILERPLATE.test(a.analysis || '') || ANALYSIS_BOILERPLATE.test(a.prospects || ''))) delete p.analysis;
         const sb = p.id && briefings[p.id];
         if (!sb) continue;
-        p.has_briefing = true;
         if (sb.title_ja) p.title_ja = sb.title_ja;
         if (sb.summary_ja) p.summary_ja = sb.summary_ja;
+        if (sb.point) p.point_ja = sb.point;
+        // 要約だけの項目(kind: digest)は動画解説を持たない
+        if (sb.kind === 'digest') continue;
+        p.has_briefing = true;
         p.analysis = { analysis: sb.result || '', prospects: sb.impact || '' };
       }
     }
@@ -2514,8 +2563,9 @@ async function selectArchive(date) {
     select.value = date;
     const checked = entry ? new Date(entry.checked_at).toLocaleString('ja-JP', {timeZone:'Asia/Tokyo'}) : data.dated;
     document.getElementById('last-update').textContent = `${entry ? '取得確認' : '既存データ更新'}: ${checked || '不明'}`;
-    const briefingCount = Object.keys(briefings).length;
-    status.textContent = entry ? `${briefingCount ? `🎬 動画解説 ${briefingCount} 本 · ` : ''}保存日 ${entry.date} · ${entry.count} 件 · フィード更新: ${(entry.feed_dates || []).join(' / ') || '不明'}${entry.announcements === 0 ? '（新着なし・直前の一覧）' : ''}` : '研究機関別の既存データ（自動更新開始前）';
+    const briefingCount = Object.values(briefings).filter(sb => sb && sb.kind !== 'digest').length;
+    const summaryCount = Object.values(briefings).filter(sb => sb && sb.summary_ja).length;
+    status.textContent = entry ? `${briefingCount ? `🎬 動画解説 ${briefingCount} 本 · ` : ''}${summaryCount ? `🇯🇵 日本語要約 ${summaryCount} 本 · ` : ''}保存日 ${entry.date} · ${entry.count} 件 · フィード更新: ${(entry.feed_dates || []).join(' / ') || '不明'}${entry.announcements === 0 ? '（新着なし・直前の一覧）' : ''}` : '研究機関別の既存データ（自動更新開始前）';
   } catch (error) {
     if (sequence !== loadSequence) return;
     select.value = showingSeed ? 'seed' : (selectedEntry ? selectedEntry.date : '');
@@ -2599,8 +2649,8 @@ function showToast(msg) {
 // ============ TICKER UPDATE ============
 function updateTicker() {
   const papers = getAllPapers();
-  const headlines = papers.slice(0, 10).map(p => `${p.countryFlag} ${p.institution_ja}: ${p.title}`).join(' ⚡ ');
-  document.getElementById('ticker-content').textContent = '⚡ ' + headlines + ' ⚡ TAKE YOUR TIME. ⚡';
+  const headlines = papers.slice(0, 10).map(p => `${p.countryFlag} ${p.institution_ja}: ${p.title_ja || p.title}`).join(' ⚡ ');
+  document.getElementById('ticker-content').textContent = decodeArchiveText('⚡ ' + headlines + ' ⚡ TAKE YOUR TIME. ⚡');
 }
 setTimeout(updateTicker, 2000);
 
@@ -2616,7 +2666,7 @@ function openJarvisModal(idx) {
   const panel = document.getElementById('jarvis-panel');
   const score = calcImpactScore(paper);
   const icon = getCategoryIcon(paper.categories);
-  const analysis = paper.analysis || {};
+  const digest = paperDigest(paper);
 
   // Calculate sub-scores
   const noveltyScore = Math.min(Math.max(score + Math.floor(Math.random() * 16) - 8, 20), 99);
@@ -2694,12 +2744,12 @@ function openJarvisModal(idx) {
 
     <div class="jarvis-analysis-grid">
       <div class="jarvis-analysis-panel analysis">
-        <div class="jarvis-panel-label">📊 Analysis // 解析・評価</div>
-        <div class="jarvis-panel-text">${analysis.analysis || 'データ解析中...'}</div>
+        <div class="jarvis-panel-label">📊 Analysis // ${!digest.ja ? '注目の結果（原文）' : digest.evaluated ? '解析・評価' : 'ポイント'}</div>
+        <div class="jarvis-panel-text">${digest.point || '数値の成果は要旨に記載がありません'}</div>
       </div>
       <div class="jarvis-analysis-panel prospects">
         <div class="jarvis-panel-label">🚀 Prospects // 将来の発展性</div>
-        <div class="jarvis-panel-text">${analysis.prospects || '予測演算中...'}</div>
+        <div class="jarvis-panel-text">${digest.future || 'AI解説はまだ生成されていません'}</div>
       </div>
     </div>
 
@@ -2763,7 +2813,7 @@ function openJarvisModal(idx) {
   // Auto-briefing: 4象限アニメーション → 終了後にサマリーのタイプライター
   _briefingPaper = paper;
   playBriefing(getStoryboard(paper), () => {
-    typewriterEffect('jarvis-typewriter', paper.summary_ja || paper.summary || '', 18);
+    typewriterEffect('jarvis-typewriter', decodeArchiveText(paper.summary_ja || paper.summary || ''), 18);
   });
 }
 
@@ -2853,9 +2903,9 @@ function buildFallbackStoryboard(paper) {
   let method = (paper.categories || paper.keywords || []).slice(0, 3).map(String);
   if (method.length === 0) method = [bqFirstSentence(paper.title || 'research', 20)];
   return {
-    problem: bqFirstSentence(paper.summary, 60) || bqFirstSentence(paper.title, 60),
+    problem: bqFirstSentence(paper.summary_ja || paper.summary, 60) || bqFirstSentence(paper.title, 60),
     method: method,
-    result: bqFirstSentence(a.analysis, 60) || bqFirstSentence(paper.summary, 60),
+    result: bqFirstSentence(a.analysis || paper.point_ja, 60) || bqFirstSentence(paper.summary, 60),
     metric: bqExtractMetric(joined),
     impact: bqFirstSentence(a.prospects, 60) || '応用先を探索中',
     generated: 'client'
@@ -2863,7 +2913,8 @@ function buildFallbackStoryboard(paper) {
 }
 
 function getStoryboard(paper) {
-  const sb = (paper.id && DAILY_BRIEFINGS[paper.id]) ||
+  const daily = paper.id && DAILY_BRIEFINGS[paper.id];
+  const sb = (daily && daily.kind !== 'digest' && daily) ||
              (paper.id && STORYBOARDS[paper.id]) ||
              (paper.link && STORYBOARDS[paper.link]) ||
              (paper.title && STORYBOARDS[paper.title]);
@@ -2974,7 +3025,7 @@ function cancelBriefing() {
 }
 
 function _bTypewrite(textElId, cursorElId, text, speed, startAt) {
-  const chars = Array.from(text || '');
+  const chars = Array.from(decodeArchiveText(text));
   const cursor = cursorElId ? document.getElementById(cursorElId) : null;
   if (cursor) _bLater(() => { cursor.style.display = 'inline'; }, startAt);
   chars.forEach((ch, i) => {
@@ -3003,7 +3054,7 @@ function playBriefing(sb, onDone) {
   const flow = document.getElementById('bq-method-flow');
   if (!pt || !flow) return;
   pt.textContent = ''; rt.textContent = '';
-  it.textContent = sb.impact || ''; it.style.opacity = '0';
+  it.textContent = decodeArchiveText(sb.impact); it.style.opacity = '0';
   mt.textContent = ''; mt.classList.remove('pop');
   flow.innerHTML = (sb.method || []).map((step, i) =>
     (i > 0 ? '<span class="flow-arrow">▶</span>' : '') +
