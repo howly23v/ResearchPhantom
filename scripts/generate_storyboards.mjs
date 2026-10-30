@@ -33,6 +33,9 @@ const STORYBOARDS_PATH = path.join(ROOT, 'storyboards.json');
 const DRY_RUN = !!process.env.DRY_RUN;
 const PROVIDER = process.env.PROVIDER || '';        // '' = 自動 / 'ollama' = ローカル
 const MAX_NEW = Number(process.env.MAX_NEW || 120); // 1回の実行で生成する上限
+// 応答が返らないAPIで止まらないよう1リクエストごとに打ち切る。全体もCIの制限(30分)より前に切り上げる
+const REQUEST_TIMEOUT_MS = Number(process.env.REQUEST_TIMEOUT_MS || 90000);
+const TIME_BUDGET_MS = Number(process.env.TIME_BUDGET_MS || 20 * 60 * 1000);
 const DAILY_PER_CATEGORY = Number(process.env.DAILY_PER_CATEGORY || 4);
 const DAILY_DAYS = Number(process.env.DAILY_DAYS || 1);
 // 無料枠のモデル名は頻繁に入れ替わるため、未指定ならモデル一覧APIから自動で選ぶ
@@ -223,7 +226,7 @@ export function chooseGeminiModels(models) {
 async function resolveGeminiModels(key) {
   if (GEMINI_MODEL) return { flash: GEMINI_MODEL.split(',').map((m) => m.trim()).filter(Boolean), lite: [] };
   try {
-    const res = await fetch(`${GEMINI_BASE}/models?pageSize=1000&key=${key}`);
+    const res = await fetch(`${GEMINI_BASE}/models?pageSize=1000&key=${key}`, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
     const tiers = chooseGeminiModels((await readJson(res, 'Gemini models')).models);
     if (tiers.flash.length || tiers.lite.length) return tiers;
   } catch (e) {
@@ -238,7 +241,16 @@ async function withModelQueue(name, queue, request) {
   let waited = false;
   while (queue.length) {
     const model = queue[0];
-    const res = await request(model);
+    let res;
+    try {
+      res = await request(model, AbortSignal.timeout(REQUEST_TIMEOUT_MS));
+    } catch (e) {
+      // タイムアウト・接続断はそのモデルの不調として次の候補へ
+      console.log(`✖ ${name}(${model}) 応答なし: ${e.name === 'TimeoutError' ? `${REQUEST_TIMEOUT_MS / 1000}秒で打ち切り` : e.message} — 次のモデルへ`);
+      queue.shift();
+      waited = false;
+      continue;
+    }
     try {
       return { model, data: await readJson(res, `${name}(${model})`) };
     } catch (e) {
@@ -274,7 +286,7 @@ export function chooseOpenCodeModels(models) {
 async function resolveOpenCodeModels(key) {
   if (OPENCODE_MODEL) return OPENCODE_MODEL.split(',').map((m) => m.trim()).filter(Boolean);
   try {
-    const res = await fetch(`${OPENCODE_BASE}/models`, { headers: { Authorization: `Bearer ${key}` } });
+    const res = await fetch(`${OPENCODE_BASE}/models`, { headers: { Authorization: `Bearer ${key}` }, signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
     const chosen = chooseOpenCodeModels((await readJson(res, 'OpenCode models')).data);
     if (chosen.length) return chosen;
   } catch (e) {
@@ -291,9 +303,10 @@ async function callOpenCode(prompt) {
     OPENCODE_QUEUE = await resolveOpenCodeModels(key);
     console.log(`OpenCodeモデル候補: ${OPENCODE_QUEUE.join(', ')}`);
   }
-  const { data } = await withModelQueue('OpenCode', OPENCODE_QUEUE, (model) =>
+  const { data } = await withModelQueue('OpenCode', OPENCODE_QUEUE, (model, signal) =>
     fetch(`${OPENCODE_BASE}/chat/completions`, {
       method: 'POST',
+      signal,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${key}`,
@@ -317,9 +330,10 @@ function geminiCaller(tier) {
       GEMINI_TIERS = await resolveGeminiModels(key);
       console.log(`Geminiモデル候補: Flash=${GEMINI_TIERS.flash.join(', ') || 'なし'} / Lite=${GEMINI_TIERS.lite.join(', ') || 'なし'}`);
     }
-    const { data } = await withModelQueue('Gemini', GEMINI_TIERS[tier], (model) =>
+    const { data } = await withModelQueue('Gemini', GEMINI_TIERS[tier], (model, signal) =>
       fetch(`${GEMINI_BASE}/models/${model}:generateContent?key=${key}`, {
         method: 'POST',
+        signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
@@ -522,10 +536,22 @@ async function main() {
 
   let generated = 0;
   const deadProviders = new Set();
+  const startedAt = Date.now();
+  // 途中で止まっても生成済みを失わないよう、1件ごとにファイルへ書き出す
+  const save = (output) => {
+    const sorted = Object.fromEntries(Object.entries(output.store).sort(([a], [b]) => a.localeCompare(b)));
+    fs.mkdirSync(path.dirname(output.file), { recursive: true });
+    fs.writeFileSync(output.file, (output.pretty ? JSON.stringify(sorted, null, 2) : JSON.stringify(sorted)) + '\n');
+    return Object.keys(sorted).length;
+  };
 
   for (const { p, output, prompt: makePrompt } of jobs) {
     if (generated >= MAX_NEW) {
       console.log(`上限 ${MAX_NEW} 件に到達 — 残りは次回の実行で処理`);
+      break;
+    }
+    if (Date.now() - startedAt > TIME_BUDGET_MS) {
+      console.log(`時間の上限 ${TIME_BUDGET_MS / 60000} 分に到達 — 残りは次回の実行で処理`);
       break;
     }
     const prompt = await makePrompt();
@@ -536,7 +562,8 @@ async function main() {
         const raw = await provider.call(prompt);
         const sb = parseStoryboard(raw);
         output.store[p.id] = { ...sb, v: SCHEMA_V, title: p.title, generated: provider.name };
-        output.changed = true;
+        save(output);
+        output.changed = false;
         generated++;
         done = true;
         console.log(`✔ [${provider.name}] ${p.id}`);
@@ -554,11 +581,10 @@ async function main() {
     }
   }
 
-  for (const output of outputs.filter((o) => o.changed)) {
-    const sorted = Object.fromEntries(Object.entries(output.store).sort(([a], [b]) => a.localeCompare(b)));
-    fs.mkdirSync(path.dirname(output.file), { recursive: true });
-    fs.writeFileSync(output.file, (output.pretty ? JSON.stringify(sorted, null, 2) : JSON.stringify(sorted)) + '\n');
-    console.log(`${path.relative(ROOT, output.file)} を更新 (合計 ${Object.keys(sorted).length} 件)`);
+  // 新しい日の空ファイル(生成0件でも「確認済み」として置く)
+  for (const output of outputs.filter((o) => o.changed)) save(output);
+  for (const output of outputs) {
+    if (fs.existsSync(output.file)) console.log(`${path.relative(ROOT, output.file)}: 合計 ${Object.keys(output.store).length} 件`);
   }
   console.log(generated > 0 ? `新規生成 ${generated} 件` : '新規生成なし');
 }
