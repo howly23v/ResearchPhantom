@@ -255,6 +255,11 @@ async function withModelQueue(name, queue, request) {
       return { model, data: await readJson(res, `${name}(${model})`) };
     } catch (e) {
       if (res.status === 401) throw e; // キー自体が無効: 全モデル共通なので打ち切り
+      // OpenCode の無料モデルは OpenCode アプリ内専用で、APIキーからは全モデル共通で使えない
+      if (/FreeUsageLimitError/.test(e.message)) {
+        queue.length = 0;
+        throw new Error(`${name} 未設定: 無料モデルはAPIから使えません(OpenCode アプリ専用)`);
+      }
       if (!/400|402|403|404|429|非JSON応答/.test(e.message)) throw e;
       if (res.status === 429 && !waited) {
         waited = true;
@@ -545,6 +550,8 @@ async function main() {
     return Object.keys(sorted).length;
   };
 
+  // 呼び出し自体が待ち時間より長いモデルもあるので、前回の呼び出し開始からの不足分だけ待つ
+  const lastCall = {};
   for (const { p, output, prompt: makePrompt } of jobs) {
     if (generated >= MAX_NEW) {
       console.log(`上限 ${MAX_NEW} 件に到達 — 残りは次回の実行で処理`);
@@ -559,6 +566,9 @@ async function main() {
     for (const provider of PROVIDERS) {
       if (deadProviders.has(provider.name)) continue;
       try {
+        const since = Date.now() - (lastCall[provider.name] || 0);
+        if (provider.waitMs > since) await sleep(provider.waitMs - since);
+        lastCall[provider.name] = Date.now();
         const raw = await provider.call(prompt);
         const sb = parseStoryboard(raw);
         output.store[p.id] = { ...sb, v: SCHEMA_V, title: p.title, generated: provider.name };
@@ -567,7 +577,6 @@ async function main() {
         generated++;
         done = true;
         console.log(`✔ [${provider.name}] ${p.id}`);
-        if (provider.waitMs) await sleep(provider.waitMs);
         break;
       } catch (e) {
         console.log(`✖ [${provider.name}] ${p.id}: ${e.message}`);
