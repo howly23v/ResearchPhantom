@@ -57,8 +57,6 @@ def parse_feed(raw, category):
             'announce_type': announce[1] if announce else '',
             'institution': 'Unverified', 'institution_ja': '所属情報未確認',
             'country': 'UNKNOWN',
-            'analysis': {'analysis': '原文要旨を掲載（未翻訳・未評価）',
-                         'prospects': '詳しい結果と制約は原論文をご確認ください'}
         })
     return papers, channel.findtext('lastBuildDate', '')
 

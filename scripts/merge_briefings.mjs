@@ -14,7 +14,12 @@ if (fs.existsSync(dir)) {
     } catch (_) { /* main にまだ無いファイル */ }
     const local = JSON.parse(fs.readFileSync(file, 'utf8'));
     const merged = { ...remote, ...local };
-    const added = Object.keys(merged).length - Object.keys(local).length;
+    // 要約だけの項目(kind: digest)で、main 側にある動画解説を上書きしない
+    let kept = 0;
+    for (const [id, sb] of Object.entries(remote)) {
+      if (local[id] && local[id].kind === 'digest' && sb && sb.kind !== 'digest') { merged[id] = sb; kept++; }
+    }
+    const added = Object.keys(merged).length - Object.keys(local).length + kept;
     if (added > 0) {
       const sorted = Object.fromEntries(Object.entries(merged).sort(([a], [b]) => a.localeCompare(b)));
       fs.writeFileSync(file, JSON.stringify(sorted) + '\n');
