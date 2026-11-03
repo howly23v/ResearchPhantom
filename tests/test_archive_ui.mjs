@@ -18,7 +18,8 @@ script = script.slice(0, script.indexOf('//  JARVIS HOLOGRAPHIC MODAL SYSTEM'));
 const oldPath = `data/snapshots/${'a'.repeat(64)}.json`;
 const newPath = `data/snapshots/${'b'.repeat(64)}.json`;
 const paper = i => ({id:String(i),title:i === 0 ? '<img src=x onerror=alert(1)>' : 'Paper '+i,
-  summary:i === 3 ? "We study a worker's checks. It is a long setup. Speed improves by 24% over the baseline. Done." : 'Abstract',
+  summary:i === 3 ? "We study a worker's checks. It is a long setup. Speed improves by 24% over the baseline. Done."
+    : i === 1 ? 'A '+'very '.repeat(60)+'long opening sentence. Accuracy improves by 31% on the benchmark. Done.' : 'Abstract',
   published:'2026-10-05', categories:i%2?['quant-ph']:['cs.AI'],
   link:'https://arxiv.org/abs/2610.00001', institution:'Unverified',
   analysis:{analysis:'原文要旨を掲載（未翻訳・未評価）', prospects:'詳しい結果と制約は原論文をご確認ください'}});
@@ -53,6 +54,8 @@ assert.equal(vm.runInContext("getAllPapers().find(p => p.id === '5').has_briefin
 // Untranslated papers show the opening sentences and the sentence with a numeric result.
 assert.match(element('main-content').innerHTML,/原文要旨<\/span>We study a worker&#39;s checks\. It is a long setup\./);
 assert.match(element('main-content').innerHTML,/注目の結果（原文）[\s\S]*Speed improves by 24% over the baseline\./);
+// A result sentence cut off by the shortened opening is still shown as the highlighted result.
+assert.match(element('main-content').innerHTML,/ve…<\/div>[\s\S]*注目の結果（原文）[\s\S]*Accuracy improves by 31% on the benchmark\./);
 assert.equal(vm.runInContext("decodeArchiveText(escapeArchiveText(`a'b \"c\" <d> & e`))",context),`a'b "c" <d> & e`);
 assert.match(element('main-content').innerHTML,/&lt;img/);
 assert.doesNotMatch(element('main-content').innerHTML,/<img src=x/);

@@ -2344,8 +2344,11 @@ function paperDigest(paper) {
     return { ja: true, evaluated: !!a.analysis, lead: jaSummary, point: a.analysis || paper.point_ja || '', future: a.prospects || '' };
   }
   const sents = splitSentences(paper.summary).map(s => s.trim()).filter(Boolean);
-  const lead = clipText(escapeArchiveText(sents.slice(0, 2).join(' ')), 260);
-  const found = sents.slice(2).find(s => RESULT_SENTENCE.test(s) && RESULT_WORDS.test(s));
+  const opening = sents.slice(0, 2).join(' ');
+  const lead = clipText(escapeArchiveText(opening), 260);
+  // 冒頭2文が切り詰められたときは、その中の結果の一文も対象にする(途中で切れて見えなくなるため)
+  const shown = opening.length <= 260 ? 2 : 0;
+  const found = sents.slice(shown).find(s => RESULT_SENTENCE.test(s) && RESULT_WORDS.test(s));
   return { ja: false, lead, point: a.analysis || (found ? clipText(escapeArchiveText(found), 200) : ''), future: a.prospects || '' };
 }
 function renderDigestBlock(paper, pointLabel, futureLabel) {
