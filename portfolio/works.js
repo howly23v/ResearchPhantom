@@ -30,6 +30,22 @@ window.WORKS = [
     }
   },
   {
+    id: 'phantom-warp',
+    title: 'PHANTOM WARP',
+    sub: '論文タイムマシン',
+    date: '2026.11',
+    cats: ['research', 'creative'],
+    series: 'phantom',
+    featured: true,
+    hue: 28,
+    summary: 'ResearchPhantom の毎日の論文を、時間旅行しながら1枚ずつ発見するゲームにしたアレンジ版。',
+    problem: '論文の一覧は、毎日開きたくなる「楽しさ」が足りなかった。',
+    build: '時速88マイルまで加速してワームホールを抜けるタイムトラベル、分野ごとに動き続ける背景、N〜URのレア度演出、コンボ・レベル・実績・図鑑を作りました。',
+    point: '本家のデータを読むだけの完全な別プロジェクト。音は WebAudio で合成し、画像・音声ファイルは1つも使っていません。',
+    tech: ['JavaScript', 'Canvas', 'WebAudio', 'GitHub Pages'],
+    links: { repo: 'https://github.com/RyoSAKu610/phantom-warp' }
+  },
+  {
     id: 'neon-mythos-city',
     title: 'NEON MYTHOS',
     sub: 'AI Agent Market Simulator',
@@ -57,7 +73,6 @@ window.WORKS = [
     sub: 'Human Experience Network',
     date: '2026.09',
     cats: ['ai', 'web3'],
-    featured: true,
     hackathon: 'ETHGlobal Tokyo 2026',
     hue: 42,
     summary: '人の「経験」を本人の同意つきでAIにつなぐネットワーク。',
