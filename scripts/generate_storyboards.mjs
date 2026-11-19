@@ -10,8 +10,10 @@
 // プロバイダ優先順位(自動フォールバック):
 //   品質の高い順に試し、枠切れ・障害なら次へ(LLM_ORDER で並べ替え可):
 //   1. gemini-flash   … GEMINI_API_KEY(Google AI Studio、無料枠)の Gemini Flash 最新版
-//   2. opencode       … OPENCODE_API_KEY(OpenCode Zen)の無料モデル
-//   3. gemini-lite    … 同じ Gemini キーの Flash-Lite(日次上限が大きい保険)
+//   2. claude         … CLAUDE_CODE_OAUTH_TOKEN(Claude Pro/Max サブスク、`claude setup-token` で発行)
+//                        で Claude Code CLI を動かす。追加料金なし。要約(digest)には使わず枠を温存
+//   3. opencode       … OPENCODE_API_KEY(OpenCode Zen)の無料モデル
+//   4. gemini-lite    … 同じ Gemini キーの Flash-Lite(日次上限が大きい保険)
 //   Ollama            … PROVIDER=ollama 指定時(ローカルGPU、制限なし)
 //   ※ 以前使っていた GitHub Models は 2026-07-30 にサービス終了したため削除
 //   LLM が全滅した論文はスキップ(閲覧側のフォールバック生成が表示を担保)
@@ -52,7 +54,8 @@ let OPENCODE_QUEUE = null; // resolveOpenCodeModels() が設定する(先頭が�
 const GEMINI_BASE = process.env.GEMINI_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta';
 const GEMINI_MODEL = process.env.GEMINI_MODEL || '';
 let GEMINI_TIERS = null; // resolveGeminiModels() が設定する { flash: [...], lite: [...] }
-const LLM_ORDER = (process.env.LLM_ORDER || 'gemini-flash,opencode,gemini-lite')
+const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'haiku';
+const LLM_ORDER = (process.env.LLM_ORDER || 'gemini-flash,claude,opencode,gemini-lite')
   .split(',').map((s) => s.trim()).filter(Boolean);
 const DIGEST = process.env.DIGEST !== '0';
 const DIGEST_BATCH = Number(process.env.DIGEST_BATCH || 20);
@@ -470,10 +473,52 @@ async function callOllama(prompt) {
   return data.message.content;
 }
 
+// Claude サブスク: APIキーではなく Claude Code CLI 経由でしか使えないため子プロセスで呼ぶ。
+// ツールは全て無効(--tools "")にし、プロンプトへの応答テキストだけを受け取る
+export async function callClaude(prompt) {
+  if (!process.env.CLAUDE_CODE_OAUTH_TOKEN) throw new Error('CLAUDE_CODE_OAUTH_TOKEN 未設定');
+  const { spawn } = await import('node:child_process');
+  const stdout = await new Promise((resolve, reject) => {
+    const child = spawn('claude', [
+      '-p', '--model', CLAUDE_MODEL, '--output-format', 'json',
+      '--tools', '', '--no-session-persistence',
+    ], { stdio: ['pipe', 'pipe', 'pipe'] });
+    let out = '';
+    let err = '';
+    const timer = setTimeout(() => {
+      child.kill('SIGKILL');
+      reject(new Error(`Claude ${REQUEST_TIMEOUT_MS / 1000}秒で打ち切り`));
+    }, REQUEST_TIMEOUT_MS);
+    child.stdout.on('data', (d) => { out += d; });
+    child.stderr.on('data', (d) => { err += d; });
+    child.on('error', (e) => {
+      clearTimeout(timer);
+      reject(new Error(e.code === 'ENOENT' ? 'Claude CLI 未設定: claude コマンドがありません' : e.message));
+    });
+    child.on('close', () => { clearTimeout(timer); resolve(out || err); });
+    child.stdin.end(prompt);
+  });
+  let data;
+  try {
+    data = JSON.parse(stdout);
+  } catch (_) {
+    throw new Error(`Claude 非JSON応答: ${String(stdout).slice(0, 200)}`);
+  }
+  if (data.is_error) {
+    const msg = String(data.result || data.api_error_status || 'unknown');
+    // ログイン切れ・枠切れは以後この実行では使わない(次の論文で時間を無駄にしない)
+    if (/log ?in|auth|token|credential/i.test(msg)) throw new Error(`Claude 未設定(認証失敗): ${msg.slice(0, 120)}`);
+    if (/limit|quota|rate|usage/i.test(msg)) throw new Error(`Claude 429(利用上限): ${msg.slice(0, 120)}`);
+    throw new Error(`Claude エラー: ${msg.slice(0, 200)}`);
+  }
+  return String(data.result || '');
+}
+
 // 名前 / 呼び出し / 呼び出し間隔(無料枠のレート制限対策)
 // waitMs: Gemini は無料枠の最も厳しいRPM(5)でも収まる間隔
 const CALLERS = {
   'gemini-flash': { call: geminiCaller('flash'), waitMs: 13000 },
+  claude: { call: callClaude, waitMs: 2000 },
   opencode: { call: callOpenCode, waitMs: 6000 },
   'gemini-lite': { call: geminiCaller('lite'), waitMs: 13000 },
 };
