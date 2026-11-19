@@ -48,7 +48,7 @@ jobs:
       - name: Check LLM API keys
         run: |
           # 既存の短い名前(GEMINI / POEN)でも受け付ける
-          echo "Repository secrets: Gemini=${{ (secrets.GEMINI_API_KEY || secrets.GEMINI) != '' }} OpenCode=${{ (secrets.OPENCODE_API_KEY || secrets.POEN) != '' }}"
+          echo "Repository secrets: Gemini=${{ (secrets.GEMINI_API_KEY || secrets.GEMINI) != '' }} Claude=${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }} OpenCode=${{ (secrets.OPENCODE_API_KEY || secrets.POEN) != '' }}"
           if [ '${{ vars.GEMINI_API_KEY != '' || vars.OPENCODE_API_KEY != '' }}' = 'true' ]; then
             echo "::warning::APIキーが Variables に入っています。公開されるので Secrets に移し、キーを再発行してください"
           fi
@@ -58,10 +58,25 @@ jobs:
       # Secrets: GEMINI_API_KEY(Google AI Studio)と OPENCODE_API_KEY(opencode.ai/zen)。片方だけでも動く
       # 品質優先: Gemini Flash → OpenCode 無料モデル → Gemini Flash-Lite(Variables の LLM_ORDER で変更可)
       # 選抜した約32本は動画解説、それ以外の新着は日本語タイトル・要約・ポイントの短い紹介(まとめて生成)
-      - name: Generate video briefings and Japanese summaries (Gemini / OpenCode free tiers)
+      # Claude Pro/Max サブスクの枠で解説を作る(Gemini が混雑・枠切れの日の主力)。
+      # Secret CLAUDE_CODE_OAUTH_TOKEN が無ければ何もしない
+      - name: Install Claude Code CLI (subscription provider)
+        continue-on-error: true
+        env:
+          HAS_CLAUDE_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+        run: |
+          if [ "$HAS_CLAUDE_TOKEN" = 'true' ]; then
+            npm install -g @anthropic-ai/claude-code
+            claude --version
+          else
+            echo 'CLAUDE_CODE_OAUTH_TOKEN なし — Claude は使わずに続行'
+          fi
+      - name: Generate video briefings and Japanese summaries (Gemini / Claude / OpenCode)
         continue-on-error: true
         timeout-minutes: 45
         env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY || secrets.POEN }}
           OPENCODE_MODEL: ${{ vars.OPENCODE_MODEL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI }}
